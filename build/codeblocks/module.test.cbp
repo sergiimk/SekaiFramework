@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="module.test" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="debug">
+				<Option output="../../bin/x86_debug/module_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../bin/x86_debug_temp/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="../../bin/x86_debug/libmodule.a" />
+				</Linker>
+			</Target>
+			<Target title="release">
+				<Option output="../../bin/x86_release/module_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../bin/x86_release_temp/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="../../bin/x86_release/libmodule.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add option="-DBOOST_TEST_DYN_LINK" />
+			<Add option="-DBOOST_TEST_MAIN" />
+			<Add directory="../../test/module.test" />
+			<Add directory="../../src" />
+		</Compiler>
+		<Linker>
+			<Add option="-lboost_unit_test_framework-mt" />
+		</Linker>
+		<Unit filename="../../test/module.test/testclasses.h" />
+		<Unit filename="../../test/module.test/testmain.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

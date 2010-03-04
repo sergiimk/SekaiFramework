@@ -1,0 +1,13 @@
+# Ignore all backup files
+*~
+
+# Ignore build artifacts
+bin/*
+
+# Ignore msvc temp files
+build/msvc-9.0/*.ncb
+build/msvc-9.0/*.suo
+build/msvc-9.0/*.user
+
+# Ignore codeblocks tmp files
+

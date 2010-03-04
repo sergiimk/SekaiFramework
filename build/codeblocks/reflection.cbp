@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="reflection" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="debug">
+				<Option output="../../bin/x86_debug/libreflection" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../bin/x86_debug_temp/" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="release">
+				<Option output="../../bin/x86_release/libreflection" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="../../bin/x86_release_temp/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="../../src/reflection" />
+			<Add directory="../../src" />
+		</Compiler>
+		<Unit filename="../../src/reflection/delegate/Delegate.h" />
+		<Unit filename="../../src/reflection/delegate/DelegateBase.h" />
+		<Unit filename="../../src/reflection/delegate/Delegate_closure.h" />
+		<Unit filename="../../src/reflection/delegate/Delegate_deleg.h" />
+		<Unit filename="../../src/reflection/delegate/Delegate_funcdata.h" />
+		<Unit filename="../../src/reflection/delegate/Delegate_funcstyle.h" />
+		<Unit filename="../../src/reflection/delegate/Delegate_makedeleg.h" />
+		<Unit filename="../../src/reflection/delegate/Delegate_utils.h" />
+		<Unit filename="../../src/reflection/descriptors/AccessorDescriptor.h" />
+		<Unit filename="../../src/reflection/descriptors/AssignmentDescriptor.h" />
+		<Unit filename="../../src/reflection/descriptors/BaseType.h" />
+		<Unit filename="../../src/reflection/descriptors/ConstructDescriptor.h" />
+		<Unit filename="../../src/reflection/descriptors/DataDescriptor.h" />
+		<Unit filename="../../src/reflection/descriptors/EnumerationDescriptor.h" />
+		<Unit filename="../../src/reflection/descriptors/FieldDescriptor.h" />
+		<Unit filename="../../src/reflection/descriptors/MethodDescriptor.h" />
+		<Unit filename="../../src/reflection/descriptors/ParsingDescriptor.h" />
+		<Unit filename="../../src/reflection/descriptors/TypeDescriptor.h" />
+		<Unit filename="../../src/reflection/descriptors/typedesc.h" />
+		<Unit filename="../../src/reflection/events/Event.h" />
+		<Unit filename="../../src/reflection/reflection.h" />
+		<Unit filename="../../src/reflection/reflection_fwd.h" />
+		<Unit filename="../../src/reflection/types/ArrayType.cpp" />
+		<Unit filename="../../src/reflection/types/ArrayType.h" />
+		<Unit filename="../../src/reflection/types/BuiltInType.h" />
+		<Unit filename="../../src/reflection/types/FunctionType.cpp" />
+		<Unit filename="../../src/reflection/types/FunctionType.h" />
+		<Unit filename="../../src/reflection/types/PointerType.cpp" />
+		<Unit filename="../../src/reflection/types/PointerType.h" />
+		<Unit filename="../../src/reflection/types/Type.h" />
+		<Unit filename="../../src/reflection/types/TypeTag.h" />
+		<Unit filename="../../src/reflection/types/UserType.cpp" />
+		<Unit filename="../../src/reflection/types/UserType.h" />
+		<Unit filename="../../src/reflection/types/UserType_iterators.h" />
+		<Unit filename="../../src/reflection/types/typeof.h" />
+		<Unit filename="../../src/reflection/types/typetraits.cpp" />
+		<Unit filename="../../src/reflection/types/typetraits.h" />
+		<Unit filename="../../src/reflection/vml_ios.h" />
+		<Unit filename="../../src/reflection/vml_reflect.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

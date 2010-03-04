@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plugin
+  name="Sample.plugin"
+  brief="Sample plug-in"
+  version="1"
+  author="Sample writing dude">
+  <!--All names in plugin definition are CASE SENSITIVE!-->
+  <!--The order of sections is important-->
+  
+  
+  <!--Required plug-ins to run this one, version parameter is optional-->
+  <prerequisites>
+    <uses plugin="core.filesystem" version="1"/>
+  </prerequisites>
+
+  
+  <!--Exports such classes-->
+  <exports>
+    <class name="Class1" classid="e208e49e-0b00-45ff-bc17-a23500f730e2"/>
+    <class name="Class2" classid="3f7943ba-d059-4b57-88dd-cdb8e5790fff"/>
+  </exports>
+  
+
+  <!--Which EPs this plug-in extends-->
+  <!--'class' property can be omitted-->
+  <extends point="Someplugin::someextensionpoint" class="Class1">
+    <!--Here you can specify the params for the extendee, but ONLY in the form of name-value-->
+    <param1>value</param1>
+    <param2>value</param2>
+    <!--Values with names of exported classes will be replaced by classID strings from the export section-->
+    <impl>Class2</impl>
+  </extends>
+
+  <!--Defines new extension point-->
+  <!--interface name is ignored while parsing, it is just for convinience and static analysis-->
+  <provides point="testpoint_listeners" interface="ITestPoinListener" iid="3f8143ba-a069-4b57-9a47-cdb8e5790afd">
+    <!--Here comes params this point expects-->
+    <!--Params can be only defined as key-value pairs-->
+    <!--They are ignored in parsing time-->
+    <listener>classname</listener>
+  </provides>
+  
+</plugin>

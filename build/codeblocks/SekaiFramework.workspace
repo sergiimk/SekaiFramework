@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="SekaiFramework">
+		<Project filename="module.cbp" />
+		<Project filename="platform.cbp" />
+		<Project filename="module.test.cbp">
+			<Depends filename="module.cbp" />
+		</Project>
+		<Project filename="reflection.cbp" />
+		<Project filename="reflection.test.cbp">
+			<Depends filename="reflection.cbp" />
+		</Project>
+		<Project filename="threading.cbp" />
+		<Project filename="filesystem.cbp" />
+		<Project filename="common.cbp" />
+		<Project filename="extensionmanager.cbp" />
+		<Project filename="logging.cbp" />
+		<Project filename="script.python.cbp" />
+		<Project filename="common.test.cbp" />
+		<Project filename="filesystem.test.cbp" active="1">
+			<Depends filename="module.cbp" />
+			<Depends filename="filesystem.cbp" />
+		</Project>
+		<Project filename="script.python.test.cbp">
+			<Depends filename="module.cbp" />
+			<Depends filename="script.python.cbp" />
+		</Project>
+		<Project filename="framework.cbp">
+			<Depends filename="module.cbp" />
+		</Project>
+		<Project filename="framework.console.cbp" />
+		<Project filename="framework.utils.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

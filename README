@@ -1,0 +1,157 @@
+Sekai Framework
+---------------
+
+Sekai Framework is a software extensibility platform for C++ projects. Framework provides multiple solutions for developing modular extensible applications. It also includes library for cross-language development, allowing you to easily use C++ in combination with scripting languages.
+
+=== Introduction ===
+
+Welcome to the Sekai Framework. Sekai Framework is a middleware solution that allows easily create modular and extensible plug-in-based C++ applications. It saves you a great deal of time and effort by providing powerful facilities for structuring your project and increasing the ease of code-reuse.
+
+Sekai Framework currently provides two extension systems (or plug-in buses):
+
+- First uses a declarative approach for description of plug-ins and their connections. This approach allows extending applications without changing a single line of source code of existing modules. All project structure is defined by plug-ins' metadata (XML files), so it can be reconfigured using a simple text editor. Simply saying, XML file describes classes that exported from the plug-ins, and extension points it wants to extend.
+
+For Java programmers this approach can be known as an Eclipse Extensions model.
+
+- Second system is much more powerful. It implements a complete dynamic component model. It allows dynamic installing, starting, stopping, updating and uninstalling of plug-ins (coming in form of bundles) without requiring application restart. This involves a complex logic of dependency management and plug-in event handling. All functionality in bundles defined as a service that can be also dynamically registered and unregistered. 
+
+Implementation of this system can be described as C++ interpretation of Java's OSGi standard. It tries to follow standard as closely as possible, while modifying language-specific parts of it.
+
+
+Sekai Framework also offers a distinctive approach for embedding a scripting language into your application. This approach is based on reflection (introspection) library. Reflection on its own is useful for multiple purposes (for example GUI generation based on class properties). In this system it is used to generate script bindings at the program run-time.
+
+Currently binding generation is implemented for Pyhton language and allows:
+- exporting C++ classes, structures and enums to the script with only a few lines of code
+- gain access to values inside the script, read and modify its variables
+- inheriting python classes from C++ types
+
+
+Framework also provides multiple utilities for logging, debugging, profiling, multithreading, file system access, unicode support, all to make developers' life easier.
+
+
+== Structure ==
+
+The framework implementation intended to be highly modular. Functionality packed into a set of modules, while coupling between them is kept to the minimum. This means that developer should be able to choose those modules he actually need in his application and leave the rest aside.
+
+
+= Main modules =
+
+Main set of modules includes: 
+- Common library
+- Module library
+- Debugging module 
+- Logging module 
+- File System module 
+- Reflection library 
+- Scripting library with bindings generator
+- Unicode library 
+- Threading library 
+- Platform library 
+- Serialization library 
+- Extension Manager module
+- Framework module
+
+
+Module library
+
+This library is a heart of the framework. It provides means to export functionality from modules. It also deals with such problems as binary encapsulation, protecting modules from the changes in modules they depend on. This library allows to: 
+- Define own interfaces wit unique IDs (GUID)
+- Define implementation classes 
+- Query interface support by the class instance 
+- Export implementation from module 
+- Export classes with non-intrusive reference counting 
+- Create implementation instances on-the-stack inside the module who provides them 
+- Support different allocation policies for exported classes 
+- Simplify reference counting by usage of smart pointers
+
+
+Extension manager
+
+Extension management module allows to organize project into a plug-in-based system, where nearly any part of the system is a plug-in. The common tasks of this module are: 
+- Allow modules to define extension points (where they can be extended by other modules) 
+- Allow modules to extend specified extension points (own or other modules') 
+- Create extension graph of the program at start-up 
+- Manage lifetimes of the modules 
+- Support lazy loading of modules via creation indirection 
+- Provide environment access to the modules
+
+
+Debugging library
+
+This module provides multiple utilities for programmers to analyze program behavior, do defensive programming, inspect crashes etc. Main utilities are:
+- Assertions (SuperAssert style) 
+- Call stack generation
+- Minidump generation 
+- Exception interception (maybe some RTTI to translate exception names)
+
+
+Logging module
+
+Features: 
+- Adjustable log details (both at compile-time and runtime) 
+- Log listeners (for console output etc.) 
+- Thread safety
+
+
+FileSystem module
+
+Cross-platform file system access library. Features: 
+- Object model of file system 
+- Seamless support of archives 
+- Thread-safe 
+- Asynchronous operation support 
+- Supports Unicode paths
+
+
+Reflection library
+
+Reflection (introspection) library allows to add meta-info about any class and use it at run-time. It is also used in script binding generation, to expose classes to script. Features: 
+- Non-intrusive (will allow to add reflection to third-party libraries) 
+- Simple way to expose class members, methods, and accessors 
+- Support of generic method invocation (like in C#, using an array of parameters) 
+- Events
+
+
+Script bindings generator
+
+This module allows to dynamically expose C++ types with reflection to the script language. This is very useful, because most of the not performance critical logic can bee easily scripted and will not require a recompilation on change. Currently, bindings are implemented for Python. Using Python 
+bindings generator, user can inherit C++ class in Python, override its methods etc. Bindings work both ways, this means that C++ side can operate on Python objects, call functions and modify variables. Stackless Python offers micro-threading solution to be used by the application.
+
+
+Unicode library
+
+Unicode module can be a wrapped third-party solution (like ICU from IBM). 
+It should provide: 
+- Unicode strings (for a specified encoding type) 
+- Conversions between formats 
+- TBD
+
+
+Threading library
+
+May be wait for C++0X ??
+- Task creation and scheduling 
+- Atomic operations 
+- Barriers 
+- Synchronization primitives
+
+
+Platform library
+
+This library contains all needed to identify platform and compiler. Means to identify PC configuration, installed software etc. 
+
+
+Serialization library
+
+Serialization can be useful in lots of places. Primarily it can be used to save objects' states to the disk and load them afterward. It is also useful in networking, when forming some XML or other requests.
+
+
+== License ==
+
+Sekai Framework is dual-licensed under GPL v.3.0 and commercial license. See LICENSE file for details.
+
+
+== Contacts ==
+
+If you have any questions - mail me:
+Sergey Mikhtonyuk - mikhtonyuk@gmail.com

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="framework" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="debug">
+				<Option output="../../bin/x86_debug/libframework" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../bin/x86_debug_temp/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="release">
+				<Option output="../../bin/x86_release/libframework" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../bin/x86_release_temp/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="../../src/" />
+			<Add directory="../../src/framework/" />
+			<Add directory="../../lib/" />
+		</Compiler>
+		<Unit filename="../../src/framework/Events.h" />
+		<Unit filename="../../src/framework/Framework.h" />
+		<Unit filename="../../src/framework/Framework_fwd.h" />
+		<Unit filename="../../src/framework/IBundle.h" />
+		<Unit filename="../../src/framework/IBundleActivator.h" />
+		<Unit filename="../../src/framework/IBundleContext.h" />
+		<Unit filename="../../src/framework/IFramework.h" />
+		<Unit filename="../../src/framework/IFrameworkFactory.h" />
+		<Unit filename="../../src/framework/Listeners.h" />
+		<Unit filename="../../src/framework/Services.h" />
+		<Unit filename="../../src/framework/implementation/BundleRegParser.cpp" />
+		<Unit filename="../../src/framework/implementation/BundleRegParser.h" />
+		<Unit filename="../../src/framework/implementation/CBundle.cpp" />
+		<Unit filename="../../src/framework/implementation/CBundle.h" />
+		<Unit filename="../../src/framework/implementation/CBundleContext.cpp" />
+		<Unit filename="../../src/framework/implementation/CBundleContext.h" />
+		<Unit filename="../../src/framework/implementation/CBundleRepository.cpp" />
+		<Unit filename="../../src/framework/implementation/CBundleRepository.h" />
+		<Unit filename="../../src/framework/implementation/CEventListenerQueue.cpp" />
+		<Unit filename="../../src/framework/implementation/CEventListenerQueue.h" />
+		<Unit filename="../../src/framework/implementation/CEventServer.cpp" />
+		<Unit filename="../../src/framework/implementation/CEventServer.h" />
+		<Unit filename="../../src/framework/implementation/CFrameworkFactory.cpp" />
+		<Unit filename="../../src/framework/implementation/CFrameworkFactory.h" />
+		<Unit filename="../../src/framework/implementation/CServiceReference.cpp" />
+		<Unit filename="../../src/framework/implementation/CServiceReference.h" />
+		<Unit filename="../../src/framework/implementation/CServiceRegistration.cpp" />
+		<Unit filename="../../src/framework/implementation/CServiceRegistration.h" />
+		<Unit filename="../../src/framework/implementation/CServiceRegistry.cpp" />
+		<Unit filename="../../src/framework/implementation/CServiceRegistry.h" />
+		<Unit filename="../../src/framework/implementation/CSystemBundle.cpp" />
+		<Unit filename="../../src/framework/implementation/CSystemBundle.h" />
+		<Unit filename="../../src/framework/implementation/CSystemBundleActivator.cpp" />
+		<Unit filename="../../src/framework/implementation/CSystemBundleActivator.h" />
+		<Unit filename="../../src/framework/implementation/EventDispatchers.cpp" />
+		<Unit filename="../../src/framework/implementation/EventDispatchers.h" />
+		<Unit filename="../../src/framework/implementation/Framework.cpp" />
+		<Unit filename="../../src/framework/implementation/Impl_fwd.h" />
+		<Unit filename="../../src/framework/implementation/ServiceUsage.cpp" />
+		<Unit filename="../../src/framework/implementation/ServiceUsage.h" />
+		<Unit filename="../../src/framework/reflection.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

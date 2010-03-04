@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="filesystem" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="debug">
+				<Option output="../../bin/x86_debug/libfilesystem" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../bin/x86_debug_temp/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="release">
+				<Option output="../../bin/x86_release/libfilesystem" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../bin/x86_release_temp/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="../../src/" />
+			<Add directory="../../src/filesystem/" />
+			<Add directory="../../lib/" />
+		</Compiler>
+		<Unit filename="../../src/filesystem/FSExceptions.h" />
+		<Unit filename="../../src/filesystem/FileSystem.h" />
+		<Unit filename="../../src/filesystem/FileSystem_fwd.h" />
+		<Unit filename="../../src/filesystem/IArchive.h" />
+		<Unit filename="../../src/filesystem/IFSTraverser.h" />
+		<Unit filename="../../src/filesystem/IFile.h" />
+		<Unit filename="../../src/filesystem/IFileSystem.h" />
+		<Unit filename="../../src/filesystem/IFolder.h" />
+		<Unit filename="../../src/filesystem/IINIFileAdapter.h" />
+		<Unit filename="../../src/filesystem/IResource.h" />
+		<Unit filename="../../src/filesystem/IResourceContainer.h" />
+		<Unit filename="../../src/filesystem/IXMLFileAdapter.h" />
+		<Unit filename="../../src/filesystem/implementation/CArchFile.cpp" />
+		<Unit filename="../../src/filesystem/implementation/CArchFile.h" />
+		<Unit filename="../../src/filesystem/implementation/CArchFolder.cpp" />
+		<Unit filename="../../src/filesystem/implementation/CArchFolder.h" />
+		<Unit filename="../../src/filesystem/implementation/CArchive.cpp" />
+		<Unit filename="../../src/filesystem/implementation/CArchive.h" />
+		<Unit filename="../../src/filesystem/implementation/CFile.cpp" />
+		<Unit filename="../../src/filesystem/implementation/CFile.h" />
+		<Unit filename="../../src/filesystem/implementation/CFileSystem.cpp" />
+		<Unit filename="../../src/filesystem/implementation/CFileSystem.h" />
+		<Unit filename="../../src/filesystem/implementation/CFolder.cpp" />
+		<Unit filename="../../src/filesystem/implementation/CFolder.h" />
+		<Unit filename="../../src/filesystem/implementation/CINIFileAdapter.cpp" />
+		<Unit filename="../../src/filesystem/implementation/CINIFileAdapter.h" />
+		<Unit filename="../../src/filesystem/implementation/CXMLFileAdapter.cpp" />
+		<Unit filename="../../src/filesystem/implementation/CXMLFileAdapter.h" />
+		<Unit filename="../../src/filesystem/implementation/FileSystem.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

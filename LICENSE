@@ -1,0 +1,41 @@
+Copyright (c) Sergey Mikhtonyuk 2007-2010.
+
+Sekai Framework is published under the following licenses:
+
+ * GNU GPL v.3.0
+
+ * Commercial
+
+You are free to choose license most suitable for your needs. 
+Note, that you can not selectively use terms from multiple licenses.
+
+
+
+                         GNU GPL v.3.0
+
+
+Sekai Framework is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Sekai Framework is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+See LICENSE.GPL3 or http://www.gnu.org/licenses/gpl.txt for full 
+license version.
+
+
+
+                          Commercial
+
+Developers licensed under the commercial license are those looking to leverage
+Sekai Framework technology for commercial gain, or use it in the non-open source
+projects.
+The commercial license allows you to use the Sekai Framework to develop and distribute
+commercial products that include runtime components of the Sekai Framework. 
+We also offer a full range of technical support and services.
+
+For further information on commercial licenses, please contact project lead at <mikhtonyuk@gmail.com>.

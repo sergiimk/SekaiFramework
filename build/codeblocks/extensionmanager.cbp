@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="extensionmanager" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="debug">
+				<Option output="../../bin/x86_debug/libextensionmanager" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../bin/x86_debug_temp/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="release">
+				<Option output="../../bin/x86_release/libextensionmanager" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../bin/x86_release_temp/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="../../src/" />
+			<Add directory="../../src/extensionmanager/" />
+			<Add directory="../../lib/" />
+		</Compiler>
+		<Unit filename="../../src/extensionmanager/CommonPlugin.h" />
+		<Unit filename="../../src/extensionmanager/CoreExceptions.h" />
+		<Unit filename="../../src/extensionmanager/Core_fwd.h" />
+		<Unit filename="../../src/extensionmanager/GlobalEnvironment.h" />
+		<Unit filename="../../src/extensionmanager/ICore.h" />
+		<Unit filename="../../src/extensionmanager/IExtension.h" />
+		<Unit filename="../../src/extensionmanager/IExtensionPoint.h" />
+		<Unit filename="../../src/extensionmanager/IPlugin.h" />
+		<Unit filename="../../src/extensionmanager/IPluginManager.h" />
+		<Unit filename="../../src/extensionmanager/IPluginShadow.h" />
+		<Unit filename="../../src/extensionmanager/IStartListener.h" />
+		<Unit filename="../../src/extensionmanager/SekaiCore.h" />
+		<Unit filename="../../src/extensionmanager/implementation/CCore.cpp" />
+		<Unit filename="../../src/extensionmanager/implementation/CCore.h" />
+		<Unit filename="../../src/extensionmanager/implementation/CExtension.h" />
+		<Unit filename="../../src/extensionmanager/implementation/CExtensionPoint.h" />
+		<Unit filename="../../src/extensionmanager/implementation/CPluginDefVisitor.cpp" />
+		<Unit filename="../../src/extensionmanager/implementation/CPluginDefVisitor.h" />
+		<Unit filename="../../src/extensionmanager/implementation/CPluginManager.cpp" />
+		<Unit filename="../../src/extensionmanager/implementation/CPluginManager.h" />
+		<Unit filename="../../src/extensionmanager/implementation/CPluginShadow.cpp" />
+		<Unit filename="../../src/extensionmanager/implementation/CPluginShadow.h" />
+		<Unit filename="../../src/extensionmanager/implementation/CoreParams.cpp" />
+		<Unit filename="../../src/extensionmanager/implementation/CoreParams.h" />
+		<Unit filename="../../src/extensionmanager/implementation/SekaiCore.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="output_path"
+	OutputDirectory="$(SolutionDir)..\..\bin\$(PlatformName)_$(ConfigurationName)\"
+	IntermediateDirectory="$(SolutionDir)..\..\bin\$(PlatformName)_$(ConfigurationName)_temp\$(ProjectName)\"
+	>
+</VisualStudioPropertySheet>

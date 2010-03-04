@@ -1,0 +1,48 @@
+Current Status
+--------------
+
+Module - functional
+
+
+Logging - refactoring
+todo:
+ - refactor, extension/services aware
+
+
+Reflection - functional
+todo:
+ - solve class fields / virtual inheritance problem
+ - refactor type interface
+
+
+Script.Python - functional
+
+
+ExtensionManager - functional
+todo:
+ - dependency management
+
+
+OSGi Framework - in development
+ready:
+ - bundles
+ - services
+ - events 
+ - listeners
+todo:
+ - manifests
+ - dependency resolving
+ - service trackers
+
+
+Debugging - in development
+todo:
+ - refector old call stack walker (win)
+ - refactor minidump generator (win)
+ - implement stack walking for linux
+
+
+
+==== SekaiFramework 0.2.5.0 (28 Feb 2010) ====
+
+- Started the change log

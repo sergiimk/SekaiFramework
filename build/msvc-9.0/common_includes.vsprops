@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="common_includes"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="../../src/;../../src/$(ProjectName)/;../../lib/"
+		WarningLevel="4"
+		Detect64BitPortabilityProblems="false"
+	/>
+</VisualStudioPropertySheet>

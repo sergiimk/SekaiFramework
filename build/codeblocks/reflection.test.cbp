@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="reflection.test" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="debug">
+				<Option output="../../bin/x86_debug/reflection_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../bin/x86_debug_temp/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="../../bin/x86_debug/libreflection.a" />
+				</Linker>
+			</Target>
+			<Target title="release">
+				<Option output="../../bin/x86_release/reflection_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../bin/x86_release_temp/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="../../bin/x86_release/libreflection.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add option="-msse2" />
+			<Add option="-DBOOST_TEST_DYN_LINK" />
+			<Add option="-DBOOST_TEST_MAIN" />
+			<Add directory="../../test/reflection.test" />
+			<Add directory="../../src" />
+			<Add directory="../../src/reflection" />
+			<Add directory="../../lib" />
+			<Add directory="./" />
+		</Compiler>
+		<Linker>
+			<Add option="-lboost_unit_test_framework-mt" />
+		</Linker>
+		<Unit filename="../../test/reflection.test/testclasses.cpp" />
+		<Unit filename="../../test/reflection.test/testclasses.h" />
+		<Unit filename="../../test/reflection.test/testmain.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,1 @@
+"../tools/cloc-1.08.exe" "../" --skip-uniqueness --exclude-dir=lib,doc > lines.txt

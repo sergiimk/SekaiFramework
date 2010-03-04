@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="module" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="debug">
+				<Option output="../../bin/x86_debug/libmodule" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="../../bin/x86_debug_temp" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="release">
+				<Option output="../../bin/x86_Release/libmodule" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="../../bin/x86_release_temp/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="../../src" />
+			<Add directory="../../src/module" />
+		</Compiler>
+		<Unit filename="../../src/module/allocators.h" />
+		<Unit filename="../../src/module/guid.h" />
+		<Unit filename="../../src/module/implementation/guid.cpp" />
+		<Unit filename="../../src/module/implementation/implementations.cpp" />
+		<Unit filename="../../src/module/implementation/module.cpp" />
+		<Unit filename="../../src/module/implementations.h" />
+		<Unit filename="../../src/module/intellectual.h" />
+		<Unit filename="../../src/module/interfaces.h" />
+		<Unit filename="../../src/module/maps.h" />
+		<Unit filename="../../src/module/module.h" />
+		<Unit filename="../../src/module/module_reflection.h" />
+		<Unit filename="../../src/module/threadingmodel.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
