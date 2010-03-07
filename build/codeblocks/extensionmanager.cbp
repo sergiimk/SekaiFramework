@@ -35,6 +35,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-BUILD_SHARED" />
 			<Add directory="../../src/" />
 			<Add directory="../../src/extensionmanager/" />
 			<Add directory="../../lib/" />

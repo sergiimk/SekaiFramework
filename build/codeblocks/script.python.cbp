@@ -36,6 +36,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 			<Add option="-DPYTHON26" />
+			<Add option="-BUILD_SHARED" />
 			<Add directory="../../src/" />
 			<Add directory="../../src/script.python/" />
 			<Add directory="/usr/include/python/" />
