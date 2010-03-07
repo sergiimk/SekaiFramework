@@ -22,7 +22,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="2"
-			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\STLPort.vsprops;.\output_path.vsprops"
+			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\STLPort.vsprops;.\output_path.vsprops;.\shared_object.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -94,7 +94,7 @@
 		<Configuration
 			Name="Debug|x64"
 			ConfigurationType="2"
-			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\STLPort.vsprops;.\output_path.vsprops"
+			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\STLPort.vsprops;.\output_path.vsprops;.\shared_object.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -136,8 +136,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				LinkIncremental="2"
 				AdditionalDependencies="../../lib/tinyxml/tinyxml64d.lib"
+				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="17"
@@ -167,7 +167,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="2"
-			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\optimizations.vsprops;.\output_path.vsprops"
+			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\optimizations.vsprops;.\output_path.vsprops;.\shared_object.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -209,8 +209,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				LinkIncremental="1"
 				AdditionalDependencies="../../lib/tinyxml/tinyxml32.lib"
+				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -242,7 +242,7 @@
 		<Configuration
 			Name="Release|x64"
 			ConfigurationType="2"
-			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\optimizations.vsprops;.\output_path.vsprops"
+			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\optimizations.vsprops;.\output_path.vsprops;.\shared_object.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -285,8 +285,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				LinkIncremental="1"
 				AdditionalDependencies="../../lib/tinyxml/tinyxml64.lib"
+				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"

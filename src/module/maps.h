@@ -168,22 +168,14 @@ namespace  Module
 
 
 	/////////////////////////////////////////////////////////////////////////
-#if defined(COMPILER_MSC)
-	#define SF_EXPORT __declspec(dllexport)
-#elif defined(COMPILER_GNUC)
-	#define SF_EXPORT
-#else
-	#error No sutable branch
-#endif
-	/////////////////////////////////////////////////////////////////////////
 
 	#define DECLARE_MODULE_MAP()																					\
-		extern "C" SF_EXPORT Module::detail::MODULE_MAP_ENTRY* GetModuleMap();
+	extern "C" SHARED_EXPORT Module::detail::MODULE_MAP_ENTRY* GetModuleMap();
 
 	//////////////////////////////////////////////////////////////////////////
 
 	#define BEGIN_MODULE_MAP()																						\
-	extern "C" SF_EXPORT Module::detail::MODULE_MAP_ENTRY* GetModuleMap()								\
+	extern "C" SHARED_EXPORT Module::detail::MODULE_MAP_ENTRY* GetModuleMap()										\
 	{ static Module::detail::MODULE_MAP_ENTRY e[] = {
 
 	/////////////////////////////////////////////////////////////////////////
@@ -202,8 +194,8 @@ namespace  Module
 	{ 0, 0, 0, 0 } };																								\
 	return e; }																										\
 																													\
-	extern "C" SF_EXPORT void ModuleInit() { }															\
-	extern "C" SF_EXPORT void ModuleShutdown()															\
+	extern "C" SHARED_EXPORT void ModuleInit() { }																	\
+	extern "C" SHARED_EXPORT void ModuleShutdown()																	\
 	{																												\
 		Module::detail::MODULE_MAP_ENTRY* e = GetModuleMap();														\
 		while(e->pClsid)																							\

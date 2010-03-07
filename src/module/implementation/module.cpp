@@ -8,36 +8,7 @@
 * are covered in accompanying LICENSE file
 =========================================================*/
 #include "module.h"
-
-#ifdef OS_WINDOWS
-#include <Windows.h>
-void* Sekai_LoadLibrary(const char* name)
-{
-	return LoadLibraryExA(name, 0, 0);
-}
-void* Sekai_GetProcAddress(void* library, const char* name)
-{
-	return GetProcAddress((HMODULE)library, name);
-}
-void Sekai_FreeLibrary(void* library)
-{
-	FreeLibrary((HMODULE)library);
-}
-#else
-#include <dlfcn.h>
-void* Sekai_LoadLibrary(const char* name)
-{
-	return dlopen(name, RTLD_NOW);
-}
-void* Sekai_GetProcAddress(void* library, const char* name)
-{
-	return dlsym(library, name);
-}
-void* Sekai_FreeLibrary(void* library)
-{
-	return (void*)dlclose(library);
-}
-#endif
+#include "platform/shared.h"
 
 namespace Module
 {

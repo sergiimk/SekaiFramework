@@ -28,6 +28,9 @@
 #elif defined	(__ICL)
 	#define COMPILER_INTEL		// Intel compiler
 
+#elif defined	(__CYGWIN__)
+	#define COMPILER_CYGWIN		// CygWin compiler
+
 #elif defined	(__BORLANDC__)
 	#define COMPILER_BORLAND	// Borland compiler
 
@@ -166,6 +169,26 @@
 
 #endif
 
+//////////////////////////////////////////////////////////////////////////
+// Shared libraries
+//////////////////////////////////////////////////////////////////////////
+// see: http://gcc.gnu.org/wiki/Visibility
+//////////////////////////////////////////////////////////////////////////
+#if defined OS_WINDOWS || defined COMPILER_CYGWIN
+#	define SHARED_IMPORT __declspec(dllimport)
+#	define SHARED_EXPORT __declspec(dllexport)
+#	define SHARED_LOCAL
+#else
+#	if __GNUC__ >= 4
+#		define SHARED_IMPORT __attribute__ ((visibility("default")))
+#		define SHARED_EXPORT __attribute__ ((visibility("default")))
+#		define SHARED_LOCAL  __attribute__ ((visibility("hidden")))
+#	else
+#		define SHARED_IMPORT
+#		define SHARED_EXPORT
+#		define SHARED_LOCAL
+#	endif
+#endif
 
 //////////////////////////////////////////////////////////////////////////
 // Debugging

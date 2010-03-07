@@ -279,6 +279,10 @@
 			RelativePath="..\..\src\platform\platform.h"
 			>
 		</File>
+		<File
+			RelativePath="..\..\src\platform\shared.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
