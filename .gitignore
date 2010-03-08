@@ -10,4 +10,5 @@ build/msvc-9.0/*.suo
 build/msvc-9.0/*.user
 
 # Ignore codeblocks tmp files
-
+build/codeblocks/*.depend
+build/codeblocks/*.layout
