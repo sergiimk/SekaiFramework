@@ -37,6 +37,7 @@
 		<Unit filename="../../src/platform/hash_map.h" />
 		<Unit filename="../../src/platform/hash_set.h" />
 		<Unit filename="../../src/platform/platform.h" />
+		<Unit filename="../../src/platform/shared.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

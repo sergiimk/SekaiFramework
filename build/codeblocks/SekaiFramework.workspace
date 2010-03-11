@@ -11,17 +11,19 @@
 			<Depends filename="reflection.cbp" />
 		</Project>
 		<Project filename="threading.cbp" />
-		<Project filename="filesystem.cbp" />
+		<Project filename="filesystem.cbp">
+			<Depends filename="module.cbp" />
+		</Project>
 		<Project filename="common.cbp" />
 		<Project filename="extensionmanager.cbp" />
 		<Project filename="logging.cbp" />
 		<Project filename="script.python.cbp" />
 		<Project filename="common.test.cbp" />
-		<Project filename="filesystem.test.cbp" active="1">
+		<Project filename="filesystem.test.cbp">
 			<Depends filename="module.cbp" />
 			<Depends filename="filesystem.cbp" />
 		</Project>
-		<Project filename="script.python.test.cbp">
+		<Project filename="script.python.test.cbp" active="1">
 			<Depends filename="module.cbp" />
 			<Depends filename="script.python.cbp" />
 		</Project>

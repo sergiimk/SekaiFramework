@@ -14,8 +14,8 @@
 #define BOOST_TEST_MODULE Python_script_test
 #include <boost/test/unit_test.hpp>
 
-ModuleHandle py("Script.Python.dll");
-ModuleHandle test("Script.Python.Test.Module.dll");
+ModuleHandle py(SHARED_LIB_NAME("script.python"));
+ModuleHandle test(SHARED_LIB_NAME("script.python.test.module"));
 
 BOOST_AUTO_TEST_SUITE( PyTest );
 
@@ -135,7 +135,7 @@ BOOST_FIXTURE_TEST_CASE( FuncImportTest, ScriptFixture )
 
 	SScriptAny any;
 	BOOST_REQUIRE(mgr->FindEntry("py_funcaccess.run", any));
-	
+
 	ValueTypePair args[] = { make_typed_pair(a) };
 	ValueTypePair ret = make_typed_pair(r);
 
@@ -190,10 +190,10 @@ BOOST_FIXTURE_TEST_CASE( VariableExportTest, ScriptFixture )
 {
 	mgr->ExportType("Sekai", (UserType*)type_of<VML::Vector3>());
 	mgr->ExportType("Sekai", (UserType*)type_of<TestPlayer>());
-	
+
 	TestPlayer pl;
 	TestPlayer* ppl = &pl;
-	//BOOST_REQUIRE( 
+	//BOOST_REQUIRE(
 		mgr->ExportVariable("Sekai", "g_player", make_typed_pair(ppl)) ;
 		//);
 
@@ -204,7 +204,7 @@ BOOST_FIXTURE_TEST_CASE( InterfaceImportTest, ScriptFixture )
 {
 	mgr->ExportType("Sekai", (UserType*)type_of<TestInterface>());
 	mgr->ExportType("Sekai", (UserType*)type_of<TestInterfaceFactory>());
-	mgr->RunScript("py_interface"); 
+	mgr->RunScript("py_interface");
 }
 
 BOOST_FIXTURE_TEST_CASE( DocTest, ScriptFixture )

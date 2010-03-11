@@ -190,6 +190,18 @@
 #	endif
 #endif
 
+#if defined OS_WINDOWS
+#   define SHARED_LIB_EXTENSION ".dll"
+#   define SHARED_LIB_PREFIX ""
+#elif defined OS_LINUX || defined OS_MACOSX
+#   define SHARED_LIB_EXTENSION ".so"
+#   define SHARED_LIB_PREFIX "lib"
+#else
+#   error Whats yours OS shared library extnsion?
+#endif
+
+#define SHARED_LIB_NAME(basename) SHARED_LIB_PREFIX basename SHARED_LIB_EXTENSION
+
 //////////////////////////////////////////////////////////////////////////
 // Debugging
 //////////////////////////////////////////////////////////////////////////

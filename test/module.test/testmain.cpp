@@ -17,7 +17,6 @@ using namespace Module;
 #define BOOST_TEST_MODULE SM_lib_test
 #include <boost/test/unit_test.hpp>
 
-
 BOOST_AUTO_TEST_SUITE( SMTest );
 
 BOOST_AUTO_TEST_CASE( TestGUIDBinding )

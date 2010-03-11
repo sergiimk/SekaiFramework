@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="debug">
-				<Option output="../../bin/x86_debug/libscript" prefix_auto="1" extension_auto="1" />
+				<Option output="../../bin/x86_debug/libscript.python" prefix_auto="1" extension_auto="1" />
 				<Option object_output="../../bin/x86_debug_temp/" />
 				<Option type="3" />
 				<Option compiler="gcc" />

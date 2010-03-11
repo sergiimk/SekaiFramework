@@ -10,7 +10,7 @@
 using namespace FileSystem;
 using namespace Module;
 
-ModuleHandle module("filesystem.dll");
+ModuleHandle module(SHARED_LIB_NAME("filesystem"));
 
 
 BOOST_AUTO_TEST_SUITE( my_suite1 );
@@ -18,7 +18,7 @@ BOOST_AUTO_TEST_SUITE( my_suite1 );
 
 BOOST_AUTO_TEST_CASE( TestForSingleton )
 {
-	ModuleHandle m2("filesystem.dll");
+	ModuleHandle m2(SHARED_LIB_NAME("filesystem"));
 
 	com_ptr<IFileSystem> fs1;
 	BOOST_REQUIRE(SF_SUCCEEDED(create_instance(fs1.wrapped(), CLSID_CFileSystem, module)));
