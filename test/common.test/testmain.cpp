@@ -35,12 +35,25 @@ BOOST_AUTO_TEST_CASE( ArrayTest )
 		// std::string creation
 		std::string source2("yet another string");
 		stack_string<> stack2(source2);
-		BOOST_CHECK(std::lexicographical_compare_3way(stack2->begin(), 
-													stack2->end(), 
-													source2.begin(),
-													source2.end()) == 0);
+		BOOST_CHECK_EQUAL(stack2->length(), source2.length());
+		BOOST_CHECK(std::equal(stack2->begin(), stack2->end(), source2.begin()));
 
 		std::string asdf;
+	}
+
+	BOOST_AUTO_TEST_CASE( StackStringReallocateTest )
+	{
+		// simple creation
+		const char* source = "a very test string";
+		stack_string<> stack(source);
+
+		// check stack
+		BOOST_CHECK(stack.isOnStack());
+
+		// reallocate
+		stack->reserve(1024);
+
+		BOOST_CHECK(!stack.isOnStack());
 	}
 
 	BOOST_AUTO_TEST_SUITE_END();

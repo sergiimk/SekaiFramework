@@ -109,6 +109,11 @@ public:
 		: m_source(NULL)
 	{ }
 
+	// Empty ctor to fix build bug in GCC
+	stack_allocator() 
+		: m_source(NULL)
+	{ }
+
 	// Main ctor
 	explicit stack_allocator(Source* source) : m_source(source)
 	{ }
@@ -137,6 +142,15 @@ public:
 			m_source->m_isStackBufferUsed = false;
 		else
 			std::allocator<T>::deallocate(p, n);
+	}
+
+	// Is true, if allocator currently uses stack
+	bool isOnStack() const
+	{
+		if(m_source == NULL)
+			return false;
+
+		return m_source->m_isStackBufferUsed;
 	}
 
 private:
@@ -182,6 +196,12 @@ public:
 	// copy into a "real" container for longer-lived objects.
 	ContainerType& container() { return m_container; }
 	const ContainerType& container() const { return m_container; }
+
+	// Is true, if container is currently on stack
+	bool isOnStack() const
+	{
+		return m_allocator.isOnStack();
+	}
 
 	// Support operator-> to get to the container. This allows nicer syntax like:
 	//   StackContainer<...> foo;
