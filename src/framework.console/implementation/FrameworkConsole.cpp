@@ -8,10 +8,10 @@
 * are covered in accompanying LICENSE file
 =========================================================*/
 #include "ConsoleBundle.h"
-#include "Module/Maps.h"
+#include "module/maps.h"
 
-// {bf1e1254-3c27-474d-9572-62011b7595ba} 
-static const GUID CLSID_CConsoleBundle = 
+// {bf1e1254-3c27-474d-9572-62011b7595ba}
+static const GUID CLSID_CConsoleBundle =
 { 0xbf1e1254, 0x3c27, 0x474d, { 0x95, 0x72, 0x62, 0x01, 0x1b, 0x75, 0x95, 0xba } };
 
 BEGIN_MODULE_MAP()

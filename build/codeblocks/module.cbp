@@ -19,7 +19,7 @@
 				</Compiler>
 			</Target>
 			<Target title="release">
-				<Option output="../../bin/x86_Release/libmodule" prefix_auto="1" extension_auto="1" />
+				<Option output="../../bin/x86_release/libmodule" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="../../bin/x86_release_temp/" />
 				<Option type="2" />

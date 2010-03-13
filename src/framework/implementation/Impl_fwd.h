@@ -27,7 +27,7 @@ namespace Framework
 	#define VERBOSE(str, ...)\
 	_vb_tabber __tabber;\
 	for(int i = 0; i < _s_vb_tabs; ++i) printf("  ");\
-	printf(str, __VA_ARGS__);\
+	printf(str, ## __VA_ARGS__);\
 	printf("\n");
 
 	extern boost::thread::id fwk_thread_id;

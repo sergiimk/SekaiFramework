@@ -16,6 +16,7 @@
 				</Compiler>
 				<Linker>
 					<Add library="../../bin/x86_debug/libmodule.a" />
+					<Add library="../../bin/x86_debug/libreflection.a" />
 				</Linker>
 			</Target>
 			<Target title="release">
@@ -29,6 +30,7 @@
 				<Linker>
 					<Add option="-s" />
 					<Add library="../../bin/x86_release/libmodule.a" />
+					<Add library="../../bin/x86_release/libreflection.a" />
 				</Linker>
 			</Target>
 		</Build>
@@ -38,6 +40,11 @@
 			<Add directory="../../src/" />
 			<Add directory="../../src/framework.console/" />
 		</Compiler>
+		<Linker>
+			<Add option="-lboost_thread-mt" />
+			<Add option="-lboost_regex-mt" />
+			<Add option="-ldl" />
+		</Linker>
 		<Unit filename="../../src/framework.console/implementation/ConsoleBundle.cpp" />
 		<Unit filename="../../src/framework.console/implementation/ConsoleBundle.h" />
 		<Unit filename="../../src/framework.console/implementation/ConsoleCommands.cpp" />

@@ -10,7 +10,7 @@
 #include "CSystemBundleActivator.h"
 #include "CSystemBundle.h"
 #include "IBundleContext.h"
-#include "FileSystem/FileSystem.h"
+#include "filesystem/FileSystem.h"
 #include "BundleRegParser.h"
 
 namespace Framework
@@ -28,7 +28,7 @@ namespace Framework
 	{
 		m_systemBundle = systemBundle;
 	}
-	
+
 	//////////////////////////////////////////////////////////////////////////
 
 	void CSystemBundleActivator::Start(IBundleContext* context)
@@ -38,15 +38,15 @@ namespace Framework
 		m_context = context;
 		m_context->AddServiceListener(this);
 
-		// All installed bundles must be started in accordance with each bundle's 
-		// persistent autostart setting. This means some bundles will not be started, 
-		// some will be started with eager activation and some will be started with their 
-		// declared activation policy. If this Framework implements the optional Start Level 
-		// Service Specification, then the start level of this Framework is moved to the start 
-		// level specified by the beginning start level framework property, as described in the 
-		// Start Level Service Specification. If this framework property is not specified, then the 
-		// start level of this Framework is moved to start level one (1). Any exceptions that occur 
-		// during bundle starting must be wrapped in a BundleException and then published as a framework 
+		// All installed bundles must be started in accordance with each bundle's
+		// persistent autostart setting. This means some bundles will not be started,
+		// some will be started with eager activation and some will be started with their
+		// declared activation policy. If this Framework implements the optional Start Level
+		// Service Specification, then the start level of this Framework is moved to the start
+		// level specified by the beginning start level framework property, as described in the
+		// Start Level Service Specification. If this framework property is not specified, then the
+		// start level of this Framework is moved to start level one (1). Any exceptions that occur
+		// during bundle starting must be wrapped in a BundleException and then published as a framework
 		// event of type FrameworkEvent.ERROR
 
 		LoadCoreBundles();
@@ -60,14 +60,14 @@ namespace Framework
 		VERBOSE("[SysBndleActivator] %s", __FUNCTION__);
 
 		// This Framework's state is set to Bundle.STOPPING.
-		// 
-		// All installed bundles must be stopped without changing each bundle's 
-		// persistent autostart setting. If this Framework implements the optional 
-		// Start Level Service Specification, then the start level of this Framework 
-		// is moved to start level zero (0), as described in the Start Level Service Specification. 
-		// Any exceptions that occur during bundle stopping must be wrapped in a BundleException 
+		//
+		// All installed bundles must be stopped without changing each bundle's
+		// persistent autostart setting. If this Framework implements the optional
+		// Start Level Service Specification, then the start level of this Framework
+		// is moved to start level zero (0), as described in the Start Level Service Specification.
+		// Any exceptions that occur during bundle stopping must be wrapped in a BundleException
 		// and then published as a framework event of type FrameworkEvent.ERROR
-		// 
+		//
 		// Unregister all services registered by this Framework.
 		// Event handling is disabled.
 		// This Framework's state is set to Bundle.RESOLVED.
@@ -95,7 +95,7 @@ namespace Framework
 		if(m_systemBundle->m_log)
 			m_systemBundle->m_log->Initialize("Execution.log", "Error.log");
 
-		
+
 		com_ptr<IBundle> fsBundle = m_systemBundle->getBundleRepository()->CreateNewBundle("FileSystem.dll");
 		fsBundle->Start();
 		m_fsRef = m_context->getServiceReference(uuid_of(IFileSystem));

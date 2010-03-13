@@ -30,7 +30,10 @@
 		<Project filename="framework.cbp">
 			<Depends filename="module.cbp" />
 		</Project>
-		<Project filename="framework.console.cbp" />
+		<Project filename="framework.console.cbp">
+			<Depends filename="module.cbp" />
+			<Depends filename="reflection.cbp" />
+		</Project>
 		<Project filename="framework.utils.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

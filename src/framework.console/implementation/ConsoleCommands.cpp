@@ -9,7 +9,8 @@
 =========================================================*/
 #include "ConsoleBundle.h"
 #include "ConsoleCommands.h"
-#include "Framework/reflection.h"
+#include "framework/reflection.h"
+#include <stdio.h>
 
 //////////////////////////////////////////////////////////////////////////
 

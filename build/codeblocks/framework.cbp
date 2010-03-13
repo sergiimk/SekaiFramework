@@ -40,6 +40,9 @@
 			<Add directory="../../src/framework/" />
 			<Add directory="../../lib/" />
 		</Compiler>
+		<Linker>
+			<Add option="-lboost_thread-mt" />
+		</Linker>
 		<Unit filename="../../src/framework/Events.h" />
 		<Unit filename="../../src/framework/Framework.h" />
 		<Unit filename="../../src/framework/Framework_fwd.h" />

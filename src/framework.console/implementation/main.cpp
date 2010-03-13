@@ -7,22 +7,26 @@
 * Terms of use, copying, distribution, and modification
 * are covered in accompanying LICENSE file
 =========================================================*/
-#include "Framework/Framework.h"
-#include "Module/Module.h"
+#include "framework/Framework.h"
+#include "module/module.h"
 
-#include <windows.h>
-#include <crtdbg.h>
+#if defined OS_WINDOWS
+#   include <windows.h>
+#   include <crtdbg.h>
+#endif
 
 using namespace Module;
 using namespace Framework;
 
 int main(int argc, char* argv[])
 {
+    #if defined OS_WINDOWS
 	//_crtBreakAlloc = 193;
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	#endif
 
 	ModuleHandle fw("Framework.dll");
-	
+
 	com_ptr<IFrameworkFactory> factory;
 	create_instance(factory, fw);
 
@@ -31,7 +35,7 @@ int main(int argc, char* argv[])
 	framework->Start();
 
 	com_ptr<IBundleContext> fwkContext = framework->getBundleContext();
-	
+
 	IBundle* console = fwkContext->InstallBundle("Framework.Console.exe");
 
 	if(console) console->Start();
