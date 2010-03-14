@@ -104,13 +104,6 @@ namespace FileSystem
 
 	//////////////////////////////////////////////////////////////////////////
 
-	/*=======================================================================
-	 =  Reads
-	 ==============*
-* Copyrights (c) Sergey Mikhtonyuk 2007-2010.
-* Terms of use, copying, distribution, and modification
-* are covered in accompanying LICENSE file
-=========================================================*/
 	// This non-member function is used to prevent async reading on deleted file handle
 	static void ReadFile_Exec(const std::string& filename, char **ppBuffer, std::ios::streamoff &size)
 	{
