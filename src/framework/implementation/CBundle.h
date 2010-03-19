@@ -81,7 +81,7 @@ namespace Framework
 
 	protected:
 		typedef std::vector<CServiceRegistration*> TServiceContainer;
-		typedef std::hash_map<CServiceRegistration*, ServiceUsage, hash_ptr> TServicesInUseContainer;
+		typedef std::hash_map<CServiceRegistration*, ServiceUsage, stl::hash_ptr> TServicesInUseContainer;
 
 		size_t					m_id;
 		EBundleState			m_state;
