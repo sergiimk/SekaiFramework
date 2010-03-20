@@ -51,7 +51,7 @@ namespace stl
 
 	//////////////////////////////////////////////////////////////////////////
 
-	template<class T>
+	template<class T = Module::IUnknown>
 	struct fn_release
 	{
 		void operator()(T *itf) const { itf->Release(); }
