@@ -208,6 +208,8 @@ public:
 	//   std::sort(foo->begin(), foo->end());
 	ContainerType* operator->() { return &m_container; }
 	const ContainerType* operator->() const { return &m_container; }
+	ContainerType& operator*() { return m_container; }
+	const ContainerType& operator*() const { return m_container; }
 
 protected:
 	// Allocator must be constructed before the container!

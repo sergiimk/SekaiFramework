@@ -63,7 +63,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../../lib/tinyxml/tinyxml32d.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -213,7 +212,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../../lib/tinyxml/tinyxml32.lib"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -343,10 +341,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\test\filesystem.test\misc.h"
-			>
-		</File>
 		<File
 			RelativePath="..\..\test\filesystem.test\testmain.cpp"
 			>

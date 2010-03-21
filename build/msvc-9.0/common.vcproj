@@ -80,11 +80,10 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Release|Win32"
+			Name="Debug|x64"
 			ConfigurationType="4"
-			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\optimizations.vsprops;.\output_path.vsprops"
+			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\STLPort.vsprops;.\output_path.vsprops"
 			CharacterSet="1"
-			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -100,14 +99,15 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
+				TargetEnvironment="3"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="1"
-				EnableIntrinsicFunctions="true"
-				PreprocessorDefinitions="WIN32;_LIB"
-				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="true"
+				Optimization="0"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
@@ -141,10 +141,11 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Debug|x64"
+			Name="Release|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\STLPort.vsprops;.\output_path.vsprops"
+			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\optimizations.vsprops;.\output_path.vsprops"
 			CharacterSet="1"
+			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -160,15 +161,14 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				TargetEnvironment="3"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				Optimization="1"
+				EnableIntrinsicFunctions="true"
+				PreprocessorDefinitions="WIN32;_LIB"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"

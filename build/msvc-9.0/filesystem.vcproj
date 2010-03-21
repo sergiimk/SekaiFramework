@@ -63,7 +63,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../../lib/zlib/zlib32.lib ../../lib/tinyxml/tinyxml32d.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -209,7 +208,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../../lib/zlib/zlib32.lib ../../lib/tinyxml/tinyxml32.lib"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -320,135 +318,23 @@
 	</References>
 	<Files>
 		<Filter
-			Name="interfaces"
-			>
-			<File
-				RelativePath="..\..\src\filesystem\FSExceptions.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\filesystem\IFSTraverser.h"
-				>
-			</File>
-			<Filter
-				Name="Resources"
-				>
-				<File
-					RelativePath="..\..\src\filesystem\IArchive.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\IFile.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\IFileSystem.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\IFolder.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\IResource.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\IResourceContainer.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Adapters"
-				>
-				<File
-					RelativePath="..\..\src\filesystem\IINIFileAdapter.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\IXMLFileAdapter.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
 			Name="implementation"
 			>
 			<File
-				RelativePath="..\..\src\filesystem\Implementation\CFileSystem.cpp"
+				RelativePath="..\..\src\filesystem\implementation\directory_iterator.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\filesystem\Implementation\CFileSystem.h"
+				RelativePath="..\..\src\filesystem\implementation\filesystem.cpp"
 				>
 			</File>
-			<Filter
-				Name="Resources"
+			<File
+				RelativePath="..\..\src\filesystem\implementation\path.cpp"
 				>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CArchFile.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CArchFile.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CArchFolder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CArchFolder.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CArchive.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CArchive.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CFile.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CFile.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CFolder.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CFolder.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Adapters"
-				>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CINIFileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CINIFileAdapter.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CXMLFileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\filesystem\Implementation\CXMLFileAdapter.h"
-					>
-				</File>
-			</Filter>
+			</File>
 		</Filter>
 		<File
-			RelativePath="..\..\src\filesystem\implementation\filesystem.cpp"
+			RelativePath="..\..\src\filesystem\directory_iterator.h"
 			>
 		</File>
 		<File
@@ -457,6 +343,10 @@
 		</File>
 		<File
 			RelativePath="..\..\src\filesystem\filesystem_fwd.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\src\filesystem\path.h"
 			>
 		</File>
 	</Files>

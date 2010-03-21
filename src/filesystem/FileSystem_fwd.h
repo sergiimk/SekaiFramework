@@ -1,7 +1,7 @@
 /*========================================================
-* FileSystem_fwd.h
+* filesystem_fwd.h
 * @author Sergey Mikhtonyuk
-* @date 23 July 2009
+* @date 20 Mar 2010
 *
 * Copyrights (c) Sergey Mikhtonyuk 2007-2010.
 * Terms of use, copying, distribution, and modification
@@ -10,19 +10,20 @@
 #ifndef _FILESYSTEM_FWD_H__
 #define _FILESYSTEM_FWD_H__
 
-namespace FileSystem
+#include "platform/platform.h"
+
+#if defined BUILD_SHARED
+#	define FILESYSTEM_API SHARED_EXPORT
+#else
+#	define FILESYSTEM_API SHARED_IMPORT
+#endif
+
+namespace filesystem
 {
-
-	struct IFileSystem;
-
-	struct IResource;
-	struct IResourceContainer;
-	struct IFolder;
-	struct IArchive;
-	struct IFile;
-
-	struct IFSTraverser;
+	
+	class path;
+	class directory_iterator;
 
 } // namespace
 
-#endif // _FILESYSTEM_FWD_H__
+#endif //_FILESYSTEM_FWD_H__
