@@ -276,10 +276,6 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\src\common\exceptions.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\src\common\IAdaptable.h"
 			>
 		</File>

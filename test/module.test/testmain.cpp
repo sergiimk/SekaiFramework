@@ -9,10 +9,13 @@
 =========================================================*/
 #include "testclasses.h"
 #include "module/intellectual.h"
+#include "module/exception.h"
 #include <sstream>
 #include <map>
 
 using namespace Module;
+
+SF_IMPLEMENT_EXCEPTION(TestException, Exception)
 
 #define BOOST_TEST_MODULE SM_lib_test
 #include <boost/test/unit_test.hpp>
@@ -160,6 +163,21 @@ BOOST_AUTO_TEST_CASE( TestOnStackObjects )
 	ITest* pt;
 	interface_cast<ITest>(static_cast<ITest*>(&t), &pt);
 	BOOST_CHECK(pt);
+}
+
+BOOST_AUTO_TEST_CASE( TestException )
+{
+	try
+	{
+		Exception e("D'oh", "!", 10);
+		e.rethrow();
+
+		BOOST_CHECK(false);
+	}
+	catch(Exception& ex)
+	{
+		BOOST_CHECK(strcmp(ex.message(), "D'oh !") == 0);
+	}
 }
 
 BOOST_AUTO_TEST_SUITE_END();
