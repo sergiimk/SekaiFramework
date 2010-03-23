@@ -9,6 +9,7 @@
 =========================================================*/
 #include "directory_iterator.h"
 #include "path.h"
+#include "module/exception.h"
 #include "common/stack_string.h"
 #include <string>
 
@@ -31,11 +32,14 @@ namespace filesystem
 			, h(INVALID_HANDLE_VALUE)
 			, steps(0)
 		{
+			if(!_p.is_directory())
+				throw Module::InvalidArgumentException("Path does not specify a directory");
+
 			stack_string<> path(p->c_str());
 			*path += "\\*";
 
 			WIN32_FIND_DATAA data;
-			h = FindFirstFileA(path->c_str(), &data);
+			h = ::FindFirstFileA(path->c_str(), &data);
 
 			if(h != INVALID_HANDLE_VALUE)
 				entry = data.cFileName;
@@ -129,7 +133,7 @@ namespace filesystem
 			*path += "\\*";
 
 			WIN32_FIND_DATAA data;
-			h = FindFirstFileA(path->c_str(), &data);
+			h = ::FindFirstFileA(path->c_str(), &data);
 
 			if(h == INVALID_HANDLE_VALUE)
 				return false;
@@ -165,7 +169,7 @@ namespace filesystem
 		std::string entry;
 		HANDLE h;
 		const path* p;
-		size_t steps; // used for deep copying of handle
+		size_t steps; // used in deep copying of handle
 
 		//////////////////////////////////////////////////////////////////////////
 

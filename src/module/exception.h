@@ -125,6 +125,22 @@ namespace Module
 
 	//////////////////////////////////////////////////////////////////////////
 
+	SF_DECLARE_EXCEPTION(LogicException, Exception)
+	SF_DECLARE_EXCEPTION(InvalidArgumentException, LogicException)
+	SF_DECLARE_EXCEPTION(NotImplementedException, LogicException)
+	SF_DECLARE_EXCEPTION(RangeException, LogicException)
+
+	//////////////////////////////////////////////////////////////////////////
+
+	SF_DECLARE_EXCEPTION(RuntimeException, Exception)
+	SF_DECLARE_EXCEPTION(NotFoundException, RuntimeException)
+	SF_DECLARE_EXCEPTION(ExistsException, RuntimeException)
+	SF_DECLARE_EXCEPTION(TimeoutException, RuntimeException)
+	SF_DECLARE_EXCEPTION(NoPermissionException, RuntimeException)
+	SF_DECLARE_EXCEPTION(IOException, RuntimeException)	
+
+	//////////////////////////////////////////////////////////////////////////
+
 } // namespace
 
 #endif //_FWK_EXCEPTIONS_H__

@@ -9,6 +9,7 @@
 =========================================================*/
 #include "path.h"
 #include "directory_iterator.h"
+#include "module/exception.h"
 #include <string>
 
 #if defined OS_WINDOWS
@@ -17,7 +18,9 @@
 
 namespace filesystem
 {
-	bool is_sep(char c)
+	//////////////////////////////////////////////////////////////////////////
+
+	static bool is_sep(char c)
 	{
 		const char* seps = path::separators();
 		while(*seps)
@@ -43,6 +46,10 @@ namespace filesystem
 
 		path_impl(const char* p)
 		{
+			for(const char* pp = p; *pp; ++pp)
+				if(is_invalid_path_symbol(*pp))
+					throw Module::InvalidArgumentException("Invalid symbols in the path");
+
 			size_t l = strlen(p);
 			while(--l > 0 && is_sep(p[l]))
 				;
@@ -195,6 +202,64 @@ namespace filesystem
 
 	//////////////////////////////////////////////////////////////////////////
 
+	bool path::exists() const
+	{
+		return !(get_attributes() & fa_not_found);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	
+	//bool is_absolute() const;
+
+	//////////////////////////////////////////////////////////////////////////
+
+	bool path::is_file() const
+	{
+		return (get_attributes() & fa_file) ? true : false;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	bool path::is_directory() const
+	{
+		return get_attributes() & fa_directory;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	bool path::is_link() const
+	{
+		throw Module::NotImplementedException("Not implemented");
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	int path::get_attributes() const
+	{
+		DWORD attrs = ::GetFileAttributesA(m_impl->str.c_str());
+		if(attrs == 0xffffffff)
+		{
+			DWORD ec = ::GetLastError();
+			if(ec == ERROR_FILE_NOT_FOUND
+				|| ec == ERROR_PATH_NOT_FOUND
+				|| ec == ERROR_INVALID_NAME
+				|| ec == ERROR_INVALID_DRIVE
+				|| ec == ERROR_INVALID_PARAMETER
+				|| ec == ERROR_BAD_PATHNAME
+				|| ec == ERROR_BAD_NETPATH)
+			{
+				return fa_not_found;
+			}
+			return fa_unknown;
+		}
+		int ret = (attrs & FILE_ATTRIBUTE_DIRECTORY) ? fa_directory : fa_file;
+		if(attrs & FILE_ATTRIBUTE_HIDDEN) ret |= fa_hidden;
+		if(attrs & FILE_ATTRIBUTE_READONLY) ret |= fa_readonly;
+		return ret;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	directory_iterator path::list_dir() const
 	{
 		return directory_iterator(*this);
@@ -204,24 +269,34 @@ namespace filesystem
 
 	const char* path::separators() 
 	{ 
-		return "\\/"; 
+		return "\\/";
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	const char* path::invalid_symbols()
+	bool path::is_invalid_file_name_symbol(char c)
 	{
-		return "\\/*?:<>|\"^";
+		unsigned char code = (unsigned char)c;
+		return code < 32 || c == '"' || c == '<' || c == '>' || c == '|' 
+			 || c == ':' || c == '*' || c == '?' || c == '\\' || c == '/' ;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	bool path::is_invalid_path_symbol(char c)
+	{
+		unsigned char code = (unsigned char)c;
+		return code < 32 || c == '"' || c == '<' || c == '>' || c == '|';
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	path path::current_dir()
 	{
-		DWORD len = GetCurrentDirectoryA(0, 0);
+		DWORD len = ::GetCurrentDirectoryA(0, 0);
 		path cd;
 		cd.m_impl->str.resize(len);
-		GetCurrentDirectoryA(len, &cd.m_impl->str[0]);
+		::GetCurrentDirectoryA(len, &cd.m_impl->str[0]);
 		return cd;
 	}
 	
@@ -232,6 +307,8 @@ namespace filesystem
 		os << p.c_str();
 		return os;
 	}
+
+	//////////////////////////////////////////////////////////////////////////
 
 	std::istream& operator>>(std::istream& is, path& p)
 	{
@@ -270,6 +347,7 @@ namespace filesystem
 			: p(other.p)
 			, pos(other.pos)
 			, pstr(other.pstr)
+			, element(other.element)
 		{ }
 
 		//////////////////////////////////////////////////////////////////////////
@@ -282,6 +360,7 @@ namespace filesystem
 			p = rhs.p;
 			pos = rhs.pos;
 			pstr = rhs.pstr;
+			element = rhs.element;
 			return *this;
 		}
 

@@ -14,7 +14,8 @@
 
 namespace filesystem
 {
-
+	/// Iterates over directory entries
+	/** @ingroup filesystem */
 	class FILESYSTEM_API directory_iterator
 	{
 	public:
@@ -27,12 +28,16 @@ namespace filesystem
 
 		directory_iterator& operator=(const directory_iterator& rhs);
 
+		/// Returns true if iterator is valid, false when reached the end
 		operator bool() const;
 
+		/// Step to the next directory entry
 		directory_iterator& operator++();
 
+		/// Step to the next directory entry
 		directory_iterator operator++(int);
 
+		/// Returns name of current entry
 		path current() const;
 
 	private:

@@ -17,5 +17,6 @@
 
 #include "path.h"
 #include "directory_iterator.h"
+#include "module/exception.h"
 
 #endif //_FILESYSTEM_H__

@@ -17,6 +17,12 @@ using namespace filesystem;
 
 BOOST_AUTO_TEST_SUITE( PathTestSuite );
 
+BOOST_AUTO_TEST_CASE( TestConstructPath )
+{
+	path p("test_path");
+	BOOST_CHECK_THROW(path p2("te|<>\"?*st"), Module::InvalidArgumentException);
+}
+
 BOOST_AUTO_TEST_CASE( TestCmp )
 {
 	path p1("test/");
@@ -46,6 +52,19 @@ BOOST_AUTO_TEST_CASE( TestJoin )
 	BOOST_CHECK(strcmp(p4.c_str(), "asdf\\test") == 0);
 }
 
+BOOST_AUTO_TEST_CASE( TestAttrs )
+{
+	path p1("../../test/filesystem.test/tests");
+	BOOST_CHECK( p1.exists() );
+	BOOST_CHECK( p1.is_directory() );
+	BOOST_CHECK( !p1.is_file() );
+
+	path p2 = p1 + "testINI.ini";
+	BOOST_CHECK( p2.exists() );
+	BOOST_CHECK( !p2.is_directory() );
+	BOOST_CHECK( p2.is_file() );
+}
+
 BOOST_AUTO_TEST_CASE( TestFwdIterators )
 {
 	path p("..//something/right_one.yep");
@@ -63,6 +82,19 @@ BOOST_AUTO_TEST_CASE( TestFwdIterators )
 	BOOST_CHECK( ! ++it );
 	BOOST_CHECK(strcmp(it.element(), "") == 0);
 	BOOST_CHECK( it == p.end() );
+
+#if defined OS_WINDOWS
+	path p1("C:\\test\\");
+	
+	it = p1.begin();
+	BOOST_CHECK(strcmp(it.element(), "C:") == 0);
+
+	BOOST_CHECK( ++it );
+	BOOST_CHECK(strcmp(it.element(), "test") == 0);
+	
+	BOOST_CHECK( ! ++it );
+	BOOST_CHECK( it == p1.end() );
+#endif
 }
 
 BOOST_AUTO_TEST_CASE( TestRevIterators )

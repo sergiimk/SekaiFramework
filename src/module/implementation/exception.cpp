@@ -127,5 +127,21 @@ namespace Module
 	}
 
 	//////////////////////////////////////////////////////////////////////////
+
+	SF_IMPLEMENT_EXCEPTION(LogicException, Exception)
+	SF_IMPLEMENT_EXCEPTION(InvalidArgumentException, LogicException)
+	SF_IMPLEMENT_EXCEPTION(NotImplementedException, LogicException)
+	SF_IMPLEMENT_EXCEPTION(RangeException, LogicException)
+
+	//////////////////////////////////////////////////////////////////////////
+
+	SF_IMPLEMENT_EXCEPTION(RuntimeException, Exception)
+	SF_IMPLEMENT_EXCEPTION(NotFoundException, RuntimeException)
+	SF_IMPLEMENT_EXCEPTION(ExistsException, RuntimeException)
+	SF_IMPLEMENT_EXCEPTION(TimeoutException, RuntimeException)
+	SF_IMPLEMENT_EXCEPTION(NoPermissionException, RuntimeException)
+	SF_IMPLEMENT_EXCEPTION(IOException, RuntimeException)	
+
+	//////////////////////////////////////////////////////////////////////////
 	
 } // namespace

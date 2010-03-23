@@ -26,6 +26,20 @@ namespace filesystem
 	{
 	public:
 
+		//////////////////////////////////////////////////////////////////////////
+
+		enum file_attribute
+		{
+			fa_directory	= 0x1, /// Object is a directory
+			fa_file			= 0x2, /// Object is a file
+			fa_hidden		= 0x4, /// File or directory is hidden
+			fa_readonly		= 0x8, /// File or directory is read-only
+			fa_not_found	= 0x10, /// File was not found
+			fa_unknown		= 0x20, /// File type can't be determined
+		};
+
+		//////////////////////////////////////////////////////////////////////////
+
 		class iterator;
 		friend class iterator;
 
@@ -117,6 +131,9 @@ namespace filesystem
 		/// Return true if path refers to a directory entry that is a symbolic link
 		bool is_link() const;
 
+		/// Returns combination of path::file_attribute flags
+		int get_attributes() const;
+
 
 
 		/// Returns directory iterator
@@ -129,8 +146,11 @@ namespace filesystem
 		  * it can be followed by any number of alternative separators. */
 		static const char* separators();
 
-		/// Returns string that contains symbols that cannot be used in directory and path names
-		static const char* invalid_symbols();
+		/// Returns true if c is an invalid symbol for file name
+		static bool is_invalid_file_name_symbol(char c);
+
+		/// Returns true if c is an invalid symbol for path
+		static bool is_invalid_path_symbol(char c);
 
 		/// Returns absolute path to working directory
 		/** When possible prefer relative '.' path */
