@@ -10,7 +10,8 @@
 #ifndef _CPLUGINDEFVISITOR_H__
 #define _CPLUGINDEFVISITOR_H__
 
-#include "filesystem/IXMLFileAdapter.h"
+#include "module/interfaces.h"
+#include "tinyxml/tinyxml.h"
 #include <map>
 #include <string>
 #include <vector>

@@ -323,10 +323,6 @@
 			Name="interfaces"
 			>
 			<File
-				RelativePath="..\..\src\extensionmanager\CoreExceptions.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\extensionmanager\IPlugin.h"
 				>
 			</File>

@@ -14,7 +14,7 @@
 #include "tinyxml/tinyxml.h"
 
 using namespace Module;
-using namespace FileSystem;
+using namespace filesystem;
 
 namespace Framework
 {

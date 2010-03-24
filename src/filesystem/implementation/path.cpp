@@ -10,7 +10,11 @@
 #include "path.h"
 #include "directory_iterator.h"
 #include "module/exception.h"
+#include "common/stack_string.h"
 #include <string>
+#include <vector>
+#include <algorithm>
+#include <cctype>
 
 #if defined OS_WINDOWS
 #	include <windows.h>
@@ -32,6 +36,23 @@ namespace filesystem
 	}
 
 	//////////////////////////////////////////////////////////////////////////
+
+	bool pathcmp(const char* s1, const char* s2)
+	{
+		for(; *s1 && *s2; ++s1, ++s2)
+		{
+			if(*s1 != *s2
+				&& !(is_sep(*s1) && is_sep(*s2))
+#if defined OS_WINDOWS
+				&& (tolower(*s1) != tolower(*s2))
+#endif
+				)
+				return false;
+		}
+		return *s1 == '\0' && *s2 == '\0';
+	}
+
+	//////////////////////////////////////////////////////////////////////////
 	// path impl
 	//////////////////////////////////////////////////////////////////////////
 
@@ -47,14 +68,14 @@ namespace filesystem
 		path_impl(const char* p)
 		{
 			for(const char* pp = p; *pp; ++pp)
-				if(is_invalid_path_symbol(*pp))
+				if(is_bad_path_symbol(*pp))
 					throw Module::InvalidArgumentException("Invalid symbols in the path");
 
 			size_t l = strlen(p);
-			while(--l > 0 && is_sep(p[l]))
+			while(l-- > 1 && is_sep(p[l]))
 				;
-			if(l > 0)
-				str.assign(p, l + 1);
+
+			str.assign(p, l + 1);
 		}
 
 		//////////////////////////////////////////////////////////////////////////
@@ -85,10 +106,10 @@ namespace filesystem
 				const char* as = rhs.str.c_str();
 				
 				if(size) // skip as a trick for unix root paths
-					while(as && is_sep(*as))
+					while(*as && is_sep(*as))
 						++as;
 
-				if(size && !is_sep(str[size - 1]))
+				if(size && *as && !is_sep(str[size - 1]))
 					str += *path::separators();
 
 				str.append(as);
@@ -100,7 +121,7 @@ namespace filesystem
 
 		bool operator==(const path_impl& rhs) const
 		{
-			return str == rhs.str;
+			return pathcmp(str.c_str(), rhs.str.c_str());
 		}
 
 		//////////////////////////////////////////////////////////////////////////
@@ -136,6 +157,23 @@ namespace filesystem
 
 	//////////////////////////////////////////////////////////////////////////
 
+	path::path(const iterator& begin, const iterator& end)
+		: m_impl(new path_impl())
+	{
+		stack_string<> tmp = "";
+		bool first = true;
+		for(iterator it = begin; it != end; ++it)
+		{
+			if(!first && !is_sep((*tmp)[tmp->size()-1]))
+				*tmp += *separators();
+			*tmp += it.element();
+			first = false;
+		}
+		m_impl->str = tmp->c_str();
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	path::~path() { delete m_impl; }
 
 	//////////////////////////////////////////////////////////////////////////
@@ -147,6 +185,20 @@ namespace filesystem
 
 		*m_impl = *rhs.m_impl;
 		return *this;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	bool path::empty() const
+	{
+		return m_impl->str.empty();
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	size_t path::size() const
+	{
+		return m_impl->str.size();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -188,6 +240,24 @@ namespace filesystem
 
 	//////////////////////////////////////////////////////////////////////////
 
+	path& path::operator--()
+	{
+		iterator it = end();
+		slice(begin(), --it);
+		return *this;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	path path::operator--(int)
+	{
+		path ret(*this);
+		--*this;
+		return ret;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	bool path::operator ==(const path& rhs) const
 	{
 		return *m_impl == *rhs.m_impl;
@@ -202,6 +272,118 @@ namespace filesystem
 
 	//////////////////////////////////////////////////////////////////////////
 
+	void path::absolute()
+	{
+		char buf[512];
+
+		DWORD len = ::GetFullPathNameA(m_impl->str.c_str(), sizeof(buf), buf, 0);
+		if(len < sizeof(buf))
+		{
+			*this = path(len ? buf : "");
+			return;
+		}
+
+		std::vector<char> vec;
+		vec.resize(len + 1);
+		::GetFullPathNameA(m_impl->str.c_str(), len + 1, &vec[0], 0);
+
+		*this = path(&vec[0]);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void path::relative()
+	{
+		relative(current_dir());
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void path::relative(const path& dir)
+	{
+		if(!is_absolute() || !dir.is_absolute() || size() <= dir.size())
+			return;
+
+		path tmp;
+
+		path prefix = common_prefix(*this, dir);
+
+		if(prefix.size() == dir.size())
+		{
+			slice(iterator(*this, prefix.size() + 1), end());
+			return;
+		}
+
+		for(iterator it(dir, prefix.size() + 1), e = dir.end(); it != e; ++it)
+			tmp += "..";
+
+		for(iterator it(*this, prefix.size() + 1), e = end(); it != e; ++it)
+			tmp += it.element();
+
+		std::swap(m_impl->str, tmp.m_impl->str);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void path::normcase()
+	{
+		std::transform(m_impl->str.begin(), m_impl->str.end(), m_impl->str.begin(), tolower);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void path::normpath()
+	{
+		path tmp;
+		const char sep[2] = { *separators(), '\0' };
+
+		for(iterator it = begin(), e = end(); it != e; ++it)
+		{
+			if(strcmp(it.element(), "..") != 0 || tmp.empty())
+			{
+				tmp += it.element();
+				tmp += sep;
+			}	
+			else
+				--tmp;
+		}
+		std::swap(this->m_impl->str, tmp.m_impl->str);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	path path::basename() const
+	{
+		iterator it = end();
+		return path(--it, end());
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	path path::dirname() const
+	{
+		iterator it = end();
+		return path(begin(), --it);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void path::slice(const iterator& begin, const iterator& end)
+	{
+		stack_string<> tmp = "";
+		bool first = true;
+		for(iterator it = begin; it != end; ++it)
+		{
+			if(!first && !is_sep((*tmp)[tmp->size()-1]))
+				*tmp += *separators();
+			*tmp += it.element();
+			first = false;
+		}
+		m_impl->str = tmp->c_str();
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	bool path::exists() const
 	{
 		return !(get_attributes() & fa_not_found);
@@ -209,7 +391,14 @@ namespace filesystem
 
 	//////////////////////////////////////////////////////////////////////////
 	
-	//bool is_absolute() const;
+	bool path::is_absolute() const
+	{
+#if defined OS_WINDOWS
+		return m_impl->str.length() > 1 && m_impl->str[1] == ':';
+#elif defined OS_LINUX
+		return !m_impl->str.empty() && m_impl->str[0] == '/';
+#endif
+	}
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -229,7 +418,7 @@ namespace filesystem
 
 	bool path::is_link() const
 	{
-		throw Module::NotImplementedException("Not implemented");
+		throw Module::NotImplementedException(__FUNCTION__);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -274,7 +463,7 @@ namespace filesystem
 
 	//////////////////////////////////////////////////////////////////////////
 
-	bool path::is_invalid_file_name_symbol(char c)
+	bool path::is_bad_filename_symbol(char c)
 	{
 		unsigned char code = (unsigned char)c;
 		return code < 32 || c == '"' || c == '<' || c == '>' || c == '|' 
@@ -283,7 +472,7 @@ namespace filesystem
 
 	//////////////////////////////////////////////////////////////////////////
 
-	bool path::is_invalid_path_symbol(char c)
+	bool path::is_bad_path_symbol(char c)
 	{
 		unsigned char code = (unsigned char)c;
 		return code < 32 || c == '"' || c == '<' || c == '>' || c == '|';
@@ -291,13 +480,51 @@ namespace filesystem
 
 	//////////////////////////////////////////////////////////////////////////
 
+	path path::common_prefix(const path& p1, const path& p2)
+	{
+		iterator it1 = p1.begin(), e1 = p1.end();
+		iterator it2 = p2.begin(), e2 = p2.end();
+
+		for(; it1 != e1 
+			&& it2 != e2 
+			&& pathcmp(it1.element(), it2.element());
+		++it1, ++it2)
+			;
+		return path(p1.begin(), it1);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	path path::current_dir()
 	{
-		DWORD len = ::GetCurrentDirectoryA(0, 0);
-		path cd;
-		cd.m_impl->str.resize(len);
-		::GetCurrentDirectoryA(len, &cd.m_impl->str[0]);
-		return cd;
+		char buf[512];
+		DWORD len = ::GetCurrentDirectoryA(sizeof(buf), buf);
+		if(len < sizeof(buf))
+			return path(len ? buf : "");
+
+		std::vector<char> vec;
+		vec.resize(len + 1);
+		::GetCurrentDirectoryA(len + 1, &vec[0]);
+
+		return path(&vec[0]);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	path path::temp_dir()
+	{
+		char buf[_MAX_PATH];
+		::GetTempPathA(_MAX_PATH, buf);
+		return path(buf);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	path path::temp_file_name(const path& p, const char* prefix)
+	{
+		char buf[_MAX_PATH];
+		::GetTempFileNameA(p.c_str(), prefix, 0, buf);
+		return path(buf);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////
@@ -337,7 +564,6 @@ namespace filesystem
 			, pos(position)
 			, pstr(&parent.m_impl->str)
 		{
-			pos = skip_seps(pos);
 			set_element(pos);
 		}
 
@@ -368,7 +594,7 @@ namespace filesystem
 
 		iterator_impl& operator++()
 		{
-			assert(element.size());
+			assert(pstr->c_str()[pos]);
 			pos += element.size();
 			pos = skip_seps(pos);
 			set_element(pos);
@@ -390,7 +616,6 @@ namespace filesystem
 		{
 			size_t np = rskip_seps(pos);
 			np = rnext_sep(np);
-			np = skip_seps(np);
 			assert(np != pos);
 			pos = np;
 			set_element(np);
@@ -417,6 +642,7 @@ namespace filesystem
 
 		bool operator==(const iterator_impl& rhs) const
 		{
+			assert(rhs.p == p);
 			return pos == rhs.pos;
 		}
 
@@ -429,12 +655,46 @@ namespace filesystem
 
 		//////////////////////////////////////////////////////////////////////////
 
+		bool operator<(const iterator_impl& rhs) const
+		{
+			assert(rhs.p == p);
+			return pos < rhs.pos;
+		}
+
+		//////////////////////////////////////////////////////////////////////////
+
+		bool operator<=(const iterator_impl& rhs) const
+		{
+			assert(rhs.p == p);
+			return pos <= rhs.pos;
+		}
+
+		//////////////////////////////////////////////////////////////////////////
+
+		bool operator>(const iterator_impl& rhs) const
+		{
+			assert(rhs.p == p);
+			return pos > rhs.pos;
+		}
+
+		//////////////////////////////////////////////////////////////////////////
+
+		bool operator>=(const iterator_impl& rhs) const
+		{
+			assert(rhs.p == p);
+			return pos >= rhs.pos;
+		}
+
+		//////////////////////////////////////////////////////////////////////////
+
 		void set_element(size_t start)
 		{
 			element.clear();
 			size_t end = next_sep(start);
 			if(start != end)
 				element.assign(&(*pstr)[start], end - start);
+			else if(!start && !pstr->empty())
+				element += *path::separators();
 		}
 
 		//////////////////////////////////////////////////////////////////////////
@@ -450,9 +710,9 @@ namespace filesystem
 		size_t rskip_seps(size_t _p) const
 		{
 			const char* s = pstr->c_str();
-			while (--_p && is_sep(s[_p]))
+			while (_p-- && is_sep(s[_p]))
 				;
-			return _p;
+			return _p + 1;
 		}
 
 		//////////////////////////////////////////////////////////////////////////
@@ -468,9 +728,9 @@ namespace filesystem
 		size_t rnext_sep(size_t _p) const
 		{
 			const char* s = pstr->c_str();
-			while (--_p && !is_sep(s[_p]))
+			while (_p-- && !is_sep(s[_p]))
 				;
-			return _p;
+			return _p + 1;
 		}
 
 		//////////////////////////////////////////////////////////////////////////
@@ -572,6 +832,34 @@ namespace filesystem
 	bool path::iterator::operator !=(const path::iterator &rhs) const
 	{
 		return !(*m_impl == *rhs.m_impl);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	bool path::iterator::operator<(const iterator& rhs) const
+	{
+		return *m_impl < *rhs.m_impl;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	bool path::iterator::operator<=(const iterator& rhs) const
+	{
+		return *m_impl <= *rhs.m_impl;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	bool path::iterator::operator>(const iterator& rhs) const
+	{
+		return *m_impl > *rhs.m_impl;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	bool path::iterator::operator>=(const iterator& rhs) const
+	{
+		return *m_impl >= *rhs.m_impl;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

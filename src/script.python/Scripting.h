@@ -16,7 +16,6 @@
 #include "IScriptFunction.h"
 #include "IScriptTable.h"
 #include "IScriptObject.h"
-#include "ScriptExceptions.h"
 #include "SScriptAny.h"
 
 #endif // _SCRIPTING_H__

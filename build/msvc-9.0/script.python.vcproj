@@ -335,10 +335,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\script.python\ScriptExceptions.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\script.python\SScriptAny.h"
 				>
 			</File>

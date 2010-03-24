@@ -8,10 +8,10 @@
 * are covered in accompanying LICENSE file
 =========================================================*/
 #include "CScriptManager.h"
-#include "ScriptExceptions.h"
 #include "CScriptModule.h"
 #include "CScriptFunction.h"
 #include "reflection/reflection.h"
+#include "module/exception.h"
 
 #include <vector>
 #include <string>
@@ -161,7 +161,7 @@ namespace ScriptPy
 		if(!pyScript)
 		{
 			PyErr_Print();
-			throw ScriptException("Module loading failed");
+			throw Module::RuntimeException("Module loading failed");
 		}
 
 		PyModule_AddObject(mMainModule, file, pyScript);

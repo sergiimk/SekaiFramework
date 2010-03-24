@@ -9,7 +9,7 @@
 =========================================================*/
 
 #include "CPluginDefVisitor.h"
-#include "CoreExceptions.h"
+#include "module/exception.h"
 #include <cctype>
 #include <algorithm>
 #include <functional>
@@ -277,7 +277,7 @@ namespace Extensions
 
 	void CPluginDefVisitor::ThrowHelper(const char* message)
 	{
-		throw ParsingException(message);
+		throw Module::RuntimeException(message);
 	}
 
 	CPluginDefVisitor::~CPluginDefVisitor()

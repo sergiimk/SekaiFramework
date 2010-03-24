@@ -29,8 +29,9 @@ BOOST_AUTO_TEST_CASE( TestCmp )
 	path p2("test");
 	BOOST_CHECK_EQUAL(p1, p2);
 
-	p2 += "sdf";
-	BOOST_CHECK_NE(p1, p2);
+#if defined OS_WINDOWS
+	BOOST_CHECK_EQUAL(p1, "TeSt");
+#endif
 }
 
 BOOST_AUTO_TEST_CASE( TestJoin )
@@ -50,6 +51,10 @@ BOOST_AUTO_TEST_CASE( TestJoin )
 	path p4("asdf/");
 	p4 += "/test/";
 	BOOST_CHECK(strcmp(p4.c_str(), "asdf\\test") == 0);
+
+	path p5;
+	p5 += "/";
+	BOOST_CHECK(strcmp(p5.c_str(), "/") == 0);
 }
 
 BOOST_AUTO_TEST_CASE( TestAttrs )
@@ -65,11 +70,80 @@ BOOST_AUTO_TEST_CASE( TestAttrs )
 	BOOST_CHECK( p2.is_file() );
 }
 
+BOOST_AUTO_TEST_CASE( TestSlices )
+{
+	path p("/abc/def/ghi.j");
+	BOOST_CHECK_EQUAL( p.basename(), "ghi.j" );
+	BOOST_CHECK_EQUAL( p.dirname(), "/abc/def" );
+	--p;
+	--p;
+	BOOST_CHECK_EQUAL( p, "/abc" );
+	--p;
+	BOOST_CHECK_EQUAL( p, "/" );
+}
+
+BOOST_AUTO_TEST_CASE( TestAbs )
+{
+	path p1 = path::current_dir();
+	path p2(".");
+
+	BOOST_CHECK( !p2.is_absolute() );
+	p2.absolute();
+	BOOST_CHECK( p2.is_absolute() );
+
+	BOOST_CHECK_EQUAL(p1, p2);
+}
+
+BOOST_AUTO_TEST_CASE( TestRelPath )
+{
+	path p1("/common/asdf/fdsa");
+	path p2("/common/fdsa/asdf");
+	
+	BOOST_CHECK_EQUAL(path::common_prefix(p1, p2), "/common");
+
+	path p3 = path::current_dir();
+	p3 += "asdf/fdsa";
+	p3.absolute();
+	p3.relative();
+	BOOST_CHECK_EQUAL(p3, "asdf/fdsa");
+
+	path p4 = path::current_dir();
+	p4 += "../asdf/fdsa";
+	p4.absolute();
+	p4.relative();
+	BOOST_CHECK_EQUAL(p4, "../asdf/fdsa");
+}
+
+BOOST_AUTO_TEST_CASE( TestNormalization )
+{
+	path p("AbCd/teSt");
+	p.normcase();
+#if defined OS_WINDOWS
+	BOOST_CHECK(strcmp(p.c_str(), "abcd/test") == 0);
+#else
+	BOOST_CHECK(strcmp(p.c_str(), "AbCd/teSt") == 0);
+#endif
+
+	path p2("test//../../asdf/");
+	p2.normpath();
+	BOOST_CHECK_EQUAL(p2, "../asdf");
+
+	path p3("/test/..//asdf/");
+	p3.normpath();
+	BOOST_CHECK_EQUAL(p3, "/asdf");
+}
+
 BOOST_AUTO_TEST_CASE( TestFwdIterators )
 {
-	path p("..//something/right_one.yep");
+	path p("/..//something/right_one.yep");
 	
+	const char sep[] = { *path::separators(), '\0' };
+
 	path::iterator it = p.begin();
+	BOOST_CHECK(strcmp(it.element(), sep) == 0);
+	BOOST_CHECK( it != p.end() );
+
+	BOOST_CHECK( ++it );
 	BOOST_CHECK(strcmp(it.element(), "..") == 0);
 
 	BOOST_CHECK( ++it );
@@ -100,6 +174,8 @@ BOOST_AUTO_TEST_CASE( TestFwdIterators )
 BOOST_AUTO_TEST_CASE( TestRevIterators )
 {
 	path p("/../something//right_one.yep");
+
+	const char sep[] = { *path::separators(), '\0' };
 	
 	path::iterator it = p.end();
 	BOOST_CHECK(strcmp(it.element(), "") == 0);
@@ -109,10 +185,13 @@ BOOST_AUTO_TEST_CASE( TestRevIterators )
 
 	BOOST_CHECK( --it );
 	BOOST_CHECK(strcmp(it.element(), "something") == 0);
-	BOOST_CHECK( it != p.begin() );
 
 	BOOST_CHECK( --it );
 	BOOST_CHECK(strcmp(it.element(), "..") == 0);
+	BOOST_CHECK( it != p.begin() );
+
+	BOOST_CHECK( --it );
+	BOOST_CHECK(strcmp(it.element(), sep) == 0);
 	BOOST_CHECK( it == p.begin() );
 }
 
@@ -131,6 +210,12 @@ BOOST_AUTO_TEST_CASE( TestDirIterators )
 	}
 
 	BOOST_CHECK(found);
+}
+
+BOOST_AUTO_TEST_CASE( TestConvenience )
+{
+	path p1 = path::temp_dir();
+	path p2 = path::temp_file_name(p1, "sekai");
 }
 
 BOOST_AUTO_TEST_SUITE_END();

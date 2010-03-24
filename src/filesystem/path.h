@@ -52,12 +52,21 @@ namespace filesystem
 		/// Copies other path
 		path(const path& other);
 
+		/// Constructs path from range
+		path(const iterator& begin, const iterator& end);
+
 		/// Assignment
 		path& operator=(const path& rhs);
 
 		/// Destructor
 		~path();
 
+
+		/// Checks if path is empty
+		bool empty() const;
+
+		/// Returns path size
+		size_t size() const;
 
 		/// C-string representation
 		const char* c_str() const;
@@ -89,7 +98,6 @@ namespace filesystem
 		bool operator!=(const path& rhs) const;
 
 
-
 		/// Converts path to an absolute
 		void absolute();
 
@@ -103,16 +111,18 @@ namespace filesystem
 		  * file systems it converts the path to lowercase. */
 		void normcase();
 
-		/// Normalize a pathname
-		/** This collapses redundant separators and up-level references.
-		  * Also can change meaning of the path that contains symbolic links */
+		/// Normalize a path
+		/** This collapses redundant separators and up-level references */
 		void normpath();
 
-		/// Return the base name of pathname path
+		/// Return the base name of path
 		path basename() const;
 
-		/// Return the directory name of pathname path
+		/// Return the directory name of path
 		path dirname() const;
+
+		/// Cuts the path to range defined by iterators
+		void slice(const iterator& begin, const iterator& end);
 
 
 
@@ -147,29 +157,25 @@ namespace filesystem
 		static const char* separators();
 
 		/// Returns true if c is an invalid symbol for file name
-		static bool is_invalid_file_name_symbol(char c);
+		static bool is_bad_filename_symbol(char c);
 
 		/// Returns true if c is an invalid symbol for path
-		static bool is_invalid_path_symbol(char c);
+		static bool is_bad_path_symbol(char c);
+
+		/// Returns common prefix of two paths
+		static path common_prefix(const path& p1, const path& p2);
 
 		/// Returns absolute path to working directory
 		/** When possible prefer relative '.' path */
 		static path current_dir();
 
-		/// Expands user home directory
-		/** On Unix and Windows, return the argument with an initial 
-		  * component of ~ or ~user replaced by that user‘s home directory.
-		  * 
-		  * On Unix, an initial ~ is replaced by the environment variable 
-		  * HOME if it is set; otherwise the current user’s home directory 
-		  * is looked up in the password directory through the built-in module pwd.
-		  * An initial ~user is looked up directly in the password directory.
-		  * 
-		  * On Windows, HOME and USERPROFILE will be used if set, otherwise a 
-		  * combination of HOMEPATH and HOMEDRIVE will be used. 
-		  * An initial ~user is handled by stripping the last directory component 
-		  * from the created user path derived above. */
-		static path expanduser(const char* usr);
+		/// Returns path to directory designated for temporary files
+		static path temp_dir();
+
+		/// Generates name for a temporary file
+		/** @param p path in which temp file will be located
+		  * @param prefix file name prefix (up to 3 chars used on windows) **/
+		static path temp_file_name(const path& p, const char* prefix);
 
 		/// path iterator
 		/// \todo make stl-compliant
@@ -189,6 +195,10 @@ namespace filesystem
 			operator	bool() const;
 			bool		operator==(const iterator& rhs) const;
 			bool		operator!=(const iterator& rhs) const;
+			bool		operator<(const iterator& rhs) const;
+			bool		operator<=(const iterator& rhs) const;
+			bool		operator>(const iterator& rhs) const;
+			bool		operator>=(const iterator& rhs) const;
 
 			const char* element() const;
 

@@ -20,7 +20,6 @@
 #include "IExtension.h"
 #include "IStartListener.h"
 #include "IExtensionPoint.h"
-#include "CoreExceptions.h"
 #include "logging/logging.h"
 
 namespace Extensions
