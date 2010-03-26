@@ -98,6 +98,9 @@ namespace filesystem
 		bool operator!=(const path& rhs) const;
 
 
+		/// Returns path extension
+		const char* extension() const;
+
 		/// Converts path to an absolute
 		void absolute();
 

@@ -94,12 +94,6 @@ namespace Framework
 
 		if(m_systemBundle->m_log)
 			m_systemBundle->m_log->Initialize("Execution.log", "Error.log");
-
-
-		com_ptr<IBundle> fsBundle = m_systemBundle->getBundleRepository()->CreateNewBundle("FileSystem.dll");
-		fsBundle->Start();
-		m_fsRef = m_context->getServiceReference(uuid_of(IFileSystem));
-		m_systemBundle->m_fileSystem = m_context->getService(m_fsRef);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -108,8 +102,7 @@ namespace Framework
 	{
 		VERBOSE("[SysBndleActivator] %s", __FUNCTION__);
 
-		com_ptr<IFile> file = m_systemBundle->m_fileSystem->GetResource("BundleRegistry.xml");
-		BundleRegParser parser(file);
+		BundleRegParser parser("BundleRegistry.xml");
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -142,10 +135,8 @@ namespace Framework
 		VERBOSE("[SysBndleActivator] %s", __FUNCTION__);
 
 		m_systemBundle->m_log.Release();
-		m_systemBundle->m_fileSystem.Release();
 
 		m_context->ungetService(m_logRef);
-		m_context->ungetService(m_fsRef);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -155,12 +146,7 @@ namespace Framework
 		/// \todo Replace with service tracker
 		if(evnt.getType() == eSvcEvntT_Unregistering)
 		{
-			if(evnt.getServiceReference() == m_fsRef)
-			{
-				m_systemBundle->m_fileSystem.Release();
-				m_context->ungetService(m_fsRef);
-			}
-			else if(evnt.getServiceReference() == m_logRef)
+			if(evnt.getServiceReference() == m_logRef)
 			{
 				m_systemBundle->m_log.Release();
 				m_context->ungetService(m_logRef);

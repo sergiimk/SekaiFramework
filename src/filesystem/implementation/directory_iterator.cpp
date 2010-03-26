@@ -28,14 +28,14 @@ namespace filesystem
 		//////////////////////////////////////////////////////////////////////////
 
 		directory_iterator_impl(const path& _p) 
-			: p(&_p)
+			: p(_p)
 			, h(INVALID_HANDLE_VALUE)
 			, steps(0)
 		{
 			if(!_p.is_directory())
 				throw Module::InvalidArgumentException("Path does not specify a directory");
 
-			stack_string<> path(p->c_str());
+			stack_string<> path(p.c_str());
 			*path += "\\*";
 
 			WIN32_FIND_DATAA data;
@@ -129,7 +129,7 @@ namespace filesystem
 			// just repeat the same number of steps
 			// made to 'other' handle
 
-			stack_string<> path(other.p->c_str());
+			stack_string<> path(other.p.c_str());
 			*path += "\\*";
 
 			WIN32_FIND_DATAA data;
@@ -168,7 +168,7 @@ namespace filesystem
 
 		std::string entry;
 		HANDLE h;
-		const path* p;
+		path p;
 		size_t steps; // used in deep copying of handle
 
 		//////////////////////////////////////////////////////////////////////////

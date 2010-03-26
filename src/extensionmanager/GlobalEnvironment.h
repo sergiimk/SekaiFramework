@@ -12,8 +12,6 @@
 
 #include "Core_fwd.h"
 
-namespace FileSystem { struct IFileSystem; }
-
 namespace Extensions
 {
 
@@ -36,7 +34,6 @@ namespace Extensions
 		ICore*						Core;			///< Core instance
 		IPluginManager*				PluginManager;	///< Plug-in manager instance
 		Logging::ILogService*		Logger;			///< Logger instance
-		FileSystem::IFileSystem*	FileSystem;		///< FileSystem instance
 	};
 
 

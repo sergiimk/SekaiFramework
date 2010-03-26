@@ -18,12 +18,10 @@
 #include "CEventServer.h"
 #include "CEventListenerQueue.h"
 #include "logging/logging.h"
-#include "filesystem/IFileSystem.h"
 
 #include <boost/thread.hpp>
 
 using namespace Module;
-using namespace FileSystem;
 using namespace Logging;
 
 namespace Framework
@@ -89,7 +87,6 @@ namespace Framework
 		CEventListenerQueue m_listeners;
 
 		com_ptr<ILogService> m_log;
-		com_ptr<IFileSystem> m_fileSystem;
 
 		typedef boost::mutex::scoped_lock scoped_lock;
 		boost::thread m_fwkThread;

@@ -13,12 +13,10 @@ namespace Framework
 {
 	//////////////////////////////////////////////////////////////////////////
 
-	BundleRegParser::BundleRegParser(IFile* file)
+	BundleRegParser::BundleRegParser(const char* file)
 	{
-		com_ptr<IXMLFileAdapter> xml;
-		file->FileSystem()->CreateFileAdapter(file, UUID_PPV(IXMLFileAdapter, xml.wrapped()));
-		xml->Parse();
-		TiXmlDocument& doc = xml->GetDoc();
+		TiXmlDocument doc;
+		doc.LoadFile(file);
 		doc.Accept(this);
 	}
 

@@ -61,7 +61,6 @@ namespace Framework
 		IBundleContext* m_context;
 		CSystemBundle* m_systemBundle;
 		com_ptr<IServiceReference> m_logRef;
-		com_ptr<IServiceReference> m_fsRef;
 	};
 
 } // namespace

@@ -9,14 +9,14 @@
 =========================================================*/
 #include "CoreParams.h"
 #include "GlobalEnvironment.h"
-#include "filesystem/FileSystem.h"
-#include "module/intellectual.h"
+#include "filesystem/filesystem.h"
+#include "tinyxml/tinyxml.h"
 
 namespace Extensions
 {
 	//////////////////////////////////////////////////////////////////////////
 	using namespace Module;
-	using namespace FileSystem;
+	using namespace filesystem;
 	//////////////////////////////////////////////////////////////////////////
 
 	bool CoreParams::ShouldLoad(const std::string& plugin) const
@@ -29,17 +29,20 @@ namespace Extensions
 	bool CoreParams::ParseFile(const char* file)
 	{
 		// Init xml adapter
-		com_ptr<IFile> f = gEnv->FileSystem->GetResource(file);
-		if(!f) return false;
+		TiXmlDocument doc;
 
-		com_ptr<IXMLFileAdapter> adapter;
-		gEnv->FileSystem->CreateFileAdapter(f, UUID_PPV(IXMLFileAdapter, adapter.wrapped()));
-		if(!adapter) return false;
+		try 
+		{ 
+			doc.LoadFile(file); 
+			if(!doc.FirstChild()) 
+				return false;
+		}
+		catch (...) 
+		{ 
+			return false; 
+		}
 
-		try { adapter->Parse(); }
-		catch (...) { return false; }
-
-		TiXmlElement* xml = adapter->GetDoc().FirstChildElement();
+		TiXmlElement* xml = doc.FirstChildElement();
 
 		// Parse file
 		TiXmlElement* lo = xml->FirstChildElement("loadonly");

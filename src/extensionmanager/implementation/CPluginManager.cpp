@@ -7,6 +7,7 @@
 
 #include "module/module.h"
 #include "filesystem/FileSystem.h"
+#include "common/stack_string.h"
 #include <boost/bind.hpp>
 #include <cctype>
 #include <algorithm>
@@ -14,15 +15,12 @@
 namespace Extensions
 {
 	using namespace Module;
-	using namespace FileSystem;
+	using namespace filesystem;
 
-	/*=======================================================================
-	 =  Init / Shutdown
-	 ==============*
-* Copyrights (c) Sergey Mikhtonyuk 2007-2010.
-* Terms of use, copying, distribution, and modification
-* are covered in accompanying LICENSE file
-=========================================================*/
+	//////////////////////////////////////////////////////////////////////////
+	// Init / Shutdown
+	//////////////////////////////////////////////////////////////////////////
+
 	CPluginManager::CPluginManager() : mCoreParams(0)
 	{
 	}
@@ -55,9 +53,6 @@ namespace Extensions
 
 	CPluginManager::~CPluginManager()
 	{
-		// Release file system in global environment
-		gEnv->FileSystem->Release();
-
 		// Shutting down used shadows in reverse to its creation order
 		std::for_each(mCreationStack.rbegin(), mCreationStack.rend(),
 			boost::bind(&CPluginShadow::Shutdown, _1));
@@ -70,13 +65,10 @@ namespace Extensions
 
 
 
-	/*=======================================================================
-	 =  Core plug-ins
-	 ==============*
-* Copyrights (c) Sergey Mikhtonyuk 2007-2010.
-* Terms of use, copying, distribution, and modification
-* are covered in accompanying LICENSE file
-=========================================================*/
+	//////////////////////////////////////////////////////////////////////////
+	// Core plug-ins
+	//////////////////////////////////////////////////////////////////////////
+
 	Module::HResult CPluginManager::LoadCorePlugins()
 	{
 		LogTrace("[Init] Loading core plug-ins");
@@ -87,29 +79,22 @@ namespace Extensions
 		CreateExtensionPoint(pShadow, "startlisteners", uuid_of(IStartListener));
 
 		// Initializing file system
-		pShadow = CreatePluginShadow("filesystem", 1);
-		pShadow->mExportTable.insert(CLSID_CFileSystem);
-		HResult hr = pShadow->CreateInstance(CLSID_CFileSystem, UUID_PPV(IFileSystem, &gEnv->FileSystem));
-		if(SF_FAILED(hr)) return hr;
-
-		return hr;
+		return SF_S_OK;
 	}
 
 
 
-	/*=======================================================================
-	 =  Plug-in loading
-	 ==============*
-* Copyrights (c) Sergey Mikhtonyuk 2007-2010.
-* Terms of use, copying, distribution, and modification
-* are covered in accompanying LICENSE file
-=========================================================*/
+	//////////////////////////////////////////////////////////////////////////
+	// Plug-in loading
+	//////////////////////////////////////////////////////////////////////////
+
 	void CPluginManager::LoadPlugins()
 	{
 		LogTrace("[Init] Loading regular plug-ins");
 
 		// Find all xml files
-		std::vector< com_ptr<IFile> > deffiles;
+		std::vector<path> deffiles;
+		deffiles.reserve(50);
 		FindDefinitionFiles(deffiles);
 
 		// Parse them and pass them a visitors
@@ -126,19 +111,20 @@ namespace Extensions
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CPluginManager::FindDefinitionFiles(std::vector< com_ptr<IFile> >& files)
+	void CPluginManager::FindDefinitionFiles(std::vector<path>& files)
 	{
-		static std::string ext = ".xml";
+		stack_string<8> ext = ".xml";
 
-		com_ptr<IFolder> pFolder = gEnv->FileSystem->CurrentFolder();
-		const std::vector<IResource*>& children = pFolder->GetChildren();
-		com_ptr<IFile> pFile;
+		directory_iterator dir(path::current_dir());
 
-		for(size_t i = 0; i < children.size(); ++i)
+		while(dir)
 		{
-			pFile = children[i];
-			if(pFile && pFile->Extension() == ext)
-				files.push_back(pFile);
+			path current = dir.current();
+
+			if(current.is_file() && *ext == current.extension())
+				files.push_back(current);
+
+			++dir;
 		}
 	}
 
@@ -146,28 +132,27 @@ namespace Extensions
 
 	void CPluginManager::ParseDefinitions(
 		std::vector<CPluginDefVisitor> &visitors,
-		std::vector< Module::com_ptr<FileSystem::IFile> > &files)
+		std::vector<path> &files)
 	{
-		for(size_t i = 0; i < files.size(); ++i)
+		for(size_t i = 0, size = files.size(); i < size; ++i)
 		{
-			com_ptr<IXMLFileAdapter> pAdapter;
-			gEnv->FileSystem->CreateFileAdapter(files[i], UUID_PPV(IXMLFileAdapter, pAdapter.wrapped()));
-
 			try
 			{
-				pAdapter->Parse();
-				if(!pAdapter->IsInitialized())
+				TiXmlDocument doc;
+				doc.LoadFile(files[i].c_str());
+
+				if(!doc.FirstChild())
 				{
-					LogErrorAlways("XML parsing failed, file: %s", files[i]->FullPath().c_str());
+					LogErrorAlways("XML parsing failed, file: %s", files[i].c_str());
 					continue;
 				}
 
-				pAdapter->GetDoc().Accept(&visitors[i]);
+				doc.Accept(&visitors[i]);
 			}
-			catch(ParsingException& pex)
+			catch(Module::Exception& ex)
 			{
 				visitors[i].PluginName.clear();
-				LogErrorAlways("Plugin definition load failed: %s, in %s", pex.what(), files[i]->FullPath().c_str());
+				LogErrorAlways("Plugin definition load failed: %s, in %s", ex.message(), files[i].c_str());
 				continue;
 			}
 
@@ -250,13 +235,10 @@ namespace Extensions
 	}
 
 
-	/*=======================================================================
-	 =  Shadows
-	 ==============*
-* Copyrights (c) Sergey Mikhtonyuk 2007-2010.
-* Terms of use, copying, distribution, and modification
-* are covered in accompanying LICENSE file
-=========================================================*/
+	//////////////////////////////////////////////////////////////////////////
+	// Shadows
+	//////////////////////////////////////////////////////////////////////////
+
 	CPluginShadow* CPluginManager::CreatePluginShadow(const std::string& name, int version)
 	{
 		LogTrace("[Init] Creating plug-in shadow: %s", name.c_str());
@@ -307,13 +289,10 @@ namespace Extensions
 		return pEx;
 	}
 
-	/*=======================================================================
-	 =  Runtime
-	 ==============*
-* Copyrights (c) Sergey Mikhtonyuk 2007-2010.
-* Terms of use, copying, distribution, and modification
-* are covered in accompanying LICENSE file
-=========================================================*/
+	//////////////////////////////////////////////////////////////////////////
+	// Runtime
+	//////////////////////////////////////////////////////////////////////////
+
 	HResult CPluginManager::OnPluginLoad(CPluginShadow *pShadow)
 	{
 		// Initializes plugin and puts it to creation stack
@@ -328,13 +307,10 @@ namespace Extensions
 	}
 
 
-	/*=======================================================================
-	 =  Service
-	 ==============*
-* Copyrights (c) Sergey Mikhtonyuk 2007-2010.
-* Terms of use, copying, distribution, and modification
-* are covered in accompanying LICENSE file
-=========================================================*/
+	//////////////////////////////////////////////////////////////////////////
+	// Service
+	//////////////////////////////////////////////////////////////////////////
+
 	IPluginShadow* CPluginManager::FindPluginShadow(const std::string &name)
 	{
 		std::string n(name);

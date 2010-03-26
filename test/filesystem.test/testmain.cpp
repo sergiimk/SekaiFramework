@@ -82,6 +82,15 @@ BOOST_AUTO_TEST_CASE( TestSlices )
 	BOOST_CHECK_EQUAL( p, "/" );
 }
 
+BOOST_AUTO_TEST_CASE( TestExt )
+{
+	path p1("asdf/fdsa.ext");
+	BOOST_CHECK( strcmp(".ext", p1.extension()) == 0 );
+
+	path p2("asdf/fdsaext");
+	BOOST_CHECK( strcmp("", p2.extension()) == 0 );
+}
+
 BOOST_AUTO_TEST_CASE( TestAbs )
 {
 	path p1 = path::current_dir();

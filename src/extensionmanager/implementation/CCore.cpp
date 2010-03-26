@@ -11,12 +11,12 @@
 #include "CCore.h"
 #include "CPluginManager.h"
 #include "logging/logging.h"
-#include "CoreExceptions.h"
 #include "IExtension.h"
 #include "IExtensionPoint.h"
 #include "IPluginShadow.h"
 #include "IStartListener.h"
 
+#include "module/exception.h"
 #include "platform/platform.h"
 
 namespace Extensions
@@ -42,7 +42,7 @@ namespace Extensions
 	void CCore::Initialize(const char* paramsFile)
 	{
 		if(gEnv->PluginManager)
-			throw CoreException("Multiple Core initialization");
+			throw Module::RuntimeException("Multiple Core initialization");
 
 		mLogModule.Init("Logging.dll");
 		create_instance(&gEnv->Logger, Logging::CLSID_CLogService, mLogModule);
@@ -76,13 +76,13 @@ namespace Extensions
 		{
 			StartExecution_actual(argc, argv);
 		}
-		catch(CoreException& cex)
+		catch(Module::Exception& cex)
 		{
-			LogErrorAlways(cex.what());
+			LogErrorAlways("%s: %s", cex.className(), cex.message());
 		}
-		catch(std::exception& sex)
+		catch(std::exception& stdex)
 		{
-			LogErrorAlways(sex.what());
+			LogErrorAlways(stdex.what());
 		}
 		catch(...)
 		{

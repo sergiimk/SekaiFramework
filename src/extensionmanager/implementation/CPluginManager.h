@@ -14,8 +14,8 @@
 #include "IPluginManager.h"
 #include "CoreParams.h"
 #include "module/implementations.h"
-#include "filesystem/IFileSystem.h"
 #include "module/intellectual.h"
+#include "filesystem/filesystem.h"
 #include "CPluginDefVisitor.h"
 #include "platform/hash_map.h"
 #include <vector>
@@ -59,11 +59,11 @@ namespace Extensions
 			void			LoadPlugins();
 
 			/// Find all xml files
-			void			FindDefinitionFiles(std::vector<Module::com_ptr<FileSystem::IFile> >& files);
+			void			FindDefinitionFiles(std::vector<filesystem::path>& files);
 
 			/// Parses the definition files
 			void			ParseDefinitions(	std::vector<CPluginDefVisitor>& visitors,
-												std::vector<Module::com_ptr<FileSystem::IFile> >& files);
+												std::vector<filesystem::path>& files);
 
 			/// Creates shadows from visitors
 			void			CreateShadows(std::vector<CPluginDefVisitor>& visitors);
