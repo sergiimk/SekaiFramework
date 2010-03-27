@@ -193,17 +193,16 @@ BOOST_FIXTURE_TEST_CASE( VariableExportTest, ScriptFixture )
 
 	TestPlayer pl;
 	TestPlayer* ppl = &pl;
-	//BOOST_REQUIRE(
-		mgr->ExportVariable("Sekai", "g_player", make_typed_pair(ppl)) ;
-		//);
+	mgr->ExportVariable("Sekai", "g_player", make_typed_pair(ppl)) ;
 
 	mgr->RunScript("py_varexport");
 }
 
 BOOST_FIXTURE_TEST_CASE( InterfaceImportTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<TestInterface>());
+	mgr->ExportType("Sekai", (UserType*)type_of<ITestInterface>());
 	mgr->ExportType("Sekai", (UserType*)type_of<TestInterfaceFactory>());
+	mgr->ExportType("Sekai", (UserType*)type_of<com_ptr<ITestInterface> >());
 	mgr->RunScript("py_interface");
 }
 
@@ -221,6 +220,7 @@ struct ScriptModuleFixture : public ScriptFixture
 	}
 };
 
+
 BOOST_FIXTURE_TEST_CASE(ExportModule, ScriptModuleFixture)
 {
 }
@@ -228,6 +228,10 @@ BOOST_FIXTURE_TEST_CASE(ExportModule, ScriptModuleFixture)
 BOOST_FIXTURE_TEST_CASE(ModuleCreate, ScriptModuleFixture)
 {
 	mgr->RunScript("py_module_creation");
+}
+
+BOOST_FIXTURE_TEST_CASE(ModuleExportInstance, ScriptModuleFixture)
+{
 }
 
 struct ModuleLibraryFixture : public ScriptFixture

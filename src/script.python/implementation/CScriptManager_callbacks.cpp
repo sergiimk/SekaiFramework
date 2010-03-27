@@ -156,6 +156,8 @@ namespace ScriptPy
 					*(void**)builtin_buf, export_entry->Module, SIT_SHARED);
 			}
 
+			if(!pyRet)
+				PyErr_SetString(PyExc_RuntimeError, "Failed to marshal the return value");
 			return pyRet;
 		}
 

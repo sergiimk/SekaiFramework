@@ -20,7 +20,7 @@
 namespace Reflection
 {
 	template<>
-	void* type_ctor<Module::GUID, Module::NewAllocator>()
+	inline void* type_ctor<Module::GUID, Module::NewAllocator>()
 	{
 		Module::GUID* g = new Module::GUID();
 		g->SetZero();
@@ -31,6 +31,12 @@ namespace Reflection
 reflect_struct(Module::GUID)
 	map_ctor()
 	map_parsable()
+end_reflection()
+
+
+reflect_class(Module::IUnknown)
+	map_method("AddRef", AddRef)
+	map_method("Release", Release)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////

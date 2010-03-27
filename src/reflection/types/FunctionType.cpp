@@ -20,6 +20,8 @@ namespace Reflection
 	FunctionType::FunctionType(GenericInvoker inv, bool isMethod, Type* rt, Type** arguments, int argc)
 		: mIsMethod(isMethod), mInvoker(inv), mReturnType(rt)
 	{
+		ASSERT_STRICT(rt);
+
 		memset(mArguments, 0, sizeof(void*) * (DELEG_MAX_INVOKE_PARAMS + 1));
 		memcpy(mArguments, arguments, sizeof(void*) * argc);
 

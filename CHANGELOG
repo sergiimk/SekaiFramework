@@ -4,6 +4,12 @@ Current Status
 Module - functional
 
 
+FileSystem - functional 
+todo:
+ - only PImpl version, service wrapper to be added
+ - integrate archives support
+
+
 Logging - refactoring
 todo:
  - refactor, extension/services aware
@@ -41,6 +47,10 @@ todo:
  - refactor minidump generator (win)
  - implement stack walking for linux
 
+
+==== SekaiFramework 0.2.5.1 (26 March 2010) ====
+
+- redesigned file system library
 
 
 ==== SekaiFramework 0.2.5.0 (28 Feb 2010) ====

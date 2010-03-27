@@ -50,7 +50,7 @@ namespace Reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	#define _reflecy_type_empty(type, _tag)											\
+	#define _reflect_type_empty(type, _tag)											\
 	namespace Reflection {															\
 		namespace detail {															\
 			TypeDescriptor** type_desc<type>::initialize(UserType* this_type, size_t& ndesc)\

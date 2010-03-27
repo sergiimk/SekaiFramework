@@ -4,6 +4,9 @@
 # Ignore build artifacts
 bin/*
 
+# Ignore python compiled files
+*.pyc
+
 # Ignore msvc temp files
 build/msvc-9.0/*.ncb
 build/msvc-9.0/*.suo

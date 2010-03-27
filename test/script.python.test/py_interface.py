@@ -5,17 +5,20 @@ import Sekai
 f = Sekai.TestInterfaceFactory()
 i = f.GetTestInterface()
 
-assert( i.Sum(1,2) == 3 )
+s = i.Sum(1, 2)
+assert( s == 3 )
 
 i.Release()
+
+i = f.CreateTestInterface()
 
 #== Creation of abstract class ==============================================
 
 try:
-	i = Sekai.TestInterface()
+	# must throw exception here
+	i = Sekai.ITestInterface()
+	
 	assert(False)
 except:
 	pass
-	# must throw exception here
 	
-		

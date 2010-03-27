@@ -14,8 +14,8 @@
 
 #include "module/module.h"
 #include "module/intellectual.h"
+#include "module/module_reflection.h"
 #include "script.python/Scripting.h"
-#include "reflection/reflection.h"
 #include <iostream>
 #include "vml/vml.h"
 #include "reflection/vml_reflect.h"
@@ -164,36 +164,59 @@ end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
 
-class TestInterface
+sf_interface ITestInterface : public Module::IUnknown
 {
-public:
+	sf_uuid("5315a473-f8e8-4724-bb13-336557779f85")
 	virtual int Sum(int a, int b) = 0;
-
-	// Imitation of ref-counting
-	virtual void Release() = 0;
 };
 
-class TestInterfaceProvider : public TestInterface
+class NOVTABLE CTestInterface : 
+	public Module::ComRootObject<>,
+	public ITestInterface
 {
 public:
-	virtual int Sum(int a, int b) { return a+b; }
-	virtual void Release() { delete this; }
+	
+	DECLARE_IMPLEMENTATION(CTestInterface)
+
+	BEGIN_INTERFACE_MAP()
+		INTERFACE_ENTRY(ITestInterface)
+	END_INTERFACE_MAP()
+
+	virtual int Sum(int a, int b) { return a + b; }
 };
 
 class TestInterfaceFactory
 {
 public:
-	TestInterface* GetTestInterface() { return new TestInterfaceProvider; }
+	ITestInterface* GetTestInterface() 
+	{
+		CTestInterface* ti;
+		create_instance_impl(&ti);
+		return ti;
+	}
+
+	com_ptr<ITestInterface> CreateTestInterface()
+	{
+		com_ptr<ITestInterface> ti;
+		create_instance<CTestInterface, ITestInterface>(ti);
+		return ti;
+	}
 };
 
-reflect_class(TestInterface)
+
+reflect_class(com_ptr<ITestInterface>)
+	map_ctor()
+end_reflection()
+
+reflect_class(ITestInterface)
+	map_base(Module::IUnknown)
 	map_method("Sum", Sum)
-	map_method("Release", Release)
 end_reflection()
 
 reflect_class(TestInterfaceFactory)
 	map_ctor()
 	map_method("GetTestInterface", GetTestInterface)
+	map_method("CreateTestInterface", CreateTestInterface)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
