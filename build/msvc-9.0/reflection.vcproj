@@ -378,6 +378,62 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="custom"
+				>
+				<File
+					RelativePath="..\..\src\reflection\implementation\custom\attribute_impl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\reflection\implementation\custom\attribute_impl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\reflection\implementation\custom\basetype_impl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\reflection\implementation\custom\member_impl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\reflection\implementation\custom\member_impl.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="custom"
+			>
+			<File
+				RelativePath="..\..\src\reflection\custom\attribute.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\custom\basetype_attribute.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\custom\construction_attribute.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\custom\enumeration_member.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\custom\member.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\custom\method_member.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\custom\property_member.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\src\reflection\reflection.h"

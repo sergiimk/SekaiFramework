@@ -28,6 +28,10 @@ namespace reflection
 	class function_type;
 	class user_type;
 	class array_type;
+
+	class member;
+	class attribute;
+	class base_type;
 	
 } // namespace
 

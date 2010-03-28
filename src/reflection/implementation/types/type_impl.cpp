@@ -8,6 +8,8 @@
 * are covered in accompanying LICENSE file
 =========================================================*/
 #include "type_impl.h"
+#include "custom/member.h"
+#include "custom/attribute.h"
 
 namespace reflection
 {
@@ -25,6 +27,25 @@ namespace reflection
 
 	type::type_impl::~type_impl()
 	{
+		for(size_t i = 0, size = m_attributes.size(); i != size; ++i)
+			m_attributes[i].first->release();
+
+		for(size_t i = 0, size = m_members.size(); i != size; ++i)
+			m_members[i]->release();
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void type::type_impl::add_member(const member& mem)
+	{
+		m_members.push_back(mem.clone());
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void type::type_impl::add_attribute(const attribute& attr)
+	{
+		m_attributes.push_back(std::make_pair<attribute*, member*>(attr.clone(), 0));
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -87,6 +108,20 @@ namespace reflection
 	void type::set_name(const char* name)
 	{
 		m_impl->set_name(name);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void type::add_member(const member& mem)
+	{
+		m_impl->add_member(mem);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void type::add_attribute(const attribute& attr)
+	{
+		m_impl->add_attribute(attr);
 	}
 
 	//////////////////////////////////////////////////////////////////////////

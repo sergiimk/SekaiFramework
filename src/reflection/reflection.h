@@ -14,5 +14,6 @@
 
 #include "reflection_fwd.h"
 #include "types/typeof.h"
+#include "custom/basetype_attribute.h"
 
 #endif // _REFLECTION_H__
