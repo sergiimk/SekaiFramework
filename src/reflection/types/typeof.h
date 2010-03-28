@@ -1,7 +1,7 @@
 /*========================================================
 * typeof.h
 * @author Sergey Mikhtonyuk
-* @date 21 June 2009
+* @date 28 Mar 2010
 *
 * Copyrights (c) Sergey Mikhtonyuk 2007-2010.
 * Terms of use, copying, distribution, and modification
@@ -10,138 +10,124 @@
 #ifndef _TYPEOF_H__
 #define _TYPEOF_H__
 
-#include "module/module.h"
-#include "Type.h"
-#include "TypeTag.h"
-#include "typetraits.h"
-#include "../descriptors/typedesc.h"
-
-#include "BuiltInType.h"
-#include "ArrayType.h"
-#include "PointerType.h"
-#include "UserType.h"
-#include "FunctionType.h"
-
-#include "../delegate/Delegate.h"
-
+#include "reflection_fwd.h"
+#include "types/type.h"
+#include "types/builtin_type.h"
+#include "types/pointer_type.h"
+#include "types/reference_type.h"
+#include "types/function_type.h"
+#include "types/user_type.h"
+#include "types/array_type.h"
 #include "common/ifthenelse.h"
 #include "common/typetraits.h"
 
-
-namespace Reflection
+namespace reflection
 {
-	//////////////////////////////////////////////////////////////////////////
-
 	namespace detail
 	{
+		//////////////////////////////////////////////////////////////////////////
+
+		// Deduces most specialized Type class for specific T
+		template<class T>
+		struct meta_type
+		{
+			typedef typename if_then_else<t_strip<T>::is_ptr, pointer_type,
+				typename if_then_else<t_strip<T>::is_ref, reference_type,
+				typename if_then_else<is_user_type<T>::value, user_type, builtin_type<T>
+				>::value
+				>::value
+			>::value value;
+		};
+
+		//////////////////////////////////////////////////////////////////////////
 
 		template<class T>
 		struct _type_of_builtin_ {
-		static Type* get() {
-			static BuiltInType<T> type;
-			return &type; }
+			static type* get() {
+				static builtin_type<T> type;
+				return &type; 
+			}
+		};
+
+		//////////////////////////////////////////////////////////////////////////
+
+		template<class T>
+		struct _type_of_pointer_ {
+			static type* get() {
+				static pointer_type type(_type_of_<T>::get());
+				return &type; 
+			}
+		};
+
+		//////////////////////////////////////////////////////////////////////////
+
+		template<class T>
+		struct _type_of_reference_ {
+			static type* get() {
+				static reference_type type(_type_of_<T>::get());
+				return &type; 
+			}
 		};
 
 		//////////////////////////////////////////////////////////////////////////
 
 		template<class T>
 		struct _type_of_user_ {
-			static Type* get() {
-				static type_desc<T> cd;
-				static UserType ut;
-				ut._init(&cd);
-				return ut.Tag() != RL_T_UNKNOWN ? &ut : 0; }
-		};
-
-		//////////////////////////////////////////////////////////////////////////
-
-		template<class T>
-		struct _type_of_ {
-			static Type* get()
-			{
-				return Utils::IfThenElse<	r_is_user_type<T>::value,
-											_type_of_user_<T>,
-											_type_of_builtin_<T> >::value::get();
+			static type* get() {
+				return 0; 
 			}
 		};
 
 		//////////////////////////////////////////////////////////////////////////
 
-		template<class PT>
-		struct _type_of_pointer_ {
-			static Type* get() { static PointerType pt(_type_of_<PT>::get());
-				return &pt; }
+		template<class T>
+		struct _type_of_ 
+		{
+			static type* get()
+			{
+				typedef typename if_then_else<t_strip<T>::is_ptr, _type_of_pointer_<t_strip<T>::noptr>,
+					typename if_then_else<t_strip<T>::is_ref, _type_of_reference_<t_strip<T>::noref>,
+					typename if_then_else<is_user_type<T>::value, _type_of_user_<T>, _type_of_builtin_<T>
+					>::value
+					>::value
+				>::value tof;
+				return tof::get();
+			}
 		};
 
 		//////////////////////////////////////////////////////////////////////////
-
-		template<class T>
-		struct _type_of_<T*> {
-			static Type* get() { return _type_of_pointer_<T>::get(); }
-		};
-
-	} // detail
+		
+	} // namespace
 
 	//////////////////////////////////////////////////////////////////////////
 
-	/// Returns reflection of type specified as template parameter
-	/** @ingroup Reflection */
 	template<class T>
-	Type* type_of()
+	typename detail::meta_type<T>::value* type_of()
 	{
-		return detail::_type_of_<typename Utils::TStripType<T>::noref>::get();
+		return static_cast<detail::meta_type<T>::value*>(detail::_type_of_<t_strip<T>::nomod>::get());
 	}
 
-	/// Returns reflection of type passed as parameter
-	/** @ingroup Reflection */
+	//////////////////////////////////////////////////////////////////////////
+
 	template<class T>
-	Type* type_of(const T&)
+	typename detail::meta_type<T>::value* type_of(const T&)
 	{
-		return detail::_type_of_<T>::get();
+		return type_of<T>();
 	}
 
-	/// Special version that deduces the size of an array
-	/** @ingroup Reflection */
+	//////////////////////////////////////////////////////////////////////////
+
+	// Special version that deduces the size of an array
 	template<class T, int S>
-	Type* type_of(T (&)[S])
+	array_type* type_of(T (&)[S])
 	{
-		static ArrayType at(type_of<typename Utils::TStripType<T>::noref>(), S);
+		static array_type at(type_of<T>(), S);
 		return &at;
 	}
 
-	/// Special version for class fields
-	/** @ingroup Reflection */
-	template<class T, class C>
-	Type* type_of(T C::*)
-	{
-		return type_of<typename Utils::TStripType<T>::noref>();
-	}
-
-	/// Helper function to import the reflection from other module
-	/** @ingroup Reflection */
-	inline Type* type_of(SF_RIID clsid, Module::ModuleHandle module)
-	{
-		return module.GetType(clsid);
-	}
 
 	//////////////////////////////////////////////////////////////////////////
-
-	#include "../generated/invokers.inc"
-	#include "../generated/invcreators.inc"
-
-	//////////////////////////////////////////////////////////////////////////
-
-	#define CONST_METH
-	#include "../generated/invcreators_method.inc"
-	#undef CONST_METH
-	#define CONST_METH const
-	#include "../generated/invcreators_method.inc"
-	#undef CONST_METH
-
-	#include "../generated/makedeleg.inc"
-
-	//////////////////////////////////////////////////////////////////////////
-
+	
 } // namespace
 
-#endif // _TYPEOF_H__
+#endif //_TYPEOF_H__

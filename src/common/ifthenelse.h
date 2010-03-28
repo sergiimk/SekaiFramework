@@ -10,36 +10,32 @@
 #ifndef _IFTHENELSE_H__
 #define _IFTHENELSE_H__
 
-namespace Utils
-{
-	/// IfThenElse template for compile-time choice between types
-	/** @ingroup Common */
-	template<bool COND, class T, class F>
-	struct IfThenElse { typedef void value; };
+//////////////////////////////////////////////////////////////////////////
 
-	/// IfThenElseInt template for compile-time choice between integral values
-	/** @ingroup Common */
-	template<bool COND, int T, int F>
-	struct IfThenElseInt { static const int value = -1; };
+/// IfThenElse template for compile-time choice between types
+/** @ingroup Common */
+template<bool COND, class T, class F>
+struct if_then_else { typedef void value; };
 
-	//////////////////////////////////////////////////////////////////////////
+template<class T, class F>
+struct if_then_else<true, T, F> { typedef T value; };
 
-	template<class T, class F>
-	struct IfThenElse<true, T, F> { typedef T value; };
+template<class T, class F>
+struct if_then_else<false, T, F> { typedef F value; };
 
-	template<class T, class F>
-	struct IfThenElse<false, T, F> { typedef F value; };
+//////////////////////////////////////////////////////////////////////////
 
-	//////////////////////////////////////////////////////////////////////////
+/// IfThenElseInt template for compile-time choice between integral values
+/** @ingroup Common */
+template<bool COND, int T, int F>
+struct if_then_else_int { static const int value = -1; };
 
-	template<int T, int F>
-	struct IfThenElseInt<true, T, F> { static const int value = T; };
+template<int T, int F>
+struct if_then_else_int<true, T, F> { static const int value = T; };
 
-	template<int T, int F>
-	struct IfThenElseInt<false, T, F> { static const int value = F; };	
+template<int T, int F>
+struct if_then_else_int<false, T, F> { static const int value = F; };
 
-	//////////////////////////////////////////////////////////////////////////
-
-} // namespace
+//////////////////////////////////////////////////////////////////////////
 
 #endif // _IFTHENELSE_H__

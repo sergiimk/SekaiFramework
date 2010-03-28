@@ -10,8 +10,9 @@
 #ifndef _TEST_CLASSES_H__
 #define _TEST_CLASSES_H__
 
+
 #include "reflection/reflection.h"
-#include "module/implementations.h"
+/*#include "module/implementations.h"
 #include "vml/vml.h"
 #include "reflection/vml_ios.h"
 #include "reflection/vml_reflect.h"
@@ -144,5 +145,5 @@ public:
 };
 
 //////////////////////////////////////////////////////////////////////////
-
+*/
 #endif

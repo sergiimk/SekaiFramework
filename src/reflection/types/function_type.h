@@ -1,25 +1,27 @@
 /*========================================================
-* DelegateBase.h
+* function_type.h
 * @author Sergey Mikhtonyuk
-* @date 19 September 2009
+* @date 28 Mar 2010
 *
 * Copyrights (c) Sergey Mikhtonyuk 2007-2010.
 * Terms of use, copying, distribution, and modification
 * are covered in accompanying LICENSE file
 =========================================================*/
-#ifndef _DELEGATEBASE_H__
-#define _DELEGATEBASE_H__
+#ifndef _FUNCTIONTYPE_H__
+#define _FUNCTIONTYPE_H__
 
-namespace Reflection
+#include "types/type.h"
+
+namespace reflection
 {
-	#define DELEG_MAX_INVOKE_PARAMS 8
-
-	class DelegateBase
+	/// Function type class
+	/** @ingroup reflection */
+	class function_type : public type
 	{
+	public:
+	private:
 	};
-
-	typedef void (*GenericInvoker)(DelegateBase*, void**, void*);
 
 } // namespace
 
-#endif // _DELEGATEBASE_H__
+#endif //_FUNCTIONTYPE_H__

@@ -1,7 +1,7 @@
 /*========================================================
-* Type.h
+* type.h
 * @author Sergey Mikhtonyuk
-* @date 21 June 2009
+* @date 28 Mar 2010
 *
 * Copyrights (c) Sergey Mikhtonyuk 2007-2010.
 * Terms of use, copying, distribution, and modification
@@ -10,78 +10,72 @@
 #ifndef _TYPE_H__
 #define _TYPE_H__
 
-#include "TypeTag.h"
-#include "../reflection_fwd.h"
+#include "reflection_fwd.h"
+#include "types/typetag.h"
 
-namespace Reflection
+namespace reflection
 {
 	//////////////////////////////////////////////////////////////////////////
 
-	/// Reflected type of the object
-	/** @ingroup Reflection */
-	class Type
+	/// Type information class
+	/** @ingroup reflection */
+	class REFLECTION_API type
 	{
 	public:
-		virtual ~Type() { }
 
-		/// Writes type name to the buffer with specified size
-		/** @return number of characters written */
-		virtual size_t Name(char* buf, size_t size) const = 0;
+		type(ETypeTag tag, EArchType arch, size_t size);
 
-		/// Writes fully-qualified type name to the buffer with specified size
-		/** @return number of characters written */
-		virtual size_t FullName(char* buf, size_t size) const = 0;
+		virtual ~type();
 
 		/// Tag of the type
-		virtual ETypeTag Tag() const = 0;
+		ETypeTag tag() const;
 
 		/// Returns the arch-type of this type
-		virtual EArchType ArchType() const = 0;
+		EArchType arch_type() const;
 
-		/// Size of the type object
-		virtual size_t Size() const = 0;
+		/// Size of the instance of this type
+		size_t size() const;
 
+		/// Returns the name of the type
+		const char* name() const;
 
-		/// Assigns value to variable
-		virtual void Assign(void* to, void* val) const = 0;
+	protected:
+		class type_impl;
 
-		/// Converts value of this type to string
-		virtual bool ToString(void* value, char* buf, size_t size) const = 0;
+		/// Derived classes can specify own impl
+		type(type_impl* impl);
 
-		/// Tries to reconstruct value from string
-		virtual bool TryParse(void * value, const char* str) const = 0;
+		void set_name(const char* name);
 
-		/// Compares types for equality
-		virtual bool Equal(const Type* other) const = 0;
+	private:
+		type(const type& other);
+		type& operator=(const type& rhs);
 
-		/// Creates instance of user type
-		virtual void* CreateInstance() const = 0;
-
-		/// Destroys instance of user type
-		virtual void DestroyInstance(void* v) const = 0;
+	protected:
+		type_impl* m_impl;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 
-	/// Value pointer - Type pair, used for invoking the function in script
-	/** @ingroup Script */
-	struct ValueTypePair
+	/// Value pointer - Type pair
+	/** @ingroup reflection */
+	struct value_type_pair
 	{
-		void* pValue;
-		Type* pType;
+		void* Value;
+		type* Type;
 
-		ValueTypePair() : pValue(0), pType(0) { }
-		ValueTypePair(void* val, Type* t) : pValue(val), pType(t) { }
+		value_type_pair() : Value(0), Type(0) { }
+		value_type_pair(void* val, type* t) : Value(val), Type(t) { }
 	};
 
 	template<typename T>
-	inline ValueTypePair make_typed_pair(T& value)
+	inline value_type_pair make_typed_pair(T& value)
 	{
-		return ValueTypePair(&value, type_of<T>());
+		return value_type_pair(&value, type_of<T>());
 	}
 
 	//////////////////////////////////////////////////////////////////////////
-
+	
 } // namespace
 
-#endif // _TYPE_H__
+#endif //_TYPE_H__

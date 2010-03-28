@@ -3,8 +3,8 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="reflection"
-	ProjectGUID="{50797C4A-C25C-41F6-A898-47CCD24C18D9}"
-	RootNamespace="Reflection"
+	ProjectGUID="{D4FC2DA5-46DA-4312-8A89-358C491AC88B}"
+	RootNamespace="reflection"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -21,8 +21,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			ConfigurationType="4"
-			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\STLPort.vsprops;.\output_path.vsprops"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\output_path.vsprops;.\shared_object.vsprops;.\common_includes.vsprops;.\no_secure_warnings.vsprops;.\STLPort.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -43,8 +43,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=""
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				PreprocessorDefinitions="WIN32;_DEBUG;REFLECTION_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -62,10 +61,17 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				LinkIncremental="2"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -77,13 +83,89 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\output_path.vsprops;.\shared_object.vsprops;.\common_includes.vsprops;.\no_secure_warnings.vsprops;.\optimizations.vsprops"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				PreprocessorDefinitions="WIN32;REFLECTION_EXPORTS"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkIncremental="1"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|x64"
-			ConfigurationType="4"
-			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\STLPort.vsprops;.\output_path.vsprops"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\output_path.vsprops;.\shared_object.vsprops;.\common_includes.vsprops;.\no_secure_warnings.vsprops;.\STLPort.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -105,8 +187,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=""
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				PreprocessorDefinitions="WIN32;_DEBUG;REFLECTION_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -124,10 +205,17 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				LinkIncremental="2"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -139,66 +227,7 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release|Win32"
-			ConfigurationType="4"
-			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\optimizations.vsprops;.\output_path.vsprops"
-			CharacterSet="1"
-			WholeProgramOptimization="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="1"
-				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=""
-				PreprocessorDefinitions="WIN32;_LIB"
-				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
+				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -206,8 +235,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|x64"
-			ConfigurationType="4"
-			InheritedPropertySheets=".\common_includes.vsprops;.\no_secure_warnings.vsprops;.\optimizations.vsprops;.\output_path.vsprops"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\output_path.vsprops;.\shared_object.vsprops;.\common_includes.vsprops;.\no_secure_warnings.vsprops;.\optimizations.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -229,10 +258,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="1"
+				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=""
-				PreprocessorDefinitions="WIN32;_LIB"
+				PreprocessorDefinitions="WIN32;REFLECTION_EXPORTS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -249,10 +277,19 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				LinkIncremental="1"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -262,6 +299,9 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -275,217 +315,69 @@
 			Name="types"
 			>
 			<File
-				RelativePath="..\..\src\reflection\Types\type.h"
+				RelativePath="..\..\src\reflection\types\array_type.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\reflection\Types\typeof.h"
+				RelativePath="..\..\src\reflection\types\builtin_type.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\reflection\Types\typetag.h"
+				RelativePath="..\..\src\reflection\types\function_type.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\reflection\types\pointer_type.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\types\reference_type.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\types\type.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\types\typeof.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\types\typetag.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\types\user_type.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="implementation"
+			>
 			<Filter
-				Name="cpp"
+				Name="types"
 				>
 				<File
-					RelativePath="..\..\src\reflection\Types\ArrayType.cpp"
+					RelativePath="..\..\src\reflection\implementation\types\array_type.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\reflection\Types\FunctionType.cpp"
+					RelativePath="..\..\src\reflection\implementation\types\builtin_type.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\reflection\Types\PointerType.cpp"
+					RelativePath="..\..\src\reflection\implementation\types\pointer_type.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\reflection\Types\typetraits.cpp"
+					RelativePath="..\..\src\reflection\implementation\types\type_impl.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\reflection\Types\UserType.cpp"
+					RelativePath="..\..\src\reflection\implementation\types\type_impl.h"
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="headers"
-				>
-				<File
-					RelativePath="..\..\src\reflection\Types\ArrayType.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\reflection\Types\BuiltInType.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\reflection\Types\FunctionType.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\reflection\Types\PointerType.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\reflection\Types\typetraits.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\reflection\Types\UserType.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\reflection\Types\UserType_iterators.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="descriptors"
-			>
-			<File
-				RelativePath="..\..\src\reflection\Descriptors\AccessorDescriptor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Descriptors\AssignmentDescriptor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Descriptors\BaseType.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Descriptors\ConstructDescriptor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Descriptors\DataDescriptor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Descriptors\EnumerationDescriptor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Descriptors\FieldDescriptor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Descriptors\MethodDescriptor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Descriptors\ParsingDescriptor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Descriptors\typedesc.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Descriptors\TypeDescriptor.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="generated"
-			>
-			<File
-				RelativePath="..\..\src\reflection\Generated\construction.inc"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Generated\invcreators.inc"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Generated\invcreators_method.inc"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Generated\invokers.inc"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Generated\makedeleg.inc"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="delegate"
-			>
-			<File
-				RelativePath="..\..\src\reflection\Delegate\Delegate.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Delegate\Delegate_closure.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Delegate\Delegate_deleg.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Delegate\Delegate_funcdata.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Delegate\Delegate_funcstyle.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Delegate\Delegate_makedeleg.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Delegate\Delegate_utils.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Delegate\DelegateBase.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="events"
-			>
-			<File
-				RelativePath="..\..\src\reflection\Events\Event.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="scripts"
-			>
-			<File
-				RelativePath="..\..\src\reflection\Scripts\ctors.py"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Scripts\invcreators.py"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Scripts\invokers.py"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Scripts\makedeleg.py"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Scripts\packargs.py"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\reflection\Scripts\validation.py"
-				>
-			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\src\reflection\reflection.h"

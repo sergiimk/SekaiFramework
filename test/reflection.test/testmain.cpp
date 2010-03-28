@@ -13,43 +13,52 @@
 #define BOOST_TEST_MODULE Reflection test
 #include <boost/test/unit_test.hpp>
 
-using namespace Reflection;
+using namespace reflection;
 
 
 BOOST_AUTO_TEST_SUITE( reflection_test_suit );
 
 BOOST_AUTO_TEST_CASE( create_builtin_int )
 {
-	Type* t = type_of<int>();
-	BOOST_CHECK(t);
+	builtin_type<int>* t = type_of<int>();
+	BOOST_REQUIRE(t);
+	BOOST_CHECK_EQUAL(t->tag(), T_INT);
+	BOOST_CHECK_EQUAL(t->arch_type(), ARCH_BUILTIN);
+	BOOST_CHECK_EQUAL(t->size(), sizeof(int));
 }
 
 BOOST_AUTO_TEST_CASE( create_builtin_double )
 {
 	double b = 3.14;
-	Type* t = type_of(b);
-	BOOST_CHECK(t);
+	builtin_type<double>* t = type_of(b);
+	BOOST_CHECK_EQUAL(t->tag(), T_DOUBLE);
+	BOOST_CHECK_EQUAL(t->arch_type(), ARCH_BUILTIN);
+	BOOST_CHECK_EQUAL(t->size(), sizeof(double));
 }
 
 BOOST_AUTO_TEST_CASE( create_builtin_array )
 {
 	int arr[10];
-	Type* t = type_of(arr);
-	BOOST_CHECK(t);
+	array_type* t = type_of(arr);
+	BOOST_REQUIRE(t);
+	BOOST_CHECK_EQUAL(t->element_type(), type_of<int>());
+	BOOST_CHECK_EQUAL(t->length(), 10);
+	BOOST_CHECK_EQUAL(t->size(), 10*sizeof(int));
 }
 
 BOOST_AUTO_TEST_CASE( create_builtin_pointer )
 {
-	Type* t = type_of<float*>();
-	BOOST_CHECK(t);
+	pointer_type* t = type_of<float*>();
+	BOOST_REQUIRE(t);
+	BOOST_CHECK_EQUAL(t->pointed_type(), type_of<float>());
 }
 
 BOOST_AUTO_TEST_CASE( create_builtin_void )
 {
-	Type* t = type_of<void>();
+	type* t = type_of<void>();
 	BOOST_CHECK(t);
 }
-
+/*
 BOOST_AUTO_TEST_CASE( create_custom )
 {
 	UserType* t = (UserType*)type_of<ASDF>();
@@ -68,34 +77,25 @@ BOOST_AUTO_TEST_CASE( create_custom )
 }
 
 //////////////////////////////////////////////////////////////////////////
-
-struct StringOutFixture
+*/
+BOOST_AUTO_TEST_CASE( name_builtin_float )
 {
-	static const int buf_size = 100;
-	char buf[buf_size];
-};
-
-//////////////////////////////////////////////////////////////////////////
-
-BOOST_FIXTURE_TEST_CASE( name_builtin_float, StringOutFixture )
-{
-	Type* t = type_of<float>();
-	BOOST_CHECK_EQUAL(t->Name(buf, buf_size), 6);
-	BOOST_CHECK(strcmp(buf, "float") == 0);
+	builtin_type<float>* t = type_of<float>();
+	BOOST_CHECK( strcmp(t->name(), "float") == 0 );
 }
 
-BOOST_FIXTURE_TEST_CASE( name_builtin_array_ptr, StringOutFixture )
+BOOST_AUTO_TEST_CASE( name_builtin_array_ptr )
 {
 	int* arr[10];
-	Type* t = type_of(arr);
-	BOOST_CHECK_EQUAL(t->Name(buf, buf_size), 10);
-	BOOST_CHECK(strcmp(buf, "int* [10]") == 0);
+	type* t = type_of(arr);
+	BOOST_CHECK(strcmp(t->name(), "int* [10]") == 0);
 }
-
-BOOST_FIXTURE_TEST_CASE( tostring_builtin_double, StringOutFixture )
+/*
+BOOST_AUTO_TEST_CASE( tostring_builtin_double )
 {
 	double b = 3.14;
-	Type* td = type_of(b);
+	type* td = type_of(b);
+
 	BOOST_CHECK(td->ToString(&b, buf, buf_size));
 	BOOST_CHECK(strcmp(buf, "3.14") == 0);
 }
@@ -346,5 +346,5 @@ BOOST_AUTO_TEST_CASE( eventTest )
 	provider.SetA(11);
 	BOOST_CHECK_NE(provider.a, listener.a);
 }
-
+*/
 BOOST_AUTO_TEST_SUITE_END();

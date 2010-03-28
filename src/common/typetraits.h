@@ -10,20 +10,68 @@
 #ifndef _TYPETRAITS_H__
 #define _TYPETRAITS_H__
 
-namespace Utils
-{
-	/// Determines if type is pointer
-	/** @ingroup Common */
-	template<class T> struct TIsPointer { static const bool value = false; };
-	template<class T> struct TIsPointer<T*> { static const bool value = true; };
-	template<class T> struct TIsPointer<const T*> { static const bool value = true; };
-	template<class T> struct TIsPointer<volatile T*> { static const bool value = true; };
+//////////////////////////////////////////////////////////////////////////
 
-	template<class T> struct TStripType { typedef T plain; typedef T noref; typedef T noptr; typedef T ref2ptr; };
-	template<class T> struct TStripType<T&> { typedef T plain; typedef T noref; typedef T& noptr; typedef T* ref2ptr;  };
-	template<class T> struct TStripType<T*> { typedef T plain; typedef T* noref; typedef T noptr; typedef T* ref2ptr; };
-	template<class T> struct TStripType<const T&> { typedef T plain; typedef T noref; typedef T& noptr; typedef T* ref2ptr; };
-	template<class T> struct TStripType<const T*> { typedef T plain; typedef T* noref; typedef T noptr; typedef T* ref2ptr; };
-} // namespace
+template<class T> struct t_strip
+{ 
+	typedef T plain;
+	typedef T nomod;
+	typedef T noref; 
+	typedef T noptr; 
+	typedef T ref2ptr;
+	static const bool is_const = false; 
+	static const bool is_ptr = false;
+	static const bool is_ref = false;
+};
+
+template<class T> struct t_strip<T&>
+{ 
+	typedef T plain;
+	typedef T& nomod;
+	typedef T noref; 
+	typedef T& noptr; 
+	typedef T* ref2ptr; 
+	static const bool is_const = false; 
+	static const bool is_ptr = false;
+	static const bool is_ref = true;
+};
+
+template<class T> struct t_strip<T*>
+{ 
+	typedef T plain; 
+	typedef T* nomod;
+	typedef T* noref; 
+	typedef T noptr; 
+	typedef T* ref2ptr; 
+	static const bool is_const = false; 
+	static const bool is_ptr = true; 
+	static const bool is_ref = false;
+};
+
+template<class T> struct t_strip<const T&>
+{ 
+	typedef T plain; 
+	typedef T& nomod;
+	typedef T noref; 
+	typedef T& noptr; 
+	typedef T* ref2ptr; 
+	static const bool is_const = true; 
+	static const bool is_ptr = false; 
+	static const bool is_ref = true;
+};
+
+template<class T> struct t_strip<const T*>
+{ 
+	typedef T plain; 
+	typedef T* nomod;
+	typedef T* noref; 
+	typedef T noptr; 
+	typedef T* ref2ptr; 
+	static const bool is_const = true;
+	static const bool is_ptr = true;
+	static const bool is_ref = false;
+};
+
+//////////////////////////////////////////////////////////////////////////
 
 #endif // _TYPETRAITS_H__

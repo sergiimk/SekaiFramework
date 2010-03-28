@@ -1,5 +1,5 @@
 #include "testclasses.h"
-
+/*
 std::ostream& operator<<(std::ostream& os, const TestEnum& cc)
 {
 	if(cc == VAL_1) os<<"VAL_1";
@@ -16,4 +16,4 @@ std::istream& operator>>(std::istream& os, TestEnum& cc)
 	else os.setstate(std::ios::failbit);
 	return os;
 }
-
+*/

@@ -12,7 +12,7 @@
 
 #include "platform/platform.h"
 
-#if defined BUILD_SHARED
+#if defined BUILD_SHARED && defined FILESYSTEM_EXPORTS
 #	define FILESYSTEM_API SHARED_EXPORT
 #else
 #	define FILESYSTEM_API SHARED_IMPORT
