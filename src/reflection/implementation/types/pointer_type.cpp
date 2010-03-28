@@ -18,34 +18,34 @@ namespace reflection
 
 	struct pointer_type::pointer_type_impl : public type::type_impl
 	{
-		pointer_type_impl(type* pointed)
+		pointer_type_impl(type* pointee)
 			: type_impl(T_POINTER, ARCH_POINTER, sizeof(void*))
-			, m_pointed(pointed)
+			, m_pointee(pointee)
 		{ }
 
-		virtual const char* print_name() const
+		virtual void print_name() const
 		{
-			stack_string<> buf = m_pointed->name();
+			stack_string<> buf = m_pointee->name();
 			*buf += '*';
-			return buf->c_str();
+			set_name(buf->c_str());
 		}
 
-		type* m_pointed;
+		type* m_pointee;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 
-	pointer_type::pointer_type(type* pointed)
-		: type(new pointer_type_impl(pointed))
+	pointer_type::pointer_type(type* pointee)
+		: type(new pointer_type_impl(pointee))
 	{
 		m_impl = static_cast<pointer_type_impl*>(type::m_impl);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	type* pointer_type::pointed_type() const
+	type* pointer_type::pointee_type() const
 	{
-		return m_impl->m_pointed;
+		return m_impl->m_pointee;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

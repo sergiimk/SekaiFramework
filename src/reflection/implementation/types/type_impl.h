@@ -35,7 +35,7 @@ namespace reflection
 
 		size_t size() const;
 
-		void set_name(const char* name);
+		void set_name(const char* name) const;
 
 		const char* get_name() const;
 
@@ -45,7 +45,7 @@ namespace reflection
 
 	protected:
 
-		virtual const char* print_name() const;
+		virtual void print_name() const;
 
 	private:
 		typedef std::vector<member*> TMemberContainer;
@@ -82,7 +82,7 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	inline void type::type_impl::set_name(const char* name)
+	inline void type::type_impl::set_name(const char* name) const
 	{
 		m_name = name;
 	}
@@ -92,15 +92,14 @@ namespace reflection
 	inline const char* type::type_impl::get_name() const
 	{
 		if(m_name.empty())
-			m_name = print_name();
+			print_name();
 		return m_name.c_str();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	inline const char* type::type_impl::print_name() const
+	inline void type::type_impl::print_name() const
 	{
-		return "";
 	}
 
 	//////////////////////////////////////////////////////////////////////////

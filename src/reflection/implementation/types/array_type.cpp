@@ -25,7 +25,7 @@ namespace reflection
 			, m_length(length)
 		{ }
 
-		virtual const char* print_name() const
+		virtual void print_name() const
 		{
 			stack_string<> buf = m_elem_t->name();
 			*buf += " [";
@@ -33,7 +33,7 @@ namespace reflection
 			sprintf(ib, "%d", m_length);
 			*buf += ib;
 			*buf += ']';
-			return buf->c_str();
+			set_name(buf->c_str());
 		}
 
 		type* m_elem_t;

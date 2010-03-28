@@ -38,19 +38,20 @@ BOOST_AUTO_TEST_CASE( create_builtin_double )
 
 BOOST_AUTO_TEST_CASE( create_builtin_array )
 {
-	int arr[10];
+	size_t arr[10];
 	array_type* t = type_of(arr);
+	t->name();
 	BOOST_REQUIRE(t);
-	BOOST_CHECK_EQUAL(t->element_type(), type_of<int>());
+	BOOST_CHECK_EQUAL(t->element_type(), type_of<size_t>());
 	BOOST_CHECK_EQUAL(t->length(), 10);
-	BOOST_CHECK_EQUAL(t->size(), 10*sizeof(int));
+	BOOST_CHECK_EQUAL(t->size(), 10*sizeof(size_t));
 }
 
 BOOST_AUTO_TEST_CASE( create_builtin_pointer )
 {
 	pointer_type* t = type_of<float*>();
 	BOOST_REQUIRE(t);
-	BOOST_CHECK_EQUAL(t->pointed_type(), type_of<float>());
+	BOOST_CHECK_EQUAL(t->pointee_type(), type_of<float>());
 }
 
 BOOST_AUTO_TEST_CASE( create_builtin_void )

@@ -19,10 +19,10 @@ namespace reflection
 	class REFLECTION_API pointer_type : public type
 	{
 	public:
-		pointer_type(type* pointed);
+		pointer_type(type* pointee);
 
 		/// Returns type this one points to
-		type* pointed_type() const;
+		type* pointee_type() const;
 
 	private:
 		struct pointer_type_impl;
