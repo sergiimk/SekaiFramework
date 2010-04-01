@@ -33,9 +33,7 @@ namespace reflection
 	{
 	public:
 
-		member(EMemberType type, const char* name);
-
-		virtual ~member();
+		~member();
 
 		/// Returns type of this member
 		EMemberType get_type() const;
@@ -44,10 +42,10 @@ namespace reflection
 		const char* get_name() const;
 
 		/// Clones the member
-		virtual member* clone() const;
+		member* clone() const;
 
 		/// Releases the cloned member
-		virtual void release();
+		void release();
 
 	private:
 		member(const member& other);
@@ -59,6 +57,8 @@ namespace reflection
 		member(member_impl* impl);
 
 		member_impl* m_impl;
+
+		static const int _deleg_buf_size = 10;
 	};
 
 	//////////////////////////////////////////////////////////////////////////

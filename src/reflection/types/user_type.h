@@ -16,12 +16,77 @@ namespace reflection
 {
 	/// User-defined type class
 	/** @ingroup reflection */
-	class user_type : public type
+	class REFLECTION_API user_type : public type
 	{
 	public:
+
+		user_type(ETypeTag tag, const char* name, size_t size);
+
+		/// Adds type member
+		void add_member(const member& mem);
+
+		/// Adds attribute to the type itself
+		void add_attribute(const attribute& attr);
+
+		/// Declare member
+		user_type& def(const member& mem) 
+		{ 
+			add_member(mem); 
+			return *this; 
+		}
+
+		/// Declare class attribute
+		user_type& def(const attribute& a) 
+		{ 
+			add_attribute(a); 
+			return *this; 
+		}
+
+		/// Declare method
+		template<class MemFun>
+		user_type& def(const char* name, MemFun meth)
+		{
+			add_member(method::create(name, meth, type_of(meth)));
+			return *this;
+		}
+
+		/// Declare accessor
+		template<class TGet, class TSet>
+		user_type& def(const char* name, TGet getter, TSet setter)
+		{
+			add_member(accessor::create(name, getter, type_of(getter), setter, type_of(setter)));
+			return *this;
+		}
+
 	private:
+		class user_type_impl;
+		user_type_impl* m_impl;
 	};
 
 } // namespace
+
+//////////////////////////////////////////////////////////////////////////
+
+#define reflect_user(clas, name, tag)											\
+namespace reflection { namespace detail {										\
+template<> struct type_desc<clas> {												\
+	user_type* get_type() {														\
+		static bool is_init = false;											\
+		static user_type t(tag, name, sizeof(clas));							\
+		if(!is_init) {															\
+			is_init = true;														\
+			t
+
+//////////////////////////////////////////////////////////////////////////
+
+#define reflect_class(clas, name) reflect_user(clas, name, T_CLASS)
+#define reflect_struct(clas, name) reflect_user(clas, name, T_STRUCT)
+#define reflect_enum(clas, name) reflect_user(clas, name, T_ENUM)
+
+//////////////////////////////////////////////////////////////////////////
+
+#define end_reflection() ;}return &t;}};}}
+
+//////////////////////////////////////////////////////////////////////////
 
 #endif //_USERTYPE_H__

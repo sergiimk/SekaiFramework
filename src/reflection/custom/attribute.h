@@ -33,18 +33,16 @@ namespace reflection
 	{
 	public:
 
-		attribute(EAttributeType type);
-
-		virtual ~attribute();
+		~attribute();
 
 		/// Returns type of the attribute
 		EAttributeType get_type() const;
 
 		/// Clones the attribute
-		virtual attribute* clone() const;
+		attribute* clone() const;
 
 		/// Releases the cloned attribute
-		virtual void release();
+		void release();
 
 	private:
 		attribute(const attribute& other);

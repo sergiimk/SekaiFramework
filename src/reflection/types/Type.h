@@ -39,12 +39,6 @@ namespace reflection
 		/// Returns the name of the type
 		const char* name() const;
 
-		/// Adds type member
-		void add_member(const member& mem);
-
-		/// Adds attribute to the type itself
-		void add_attribute(const attribute& attr);
-
 	private:
 		type(const type& other);
 		type& operator=(const type& rhs);

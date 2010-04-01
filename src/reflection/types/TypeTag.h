@@ -18,7 +18,7 @@ namespace reflection
 	//////////////////////////////////////////////////////////////////////////
 
 	/// Allow at least run-time type safety for built-in types
-	/** @ingroup Reflection */
+	/** @ingroup reflection */
 	enum ETypeTag
 	{
 		T_EMPTY = 0, ///< Uninitialized
@@ -60,7 +60,7 @@ namespace reflection
 	//////////////////////////////////////////////////////////////////////////
 
 	/// Describes the arch-type of the type
-	/** @ingroup Reflection */
+	/** @ingroup reflection */
 	enum EArchType
 	{
 		ARCH_BUILTIN,

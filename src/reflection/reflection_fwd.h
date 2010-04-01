@@ -1,5 +1,5 @@
 /*========================================================
-* Reflection_fwd.h
+* reflection_fwd.h
 * @author Sergey Mikhtonyuk
 * @date 23 June 2009
 *
@@ -30,6 +30,9 @@ namespace reflection
 	class array_type;
 
 	class member;
+	class method;
+	class accessor;
+
 	class attribute;
 	class base_type;
 	

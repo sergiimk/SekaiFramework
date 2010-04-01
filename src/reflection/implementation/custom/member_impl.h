@@ -31,7 +31,7 @@ namespace reflection
 
 		const char* get_name() const;
 
-		virtual member_impl* clone() const;
+		virtual member_impl* clone() const = 0;
 
 	private:
 		EMemberType m_type;

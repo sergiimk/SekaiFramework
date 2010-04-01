@@ -300,6 +300,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\src\common\static_assert.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\src\common\stlutils.h"
 			>
 		</File>

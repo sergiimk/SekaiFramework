@@ -59,11 +59,12 @@ BOOST_AUTO_TEST_CASE( create_builtin_void )
 	type* t = type_of<void>();
 	BOOST_CHECK(t);
 }
-/*
+
 BOOST_AUTO_TEST_CASE( create_custom )
 {
-	UserType* t = (UserType*)type_of<ASDF>();
-	Type* argt = type_of<int>();
+	user_type* t = type_of<Vec3>();
+	BOOST_REQUIRE(t);
+	/*Type* argt = type_of<int>();
 	ConstructDescriptor* ctor = t->FindSuitableCtor(&argt, 1);
 	BOOST_REQUIRE(ctor != 0);
 
@@ -74,11 +75,11 @@ BOOST_AUTO_TEST_CASE( create_custom )
 	BOOST_CHECK_EQUAL(inst->a, 5);
 	BOOST_CHECK_EQUAL(inst->f, 8);
 
-	ctor->DestroyInstance(inst);
+	ctor->DestroyInstance(inst);*/
 }
 
 //////////////////////////////////////////////////////////////////////////
-*/
+
 BOOST_AUTO_TEST_CASE( name_builtin_float )
 {
 	builtin_type<float>* t = type_of<float>();
@@ -149,32 +150,31 @@ BOOST_AUTO_TEST_CASE( parse_enum )
 	Type* t = type_of<TestEnum>();
 	BOOST_CHECK(t->TryParse(&e, "VAL_1"));
 	BOOST_CHECK_EQUAL(e, VAL_1);
-}
+}*/
 
 BOOST_AUTO_TEST_CASE( create_function )
 {
-	Type* t = type_of(&F1);
+	function_type* t = type_of(&F1);
 	BOOST_CHECK(t);
 }
 
 BOOST_AUTO_TEST_CASE( invoke_function )
 {
-	FunctionType* t = static_cast<FunctionType*>(type_of(&F1));
+	function_type* t = type_of(&F1);
 	int ret, a = 2, b = 3;
 	void* args[] = { &a, &b };
 	Delegate<int(int, int)> deleg = Delegate<int(int, int)>(F1);
-	t->Invoke(&deleg, args, &ret);
+	t->invoke(&deleg, args, &ret);
 	BOOST_CHECK_EQUAL(ret, 5);
 }
 
-BOOST_FIXTURE_TEST_CASE( name_function, StringOutFixture )
+BOOST_AUTO_TEST_CASE( name_function )
 {
-	Type* t = type_of(&F1);
-	BOOST_CHECK_EQUAL(t->Name(buf, buf_size), 15);
-	BOOST_CHECK(strcmp(buf, "int (int, int)") == 0);
+	type* t = type_of(&F1);
+	BOOST_CHECK(strcmp(t->name(), "int (int, int)") == 0);
 }
 
-//////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////
 
 template<class T>
 struct MethodFixture1 : public StringOutFixture

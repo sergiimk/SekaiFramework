@@ -1,5 +1,5 @@
 /*========================================================
-* basetype_impl.cpp
+* reference_type.cpp
 * @author Sergey Mikhtonyuk
 * @date 28 Mar 2010
 *
@@ -7,42 +7,45 @@
 * Terms of use, copying, distribution, and modification
 * are covered in accompanying LICENSE file
 =========================================================*/
-#include "custom/basetype_attribute.h"
-#include "attribute_impl.h"
+#include "types/reference_type.h"
+#include "type_impl.h"
+#include "common/stack_string.h"
 
 namespace reflection
 {
 
 	//////////////////////////////////////////////////////////////////////////
 
-	struct base_type::base_type_impl : public attribute::attribute_impl
+	struct reference_type::reference_type_impl : public type::type_impl
 	{
-		base_type_impl(type* base)
-			: attribute_impl(ATTR_BASE_TYPE)
-			, m_base(base)
+		reference_type_impl(type* referenced)
+			: type_impl(T_POINTER, ARCH_POINTER, sizeof(void*))
+			, m_referenced(referenced)
 		{ }
 
-		virtual base_type_impl* clone() const
+		virtual void print_name() const
 		{
-			return new base_type_impl(m_base);
+			stack_string<> buf = m_referenced->name();
+			*buf += '*';
+			set_name(buf->c_str());
 		}
 
-		type* m_base;
+		type* m_referenced;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 
-	base_type::base_type(type* base)
-		: attribute(new base_type_impl(base))
+	reference_type::reference_type(type* referenced)
+		: type(new reference_type_impl(referenced))
 	{
-		m_impl = static_cast<base_type_impl*>(attribute::m_impl);
+		m_impl = static_cast<reference_type_impl*>(type::m_impl);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	type* base_type::get_base() const
+	type* reference_type::referenced_type() const
 	{
-		return m_impl->m_base;
+		return m_impl->m_referenced;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

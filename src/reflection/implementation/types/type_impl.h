@@ -12,7 +12,6 @@
 
 #include "types/type.h"
 #include <string>
-#include <vector>
 
 namespace reflection
 {
@@ -39,20 +38,11 @@ namespace reflection
 
 		const char* get_name() const;
 
-		void add_member(const member& mem);
-
-		void add_attribute(const attribute& attr);
-
 	protected:
 
 		virtual void print_name() const;
 
 	private:
-		typedef std::vector<member*> TMemberContainer;
-		typedef std::vector<std::pair<attribute*, member*> > TAttributeContainer;
-
-		TMemberContainer m_members;
-		TAttributeContainer m_attributes;
 		mutable std::string m_name;
 		size_t m_size;
 		ETypeTag m_tag;

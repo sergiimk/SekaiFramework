@@ -12,34 +12,30 @@
 
 
 #include "reflection/reflection.h"
-/*#include "module/implementations.h"
-#include "vml/vml.h"
-#include "reflection/vml_ios.h"
-#include "reflection/vml_reflect.h"
+//#include "module/implementations.h"
+//#include "vml/vml.h"
+//#include "reflection/vml_ios.h"
+//#include "reflection/vml_reflect.h"
 #include <iostream>
 
 //////////////////////////////////////////////////////////////////////////
 inline int F1(int a, int b) { return a + b; }
 //////////////////////////////////////////////////////////////////////////
 
-struct ASDF
+struct Vec3
 {
-	int a, s, d, f;
-	ASDF() : a(0), s(1), d(2), f(3)
-	{
-	}
-
-	ASDF(int _a) : a(_a), s(a+1), d(a+2), f(a+3)
-	{
-	}
+	float x, y, z;
+	Vec3() : x(0), y(0), z(0) { }
+	Vec3(float v) : x(v), y(v), z(v) { }
+	Vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) { }
 };
 
-reflect_class(ASDF)
-	map_ctor()
-	map_ctor(int)
+reflect_class(Vec3, "Vec3")
+//map_ctor()
+//map_ctor(int)
 end_reflection()
 
-
+/*
 //////////////////////////////////////////////////////////////////////////
 
 enum TestEnum
@@ -55,7 +51,7 @@ reflect_enum(TestEnum)
 	map_enum(VAL_1) 
 	map_enum(VAL_2)
 end_reflection_enum()
-
+*/
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -64,8 +60,8 @@ struct ITestClass
 	virtual int DoFoo(int a, int b) = 0;
 };
 
-reflect_class(ITestClass)
-	map_method("DoFoo", DoFoo)
+reflect_class(ITestClass, "ITestClass")
+	.def("DoFoo", &ITestClass::DoFoo)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
@@ -84,10 +80,9 @@ public:
 	int field;
 };
 
-reflect_class(TestClass1)
-	map_base(ITestClass)
-	map_method("DoFooInv", DoFooInv)
-	map_field("field", field)
+reflect_class(TestClass1, "TestClass1")
+	.def(base_type(type_of<ITestClass>()))
+	.def("DoFooInv", &TestClass1::DoFooInv)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
@@ -103,17 +98,17 @@ class TestClass2 : public MixUp2, public TestClass1
 public:
 	virtual int DoFoo(int a, int b) { return a * b; }
 	virtual int DoFooInv(int a, int b) { return a / b; }
-	virtual const VML::Vector3& GetV() const { return m_vec; }
-	virtual void SetV(const VML::Vector3& v) { m_vec = v; }
+	virtual const Vec3& GetV() const { return m_vec; }
+	virtual void SetV(const Vec3& v) { m_vec = v; }
 	int m_stub2;
-	VML::Vector3 m_vec;
+	Vec3 m_vec;
 };
 
-reflect_class(TestClass2)
-	map_base(TestClass1)
-	map_accessor("V", GetV, SetV)
+reflect_class(TestClass2, "TestClass2")
+	.def(base_type(type_of<TestClass1>()))
+	.def("V", &TestClass2::GetV, &TestClass2::SetV)
 end_reflection()
-
+/*
 //////////////////////////////////////////////////////////////////////////
 
 class EventProvider

@@ -16,10 +16,18 @@ namespace reflection
 {
 	/// Reference type class
 	/** @ingroup reflection */
-	class reference_type : public type
+	class REFLECTION_API reference_type : public type
 	{
 	public:
+
+		reference_type(type* pointee);
+
+		/// Returns type this one references
+		type* referenced_type() const;
+
 	private:
+		struct reference_type_impl;
+		reference_type_impl* m_impl;
 	};
 
 } // namespace

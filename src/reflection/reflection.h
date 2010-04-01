@@ -1,5 +1,5 @@
 /*========================================================
-* Reflection.h
+* reflection.h
 * @author Sergey Mikhtonyuk
 * @date 23 June 2009
 *
@@ -14,6 +14,8 @@
 
 #include "reflection_fwd.h"
 #include "types/typeof.h"
+#include "custom/method_member.h"
+#include "custom/accessor_member.h"
 #include "custom/basetype_attribute.h"
 
 #endif // _REFLECTION_H__

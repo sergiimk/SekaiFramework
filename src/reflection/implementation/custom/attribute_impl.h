@@ -27,7 +27,7 @@ namespace reflection
 
 		EAttributeType get_type() const;
 
-		virtual attribute_impl* clone() const;
+		virtual attribute_impl* clone() const = 0;
 
 	private:
 		EAttributeType m_type;

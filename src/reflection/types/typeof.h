@@ -18,8 +18,10 @@
 #include "types/function_type.h"
 #include "types/user_type.h"
 #include "types/array_type.h"
+#include "custom/custom.h"
 #include "common/ifthenelse.h"
 #include "common/typetraits.h"
+#include "delegate/Delegate.h"
 
 namespace reflection
 {
@@ -74,7 +76,8 @@ namespace reflection
 		template<class T>
 		struct _type_of_user_ {
 			static type* get() {
-				return 0; 
+				static type_desc<T> desc;
+				return desc.get_type(); 
 			}
 		};
 
@@ -125,6 +128,19 @@ namespace reflection
 		return &at;
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+
+	#include "generated/invoke_generic.inc"
+	#include "generated/function_typeof.inc"
+
+	//////////////////////////////////////////////////////////////////////////
+
+	#define CONST_METH
+	#include "generated/method_typeof.inc"
+	#undef CONST_METH
+	#define CONST_METH const
+	#include "generated/method_typeof.inc"
+	#undef CONST_METH
 
 	//////////////////////////////////////////////////////////////////////////
 	
