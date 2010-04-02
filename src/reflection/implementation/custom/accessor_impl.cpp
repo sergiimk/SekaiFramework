@@ -27,16 +27,18 @@ namespace reflection
 			, m_typeSet(typeSet)
 		{
 			memcpy(m_delegGetBuf, delegGet, sizeof(m_delegGetBuf));
-			if(typeSet)
+			if(m_typeSet)
 				memcpy(m_delegSetBuf, delegSet, sizeof(m_delegSetBuf));
 		}
 
-		virtual accessor_impl* clone() const
+		accessor_impl(const accessor_impl& other)
+			: member_impl(MEMBER_ACCESSOR, other.get_name())
+			, m_typeGet(other.m_typeGet)
+			, m_typeSet(other.m_typeSet)
 		{
-			return new accessor_impl(
-				get_name(), 
-				(DelegateBase*)m_delegGetBuf, m_typeGet,
-				(DelegateBase*)m_delegSetBuf, m_typeSet);
+			memcpy(m_delegGetBuf, other.m_delegGetBuf, sizeof(m_delegGetBuf));
+			if(m_typeSet)
+				memcpy(m_delegSetBuf, other.m_delegSetBuf, sizeof(m_delegSetBuf));
 		}
 
 	private:
@@ -60,5 +62,29 @@ namespace reflection
 	{
 		m_impl = static_cast<accessor_impl*>(member::m_impl);
 	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	accessor::accessor(accessor_impl* impl)
+		: member(impl)
+	{
+		m_impl = impl;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	accessor* accessor::clone() const
+	{
+		return new accessor(new accessor_impl(*m_impl));
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void accessor::release()
+	{
+		delete this;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
 	
 } // namespace

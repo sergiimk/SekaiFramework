@@ -43,6 +43,7 @@ namespace reflection
 			if(tag() == T_METHOD)
 			{
 				*buf += m_argTypes[0]->name();
+				buf->resize(buf->size() - 1);
 				*buf += "::*";
 			}
 			

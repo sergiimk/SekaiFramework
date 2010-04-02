@@ -19,14 +19,20 @@ namespace reflection
 	class REFLECTION_API base_type : public attribute
 	{
 	public:
-		base_type(type* base);
+		base_type(user_type* base);
 
 		/// Returns base type
-		type* get_base() const;
+		user_type* get_base() const;
+
+		virtual base_type* clone() const;
+
+		virtual void release();
 
 	private:
 		struct base_type_impl;
 		base_type_impl* m_impl;
+
+		base_type(base_type_impl* impl);
 	};
 	
 } // namespace

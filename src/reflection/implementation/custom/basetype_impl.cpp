@@ -17,7 +17,7 @@ namespace reflection
 
 	struct base_type::base_type_impl : public attribute::attribute_impl
 	{
-		base_type_impl(type* base)
+		base_type_impl(user_type* base)
 			: attribute_impl(ATTR_BASE_TYPE)
 			, m_base(base)
 		{ }
@@ -27,12 +27,12 @@ namespace reflection
 			return new base_type_impl(m_base);
 		}
 
-		type* m_base;
+		user_type* m_base;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 
-	base_type::base_type(type* base)
+	base_type::base_type(user_type* base)
 		: attribute(new base_type_impl(base))
 	{
 		m_impl = static_cast<base_type_impl*>(attribute::m_impl);
@@ -40,9 +40,30 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	type* base_type::get_base() const
+	base_type::base_type(base_type_impl* impl)
+		: attribute(impl)
+		, m_impl(impl)
+	{ }
+
+	//////////////////////////////////////////////////////////////////////////
+
+	user_type* base_type::get_base() const
 	{
 		return m_impl->m_base;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	base_type* base_type::clone() const
+	{
+		return new base_type(new base_type_impl(*m_impl));
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void base_type::release()
+	{
+		delete this;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

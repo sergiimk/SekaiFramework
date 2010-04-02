@@ -9,6 +9,7 @@
 =========================================================*/
 #include "custom/method_member.h"
 #include "member_impl.h"
+#include "types/function_type.h"
 
 namespace reflection
 {
@@ -25,9 +26,21 @@ namespace reflection
 			memcpy(m_delegBuf, deleg, sizeof(m_delegBuf));
 		}
 
-		virtual method_impl* clone() const
+		method_impl(const method_impl& other)
+			: member_impl(MEMBER_METHOD, other.get_name())
+			, m_type(other.m_type)
 		{
-			return new method_impl(get_name(), (DelegateBase*)m_delegBuf, m_type);
+			memcpy(m_delegBuf, other.m_delegBuf, sizeof(m_delegBuf));
+		}
+
+		function_type* get_function_type() const
+		{
+			return m_type;
+		}
+
+		void invoke(void** args, void* result) const
+		{
+			m_type->invoke((DelegateBase*)m_delegBuf, args, result);
 		}
 
 	private:
@@ -43,6 +56,42 @@ namespace reflection
 		: member(new method_impl(name, deleg, type))
 	{
 		m_impl = static_cast<method_impl*>(member::m_impl);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	method::method(method_impl* impl)
+		: member(impl)
+	{
+		m_impl = impl;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	function_type* method::get_function_type() const
+	{
+		return m_impl->get_function_type();
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void method::invoke(void** args, void* result) const
+	{
+		m_impl->invoke(args, result);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	method* method::clone() const
+	{
+		return new method(new method_impl(*m_impl));
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void method::release()
+	{
+		delete this;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

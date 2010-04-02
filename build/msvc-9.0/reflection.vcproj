@@ -350,6 +350,10 @@
 				RelativePath="..\..\src\reflection\types\user_type.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\reflection\types\user_type_iters.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="implementation"

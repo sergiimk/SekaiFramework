@@ -20,6 +20,8 @@ namespace reflection
 	{
 	public:
 
+		#include "user_type_iters.h"
+
 		user_type(ETypeTag tag, const char* name, size_t size);
 
 		/// Adds type member
@@ -57,6 +59,16 @@ namespace reflection
 			add_member(accessor::create(name, getter, type_of(getter), setter, type_of(setter)));
 			return *this;
 		}
+
+	private:
+		size_t _member_count() const;
+		member* _get_member(size_t i) const;
+		size_t _find_member(const char* name) const;
+
+		size_t _attribute_count() const;
+		void _get_attribute(attribute*& attr, member*& mem, size_t i) const;
+
+		void traverse_rec(hierarchy_traverser& tr, size_t depth) const;
 
 	private:
 		class user_type_impl;

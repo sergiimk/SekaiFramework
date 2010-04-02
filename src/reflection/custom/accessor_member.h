@@ -53,9 +53,15 @@ namespace reflection
 			DelegateBase* delegSet = 0,  
 			function_type* typeSet = 0);
 
+		virtual accessor* clone() const;
+
+		virtual void release();
+
 	private:
 		class accessor_impl;
 		accessor_impl* m_impl;
+
+		accessor(accessor_impl* impl);
 	};
 	
 } // namespace

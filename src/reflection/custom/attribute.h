@@ -39,10 +39,10 @@ namespace reflection
 		EAttributeType get_type() const;
 
 		/// Clones the attribute
-		attribute* clone() const;
+		virtual attribute* clone() const = 0;
 
 		/// Releases the cloned attribute
-		void release();
+		virtual void release() = 0;
 
 	private:
 		attribute(const attribute& other);

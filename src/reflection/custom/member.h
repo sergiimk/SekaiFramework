@@ -42,10 +42,10 @@ namespace reflection
 		const char* get_name() const;
 
 		/// Clones the member
-		member* clone() const;
+		virtual member* clone() const = 0;
 
 		/// Releases the cloned member
-		void release();
+		virtual void release() = 0;
 
 	private:
 		member(const member& other);

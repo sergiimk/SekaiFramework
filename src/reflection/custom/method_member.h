@@ -33,9 +33,20 @@ namespace reflection
 
 		method(const char* name, DelegateBase* deleg, function_type* type);
 
+		/// Returns type of the method
+		function_type* get_function_type() const;
+
+		void invoke(void** args, void* result) const;
+
+		virtual method* clone() const;
+
+		virtual void release();
+
 	private:
 		class method_impl;
 		method_impl* m_impl;
+
+		method(method_impl* impl);
 	};
 
 } // namespace

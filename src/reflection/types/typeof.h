@@ -67,7 +67,7 @@ namespace reflection
 		struct _type_of_reference_ {
 			static type* get() {
 				static reference_type type(_type_of_<T>::get());
-				return &type; 
+				return &type;
 			}
 		};
 

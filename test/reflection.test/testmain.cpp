@@ -174,18 +174,19 @@ BOOST_AUTO_TEST_CASE( name_function )
 	BOOST_CHECK(strcmp(t->name(), "int (int, int)") == 0);
 }
 
-/*//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 template<class T>
-struct MethodFixture1 : public StringOutFixture
+struct MethodFixture1
 {
-	Method method;
-	FunctionType* methodType;
+	method* meth;
+	function_type* methT;
 	MethodFixture1(const char* name = "DoFoo")
 	{
-		UserType* t = static_cast<UserType*>(type_of<T>());
-		method = t->FindMethod(name);
-		methodType = method.getType();
+		user_type* t = type_of<T>();
+		user_type::member_iterator it = t->find_member(name, true);
+		meth = static_cast<method*>(&*it);
+		methT = meth->get_function_type();
 	}
 };
 
@@ -200,13 +201,12 @@ struct MethodFixture2 : public MethodFixture1<T>
 
 BOOST_FIXTURE_TEST_CASE( name_method, MethodFixture1<ITestClass> )
 {
-	BOOST_CHECK_EQUAL(methodType->Name(buf, buf_size), 28);
-	BOOST_CHECK(strcmp(buf, "int ITestClass::*(int, int)") == 0);
+	BOOST_CHECK(strcmp(methT->name(), "int ITestClass::*(int, int)") == 0);
 }
 
 BOOST_FIXTURE_TEST_CASE( method_arguments, MethodFixture1<ITestClass> )
 {
-	BOOST_CHECK_EQUAL(methodType->getArgumentNumber(), 3);
+	BOOST_CHECK_EQUAL(methT->argument_count(), 3);
 }
 
 BOOST_FIXTURE_TEST_CASE( invoke_method, MethodFixture1<TestClass1> )
@@ -215,10 +215,10 @@ BOOST_FIXTURE_TEST_CASE( invoke_method, MethodFixture1<TestClass1> )
 	void* inst = &tc;
 	int a = 10, b = 5, ret;
 	void* args[] = { &inst, &a, &b };
-	method.Invoke(args, &ret);
+	meth->invoke(args, &ret);
 	BOOST_CHECK_EQUAL(ret, 15);
 }
-
+/*
 BOOST_FIXTURE_TEST_CASE( invoke_method_of_base, MethodFixture1<TestClass2> )
 {
 	TestClass2 tc;
