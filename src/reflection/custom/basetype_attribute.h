@@ -19,10 +19,15 @@ namespace reflection
 	class REFLECTION_API base_type : public attribute
 	{
 	public:
-		base_type(user_type* base);
+		base_type(user_type* base, size_t this_offset);
+
+		~base_type();
 
 		/// Returns base type
 		user_type* get_base() const;
+
+		/// Returns offset of 'this' pointer from base class
+		size_t get_offset() const;
 
 		virtual base_type* clone() const;
 

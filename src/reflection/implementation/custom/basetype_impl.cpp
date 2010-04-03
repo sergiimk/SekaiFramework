@@ -17,23 +17,25 @@ namespace reflection
 
 	struct base_type::base_type_impl : public attribute::attribute_impl
 	{
-		base_type_impl(user_type* base)
+		base_type_impl(user_type* base, size_t this_offset)
 			: attribute_impl(ATTR_BASE_TYPE)
 			, m_base(base)
+			, m_offser(this_offset)
 		{ }
 
 		virtual base_type_impl* clone() const
 		{
-			return new base_type_impl(m_base);
+			return new base_type_impl(m_base, m_offser);
 		}
 
 		user_type* m_base;
+		size_t m_offser;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 
-	base_type::base_type(user_type* base)
-		: attribute(new base_type_impl(base))
+	base_type::base_type(user_type* base, size_t this_offset)
+		: attribute(new base_type_impl(base, this_offset))
 	{
 		m_impl = static_cast<base_type_impl*>(attribute::m_impl);
 	}
@@ -47,9 +49,23 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
+	base_type::~base_type()
+	{
+		delete m_impl;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	user_type* base_type::get_base() const
 	{
 		return m_impl->m_base;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	size_t base_type::get_offset() const
+	{
+		return m_impl->m_offser;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

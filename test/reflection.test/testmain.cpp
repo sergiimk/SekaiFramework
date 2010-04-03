@@ -179,14 +179,15 @@ BOOST_AUTO_TEST_CASE( name_function )
 template<class T>
 struct MethodFixture1
 {
-	method* meth;
+	method meth;
 	function_type* methT;
 	MethodFixture1(const char* name = "DoFoo")
 	{
 		user_type* t = type_of<T>();
 		user_type::member_iterator it = t->find_member(name, true);
-		meth = static_cast<method*>(&*it);
-		methT = meth->get_function_type();
+		BOOST_CHECK(it.is<method>());
+		meth = it.get<method>();
+		methT = meth.get_function_type();
 	}
 };
 
@@ -215,17 +216,17 @@ BOOST_FIXTURE_TEST_CASE( invoke_method, MethodFixture1<TestClass1> )
 	void* inst = &tc;
 	int a = 10, b = 5, ret;
 	void* args[] = { &inst, &a, &b };
-	meth->invoke(args, &ret);
+	meth.invoke(args, &ret);
 	BOOST_CHECK_EQUAL(ret, 15);
 }
-/*
+
 BOOST_FIXTURE_TEST_CASE( invoke_method_of_base, MethodFixture1<TestClass2> )
 {
 	TestClass2 tc;
 	TestClass2* inst = &tc;
 	int a = 10, b = 5, ret;
 	void* args[] = { &inst, &a, &b };
-	method.Invoke(args, &ret);
+	meth.invoke(args, &ret);
 	BOOST_CHECK_EQUAL(ret, 50);
 }
 
@@ -235,32 +236,11 @@ BOOST_FIXTURE_TEST_CASE( invoke_method_of_middle, MethodFixture2<TestClass2> )
 	TestClass2* inst = &tc;
 	int a = 10, b = 5, ret;
 	void* args[] = { &inst, &a, &b };
-	method.Invoke(args, &ret);
+	meth.invoke(args, &ret);
 	BOOST_CHECK_EQUAL(ret, 2);
 }
-
+/*
 //////////////////////////////////////////////////////////////////////////
-
-template<class T>
-struct FieldFixture : public StringOutFixture
-{
-	Field field;
-	FieldFixture()
-	{
-		UserType* t = static_cast<UserType*>(type_of<T>());
-		field = t->FindField("field");
-	}
-};
-
-//////////////////////////////////////////////////////////////////////////
-
-BOOST_FIXTURE_TEST_CASE( tostring_field, FieldFixture<TestClass2> )
-{
-	TestClass2 tc;
-	tc.field = 123;
-	BOOST_CHECK(field.ToString(&tc, buf, buf_size));
-	BOOST_CHECK(strcmp(buf, "123") == 0);
-}
 
 BOOST_AUTO_TEST_CASE( usertype )
 {
@@ -272,21 +252,13 @@ BOOST_AUTO_TEST_CASE( usertype )
 	BOOST_CHECK_EQUAL(t->getMethodNumber(), 1);
 	BOOST_CHECK_EQUAL(t->getAccessorNumber(), 0);
 }
-
-BOOST_FIXTURE_TEST_CASE( name_usertype, StringOutFixture )
+*/
+BOOST_AUTO_TEST_CASE( name_usertype )
 {
-	Type* t = type_of<TestClass2>();
-	t->Name(buf, buf_size);
-	BOOST_CHECK(strcmp(buf, "TestClass2") == 0);
+	type* t = type_of<TestClass2>();
+	BOOST_CHECK(strcmp(t->name(), "TestClass2") == 0);
 }
-
-BOOST_AUTO_TEST_CASE( usertype_field )
-{
-	UserType* t = static_cast<UserType*>(type_of<TestClass2>());
-	Field tcf = t->FindField("field");
-	BOOST_CHECK_EQUAL(tcf.getType(), type_of<int>());
-}
-
+/*
 BOOST_AUTO_TEST_CASE( usertype_method )
 {
 	UserType* t = static_cast<UserType*>(type_of<TestClass2>());
@@ -306,46 +278,33 @@ BOOST_AUTO_TEST_CASE( usertype_base )
 
 	BOOST_CHECK(t->FindBaseType("asdf") == 0);
 }
-
+*/
 struct AccessorFixture
 {
-	Accessor acc;
+	accessor acc;
 	AccessorFixture()
 	{
-		UserType* t = static_cast<UserType*>(type_of<TestClass2>());
-		acc = t->FindAccessor("V");
+		user_type* t = type_of<TestClass2>();
+		user_type::member_iterator it = t->find_member("V");
+		acc = it.get<accessor>();
 	}
 };
 
 BOOST_FIXTURE_TEST_CASE( usertype_accessor_get, AccessorFixture )
 {
 	TestClass2 tc;
-	tc.m_vec = VML::Vector3(1, 2, 3);
-	VML::Vector3 ret;
-	acc.getValue(&tc, &ret);
-	BOOST_CHECK(VML::equivalent(ret, tc.m_vec));
+	tc.m_vec = Vec3(1, 2, 3);
+	Vec3 ret;
+	acc.get_value(&tc, &ret);
+	BOOST_CHECK(ret == tc.m_vec);
 }
 
 BOOST_FIXTURE_TEST_CASE( usertype_accessor_set, AccessorFixture )
 {
 	TestClass2 tc;
-	VML::Vector3 val(3, 2, 1);
-	acc.setValue(&tc, &val);
-	BOOST_CHECK(VML::equivalent(val, tc.m_vec));
+	Vec3 val(3, 2, 1);
+	acc.set_value(&tc, &val);
+	BOOST_CHECK(val == tc.m_vec);
 }
 
-BOOST_AUTO_TEST_CASE( eventTest )
-{
-	EventProvider provider;
-	EventListener listener;
-
-	provider.OnValueChanged.connect(MakeDelegate(&listener, &EventListener::AChanged));
-	provider.SetA(10);
-	BOOST_CHECK_EQUAL(provider.a, listener.a);
-
-	provider.OnValueChanged.disconnect(MakeDelegate(&listener, &EventListener::AChanged));
-	provider.SetA(11);
-	BOOST_CHECK_NE(provider.a, listener.a);
-}
-*/
 BOOST_AUTO_TEST_SUITE_END();

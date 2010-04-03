@@ -16,10 +16,10 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	class method::method_impl : public member::member_impl
+	class method_member::method_impl : public member::member_impl
 	{
 	public:
-		method_impl(const char* name, DelegateBase* deleg, function_type* type)
+		method_impl(const char* name, void* deleg, function_type* type)
 			: member_impl(MEMBER_METHOD, name)
 			, m_type(type)
 		{
@@ -49,10 +49,10 @@ namespace reflection
 	};
 
 	//////////////////////////////////////////////////////////////////////////
-	// method
+	// method_member
 	//////////////////////////////////////////////////////////////////////////
 
-	method::method(const char* name, DelegateBase* deleg, function_type* type)
+	method_member::method_member(const char* name, void* deleg, function_type* type)
 		: member(new method_impl(name, deleg, type))
 	{
 		m_impl = static_cast<method_impl*>(member::m_impl);
@@ -60,7 +60,7 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	method::method(method_impl* impl)
+	method_member::method_member(method_impl* impl)
 		: member(impl)
 	{
 		m_impl = impl;
@@ -68,28 +68,28 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	function_type* method::get_function_type() const
+	function_type* method_member::get_function_type() const
 	{
 		return m_impl->get_function_type();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void method::invoke(void** args, void* result) const
+	void method_member::invoke(void** args, void* result) const
 	{
 		m_impl->invoke(args, result);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	method* method::clone() const
+	method_member* method_member::clone() const
 	{
-		return new method(new method_impl(*m_impl));
+		return new method_member(new method_impl(*m_impl));
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void method::release()
+	void method_member::release()
 	{
 		delete this;
 	}

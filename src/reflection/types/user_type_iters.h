@@ -19,15 +19,28 @@ public:
 	member_iterator(const member_iterator& other)
 		: m_type(other.m_type)
 		, m_pos(other.m_pos)
+		, m_offset(other.m_offset)
 	{ }
 
 	member_iterator& operator=(const member_iterator& rhs)
 	{
 		m_type = rhs.m_type;
 		m_pos = rhs.m_pos;
+		m_offset = rhs.m_offset;
 	}
 
 	const user_type& get_type() const { return *m_type; }
+
+	template<class T>
+	bool is() const { return (*this)->get_type() == T::member_id; }
+
+	template<class T>
+	T get() const
+	{
+		member* mem = m_type->_get_member(m_pos);
+		ASSERT_STRICT(mem->get_type() == T::member_id);
+		return T(*static_cast<T::member_type*>(mem), m_offset);		
+	}
 
 	member& operator*() const { return *m_type->_get_member(m_pos); }
 
@@ -69,20 +82,22 @@ public:
 
 private:
 	friend class user_type;
-	member_iterator(const user_type& t, size_t pos = 0)
+	member_iterator(const user_type& t, size_t pos = 0, size_t offset = 0)
 		: m_type(&t)
 		, m_pos(pos)
+		, m_offset(offset)
 	{ }
 
 	const user_type* m_type;
 	size_t m_pos;
+	size_t m_offset;
 };
 
 //////////////////////////////////////////////////////////////////////////
 
 member_iterator members_begin() const { return member_iterator(*this); }
 member_iterator members_end() const { return member_iterator(*this, _member_count()); }
-member_iterator find_member(const char* name, bool search_base = false) const;
+member_iterator find_member(const char* name, bool search_base = false, size_t offset = 0) const;
 
 //////////////////////////////////////////////////////////////////////////
 // attribute_iterator

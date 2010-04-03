@@ -12,10 +12,7 @@
 
 
 #include "reflection/reflection.h"
-//#include "module/implementations.h"
-//#include "vml/vml.h"
-//#include "reflection/vml_ios.h"
-//#include "reflection/vml_reflect.h"
+#include "module/implementations.h"
 #include <iostream>
 
 //////////////////////////////////////////////////////////////////////////
@@ -28,6 +25,7 @@ struct Vec3
 	Vec3() : x(0), y(0), z(0) { }
 	Vec3(float v) : x(v), y(v), z(v) { }
 	Vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) { }
+	bool operator==(const Vec3& rhs) { return x == rhs.x && y == rhs.y && z == rhs.z; }
 };
 
 reflect_class(Vec3, "Vec3")
@@ -61,7 +59,7 @@ struct ITestClass
 };
 
 reflect_class(ITestClass, "ITestClass")
-	.def("DoFoo", &ITestClass::DoFoo)
+	.def<ITestClass>("DoFoo", &ITestClass::DoFoo)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
@@ -81,8 +79,8 @@ public:
 };
 
 reflect_class(TestClass1, "TestClass1")
-	.def(base_type(type_of<ITestClass>()))
-	.def("DoFooInv", &TestClass1::DoFooInv)
+	.def(base_type(type_of<ITestClass>(), classoffset<ITestClass, TestClass1>() ))
+	.def<TestClass1>("DoFooInv", &TestClass1::DoFooInv)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
@@ -105,8 +103,8 @@ public:
 };
 
 reflect_class(TestClass2, "TestClass2")
-	.def(base_type(type_of<TestClass1>()))
-	.def("V", &TestClass2::GetV, &TestClass2::SetV)
+	.def(base_type(type_of<TestClass1>(), classoffset<TestClass1, TestClass2>() ))
+	.def<TestClass2>("V", &TestClass2::GetV, &TestClass2::SetV)
 end_reflection()
 /*
 //////////////////////////////////////////////////////////////////////////

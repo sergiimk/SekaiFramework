@@ -150,12 +150,12 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	user_type::member_iterator user_type::find_member(const char* name, bool search_base) const
+	user_type::member_iterator user_type::find_member(const char* name, bool search_base, size_t offset) const
 	{
 		size_t memcount = m_impl->member_count();
 		size_t p = m_impl->find_member(name);
 		if(p != memcount || !search_base)
-			return member_iterator(*this, p); 
+			return member_iterator(*this, p, offset); 
 
 		for(attribute_iterator it = attributes_begin(), 
 			end = attributes_end(); it != end; ++it)
@@ -163,7 +163,7 @@ namespace reflection
 			if(it->get_type() == ATTR_BASE_TYPE)
 			{
 				base_type* bt = static_cast<base_type*>(&*it);
-				member_iterator it = bt->get_base()->find_member(name, search_base);
+				member_iterator it = bt->get_base()->find_member(name, search_base, offset + bt->get_offset());
 				if(it != bt->get_base()->members_end())
 					return it;
 			}

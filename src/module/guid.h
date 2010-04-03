@@ -131,13 +131,6 @@ namespace Module
 	//@{
 	/** Utils */
 
-	/// Returns the offset between classes
-	template<class base, class derived>
-	inline size_t classoffset() { return (size_t)(static_cast<base*>((derived*)8)) - 8; }
-
-	/// Adjusts the pointer by specified offset
-	inline void* adjustptr(void* pThis, size_t offset) { return (char*)pThis + offset; }
-
 	/// Safe way to pass interface and void**
 	#define UUID_PPV(infc, pp) uuid_of(infc), reinterpret_cast<void**>(static_cast<infc**>(pp))
 

@@ -9,19 +9,20 @@
 =========================================================*/
 #include "custom/accessor_member.h"
 #include "member_impl.h"
+#include "types/function_type.h"
 
 namespace reflection
 {
 
 	//////////////////////////////////////////////////////////////////////////
 
-	class accessor::accessor_impl : public member::member_impl
+	class accessor_member::accessor_impl : public member::member_impl
 	{
 	public:
 		accessor_impl(
 			const char* name, 
-			DelegateBase* delegGet, function_type* typeGet, 
-			DelegateBase* delegSet, function_type* typeSet)
+			void* delegGet, function_type* typeGet, 
+			void* delegSet, function_type* typeSet)
 			: member_impl(MEMBER_ACCESSOR, name)
 			, m_typeGet(typeGet)
 			, m_typeSet(typeSet)
@@ -41,6 +42,21 @@ namespace reflection
 				memcpy(m_delegSetBuf, other.m_delegSetBuf, sizeof(m_delegSetBuf));
 		}
 
+		void get_value(void* inst, void* buffer) const
+		{
+			void* args[] = { &inst };
+			m_typeGet->invoke((DelegateBase*)m_delegGetBuf, args, buffer);
+		}
+
+		void set_value(void* inst, void* buffer) const
+		{
+			if(m_typeSet)
+			{
+				void* args[] = { &inst, buffer };
+				m_typeSet->invoke((DelegateBase*)m_delegSetBuf, args, 0);
+			}
+		}
+
 	private:
 		char m_delegGetBuf[member::_deleg_buf_size];
 		char m_delegSetBuf[member::_deleg_buf_size];
@@ -49,14 +65,14 @@ namespace reflection
 	};
 
 	//////////////////////////////////////////////////////////////////////////
-	// accessor
+	// accessor_member
 	//////////////////////////////////////////////////////////////////////////
 
-	accessor::accessor(
+	accessor_member::accessor_member(
 		const char* name, 
-		DelegateBase* delegGet, 
+		void* delegGet, 
 		function_type* typeGet, 
-		DelegateBase* delegSet /* = 0 */, 
+		void* delegSet /* = 0 */, 
 		function_type* typeSet /* = 0 */)
 		: member(new accessor_impl(name, delegGet, typeGet, delegSet, typeSet))
 	{
@@ -65,7 +81,7 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	accessor::accessor(accessor_impl* impl)
+	accessor_member::accessor_member(accessor_impl* impl)
 		: member(impl)
 	{
 		m_impl = impl;
@@ -73,14 +89,29 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	accessor* accessor::clone() const
+	void accessor_member::get_value(void* inst, void* buffer) const
 	{
-		return new accessor(new accessor_impl(*m_impl));
+		m_impl->get_value(inst, buffer);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void accessor::release()
+	void accessor_member::set_value(void* inst, void* buffer) const
+	{
+		m_impl->set_value(inst, buffer);
+	}
+
+
+	//////////////////////////////////////////////////////////////////////////
+
+	accessor_member* accessor_member::clone() const
+	{
+		return new accessor_member(new accessor_impl(*m_impl));
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	void accessor_member::release()
 	{
 		delete this;
 	}

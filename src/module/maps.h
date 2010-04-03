@@ -11,6 +11,7 @@
 #define _SF_MAPS_H__
 
 #include "interfaces.h"
+#include "common/typetraits.h"
 
 // Fwd for reflection export
 namespace Reflection { class Type; };
@@ -78,7 +79,7 @@ namespace  Module
 	/////////////////////////////////////////////////////////////////////////
 	
 	#define INTERFACE_ENTRY(intrfc)	\
-	{&uuid_of(intrfc), (void*)Module::classoffset<intrfc, _ThisClass>(), Module::detail::SF_OFFSET_ENTRY},
+	{&uuid_of(intrfc), (void*)classoffset<intrfc, _ThisClass>(), Module::detail::SF_OFFSET_ENTRY},
 
 	/////////////////////////////////////////////////////////////////////////
 

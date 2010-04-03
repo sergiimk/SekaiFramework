@@ -45,18 +45,20 @@ namespace reflection
 		}
 
 		/// Declare method
-		template<class MemFun>
+		template<class C, class MemFun>
 		user_type& def(const char* name, MemFun meth)
 		{
-			add_member(method::create(name, meth, type_of(meth)));
+			add_member(method_member::create(name, MakeDelegate(static_cast<C*>(0), meth), type_of(meth)));
 			return *this;
 		}
 
 		/// Declare accessor
-		template<class TGet, class TSet>
+		template<class C, class TGet, class TSet>
 		user_type& def(const char* name, TGet getter, TSet setter)
 		{
-			add_member(accessor::create(name, getter, type_of(getter), setter, type_of(setter)));
+			add_member(accessor_member::create(name, 
+				MakeDelegate(static_cast<C*>(0), getter), type_of(getter), 
+				MakeDelegate(static_cast<C*>(0), setter), type_of(setter)));
 			return *this;
 		}
 
