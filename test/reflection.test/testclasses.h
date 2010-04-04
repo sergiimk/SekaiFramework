@@ -33,7 +33,6 @@ reflect_class(Vec3, "Vec3")
 //map_ctor(int)
 end_reflection()
 
-/*
 //////////////////////////////////////////////////////////////////////////
 
 enum TestEnum
@@ -42,14 +41,10 @@ enum TestEnum
 	VAL_2,
 };
 
-std::ostream& operator<<(std::ostream& os, const TestEnum& cc);
-std::istream& operator>>(std::istream& os, TestEnum& cc);
-
-reflect_enum(TestEnum)
-	map_enum(VAL_1) 
-	map_enum(VAL_2)
-end_reflection_enum()
-*/
+reflect_enum(TestEnum, "TestEnum")
+	.def(enumeration_member("VAL_1", VAL_1))
+	.def(enumeration_member("VAL_2", VAL_2))
+end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -106,37 +101,7 @@ reflect_class(TestClass2, "TestClass2")
 	.def(base_type(type_of<TestClass1>(), classoffset<TestClass1, TestClass2>() ))
 	.def<TestClass2>("V", &TestClass2::GetV, &TestClass2::SetV)
 end_reflection()
-/*
-//////////////////////////////////////////////////////////////////////////
-
-class EventProvider
-{
-public:
-	int a;
-
-	void SetA(int na) { 
-		if(a != na) {
-			a = na; 
-			OnValueChanged.raise(na);
-		}
-	}
-
-	int GetA() const { return a; }
-
-	Reflection::Event<void (int)> OnValueChanged;
-};
 
 //////////////////////////////////////////////////////////////////////////
 
-class EventListener
-{
-public:
-	int a;
-
-	void AChanged(int na)
-	{ a = na; }
-};
-
-//////////////////////////////////////////////////////////////////////////
-*/
 #endif

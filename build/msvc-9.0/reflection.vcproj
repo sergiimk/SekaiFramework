@@ -414,6 +414,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\reflection\implementation\custom\enumeration_impl.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\reflection\implementation\custom\member_impl.cpp"
 					>
 				</File>

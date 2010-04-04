@@ -16,6 +16,13 @@ friend class member_iterator;
 class member_iterator
 {
 public:
+
+	typedef std::bidirectional_iterator_tag iterator_category;
+	typedef member value_type;
+	typedef ptrdiff_t difference_type;
+	typedef member* pointer;
+	typedef member& reference;
+
 	member_iterator(const member_iterator& other)
 		: m_type(other.m_type)
 		, m_pos(other.m_pos)
@@ -108,6 +115,13 @@ member_iterator find_member(const char* name, bool search_base = false, size_t o
 class attribute_iterator
 {
 public:
+
+	typedef std::forward_iterator_tag iterator_category;
+	typedef attribute value_type;
+	typedef ptrdiff_t difference_type;
+	typedef attribute* pointer;
+	typedef attribute& reference;
+
 	attribute_iterator(const attribute_iterator& other)
 		: m_type(other.m_type)
 		, m_pos(other.m_pos)

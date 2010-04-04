@@ -328,10 +328,6 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\test\reflection.test\testclasses.cpp"
-			>
-		</File>
-		<File
 			RelativePath="..\..\test\reflection.test\testclasses.h"
 			>
 		</File>

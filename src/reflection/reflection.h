@@ -17,5 +17,6 @@
 #include "custom/method_member.h"
 #include "custom/accessor_member.h"
 #include "custom/basetype_attribute.h"
+#include "custom/enumeration_member.h"
 
 #endif // _REFLECTION_H__

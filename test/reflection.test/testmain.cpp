@@ -128,29 +128,36 @@ BOOST_AUTO_TEST_CASE( compare_user )
 	BOOST_CHECK(!t1->Equal(t2));
 	BOOST_CHECK(t2->Equal(t2));
 }
-
+*/
 BOOST_AUTO_TEST_CASE( create_enum )
 {
-	Type* t = type_of<TestEnum>();
+	type* t = type_of<TestEnum>();
 	BOOST_CHECK(t);
 }
 
+struct find_enum {
+	unsigned int val;
+	find_enum(unsigned int v) : val(v) { }
+	bool operator()(const member& mem) {
+		return mem.get_type() == MEMBER_ENUMERATION 
+			&& ((const enumeration_member&)mem).get_value() == val; 
+	}
+};
+
 BOOST_AUTO_TEST_CASE( tostring_enum )
 {
-	char buf[100];
-	TestEnum e = VAL_2;
-	Type* t = type_of<TestEnum>();
-	BOOST_CHECK(t->ToString(&e, buf, 100));
-	BOOST_CHECK(strcmp(buf, "VAL_2") == 0);
+	user_type* t = type_of<TestEnum>();
+	user_type::member_iterator it = std::find_if(t->members_begin(), t->members_end(), find_enum(VAL_2));
+	BOOST_CHECK(strcmp(it->get_name(), "VAL_2") == 0);
 }
 
 BOOST_AUTO_TEST_CASE( parse_enum )
 {
 	TestEnum e = VAL_2;
-	Type* t = type_of<TestEnum>();
-	BOOST_CHECK(t->TryParse(&e, "VAL_1"));
-	BOOST_CHECK_EQUAL(e, VAL_1);
-}*/
+	user_type* t = type_of<TestEnum>();
+	user_type::member_iterator it = t->find_member("VAL_1");
+	BOOST_CHECK_EQUAL(it.get<enumeration>().get_value(), VAL_1);
+}
 
 BOOST_AUTO_TEST_CASE( create_function )
 {
@@ -239,46 +246,22 @@ BOOST_FIXTURE_TEST_CASE( invoke_method_of_middle, MethodFixture2<TestClass2> )
 	meth.invoke(args, &ret);
 	BOOST_CHECK_EQUAL(ret, 2);
 }
-/*
+
 //////////////////////////////////////////////////////////////////////////
 
-BOOST_AUTO_TEST_CASE( usertype )
-{
-	UserType* t = static_cast<UserType*>(type_of<TestClass1>());
-	BOOST_CHECK_EQUAL(t->Tag(), RL_T_CLASS);
-	BOOST_CHECK_EQUAL(t->Size(), sizeof(TestClass1));
-	BOOST_CHECK_EQUAL(t->getBaseTypeNumber(), 1);
-	BOOST_CHECK_EQUAL(t->getFieldNumber(), 1);
-	BOOST_CHECK_EQUAL(t->getMethodNumber(), 1);
-	BOOST_CHECK_EQUAL(t->getAccessorNumber(), 0);
-}
-*/
 BOOST_AUTO_TEST_CASE( name_usertype )
 {
 	type* t = type_of<TestClass2>();
 	BOOST_CHECK(strcmp(t->name(), "TestClass2") == 0);
 }
-/*
+
 BOOST_AUTO_TEST_CASE( usertype_method )
 {
-	UserType* t = static_cast<UserType*>(type_of<TestClass2>());
-	Method tcm = t->FindMethod("DoFoo");
-	BOOST_CHECK_EQUAL(tcm.getType(), type_of(&ITestClass::DoFoo));
+	user_type* t = type_of<TestClass2>();
+	user_type::member_iterator it = t->find_member("DoFoo", true);
+	BOOST_CHECK(it.is<method>());
 }
 
-BOOST_AUTO_TEST_CASE( usertype_base )
-{
-	UserType* t = static_cast<UserType*>(type_of<TestClass2>());
-
-	Type* tc = t->FindBaseType("TestClass1");
-	BOOST_CHECK_EQUAL(tc, type_of<TestClass1>());
-
-	Type* tc2 = t->FindBaseType("ITestClass");
-	BOOST_CHECK_EQUAL(tc2, type_of<ITestClass>());
-
-	BOOST_CHECK(t->FindBaseType("asdf") == 0);
-}
-*/
 struct AccessorFixture
 {
 	accessor acc;

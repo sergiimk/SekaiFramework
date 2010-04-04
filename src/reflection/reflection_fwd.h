@@ -30,8 +30,11 @@ namespace reflection
 	class array_type;
 
 	class member;
+	class method_member;
 	class method;
+	class accessor_member;
 	class accessor;
+	class enumeration_member;
 
 	class attribute;
 	class base_type;

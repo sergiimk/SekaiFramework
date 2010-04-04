@@ -11,6 +11,7 @@
 #define _USERTYPE_H__
 
 #include "types/type.h"
+#include <iterator>
 
 namespace reflection
 {
