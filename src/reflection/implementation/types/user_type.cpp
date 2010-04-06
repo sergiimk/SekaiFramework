@@ -31,7 +31,7 @@ namespace reflection
 		~user_type_impl()
 		{
 			for(size_t i = 0, size = m_attributes.size(); i != size; ++i)
-				m_attributes[i].first->release();
+				m_attributes[i]->release();
 
 			for(size_t i = 0, size = m_members.size(); i != size; ++i)
 				m_members[i]->release();
@@ -44,7 +44,7 @@ namespace reflection
 
 		void add_attribute(const attribute& attr)
 		{
-			m_attributes.push_back(std::make_pair<attribute*, member*>(attr.clone(), 0));
+			m_attributes.push_back(attr.clone());
 		}
 
 		size_t member_count() const
@@ -70,18 +70,14 @@ namespace reflection
 			return m_attributes.size();
 		}
 
-		std::pair<attribute*, member*> get_attribute(size_t i) const
+		attribute* get_attribute(size_t i) const
 		{
 			return m_attributes[i];
 		}
 
 	private:
-
-		
-
-	private:
 		typedef std::vector<member*> TMemberContainer;
-		typedef std::vector<std::pair<attribute*, member*> > TAttributeContainer;
+		typedef std::vector<attribute*> TAttributeContainer;
 
 		TMemberContainer m_members;
 		TAttributeContainer m_attributes;
@@ -141,11 +137,9 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void user_type::_get_attribute(attribute*& attr, member*& mem, size_t i) const
+	const attribute* user_type::_get_attribute(size_t i) const
 	{
-		std::pair<attribute*, member*> p = m_impl->get_attribute(i);
-		attr = p.first;
-		mem = p.second;
+		return m_impl->get_attribute(i);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -162,7 +156,7 @@ namespace reflection
 		{
 			if(it->get_type() == ATTR_BASE_TYPE)
 			{
-				base_type* bt = static_cast<base_type*>(&*it);
+				const base_type* bt = static_cast<const base_type*>(&*it);
 				member_iterator it = bt->get_base()->find_member(name, search_base, offset + bt->get_offset());
 				if(it != bt->get_base()->members_end())
 					return it;
@@ -189,12 +183,68 @@ namespace reflection
 		{
 			if(it->get_type() == ATTR_BASE_TYPE)
 			{
-				base_type* bt = static_cast<base_type*>(&*it);
+				const base_type* bt = static_cast<const base_type*>(&*it);
 				bt->get_base()->traverse_rec(tr, depth + 1);
 			}
 		}
 		tr.LeaveType(*this, depth);
 	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	/*bool user_type::to_string(void* value, char* buf, size_t size) const
+	{
+		if(tag() != T_ENUM)
+		{
+			attribute_iterator it = std::find_if(
+				attributes_begin(), attributes_end(),
+				find_attribute(ATTR_PARSING));
+
+			if(it != attributes_end())
+				return static_cast<const parsing_attribute*>(&*it)->to_string(value, buf, size);
+		}
+		else
+		{
+			member_iterator it = std::find_if(
+				members_begin(), members_end(), 
+				find_enum(*(unsigned int*)value));
+
+			if(it != members_end())
+			{
+				const char* name = it->get_name();
+				strncpy(buf, name, size - 1);
+				return strlen(name) < size;
+			}
+		}
+		return false;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	bool user_type::try_parse(void* value, const char* str) const
+	{
+		if(tag() != T_ENUM)
+		{
+			attribute_iterator it = std::find_if(
+				attributes_begin(), attributes_end(),
+				find_attribute(ATTR_PARSING));
+
+			if(it != attributes_end())
+				return static_cast<const parsing_attribute*>(&*it)->try_parse(value, str);
+		}
+		else
+		{
+			member_iterator it = find_member(str);
+
+			if(it.is<enumeration>())
+			{
+				unsigned int* pui = (unsigned int*)value;
+				*pui = it.get<enumeration>().get_value();
+				return true;
+			}
+		}
+		return false;
+	}*/
 
 	//////////////////////////////////////////////////////////////////////////
 

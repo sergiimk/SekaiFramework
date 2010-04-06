@@ -339,6 +339,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\reflection\types\type_iters.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\reflection\types\typeof.h"
 				>
 			</File>
@@ -430,6 +434,14 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="utils"
+				>
+				<File
+					RelativePath="..\..\src\reflection\implementation\utils\converter.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="custom"
@@ -464,6 +476,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\reflection\custom\method_member.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\reflection\custom\parsing_attribute.h"
 				>
 			</File>
 		</Filter>
@@ -516,6 +532,14 @@
 			</File>
 			<File
 				RelativePath="..\..\src\reflection\delegate\DelegateBase.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="utils"
+			>
+			<File
+				RelativePath="..\..\src\reflection\utils\converter.h"
 				>
 			</File>
 		</Filter>

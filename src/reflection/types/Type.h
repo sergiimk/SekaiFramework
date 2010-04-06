@@ -12,6 +12,7 @@
 
 #include "reflection_fwd.h"
 #include "types/typetag.h"
+#include <iterator>
 
 namespace reflection
 {
@@ -22,6 +23,8 @@ namespace reflection
 	class REFLECTION_API type
 	{
 	public:
+
+		#include "type_iters.h"
 
 		type(ETypeTag tag, EArchType arch, size_t size);
 
@@ -44,6 +47,10 @@ namespace reflection
 		type& operator=(const type& rhs);
 
 	protected:
+
+		virtual size_t _attribute_count() const;
+		virtual const attribute* _get_attribute(size_t i) const;
+
 		class type_impl;
 
 		/// Derived classes can specify own impl

@@ -8,6 +8,7 @@
 * are covered in accompanying LICENSE file
 =========================================================*/
 #include "types/builtin_type.h"
+#include <sstream>
 
 namespace reflection
 {
@@ -64,6 +65,22 @@ namespace reflection
 		: type(T_VOID, ARCH_BUILTIN, 0)
 	{
 		type::set_name(get_type_name(tag()));
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	template<class T>
+	size_t builtin_type<T>::_attribute_count() const
+	{
+		return 1;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	template<class T>
+	const attribute* builtin_type<T>::_get_attribute(size_t i) const
+	{
+		return &m_parse;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

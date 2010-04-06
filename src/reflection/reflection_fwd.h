@@ -38,6 +38,10 @@ namespace reflection
 
 	class attribute;
 	class base_type;
+	class parsing_attribute_base;
+
+	class converter;
+	struct value_type_pair;
 	
 } // namespace
 

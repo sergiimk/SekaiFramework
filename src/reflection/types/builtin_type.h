@@ -11,6 +11,7 @@
 #define _BUILTINTYPE_H__
 
 #include "types/type.h"
+#include "custom/parsing_attribute.h"
 
 namespace reflection
 {
@@ -21,6 +22,14 @@ namespace reflection
 	{
 	public:
 		builtin_type();
+
+	private:
+
+		virtual size_t _attribute_count() const;
+
+		virtual const attribute* _get_attribute(size_t i) const;
+
+		parsing_attribute_t<T> m_parse;
 	};
 
 	//////////////////////////////////////////////////////////////////////////

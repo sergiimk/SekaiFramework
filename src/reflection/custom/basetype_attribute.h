@@ -21,8 +21,6 @@ namespace reflection
 	public:
 		base_type(user_type* base, size_t this_offset);
 
-		~base_type();
-
 		/// Returns base type
 		user_type* get_base() const;
 

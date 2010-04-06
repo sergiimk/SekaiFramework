@@ -59,12 +59,12 @@ BOOST_AUTO_TEST_CASE( create_builtin_void )
 	type* t = type_of<void>();
 	BOOST_CHECK(t);
 }
-
+/*
 BOOST_AUTO_TEST_CASE( create_custom )
 {
 	user_type* t = type_of<Vec3>();
 	BOOST_REQUIRE(t);
-	/*Type* argt = type_of<int>();
+	Type* argt = type_of<int>();
 	ConstructDescriptor* ctor = t->FindSuitableCtor(&argt, 1);
 	BOOST_REQUIRE(ctor != 0);
 
@@ -75,9 +75,9 @@ BOOST_AUTO_TEST_CASE( create_custom )
 	BOOST_CHECK_EQUAL(inst->a, 5);
 	BOOST_CHECK_EQUAL(inst->f, 8);
 
-	ctor->DestroyInstance(inst);*/
+	ctor->DestroyInstance(inst);
 }
-
+*/
 //////////////////////////////////////////////////////////////////////////
 
 BOOST_AUTO_TEST_CASE( name_builtin_float )
@@ -92,24 +92,22 @@ BOOST_AUTO_TEST_CASE( name_builtin_array_ptr )
 	type* t = type_of(arr);
 	BOOST_CHECK(strcmp(t->name(), "int* [10]") == 0);
 }
-/*
+
 BOOST_AUTO_TEST_CASE( tostring_builtin_double )
 {
+	char buf[10];
 	double b = 3.14;
-	type* td = type_of(b);
-
-	BOOST_CHECK(td->ToString(&b, buf, buf_size));
+	BOOST_CHECK(converter::to_string(make_typed_pair(b), buf, sizeof(buf)));
 	BOOST_CHECK(strcmp(buf, "3.14") == 0);
 }
 
 BOOST_AUTO_TEST_CASE( parse_builtin_double )
 {
 	double b;
-	Type* td = type_of(b);
-	BOOST_CHECK(td->TryParse(&b, "2.71"));
+	BOOST_CHECK(converter::try_parse(make_typed_pair(b), "2.71"));
 	BOOST_CHECK_EQUAL(b, 2.71);
 }
-
+/*
 BOOST_AUTO_TEST_CASE( compare_builtin )
 {
 	int a = 0;
@@ -135,28 +133,19 @@ BOOST_AUTO_TEST_CASE( create_enum )
 	BOOST_CHECK(t);
 }
 
-struct find_enum {
-	unsigned int val;
-	find_enum(unsigned int v) : val(v) { }
-	bool operator()(const member& mem) {
-		return mem.get_type() == MEMBER_ENUMERATION 
-			&& ((const enumeration_member&)mem).get_value() == val; 
-	}
-};
-
 BOOST_AUTO_TEST_CASE( tostring_enum )
 {
-	user_type* t = type_of<TestEnum>();
-	user_type::member_iterator it = std::find_if(t->members_begin(), t->members_end(), find_enum(VAL_2));
-	BOOST_CHECK(strcmp(it->get_name(), "VAL_2") == 0);
+	char buf[10];
+	TestEnum e = VAL_2;
+	BOOST_CHECK(converter::to_string(make_typed_pair(e), buf, sizeof(buf)));
+	BOOST_CHECK(strcmp(buf, "VAL_2") == 0);
 }
 
 BOOST_AUTO_TEST_CASE( parse_enum )
 {
 	TestEnum e = VAL_2;
-	user_type* t = type_of<TestEnum>();
-	user_type::member_iterator it = t->find_member("VAL_1");
-	BOOST_CHECK_EQUAL(it.get<enumeration>().get_value(), VAL_1);
+	BOOST_CHECK(converter::try_parse(make_typed_pair(e), "VAL_1"));
+	BOOST_CHECK_EQUAL(e, VAL_1);
 }
 
 BOOST_AUTO_TEST_CASE( create_function )

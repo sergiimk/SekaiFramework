@@ -22,6 +22,7 @@ namespace reflection
 	enum EAttributeType
 	{
 		ATTR_BASE_TYPE,
+		ATTR_PARSING,
 		ATTR_CONSTRUCTION,
 	};
 
@@ -32,6 +33,8 @@ namespace reflection
 	class REFLECTION_API attribute
 	{
 	public:
+
+		attribute(EAttributeType type);
 
 		~attribute();
 

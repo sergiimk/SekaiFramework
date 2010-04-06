@@ -11,7 +11,6 @@
 #define _USERTYPE_H__
 
 #include "types/type.h"
-#include <iterator>
 
 namespace reflection
 {
@@ -64,12 +63,13 @@ namespace reflection
 		}
 
 	private:
+
+		virtual size_t _attribute_count() const;
+		virtual const attribute* _get_attribute(size_t i) const;
+
 		size_t _member_count() const;
 		member* _get_member(size_t i) const;
 		size_t _find_member(const char* name) const;
-
-		size_t _attribute_count() const;
-		void _get_attribute(attribute*& attr, member*& mem, size_t i) const;
 
 		void traverse_rec(hierarchy_traverser& tr, size_t depth) const;
 

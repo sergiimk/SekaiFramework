@@ -8,7 +8,7 @@ friend class member_iterator;
 //////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////
-// membere_iterator
+// member_iterator
 //////////////////////////////////////////////////////////////////////////
 
 /// bidirectional iterator over user type members
@@ -105,88 +105,6 @@ private:
 member_iterator members_begin() const { return member_iterator(*this); }
 member_iterator members_end() const { return member_iterator(*this, _member_count()); }
 member_iterator find_member(const char* name, bool search_base = false, size_t offset = 0) const;
-
-//////////////////////////////////////////////////////////////////////////
-// attribute_iterator
-//////////////////////////////////////////////////////////////////////////
-
-/// forward iterator over user type attributes
-/** @ingroup reflection */
-class attribute_iterator
-{
-public:
-
-	typedef std::forward_iterator_tag iterator_category;
-	typedef attribute value_type;
-	typedef ptrdiff_t difference_type;
-	typedef attribute* pointer;
-	typedef attribute& reference;
-
-	attribute_iterator(const attribute_iterator& other)
-		: m_type(other.m_type)
-		, m_pos(other.m_pos)
-	{ }
-
-	attribute_iterator& operator=(const attribute_iterator& rhs)
-	{
-		m_type = rhs.m_type;
-		m_pos = rhs.m_pos;
-	}
-
-	attribute& operator*() const
-	{
-		attribute* attr; member* mem;
-		m_type->_get_attribute(attr, mem, m_pos);
-		return *attr;
-	}
-
-	const user_type& get_type() const { return *m_type; }
-
-	attribute* operator->() const { return &this->operator*(); }
-
-	bool operator==(const attribute_iterator& rhs) const { return (m_type == rhs.m_type && m_pos == rhs.m_pos); }
-
-	bool operator!=(const attribute_iterator& rhs) const { return !(*this == rhs); }
-
-	bool operator<(const attribute_iterator& rhs) const { return m_pos < rhs.m_pos; }
-
-	attribute_iterator& operator++()
-	{
-		ASSERT_STRICT(m_pos != m_type->_attribute_count());
-		attribute* attr; member* mem;
-		size_t size = m_type->_attribute_count();
-
-		while(++m_pos != size)
-		{
-			m_type->_get_attribute(attr, mem, m_pos);
-			if(!mem)
-				break;
-		}
-		return *this;
-	}
-
-	attribute_iterator operator++(int)
-	{
-		attribute_iterator ret(*this);
-		++*this;
-		return ret;
-	}
-
-private:
-	friend class user_type;
-	attribute_iterator(const user_type& t, size_t pos = 0)
-		: m_type(&t)
-		, m_pos(pos)
-	{ }
-
-	const user_type* m_type;
-	size_t m_pos;
-};
-
-//////////////////////////////////////////////////////////////////////////
-
-attribute_iterator attributes_begin() const { return attribute_iterator(*this); }
-attribute_iterator attributes_end() const { return attribute_iterator(*this, _attribute_count()); }
 
 //////////////////////////////////////////////////////////////////////////
 // hierarchy_traverser
