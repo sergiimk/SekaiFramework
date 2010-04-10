@@ -3,7 +3,7 @@
 	<Workspace title="SekaiFramework">
 		<Project filename="module.cbp" />
 		<Project filename="platform.cbp" />
-		<Project filename="module.test.cbp">
+		<Project filename="module.test.cbp" active="1">
 			<Depends filename="module.cbp" />
 		</Project>
 		<Project filename="reflection.cbp" />
@@ -23,7 +23,7 @@
 			<Depends filename="module.cbp" />
 			<Depends filename="filesystem.cbp" />
 		</Project>
-		<Project filename="script.python.test.cbp" active="1">
+		<Project filename="script.python.test.cbp">
 			<Depends filename="module.cbp" />
 			<Depends filename="script.python.cbp" />
 		</Project>

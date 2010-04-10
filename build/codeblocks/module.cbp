@@ -40,6 +40,7 @@
 		</Compiler>
 		<Unit filename="../../src/module/allocators.h" />
 		<Unit filename="../../src/module/guid.h" />
+		<Unit filename="../../src/module/implementation/exception.cpp" />
 		<Unit filename="../../src/module/implementation/guid.cpp" />
 		<Unit filename="../../src/module/implementation/implementations.cpp" />
 		<Unit filename="../../src/module/implementation/module.cpp" />
