@@ -47,6 +47,8 @@ namespace reflection
 		/// Releases the cloned member
 		virtual void release() = 0;
 
+		static const int _deleg_buf_size = 10;
+
 	private:
 		member(const member& other);
 		member& operator=(const member& rhs);
@@ -57,8 +59,6 @@ namespace reflection
 		member(member_impl* impl);
 
 		member_impl* m_impl;
-
-		static const int _deleg_buf_size = 10;
 	};
 
 	//////////////////////////////////////////////////////////////////////////

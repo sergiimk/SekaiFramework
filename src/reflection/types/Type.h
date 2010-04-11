@@ -42,6 +42,9 @@ namespace reflection
 		/// Returns the name of the type
 		const char* name() const;
 
+		/// Checks whether two types are equal
+		virtual bool equal(const type* other) const;
+
 	private:
 		type(const type& other);
 		type& operator=(const type& rhs);

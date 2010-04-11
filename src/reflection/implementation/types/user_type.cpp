@@ -95,6 +95,13 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
+	bool user_type::equal(const type* other) const
+	{
+		return type::equal(other) && strcmp(name(), other->name()) == 0;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	void user_type::add_member(const member& mem)
 	{
 		m_impl->add_member(mem);

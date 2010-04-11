@@ -49,5 +49,15 @@ namespace reflection
 	}
 
 	//////////////////////////////////////////////////////////////////////////
+
+	bool pointer_type::equal(const type* other) const
+	{
+		if(!type::equal(other))
+			return false;
+		const pointer_type* pt = static_cast<const pointer_type*>(other);
+		return pointee_type()->equal(pt->pointee_type());
+	}
+
+	//////////////////////////////////////////////////////////////////////////
 	
 } // namespace

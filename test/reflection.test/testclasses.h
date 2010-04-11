@@ -13,6 +13,7 @@
 
 #include "reflection/reflection.h"
 #include "module/implementations.h"
+#include "module/allocators.h"
 #include <iostream>
 
 //////////////////////////////////////////////////////////////////////////
@@ -29,8 +30,15 @@ struct Vec3
 };
 
 reflect_class(Vec3, "Vec3")
-//map_ctor()
-//map_ctor(int)
+	.def(construct_attribute::create(
+	type_of(&type_ctor<Vec3, Module::NewAllocator>), 
+	Delegate<void* ()>(&type_ctor<Vec3, Module::NewAllocator>), 
+	&type_destructor<Vec3, Module::NewAllocator>))
+
+	.def(construct_attribute::create(
+	type_of(&type_ctor<Vec3, Module::NewAllocator, float>), 
+	Delegate<void* (float)>(&type_ctor<Vec3, Module::NewAllocator, float>), 
+	&type_destructor<Vec3, Module::NewAllocator>))
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////

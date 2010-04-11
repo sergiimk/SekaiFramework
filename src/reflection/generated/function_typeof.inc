@@ -7,8 +7,7 @@ inline function_type* type_of(RT (*)())
 	typedef RT (FT)(); 
 	generic_invoker inv = &invoke_generic<FT, RT>; 
 	type* rt = type_of<RT>();
-	type* args[0];
-	static function_type ft(inv, false, rt, args, 0);
+	static function_type ft(inv, false, rt, 0, 0);
 	return &ft;
 }
 

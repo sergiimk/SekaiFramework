@@ -24,6 +24,8 @@ namespace reflection
 
 		user_type(ETypeTag tag, const char* name, size_t size);
 
+		virtual bool equal(const type* other) const;
+
 		/// Adds type member
 		void add_member(const member& mem);
 

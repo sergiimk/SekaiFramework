@@ -127,5 +127,26 @@ namespace reflection
 	}
 
 	//////////////////////////////////////////////////////////////////////////
+
+	bool function_type::equal(const type* other) const
+	{
+		if(!type::equal(other))
+			return false;
+		const function_type* ft = static_cast<const function_type*>(other);
+		
+		if(argument_count() != ft->argument_count() || !return_type()->equal(ft->return_type()))
+			return false;
+
+		type** args1 = argument_types();
+		type** args2 = ft->argument_types();
+
+		for(size_t i = 0; i != argument_count(); ++i)
+			if(!args1[i]->equal(args2[i]))
+				return false;
+
+		return true;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
 	
 } // namespace

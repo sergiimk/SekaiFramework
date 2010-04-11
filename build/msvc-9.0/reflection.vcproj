@@ -418,6 +418,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\reflection\implementation\custom\construction_impl.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\reflection\implementation\custom\enumeration_impl.cpp"
 					>
 				</File>
@@ -437,6 +441,10 @@
 			<Filter
 				Name="utils"
 				>
+				<File
+					RelativePath="..\..\src\reflection\implementation\utils\activator.cpp"
+					>
+				</File>
 				<File
 					RelativePath="..\..\src\reflection\implementation\utils\converter.cpp"
 					>
@@ -486,6 +494,10 @@
 		<Filter
 			Name="generated"
 			>
+			<File
+				RelativePath="..\..\src\reflection\generated\construction.inc"
+				>
+			</File>
 			<File
 				RelativePath="..\..\src\reflection\generated\function_typeof.inc"
 				>
@@ -538,6 +550,10 @@
 		<Filter
 			Name="utils"
 			>
+			<File
+				RelativePath="..\..\src\reflection\utils\activator.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\src\reflection\utils\converter.h"
 				>

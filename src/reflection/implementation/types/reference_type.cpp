@@ -49,5 +49,15 @@ namespace reflection
 	}
 
 	//////////////////////////////////////////////////////////////////////////
+
+	bool reference_type::equal(const type* other) const
+	{
+		if(!type::equal(other))
+			return false;
+		const reference_type* rt = static_cast<const reference_type*>(other);
+		return referenced_type()->equal(rt->referenced_type());
+	}
+
+	//////////////////////////////////////////////////////////////////////////
 	
 } // namespace

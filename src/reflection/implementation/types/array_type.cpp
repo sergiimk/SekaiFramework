@@ -63,5 +63,16 @@ namespace reflection
 	}
 
 	//////////////////////////////////////////////////////////////////////////
+
+	bool array_type::equal(const type* other) const
+	{
+		if(!type::equal(other)) 
+			return false;
+		const array_type* at = static_cast<const array_type*>(other);
+		return m_impl->m_elem_t->equal(at->m_impl->m_elem_t)
+			&& m_impl->m_length == at->m_impl->m_length;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
 	
 } // namespace

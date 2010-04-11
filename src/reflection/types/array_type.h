@@ -27,6 +27,8 @@ namespace reflection
 		/// Length of array
 		size_t length() const;
 
+		virtual bool equal(const type* other) const;
+
 	private:
 		struct array_type_impl;
 		array_type_impl* m_impl;

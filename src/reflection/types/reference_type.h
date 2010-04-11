@@ -25,6 +25,8 @@ namespace reflection
 		/// Returns type this one references
 		type* referenced_type() const;
 
+		virtual bool equal(const type* other) const;
+
 	private:
 		struct reference_type_impl;
 		reference_type_impl* m_impl;

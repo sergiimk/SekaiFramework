@@ -84,6 +84,16 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
+	bool type::equal(const type* other) const
+	{
+		return other
+			&& size() == other->size()
+			&& tag() == other->tag()
+			&& arch_type() == other->arch_type();
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	void type::set_name(const char* name)
 	{
 		m_impl->set_name(name);

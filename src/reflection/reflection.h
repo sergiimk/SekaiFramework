@@ -16,10 +16,12 @@
 #include "types/typeof.h"
 #include "custom/basetype_attribute.h"
 #include "custom/parsing_attribute.h"
+#include "custom/construction_attribute.h"
 #include "custom/method_member.h"
 #include "custom/accessor_member.h"
 #include "custom/enumeration_member.h"
 
 #include "utils/converter.h"
+#include "utils/activator.h"
 
 #endif // _REFLECTION_H__

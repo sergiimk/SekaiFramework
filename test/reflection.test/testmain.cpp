@@ -59,25 +59,23 @@ BOOST_AUTO_TEST_CASE( create_builtin_void )
 	type* t = type_of<void>();
 	BOOST_CHECK(t);
 }
-/*
+
 BOOST_AUTO_TEST_CASE( create_custom )
 {
 	user_type* t = type_of<Vec3>();
-	BOOST_REQUIRE(t);
-	Type* argt = type_of<int>();
-	ConstructDescriptor* ctor = t->FindSuitableCtor(&argt, 1);
-	BOOST_REQUIRE(ctor != 0);
+	float a = 5.0f;
+	value_type_pair vt = make_typed_pair(a);	
 
-	int a = 5;
-	void* args[] = { &a };
-	ASDF* inst = (ASDF*)ctor->CreateInstance(args);
-	BOOST_REQUIRE(inst != 0);
-	BOOST_CHECK_EQUAL(inst->a, 5);
-	BOOST_CHECK_EQUAL(inst->f, 8);
+	Vec3* vec = (Vec3*)activator::create_instance(*t, &vt, 1);
+	BOOST_REQUIRE(vec);
 
-	ctor->DestroyInstance(inst);
+	BOOST_CHECK_EQUAL(vec->x, 5.0f);
+	BOOST_CHECK_EQUAL(vec->y, 5.0f);
+	BOOST_CHECK_EQUAL(vec->z, 5.0f);
+
+	activator::destroy_instance(*t, vec);
 }
-*/
+
 //////////////////////////////////////////////////////////////////////////
 
 BOOST_AUTO_TEST_CASE( name_builtin_float )
@@ -107,26 +105,26 @@ BOOST_AUTO_TEST_CASE( parse_builtin_double )
 	BOOST_CHECK(converter::try_parse(make_typed_pair(b), "2.71"));
 	BOOST_CHECK_EQUAL(b, 2.71);
 }
-/*
+
 BOOST_AUTO_TEST_CASE( compare_builtin )
 {
 	int a = 0;
-	Type* ti1 = type_of<int>();
-	Type* ti2 = type_of(a);
-	BOOST_CHECK(ti1->Equal(ti2));
+	type* ti1 = type_of<int>();
+	type* ti2 = type_of(a);
+	BOOST_CHECK(ti1->equal(ti2));
 
-	Type* td1 = type_of<double>();
-	BOOST_CHECK(!ti1->Equal(td1));
+	type* td1 = type_of<double>();
+	BOOST_CHECK(!ti1->equal(td1));
 }
 
 BOOST_AUTO_TEST_CASE( compare_user )
 {
-	Type* t1 = type_of<TestClass1>();
-	Type* t2 = type_of<TestClass2>();
-	BOOST_CHECK(!t1->Equal(t2));
-	BOOST_CHECK(t2->Equal(t2));
+	type* t1 = type_of<TestClass1>();
+	type* t2 = type_of<TestClass2>();
+	BOOST_CHECK(!t1->equal(t2));
+	BOOST_CHECK(t2->equal(t2));
 }
-*/
+
 BOOST_AUTO_TEST_CASE( create_enum )
 {
 	type* t = type_of<TestEnum>();

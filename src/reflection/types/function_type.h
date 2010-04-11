@@ -35,6 +35,8 @@ namespace reflection
 		/// Make a function call (in case of methods first argument is class instance)
 		void invoke(DelegateBase* deleg, void** args, void* result) const;
 
+		virtual bool equal(const type* other) const;
+
 	private:
 		class function_type_impl;
 		function_type_impl* m_impl;

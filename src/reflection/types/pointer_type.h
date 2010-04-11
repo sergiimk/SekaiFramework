@@ -24,6 +24,8 @@ namespace reflection
 		/// Returns type this one points to
 		type* pointee_type() const;
 
+		virtual bool equal(const type* other) const;
+
 	private:
 		struct pointer_type_impl;
 		pointer_type_impl* m_impl;
