@@ -35,7 +35,7 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CScriptFunction::Invoke(Reflection::ValueTypePair* args, size_t nargs, Reflection::ValueTypePair* ret)
+	void CScriptFunction::Invoke(reflection::value_type_pair* args, size_t nargs, reflection::value_type_pair* ret)
 	{
 
 		CScriptManager::sInstance->InvokeCallable(mCallable, args, nargs, ret);

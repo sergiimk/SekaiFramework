@@ -158,7 +158,7 @@ namespace Module
 
 	//////////////////////////////////////////////////////////////////////////
 
-	Reflection::Type* ModuleHandle::GetType(const Module::GUID &clsid) const
+	reflection::user_type* ModuleHandle::GetType(const Module::GUID &clsid) const
 	{
 		if(!IsLoaded()) return 0;
 

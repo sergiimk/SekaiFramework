@@ -19,7 +19,7 @@ namespace reflection
 	struct reference_type::reference_type_impl : public type::type_impl
 	{
 		reference_type_impl(type* referenced)
-			: type_impl(T_POINTER, ARCH_POINTER, sizeof(void*))
+			: type_impl(T_REFERENCE, ARCH_REFERENCE, sizeof(void*))
 			, m_referenced(referenced)
 		{ }
 

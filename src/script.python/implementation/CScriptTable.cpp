@@ -36,7 +36,7 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	bool CScriptTable::HasEntryRaw(const Reflection::ValueTypePair &attr_key)
+	bool CScriptTable::HasEntryRaw(const reflection::value_type_pair &attr_key)
 	{
 		PyObject* py_key = script_cast(attr_key);
 
@@ -53,7 +53,7 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	bool CScriptTable::GetEntryRaw(const Reflection::ValueTypePair& attr_key, Reflection::ValueTypePair& out_val)
+	bool CScriptTable::GetEntryRaw(const reflection::value_type_pair& attr_key, reflection::value_type_pair& out_val)
 	{
 		PyObject* py_key = script_cast(attr_key);
 

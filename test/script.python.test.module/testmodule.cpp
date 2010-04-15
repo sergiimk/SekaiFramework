@@ -11,5 +11,5 @@
 #include "test_implementations.h"
 
 BEGIN_MODULE_MAP()
-	OBJECT_ENTRY_REFLECTED(CLSID_FancyAdder, uuid_of(IFancyInterface), CFancyAdder, &Reflection::type_of<CFancyAdder>)
+	OBJECT_ENTRY_REFLECTED(CLSID_FancyAdder, uuid_of(IFancyInterface), CFancyAdder, &reflection::type_of<CFancyAdder>)
 END_MODULE_MAP()

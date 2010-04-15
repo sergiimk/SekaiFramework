@@ -36,9 +36,9 @@ namespace ScriptPy
 
 		void FinalConstruct(PyObject* obj);
 	
-		virtual bool HasEntryRaw(const Reflection::ValueTypePair& attr_key);
+		virtual bool HasEntryRaw(const reflection::value_type_pair& attr_key);
 
-		virtual bool GetEntryRaw(const Reflection::ValueTypePair& attr_key, Reflection::ValueTypePair& out_val);
+		virtual bool GetEntryRaw(const reflection::value_type_pair& attr_key, reflection::value_type_pair& out_val);
 
 	private:
 

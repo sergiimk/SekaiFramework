@@ -13,13 +13,13 @@
 #include "reflection/reflection.h"
 #include "framework/IBundle.h"
 
-reflect_enum(Framework::EBundleState)
-	map_enum2(Framework::eBndlState_Installed, "INSTALLED")
-	map_enum2(Framework::eBndlState_Resolved, "RESOLVED")
-	map_enum2(Framework::eBndlState_Starting, "STARTING")
-	map_enum2(Framework::eBndlState_Active, "ACTIVE")
-	map_enum2(Framework::eBndlState_Stopping, "STOPPING")
-	map_enum2(Framework::eBndlState_Uninstalled, "UNINSTALLED")
-end_reflection_enum()
+reflect_enum(Framework::EBundleState, "EBundleState")
+	.def_enum("INSTALLED", Framework::eBndlState_Installed)
+	.def_enum("RESOLVED", Framework::eBndlState_Resolved)
+	.def_enum("STARTING", Framework::eBndlState_Starting)
+	.def_enum("ACTIVE", Framework::eBndlState_Active)
+	.def_enum("STOPPING", Framework::eBndlState_Stopping)
+	.def_enum("UNINSTALLED", Framework::eBndlState_Uninstalled)
+end_reflection()
 
 #endif // _FRAMEWORK_REFLECTION_H__

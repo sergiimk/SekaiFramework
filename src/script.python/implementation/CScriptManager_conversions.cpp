@@ -30,7 +30,7 @@
 
 namespace ScriptPy
 {
-	using namespace Reflection;
+	using namespace reflection;
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -81,57 +81,61 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	bool CScriptManager::IsBuiltIn(const Reflection::Type* t)
+	bool CScriptManager::IsBuiltIn(const reflection::type* t)
 	{
-		return	(t->ArchType() == RL_ARCH_BUILTIN ||
-				(t->ArchType() == RL_ARCH_POINTER &&
-				static_cast<const PointerType*>(t)->getPointedType()->Tag() == RL_T_CHAR));
+		return	(t->arch_type() == ARCH_BUILTIN ||
+				(t->arch_type() == ARCH_POINTER &&
+				static_cast<const pointer_type*>(t)->pointee_type()->tag() == T_CHAR) ||
+				(t->arch_type() == ARCH_REFERENCE &&
+				static_cast<const reference_type*>(t)->referenced_type()->arch_type() == ARCH_BUILTIN));
 	}
 
-	bool CScriptManager::IsUserDefined(const Reflection::Type* t)
+	bool CScriptManager::IsUserDefined(const reflection::type* t)
 	{
-		return t->ArchType() == RL_ARCH_USERDEFINED;
+		return t->arch_type() == ARCH_USERDEFINED ||
+			(t->arch_type() == ARCH_REFERENCE &&
+			static_cast<const reference_type*>(t)->referenced_type()->arch_type() == ARCH_USERDEFINED);
 	}
 
-	bool CScriptManager::IsPointerToBuiltin(const Reflection::Type* t)
+	bool CScriptManager::IsPointerToBuiltin(const reflection::type* t)
 	{
-		return t->ArchType() == RL_ARCH_POINTER && static_cast<const PointerType*>(t)->getPointedType()->ArchType() == RL_ARCH_BUILTIN;
+		return t->arch_type() == ARCH_POINTER && static_cast<const pointer_type*>(t)->pointee_type()->arch_type() == ARCH_BUILTIN;
 	}
 
-	bool CScriptManager::IsPointerToUserDefined(const Reflection::Type* t)
+	bool CScriptManager::IsPointerToUserDefined(const reflection::type* t)
 	{
-		return t->ArchType() == RL_ARCH_POINTER && static_cast<const PointerType*>(t)->getPointedType()->ArchType() == RL_ARCH_USERDEFINED;
+		return t->arch_type() == ARCH_POINTER && static_cast<const pointer_type*>(t)->pointee_type()->arch_type() == ARCH_USERDEFINED;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	PyObject* CScriptManager::CreateBuiltinScriptObject(Reflection::ETypeTag type, void* pVal)
+	PyObject* CScriptManager::CreateBuiltinScriptObject(reflection::ETypeTag type, void* pVal)
 	{
 		PyObject* ret = 0;
 		switch(type)
 		{
-		case RL_T_BOOL:
+		case T_BOOL:
 			ret = PYINTEGER_FROMSIZE_T(*(bool*)pVal ? 1 : 0);
 			break;
-		case RL_T_INT:
+		case T_INT:
 			ret = PYINTEGER_FROMLONG(*(int*)pVal);
 			break;
-		case RL_T_UINT:
+		case T_UINT:
 			ret = PYINTEGER_FROMLONG(*(unsigned int*)pVal);
 			break;
-		case RL_T_LONG:
+		case T_LONG:
 			ret = PYINTEGER_FROMLONG(*(long*)pVal);
 			break;
-		case RL_T_ULONG:
+		case T_ULONG:
 			ret = PYINTEGER_FROMLONG(*(unsigned long*)pVal);
 			break;
-		case RL_T_FLOAT:
+		case T_FLOAT:
 			ret = PyFloat_FromDouble(*(float*)pVal);
 			break;
-		case RL_T_DOUBLE:
+		case T_DOUBLE:
 			ret = PyFloat_FromDouble(*(double*)pVal);
 			break;
-		case RL_T_POINTER:
+		case T_POINTER:
 			// Strings
 		#ifdef PYTHON31
 			ret = PyUnicode_FromString(*(char**)pVal);
@@ -145,31 +149,31 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	bool CScriptManager::ConvertToBuiltinValue(Reflection::ETypeTag type, void* pValOut, PyObject* v)
+	bool CScriptManager::ConvertToBuiltinValue(reflection::ETypeTag type, void* pValOut, PyObject* v)
 	{
 		switch(type)
 		{
-		case RL_T_BOOL:
+		case T_BOOL:
 			if(!PYINTEGER_CHECK(v)) return false;
 			*(bool*)pValOut = PYINTEGER_ASLONG(v) ? true : false;
 			return true;
-		case RL_T_INT:
+		case T_INT:
 			if(!PYINTEGER_CHECK(v)) return false;
 			*(int*)pValOut = PYINTEGER_ASLONG(v);
 			return true;
-		case RL_T_UINT:
+		case T_UINT:
 			if(!PYINTEGER_CHECK(v)) return false;
 			*(unsigned int*)pValOut = PYINTEGER_ASLONG(v);
 			return true;
-		case RL_T_LONG:
+		case T_LONG:
 			if(!PYINTEGER_CHECK(v)) return false;
 			*(long*)pValOut = PYINTEGER_ASLONG(v);
 			return true;
-		case RL_T_ULONG:
+		case T_ULONG:
 			if(!PYINTEGER_CHECK(v)) return false;
 			*(unsigned long*)pValOut = PYINTEGER_ASLONG(v);
 			return true;
-		case RL_T_FLOAT:
+		case T_FLOAT:
 			if(PyFloat_Check(v)) {
 				*(float*)pValOut = (float)PyFloat_AS_DOUBLE(v);
 				return true;
@@ -179,7 +183,7 @@ namespace ScriptPy
 				return true;
 			}
 			return false;
-		case RL_T_DOUBLE:
+		case T_DOUBLE:
 			if(PyFloat_Check(v)) {
 				*(double*)pValOut = PyFloat_AS_DOUBLE(v);
 				return true;
@@ -188,7 +192,7 @@ namespace ScriptPy
 				*(double*)pValOut = PYINTEGER_ASLONG(v);
 				return true;
 			}
-		case RL_T_POINTER:
+		case T_POINTER:
 			// Strings
 			/*if(!PyUnicode_Check(v)) return false;
 			*(char**)pValOut = (char*)PyUnicode_AS_DATA(v);
@@ -207,14 +211,10 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	PyObject* CScriptManager::CreateUserDefScriptObject(const Reflection::Type* type, void* pVal, CScriptModule* moduleHint, InstanceType inst_t)
+	PyObject* CScriptManager::CreateUserDefScriptObject(const reflection::type* type, void* pVal, CScriptModule* moduleHint, InstanceType inst_t)
 	{
-		// Print the type name
-		char buf[_EntNameBufLen];
-		type->FullName(buf, _EntNameBufLen);
-
 		// Find exported type by name, use the hint first
-		ExportEntry* typeEntry = FindExportedType(buf, moduleHint);
+		ExportEntry* typeEntry = FindExportedType(type->name(), moduleHint);
 		PyTypeObject *typeObj = &typeEntry->ClassObj;
 
 		if(!typeEntry)
@@ -231,19 +231,19 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	bool CScriptManager::ConvertObject(PyObject* v, ValueTypePair& ret)
+	bool CScriptManager::ConvertObject(PyObject* v, value_type_pair& ret)
 	{
-		const Type *dataType = ret.pType;
-		ASSERT_STRICT(ret.pType);
+		const type *dataType = ret.Type;
+		ASSERT_STRICT(ret.Type);
 
 		if(IsBuiltIn(dataType))
 		{
-			ConvertToBuiltinValue(dataType->Tag(), ret.pValue, v);
+			ConvertToBuiltinValue(dataType->tag(), ret.Value, v);
 			return true;
 		}
 		else if(IsUserDefined(dataType))
 		{
-			*(void**)ret.pValue = ExtractInstanceInfo(v)->instance;
+			*(void**)ret.Value = ExtractInstanceInfo(v)->instance;
 			return true;
 		}
 		else if(IsPointerToBuiltin(dataType))
@@ -253,7 +253,7 @@ namespace ScriptPy
 		}
 		else if(IsPointerToUserDefined(dataType))
 		{
-			*(void**)ret.pValue = &ExtractInstanceInfo(v)->instance;
+			*(void**)ret.Value = &ExtractInstanceInfo(v)->instance;
 			return true;
 		}
 
@@ -262,17 +262,17 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////\
 
-	PyObject* CScriptManager::ConvertToObject(const ValueTypePair& v)
+	PyObject* CScriptManager::ConvertToObject(const value_type_pair& v)
 	{
-		const Type *dataType = v.pType;
+		const type *dataType = v.Type;
 
 		if(IsBuiltIn(dataType))
 		{
-			return CreateBuiltinScriptObject(dataType->Tag(), v.pValue);
+			return CreateBuiltinScriptObject(dataType->tag(), v.Value);
 		}
 		else if(IsUserDefined(dataType))
 		{
-			return CreateUserDefScriptObject(dataType, v.pValue, 0, SIT_OWNED);
+			return CreateUserDefScriptObject(dataType, v.Value, 0, SIT_OWNED);
 		}
 		else if(IsPointerToBuiltin(dataType))
 		{
@@ -282,8 +282,8 @@ namespace ScriptPy
 		else if(IsPointerToUserDefined(dataType))
 		{
 			return CreateUserDefScriptObject(
-				static_cast<const PointerType*>(dataType)->getPointedType(),
-				*(void**)v.pValue,
+				static_cast<const pointer_type*>(dataType)->pointee_type(),
+				*(void**)v.Value,
 				0,
 				SIT_SHARED);
 		}

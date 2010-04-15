@@ -30,9 +30,7 @@ com_ptr<IBundle> ConsoleCommand::getBundleFromParam(CConsoleBundle &console, con
 std::string ConsoleCommand::getStateName(EBundleState state)
 {
 	char stateBuf[128];
-	Reflection::UserType* stateT = static_cast<Reflection::UserType*>(Reflection::type_of<EBundleState>());
-
-	stateT->ToString(&state, stateBuf, 128);
+	reflection::converter::to_string(reflection::make_typed_pair(state), stateBuf, 128);
 	return stateBuf;
 }
 

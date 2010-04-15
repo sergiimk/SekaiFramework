@@ -41,13 +41,13 @@ namespace Script
 		virtual void ExportModule(const char* moduleName, const Module::ModuleHandle& module) = 0;
 
 		/// Exports user-defined type to script engine
-		virtual void ExportType(const char* moduleName, Reflection::UserType* type) = 0;
+		virtual void ExportType(const char* moduleName, reflection::user_type* type) = 0;
 
 		/// Runs the specified script
 		virtual void RunScript(const char* file) = 0;
 
 		/// Exports object as global variable of specified module
-		virtual bool ExportVariable(const char* moduleName, const char* varName, const Reflection::ValueTypePair& value) = 0;
+		virtual bool ExportVariable(const char* moduleName, const char* varName, const reflection::value_type_pair& value) = 0;
 
 		/// Searches and returns script value wrapper
 		virtual bool FindEntry(const char* name, SScriptAny& outValue) = 0;

@@ -15,7 +15,7 @@ namespace reflection
 {
 	//////////////////////////////////////////////////////////////////////////
 
-	const construct_attribute* activator::find_ctor(const type &t, type* argv[], size_t argc)
+	const construct_attribute* activator::find_ctor(const type &t, const type* argv[], size_t argc)
 	{
 		for(type::attribute_iterator it = t.attributes_begin(),
 			end = t.attributes_end();
@@ -35,7 +35,7 @@ namespace reflection
 
 	void* activator::create_instance(const type& t, value_type_pair argv[], size_t argc)
 	{
-		type* argv_t[DELEG_MAX_INVOKE_PARAMS];
+		const type* argv_t[DELEG_MAX_INVOKE_PARAMS];
 		void* argv_i[DELEG_MAX_INVOKE_PARAMS];
 
 		for(size_t i = 0; i != argc; ++i)
@@ -69,7 +69,7 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	bool activator::suitable_params(const function_type &ft, type* argv[], size_t argc)
+	bool activator::suitable_params(const function_type &ft, const type* argv[], size_t argc)
 	{
 		size_t fargc = ft.argument_count();
 		if(fargc != argc)

@@ -20,8 +20,8 @@ sf_interface IFancyInterface : public Module::IUnknown
 	virtual int DoFancyThings(int a, int b) = 0;
 };
 
-reflect_class(IFancyInterface)
-	map_method_doc("DoFancyThings", DoFancyThings, "Performs implementation-defined operation")
+reflect_class(IFancyInterface, "IFancyInterface")
+	.def_method("DoFancyThings", DoFancyThings)
 end_reflection()
 
 #endif // _TEST_INTERFACES_H__

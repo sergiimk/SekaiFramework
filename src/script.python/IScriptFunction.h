@@ -29,7 +29,7 @@ namespace Script
 		 *  @param args Packed arguments in form of value-type pairs
 		 *  @param nargs Number of arguments
 		 *  @param ret Return value, can be 0 */
-		virtual void Invoke(Reflection::ValueTypePair* args, size_t nargs, Reflection::ValueTypePair* ret) = 0;
+		virtual void Invoke(reflection::value_type_pair* args, size_t nargs, reflection::value_type_pair* ret) = 0;
 	};
 
 } // namespace

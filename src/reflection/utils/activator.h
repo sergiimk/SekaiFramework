@@ -22,7 +22,7 @@ namespace reflection
 	{
 	public:
 		/// Searches construction attribute in type t with suitable argument set
-		static const construct_attribute* find_ctor(const type& t, type* argv[] = 0, size_t argc = 0);
+		static const construct_attribute* find_ctor(const type& t, const type* argv[] = 0, size_t argc = 0);
 
 		/// Searches for suitable constructor and creates instance
 		static void* create_instance(const type& t, value_type_pair argv[] = 0, size_t argc = 0);
@@ -31,7 +31,7 @@ namespace reflection
 		static void destroy_instance(const type& t, void* inst);
 
 	private:
-		static bool suitable_params(const function_type& ft, type* argv[], size_t argc);
+		static bool suitable_params(const function_type& ft, const type* argv[], size_t argc);
 	};
 
 	//////////////////////////////////////////////////////////////////////////

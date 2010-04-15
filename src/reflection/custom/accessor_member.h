@@ -59,6 +59,10 @@ namespace reflection
 
 		void set_value(void* inst, void* buffer) const;
 
+		bool is_read_only() const;
+
+		type* value_type() const;
+
 		virtual accessor_member* clone() const;
 
 		virtual void release();

@@ -54,7 +54,7 @@ BOOST_FIXTURE_TEST_CASE( PlainPyTest, ScriptFixture )
 
 BOOST_FIXTURE_TEST_CASE( ObjectCreateDestroyTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<TestClass>());
+	mgr->ExportType("Sekai", type_of<TestClass>());
 	mgr->RunScript("py_simple");
 
 	Shutdown();
@@ -65,64 +65,64 @@ BOOST_FIXTURE_TEST_CASE( ObjectCreateDestroyTest, ScriptFixture )
 
 BOOST_FIXTURE_TEST_CASE( CounstructionTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<VML::Vector3>());
+	mgr->ExportType("Sekai", type_of<Vec3>());
 	mgr->RunScript("py_construction");
 }
 
 BOOST_FIXTURE_TEST_CASE( MethodsTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<TestClass>());
+	mgr->ExportType("Sekai", type_of<TestClass>());
 	mgr->RunScript("py_methods");
 }
 
 BOOST_FIXTURE_TEST_CASE( MembersTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<TestClass>());
+	mgr->ExportType("Sekai", type_of<TestClass>());
 	mgr->RunScript("py_members");
 }
 
 BOOST_FIXTURE_TEST_CASE( ArgumentsTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<TestClass>());
+	mgr->ExportType("Sekai", type_of<TestClass>());
 	mgr->RunScript("py_arguments");
 }
 
 BOOST_FIXTURE_TEST_CASE( VectorTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<VML::Vector3>());
+	mgr->ExportType("Sekai", type_of<Vec3>());
 	mgr->RunScript("py_vector");
 }
 
-BOOST_FIXTURE_TEST_CASE( UserTypeArgumentsTest, ScriptFixture )
+BOOST_FIXTURE_TEST_CASE( user_typrArgumentsTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<TestPlayer>());
-	mgr->ExportType("Sekai", (UserType*)type_of<VML::Vector3>());
+	mgr->ExportType("Sekai", type_of<TestPlayer>());
+	mgr->ExportType("Sekai", type_of<Vec3>());
 	mgr->RunScript("py_utargs");
 }
 
 BOOST_FIXTURE_TEST_CASE( PointerArgsTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<TestPlayer>());
-	mgr->ExportType("Sekai", (UserType*)type_of<VML::Vector3>());
+	mgr->ExportType("Sekai", type_of<TestPlayer>());
+	mgr->ExportType("Sekai", type_of<Vec3>());
 	mgr->RunScript("py_ptrargs");
 }
 
 BOOST_FIXTURE_TEST_CASE( CustomizationTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<VML::Vector3>());
+	mgr->ExportType("Sekai", type_of<Vec3>());
 	mgr->RunScript("py_customization");
 }
 
 BOOST_FIXTURE_TEST_CASE( InheritanceTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<TestInh_Derived>());
-	mgr->ExportType("Sekai", (UserType*)type_of<VML::Vector3>());
+	mgr->ExportType("Sekai", type_of<TestInh_Derived>());
+	mgr->ExportType("Sekai", type_of<Vec3>());
 	mgr->RunScript("py_inheritance");
 }
 
 BOOST_FIXTURE_TEST_CASE( EnumExportTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<TestEnum>());
+	mgr->ExportType("Sekai", type_of<TestEnum>());
 	mgr->RunScript("py_enumtest");
 }
 
@@ -136,8 +136,8 @@ BOOST_FIXTURE_TEST_CASE( FuncImportTest, ScriptFixture )
 	SScriptAny any;
 	BOOST_REQUIRE(mgr->FindEntry("py_funcaccess.run", any));
 
-	ValueTypePair args[] = { make_typed_pair(a) };
-	ValueTypePair ret = make_typed_pair(r);
+	value_type_pair args[] = { make_typed_pair(a) };
+	value_type_pair ret = make_typed_pair(r);
 
 	any.asFunction()->Invoke(args, 1, &ret);
 	BOOST_CHECK_EQUAL(r, 12);
@@ -173,11 +173,11 @@ BOOST_FIXTURE_TEST_CASE( ClassImportTest, ScriptFixture )
 	BOOST_CHECK( inst_any.asObject()->GetMember("getData", getter_any) );
 
 	int dataVal = 10;
-	ValueTypePair args[] = { make_typed_pair(dataVal) };
+	value_type_pair args[] = { make_typed_pair(dataVal) };
 	setter_any.asFunction()->Invoke(args, 1, 0);
 
 	int r = -1;
-	ValueTypePair ret = make_typed_pair(r);
+	value_type_pair ret = make_typed_pair(r);
 	getter_any.asFunction()->Invoke(0, 0, &ret);
 	BOOST_CHECK_EQUAL( r, 10 );
 
@@ -188,8 +188,8 @@ BOOST_FIXTURE_TEST_CASE( ClassImportTest, ScriptFixture )
 
 BOOST_FIXTURE_TEST_CASE( VariableExportTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<VML::Vector3>());
-	mgr->ExportType("Sekai", (UserType*)type_of<TestPlayer>());
+	mgr->ExportType("Sekai", type_of<Vec3>());
+	mgr->ExportType("Sekai", type_of<TestPlayer>());
 
 	TestPlayer pl;
 	TestPlayer* ppl = &pl;
@@ -200,18 +200,18 @@ BOOST_FIXTURE_TEST_CASE( VariableExportTest, ScriptFixture )
 
 BOOST_FIXTURE_TEST_CASE( InterfaceImportTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<ITestInterface>());
-	mgr->ExportType("Sekai", (UserType*)type_of<TestInterfaceFactory>());
-	mgr->ExportType("Sekai", (UserType*)type_of<com_ptr<ITestInterface> >());
+	mgr->ExportType("Sekai", type_of<ITestInterface>());
+	mgr->ExportType("Sekai", type_of<TestInterfaceFactory>());
+	mgr->ExportType("Sekai", type_of<com_ptr<ITestInterface> >());
 	mgr->RunScript("py_interface");
 }
-
+/*
 BOOST_FIXTURE_TEST_CASE( DocTest, ScriptFixture )
 {
-	mgr->ExportType("Sekai", (UserType*)type_of<TestDocClass>() );
+	mgr->ExportType("Sekai", type_of<TestDocClass>() );
 	mgr->RunScript("py_doctest");
 }
-
+*/
 struct ScriptModuleFixture : public ScriptFixture
 {
 	ScriptModuleFixture()
@@ -219,7 +219,6 @@ struct ScriptModuleFixture : public ScriptFixture
 		mgr->ExportModule("TestModule", test);
 	}
 };
-
 
 BOOST_FIXTURE_TEST_CASE(ExportModule, ScriptModuleFixture)
 {
@@ -238,7 +237,7 @@ struct ModuleLibraryFixture : public ScriptFixture
 {
 	ModuleLibraryFixture()
 	{
-		mgr->ExportType("Module", (UserType*)type_of<Module::GUID>());
+		mgr->ExportType("Module", type_of<Module::GUID>());
 	}
 };
 

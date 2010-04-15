@@ -10,7 +10,7 @@
 #ifndef _TYPETAG_H__
 #define _TYPETAG_H__
 
-#include "reflection_fwd.h"
+#include "../reflection_fwd.h"
 
 namespace reflection
 {
@@ -41,6 +41,8 @@ namespace reflection
 
 		// ARCH_POINTER
 		T_POINTER,
+		// ARCH_REFERENCE
+		T_REFERENCE,
 
 		// ARCH_ARRAY
 		T_ARRAY,
@@ -65,6 +67,7 @@ namespace reflection
 	{
 		ARCH_BUILTIN,
 		ARCH_POINTER,
+		ARCH_REFERENCE,
 		ARCH_ARRAY,
 		ARCH_USERDEFINED,
 		ARCH_FUNCTION,

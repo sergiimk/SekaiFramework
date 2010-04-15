@@ -17,7 +17,7 @@
 
 namespace ScriptPy
 {
-	using namespace Reflection;
+	using namespace reflection;
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -83,9 +83,9 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	ExportEntry* CScriptModule::ExportType(Reflection::UserType *type)
+	ExportEntry* CScriptModule::ExportType(const user_type *type)
 	{
-		if(RL_T_ENUM != type->Tag())
+		if(T_ENUM != type->tag())
 		{
 			ExportEntry* ent = CreateClassObject(type);
 
@@ -98,21 +98,17 @@ namespace ScriptPy
 		}
 		else
 		{
-			EnumerationDescriptor* enumDesc =
-				static_cast<EnumerationDescriptor*>(
-				type->FindService(RL_DESC_SERVICE_ENUMERATION));
-
-			if(!enumDesc)
-				return 0;
-
-			size_t num = enumDesc->NumEntries();
-
-			for(size_t i = 0; i != num; ++i)
+			for(user_type::member_iterator it = type->members_begin(),
+				end = type->members_end();
+				it != end; ++it)
 			{
-				int ret = PyModule_AddIntConstant(mPyModule, enumDesc->getName(i), (long)enumDesc->getValue(i));
+				if(!it.is<enumeration>())
+					continue;
+				enumeration e = it.get<enumeration>();
+
+				int ret = PyModule_AddIntConstant(mPyModule, e.get_name(), e.get_value());
 				ASSERT_STRICT(ret == 0);
 			}
-
 			return 0;
 		}
 	}
@@ -127,22 +123,26 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	ExportEntry* CScriptModule::CreateClassObject(UserType *type)
+	ExportEntry* CScriptModule::CreateClassObject(const user_type *type)
 	{
 		ExportEntry* base_class = 0;
 
-		// GetFirst base class
-		assert(type->getBaseTypeNumber() <= 1);
-		if(type->getBaseTypeNumber())
+		// TODO: Support multiple base classes
+		for(type::attribute_iterator it = type->attributes_begin(),
+			end = type->attributes_end();
+			it != end; ++it)
 		{
-			UserType* base = type->getBaseTypeDescriptor(0)->getBaseType();
+			if(it->get_type() != ATTR_BASE_TYPE)
+				continue;
+			const base_type* bta = static_cast<const base_type*>(&*it);
+			const user_type* base = &bta->get_base();
 
 			// Check if exist (using hint for in-module lookup)
-			THintMap::const_iterator it = mHintMap.find(base);
-			if(it == mHintMap.end())
+			THintMap::const_iterator fnd = mHintMap.find(base);
+			if(fnd == mHintMap.end())
 				base_class = ExportType(base);
 			else
-				base_class = it->second;
+				base_class = fnd->second;
 		}
 
 		ExportEntry* ent = CreateClass(type, base_class);
@@ -154,11 +154,11 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	ExportEntry* CScriptModule::CreateClass(UserType* type, ExportEntry* base_class)
+	ExportEntry* CScriptModule::CreateClass(const user_type* type, ExportEntry* base_class)
 	{
 		ExportEntry* ent = new ExportEntry;
-		type->Name(ent->Name, _EntNameBufLen);
-		type->FullName(ent->FullName, _EntNameBufLen);
+		strncpy(ent->Name, type->name(), _EntNameBufLen);
+		//type->FullName(ent->FullName, _EntNameBufLen);
 		ent->Type = type;
 		ent->Module = this;
 		ent->BaseType = base_class;
@@ -187,7 +187,8 @@ namespace ScriptPy
 			return 0;
 		}
 
-		mEntries.insert(std::make_pair(ent->FullName, ent));
+		//mEntries.insert(std::make_pair(ent->FullName, ent));
+		mEntries.insert(std::make_pair(ent->Name, ent));
 		mHintMap.insert(std::make_pair(ent->Type, ent));
 
 		return ent;
@@ -195,17 +196,17 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CScriptModule::AddMethods(UserType* type, ExportEntry* entry)
+	void CScriptModule::AddMethods(const user_type* type, ExportEntry* entry)
 	{
-		const size_t nMethods = type->getMethodNumber();
-
-		for(size_t m = 0; m != nMethods; ++m)
+		for(user_type::member_iterator it = type->members_begin(),
+			end = type->members_end();
+			it != end; ++it)
 		{
-			Reflection::MethodDescriptor* method = type->getMethodDescriptor(m);
+			if(!it.is<method>())
+				continue;
+			const method_member* method = static_cast<const method_member*>(&*it);
 			PyObject* self = PyLong_FromSize_t(reinterpret_cast<size_t>(method));
-
-			CreateMethod(method->getName(), entry->ClassObj.tp_dict, self, CScriptManager::callback_invoke, method->getDocString());
-
+			CreateMethod(method->get_name(), entry->ClassObj.tp_dict, self, CScriptManager::callback_invoke);
 			Py_DECREF(self);
 		}
 	}
@@ -235,37 +236,48 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	PyGetSetDef* CScriptModule::CreateAttributes(UserType* type)
+	PyGetSetDef* CScriptModule::CreateAttributes(const user_type* type)
 	{
-		const size_t nFields = type->getFieldNumber();
-		const size_t nAcc = type->getAccessorNumber();
+		size_t nAccessors = 0;
+		for(user_type::member_iterator it = type->members_begin(),
+			end = type->members_end();
+			it != end; ++it)
+		{
+			if(it.is<accessor>())
+				++nAccessors;
+		}
 
-		if(0 == nFields + nAcc)
+		if(!nAccessors)
 			return 0;
 
-		PyGetSetDef* attrs = new PyGetSetDef[nFields + nAcc + 1];
-		memset(&attrs[nFields + nAcc], 0, sizeof(PyGetSetDef));
-
+		PyGetSetDef* attrs = new PyGetSetDef[nAccessors + 1];
+		memset(attrs, 0, sizeof(PyGetSetDef) * (nAccessors + 1));
 		mAttributeStorage.push_back(attrs);
 
-		for(size_t f = 0; f != nFields; ++f)
-			FillAttributeDesc(attrs[f], type->getFieldDescriptor(f));
-
-		for(size_t a = 0; a != nAcc; ++a)
-			FillAttributeDesc(attrs[nFields + a], type->getAccessorDescriptor(a));
+		size_t i = 0;
+		for(user_type::member_iterator it = type->members_begin(),
+			end = type->members_end();
+			it != end; ++it)
+		{
+			if(!it.is<accessor>())
+				continue;
+			const accessor_member* method = static_cast<const accessor_member*>(&*it);
+			FillAttributeDesc(attrs[i], method);
+			++i;
+		}
 
 		return attrs;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CScriptModule::FillAttributeDesc(PyGetSetDef& def, DataDescriptor* data)
+	void CScriptModule::FillAttributeDesc(PyGetSetDef& def, const accessor_member* acc)
 	{
-		def.name = (char*)data->getName();
-		def.doc = (char*)data->getDocString();
+		def.name = (char*)acc->get_name();
+		//def.doc = (char*)data->getDocString();
 		def.get = &CScriptManager::callback_attribute_get;
 		def.set = &CScriptManager::callback_attribute_set;
-		def.closure = data;
+		def.closure = (void*)acc;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

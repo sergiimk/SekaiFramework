@@ -39,7 +39,7 @@ namespace Module
 			iterator& operator++() { ASSERT_STRICT(m_pEntry); ++m_pEntry; checkEnd(); return *this; }
 			iterator operator++(int) { iterator ret(*this); ++*this; return ret; }
 			const GUID* ClassID() const { return m_pEntry->pClsid; }
-			Reflection::Type* ReflectedType() const { return (m_pEntry->pTypeOf) ? m_pEntry->pTypeOf() : 0; }
+			reflection::user_type* ReflectedType() const { return (m_pEntry->pTypeOf) ? m_pEntry->pTypeOf() : 0; }
 
 			iterator() : m_pEntry(0) { }
 			iterator(const iterator& other) : m_pEntry(other.m_pEntry) { }
@@ -106,7 +106,7 @@ namespace Module
 
 		/// Searches the module map for reflection for the specified class
 		/** @param clsid ID of the implementation class */
-		Reflection::Type* GetType(SF_RIID clsid) const;
+		reflection::user_type* GetType(SF_RIID clsid) const;
 
 	private:
 

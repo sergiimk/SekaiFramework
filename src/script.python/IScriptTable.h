@@ -24,24 +24,24 @@ namespace Script
 		template<typename T>
 		bool HasEntry(T attr_key)
 		{
-			Reflection::ValueTypePair pair = Reflection::make_typed_pair(attr_key);
+			reflection::value_type_pair pair = reflection::make_typed_pair(attr_key);
 			return HasEntryRaw(pair);
 		}
 
 		template<typename KT, typename VT>
 		bool GetEntry(KT attr_key, VT& out_val)
 		{
-			Reflection::ValueTypePair keyPair = Reflection::make_typed_pair(attr_key);
-			Reflection::ValueTypePair valuePair = Reflection::make_typed_pair(out_val);
+			reflection::value_type_pair keyPair = reflection::make_typed_pair(attr_key);
+			reflection::value_type_pair valuePair = reflection::make_typed_pair(out_val);
 			return GetEntryRaw(keyPair, valuePair);
 		}
 
 		/// Determines if table has entry by specified key
-		virtual bool HasEntryRaw(const Reflection::ValueTypePair& attr_key) = 0;
+		virtual bool HasEntryRaw(const reflection::value_type_pair& attr_key) = 0;
 
 		/// Fetches entry value by specified key
 		/** @return 'true' indicates success */
-		virtual bool GetEntryRaw(const Reflection::ValueTypePair& attr_key, Reflection::ValueTypePair& out_val) = 0;
+		virtual bool GetEntryRaw(const reflection::value_type_pair& attr_key, reflection::value_type_pair& out_val) = 0;
 	};
 }
 

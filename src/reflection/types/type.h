@@ -10,8 +10,8 @@
 #ifndef _TYPE_H__
 #define _TYPE_H__
 
-#include "reflection_fwd.h"
-#include "types/typetag.h"
+#include "../reflection_fwd.h"
+#include "../types/typetag.h"
 #include <iterator>
 
 namespace reflection
@@ -71,10 +71,10 @@ namespace reflection
 	struct value_type_pair
 	{
 		void* Value;
-		type* Type;
+		const type* Type;
 
 		value_type_pair() : Value(0), Type(0) { }
-		value_type_pair(void* val, type* t) : Value(val), Type(t) { }
+		value_type_pair(void* val, const type* t) : Value(val), Type(t) { }
 	};
 
 	template<typename T>

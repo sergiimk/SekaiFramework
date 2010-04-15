@@ -148,7 +148,15 @@ namespace reflection
 	//			This makes it possible to eliminate many typedefs from user code.
 	//
 	////////////////////////////////////////////////////////////////////////////////
+	#define DELEG_CONST
 	#include "Delegate_makedeleg.h"
+	#undef DELEG_CONST
+	#define DELEG_CONST const
+	#include "Delegate_makedeleg.h"
+	#undef DELEG_CONST
+
+	template <class FT>
+	Delegate<FT> MakeDelegate(FT* func) { return Delegate<FT>(func); }
 	
 
 } // namespace

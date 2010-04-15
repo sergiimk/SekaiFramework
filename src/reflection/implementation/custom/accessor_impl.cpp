@@ -57,6 +57,16 @@ namespace reflection
 			}
 		}
 
+		bool is_read_only() const
+		{
+			return m_typeSet == 0;
+		}
+
+		type* value_type() const
+		{
+			return m_typeGet->return_type();
+		}
+
 	private:
 		char m_delegGetBuf[member::_deleg_buf_size];
 		char m_delegSetBuf[member::_deleg_buf_size];
@@ -101,6 +111,19 @@ namespace reflection
 		m_impl->set_value(inst, buffer);
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+
+	bool accessor_member::is_read_only() const
+	{
+		return m_impl->is_read_only();
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	type* accessor_member::value_type() const
+	{
+		return m_impl->value_type();
+	}
 
 	//////////////////////////////////////////////////////////////////////////
 

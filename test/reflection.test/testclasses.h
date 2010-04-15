@@ -30,15 +30,9 @@ struct Vec3
 };
 
 reflect_class(Vec3, "Vec3")
-	.def(construct_attribute::create(
-	type_of(&type_ctor<Vec3, Module::NewAllocator>), 
-	Delegate<void* ()>(&type_ctor<Vec3, Module::NewAllocator>), 
-	&type_destructor<Vec3, Module::NewAllocator>))
-
-	.def(construct_attribute::create(
-	type_of(&type_ctor<Vec3, Module::NewAllocator, float>), 
-	Delegate<void* (float)>(&type_ctor<Vec3, Module::NewAllocator, float>), 
-	&type_destructor<Vec3, Module::NewAllocator>))
+	.def_ctor()
+	.def_ctor(float)
+	.def_ctor(float, float, float)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
@@ -50,8 +44,8 @@ enum TestEnum
 };
 
 reflect_enum(TestEnum, "TestEnum")
-	.def(enumeration_member("VAL_1", VAL_1))
-	.def(enumeration_member("VAL_2", VAL_2))
+	.def_enum("VAL_1", VAL_1)
+	.def_enum("VAL_2", VAL_2)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
@@ -62,7 +56,7 @@ struct ITestClass
 };
 
 reflect_class(ITestClass, "ITestClass")
-	.def<ITestClass>("DoFoo", &ITestClass::DoFoo)
+	.def_method("DoFoo", DoFoo)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
@@ -82,8 +76,8 @@ public:
 };
 
 reflect_class(TestClass1, "TestClass1")
-	.def(base_type(type_of<ITestClass>(), classoffset<ITestClass, TestClass1>() ))
-	.def<TestClass1>("DoFooInv", &TestClass1::DoFooInv)
+	.def_base(ITestClass)
+	.def_method("DoFooInv", DoFooInv)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
@@ -106,8 +100,8 @@ public:
 };
 
 reflect_class(TestClass2, "TestClass2")
-	.def(base_type(type_of<TestClass1>(), classoffset<TestClass1, TestClass2>() ))
-	.def<TestClass2>("V", &TestClass2::GetV, &TestClass2::SetV)
+	.def_base(TestClass1)
+	.def_accessor("V", GetV, SetV)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////

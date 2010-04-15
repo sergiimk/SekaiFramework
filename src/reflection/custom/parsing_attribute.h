@@ -36,7 +36,7 @@ namespace reflection
 	//////////////////////////////////////////////////////////////////////////
 
 	template<class T>
-	class REFLECTION_API parsing_attribute_t : public parsing_attribute
+	class parsing_attribute_t : public parsing_attribute
 	{
 	public:
 		/// Converts value to string using the iostream operators

@@ -5,28 +5,18 @@ def checkValues(vec, x, y, z):
 
 player1 = Player()
 
-checkValues(player1.mPosition, 0.0, 0.0, 0.0)
+checkValues(player1.Position, 0.0, 0.0, 0.0)
 
-pos = player1.mPosition
+pos = player1.Position
 pos.x, pos.y, pos.z = 3.0, 2.0, 1.0
 
-checkValues(player1.mPosition, 0.0, 0.0, 0.0)
+checkValues(player1.Position, 0.0, 0.0, 0.0)
 
 checkValues(pos, 3.0, 2.0, 1.0)
 
-player1.mPosition = pos
-
-checkValues(player1.mPosition, 3.0, 2.0, 1.0)
-
-#==================================================
-
-pos.x, pos.y, pos.z = 4.0, 5.0, 6.0
-
-# using setter
 player1.Position = pos
 
-#using getter
-checkValues(player1.Position, 4.0, 5.0, 6.0)
+checkValues(player1.Position, 3.0, 2.0, 1.0)
 
 #==================================================
 pos.x, pos.y, pos.z = 3.0, 4.0, 5.0

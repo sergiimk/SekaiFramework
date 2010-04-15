@@ -41,6 +41,12 @@ namespace reflection
 		/// Returns name of this member
 		const char* get_name() const;
 
+		/// Returns owner of this member
+		const user_type* get_owner() const;
+
+		/// Called by user_type when binding the member
+		void set_owner(const user_type* own);
+
 		/// Clones the member
 		virtual member* clone() const = 0;
 

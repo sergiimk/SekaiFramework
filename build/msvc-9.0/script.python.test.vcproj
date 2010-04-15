@@ -89,7 +89,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="=========Runing unit-test for Script.Python========="
-				CommandLine="&quot;$(TargetPath)&quot;"
+				CommandLine="cd &quot;..\..\test\$(ProjectName)\&quot;&#x0D;&#x0A;&quot;$(TargetPath)&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -163,7 +163,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="=========Runing unit-test for Script.Python========="
-				CommandLine="&quot;$(TargetPath)&quot;"
+				CommandLine="cd &quot;..\..\test\$(ProjectName)\&quot;&#x0D;&#x0A;&quot;$(TargetPath)&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -239,7 +239,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="=========Runing unit-test for Script.Python========="
-				CommandLine="&quot;$(TargetPath)&quot;"
+				CommandLine="cd &quot;..\..\test\$(ProjectName)\&quot;&#x0D;&#x0A;&quot;$(TargetPath)&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -316,7 +316,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="=========Runing unit-test for Script.Python========="
-				CommandLine="&quot;$(TargetPath)&quot;"
+				CommandLine="cd &quot;..\..\test\$(ProjectName)\&quot;&#x0D;&#x0A;&quot;$(TargetPath)&quot;"
 			/>
 		</Configuration>
 	</Configurations>

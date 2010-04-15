@@ -37,7 +37,7 @@ namespace ScriptPy
 
 		void FinalConstruct(PyObject* callable);
 
-		void Invoke(Reflection::ValueTypePair* args, size_t nargs, Reflection::ValueTypePair* ret);	
+		void Invoke(reflection::value_type_pair* args, size_t nargs, reflection::value_type_pair* ret);	
 
 	private:
 

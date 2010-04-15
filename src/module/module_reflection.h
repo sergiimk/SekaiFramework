@@ -17,26 +17,30 @@
 // GUID
 //////////////////////////////////////////////////////////////////////////
 
-namespace Reflection
+namespace detail
 {
-	template<>
-	inline void* type_ctor<Module::GUID, Module::NewAllocator>()
+	inline void* _create_guid()
 	{
 		Module::GUID* g = new Module::GUID();
 		g->SetZero();
 		return g;
 	}
+
+	inline void _delete_guid(void* inst)
+	{
+		delete (Module::GUID*)inst;
+	}
 } // namespace
 
-reflect_struct(Module::GUID)
-	map_ctor()
-	map_parsable()
+reflect_struct(Module::GUID, "GUID")
+	.def_ctor_custom(&::detail::_create_guid, &::detail::_delete_guid)
+	.def_parsable()
 end_reflection()
 
 
-reflect_class(Module::IUnknown)
-	map_method("AddRef", AddRef)
-	map_method("Release", Release)
+reflect_class(Module::IUnknown, "IUnknown")
+	.def_method("AddRef", AddRef)
+	.def_method("Release", Release)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////

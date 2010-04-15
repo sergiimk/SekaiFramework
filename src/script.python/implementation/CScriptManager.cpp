@@ -24,7 +24,7 @@
 namespace ScriptPy
 {
 
-	using namespace Reflection;
+	using namespace reflection;
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -114,10 +114,10 @@ namespace ScriptPy
 			it != end;
 			++it)
 		{
-			if(Type* t = it.ReflectedType())
+			if(type* t = it.ReflectedType())
 			{
-				ASSERT_STRICT(t->ArchType() == RL_ARCH_USERDEFINED);
-				scriptModule->ExportType(static_cast<UserType*>(t));
+				ASSERT_STRICT(t->arch_type() == ARCH_USERDEFINED);
+				scriptModule->ExportType(static_cast<user_type*>(t));
 			}
 		}
 
@@ -126,7 +126,7 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CScriptManager::ExportType(const char* moduleName, UserType *type)
+	void CScriptManager::ExportType(const char* moduleName, user_type *type)
 	{
 		CScriptModule* module = FindOrCreateModule(moduleName);
 		module->ExportType(type);
@@ -186,7 +186,7 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	bool CScriptManager::ExportVariable(const char* moduleName, const char* varName, const Reflection::ValueTypePair& value)
+	bool CScriptManager::ExportVariable(const char* moduleName, const char* varName, const reflection::value_type_pair& value)
 	{
 		PyObject* pyvalue = ConvertToObject(value);
 
@@ -229,7 +229,7 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CScriptManager::InvokeCallable(PyObject* callable, ValueTypePair* args, size_t nargs, ValueTypePair* ret)
+	void CScriptManager::InvokeCallable(PyObject* callable, value_type_pair* args, size_t nargs, value_type_pair* ret)
 	{
 		// Create arguments
 		PyObject* py_args = PyTuple_New(nargs);
@@ -315,10 +315,10 @@ namespace ScriptPy
 	//////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
 
-	MethodDescriptor* CScriptManager::ExtractMethodInfo(PyObject* methodSelf)
+	method_member* CScriptManager::ExtractMethodInfo(PyObject* methodSelf)
 	{
 		ASSERT_STRICT(PyLong_Check(methodSelf));
-		return reinterpret_cast<MethodDescriptor*>(PyLong_AsSsize_t(methodSelf));
+		return reinterpret_cast<method_member*>(PyLong_AsSsize_t(methodSelf));
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -349,10 +349,10 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void* CScriptManager::PrepareInstancePointer(InstanceObject* inst_info, UserType* ownerType)
+	void* CScriptManager::PrepareInstancePointer(InstanceObject* inst_info, const user_type* ownerType)
 	{
-		size_t offset = UserType::MeasureOffsetOfBase(inst_info->object_type->Type, ownerType);
-		return Module::adjustptr(inst_info->instance, offset);
+		size_t offset = user_type::calculate_offset(*inst_info->object_type->Type, *ownerType);
+		return adjustptr(inst_info->instance, offset);
 	}
 
 	//////////////////////////////////////////////////////////////////////////

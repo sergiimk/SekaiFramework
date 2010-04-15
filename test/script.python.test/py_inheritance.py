@@ -1,5 +1,6 @@
 import Sekai
 
+
 #=== Test C++ class hierarchy =========================
 
 d = Sekai.TestInh_Derived()
@@ -50,7 +51,7 @@ assert(d.getFlag() == 24)
 #=== Try to derive from C++ class =====================
 class Vec3(Sekai.Vector3):
 	def __init__(self, x, y, z, asdf):
-		super().__init__(x, y, z)
+		super(Vec3, self).__init__(x, y, z)
 	
 v = Vec3(1,2,3, 666)
 

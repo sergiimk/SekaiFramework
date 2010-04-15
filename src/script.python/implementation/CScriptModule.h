@@ -22,7 +22,7 @@ namespace ScriptPy
 {
     struct hash_typeptr
 	{
-		size_t operator()(Reflection::UserType* l) const
+		size_t operator()(const reflection::user_type* l) const
 		{ return (size_t)l; }
 	};
 
@@ -42,7 +42,7 @@ namespace ScriptPy
 		const char* ModuleName() const;
 
 		/// Exports specified type to module
-		ExportEntry* ExportType(Reflection::UserType* type);
+		ExportEntry* ExportType(const reflection::user_type* type);
 
 		/// Adds arbitrary module-global variable
 		bool ExportVariable(const char* varName, PyObject* pyvalue);
@@ -62,24 +62,24 @@ namespace ScriptPy
 	private:
 
 		/// Used to create class object using reflected type
-		ExportEntry* CreateClassObject(Reflection::UserType* type);
+		ExportEntry* CreateClassObject(const reflection::user_type* type);
 
 		/// Creates and initializes empty class with basic set of methods
-		ExportEntry* CreateClass(Reflection::UserType* type, ExportEntry* base_class);
+		ExportEntry* CreateClass(const reflection::user_type* type, ExportEntry* base_class);
 
 		/// Associates methods with the class object
-		void AddMethods(Reflection::UserType* type, ExportEntry* entry);
+		void AddMethods(const reflection::user_type* type, ExportEntry* entry);
 
 		/// Creates method object
 		void CreateMethod(const char* name, PyObject* dictionary, PyObject* self, PyCFunction handler, const char* docString = 0);
 
 		/// Creates null-terminated array of attributes
-		PyGetSetDef* CreateAttributes(Reflection::UserType* type);
+		PyGetSetDef* CreateAttributes(const reflection::user_type* type);
 
 	private:
-		static void FillAttributeDesc(PyGetSetDef& def, Reflection::DataDescriptor* data);
+		static void FillAttributeDesc(PyGetSetDef& def, const reflection::accessor_member* acc);
 
-		typedef std::hash_map<Reflection::UserType*, ExportEntry*, hash_typeptr> THintMap;
+		typedef std::hash_map<const reflection::user_type*, ExportEntry*, hash_typeptr> THintMap;
 		typedef std::hash_map<const char*, ExportEntry*, cstr_hash, cstrcmp_eq> TExportMap;
 
 		Module::ModuleHandle		mModuleHandle;

@@ -51,21 +51,21 @@ namespace ScriptPy
 
 		void ExportModule(const char* moduleName, const Module::ModuleHandle& module);
 
-		void ExportType(const char* moduleName, Reflection::UserType* type);
+		void ExportType(const char* moduleName, reflection::user_type* type);
 
 		void RunScript(const char* file);
 
 		bool FindEntry(const char* name, SScriptAny& outValue);
 
-		virtual bool ExportVariable(const char* moduleName, const char* varName, const Reflection::ValueTypePair& value);
+		virtual bool ExportVariable(const char* moduleName, const char* varName, const reflection::value_type_pair& value);
 
 		virtual bool CreateInstance(const char* type, SScriptAny& outInstance);
 
 		//////////////////////////////////////////////////////////////////////////
 
-		void InvokeCallable(PyObject* callable, Reflection::ValueTypePair* args, size_t nargs, Reflection::ValueTypePair* ret);
+		void InvokeCallable(PyObject* callable, reflection::value_type_pair* args, size_t nargs, reflection::value_type_pair* ret);
 
-		static bool PackFunctionArguments(Reflection::Type* types[], size_t ntypes, SInvokeArgs& args, PyObject* pyargs, size_t startIndex);
+		static bool PackFunctionArguments(reflection::type* types[], size_t ntypes, SInvokeArgs& args, PyObject* pyargs, size_t startIndex);
 
 		static PyObject* callback_invoke(PyObject* self, PyObject* args);
 
@@ -93,23 +93,23 @@ namespace ScriptPy
 
 		//////////////////////////////////////////////////////////////////////////
 
-		PyObject* CreateBuiltinScriptObject(Reflection::ETypeTag type, void* pVal);
+		PyObject* CreateBuiltinScriptObject(reflection::ETypeTag type, void* pVal);
 
-		PyObject* CreateUserDefScriptObject(const Reflection::Type* type, void* pVal, CScriptModule* moduleHint, InstanceType inst_t);
+		PyObject* CreateUserDefScriptObject(const reflection::type* type, void* pVal, CScriptModule* moduleHint, InstanceType inst_t);
 
 		//////////////////////////////////////////////////////////////////////////
 
 		bool MakeAny(PyObject* obj, SScriptAny& val);
 
-		bool ConvertToBuiltinValue(Reflection::ETypeTag type, void* pValOut, PyObject* v);
+		bool ConvertToBuiltinValue(reflection::ETypeTag type, void* pValOut, PyObject* v);
 
-		bool ConvertObject(PyObject* v, Reflection::ValueTypePair& ret);
+		bool ConvertObject(PyObject* v, reflection::value_type_pair& ret);
 
-		PyObject* ConvertToObject(const Reflection::ValueTypePair& v);
+		PyObject* ConvertToObject(const reflection::value_type_pair& v);
 
 		//////////////////////////////////////////////////////////////////////////
 
-		static Reflection::MethodDescriptor* ExtractMethodInfo(PyObject* methodSelf);
+		static reflection::method_member* ExtractMethodInfo(PyObject* methodSelf);
 
 		static InstanceObject* ExtractInstanceInfo(PyObject* inst);
 
@@ -117,17 +117,17 @@ namespace ScriptPy
 
 		static ExportEntry* FindExportedBase(PyTypeObject* type);
 
-		static void* PrepareInstancePointer(InstanceObject* inst_info, Reflection::UserType* ownerType);
+		static void* PrepareInstancePointer(InstanceObject* inst_info, const reflection::user_type* ownerType);
 
 		//////////////////////////////////////////////////////////////////////////
 
-		static bool IsBuiltIn(const Reflection::Type* t);
+		static bool IsBuiltIn(const reflection::type* t);
 
-		static bool IsUserDefined(const Reflection::Type* t);
+		static bool IsUserDefined(const reflection::type* t);
 
-		static bool IsPointerToBuiltin(const Reflection::Type* t);
+		static bool IsPointerToBuiltin(const reflection::type* t);
 
-		static bool IsPointerToUserDefined(const Reflection::Type* t);
+		static bool IsPointerToUserDefined(const reflection::type* t);
 
 		//////////////////////////////////////////////////////////////////////////
 
@@ -145,12 +145,12 @@ namespace ScriptPy
 		static CScriptManager*	sInstance;
 	};
 
-	inline bool script_cast(PyObject* v, Reflection::ValueTypePair& ret)
+	inline bool script_cast(PyObject* v, reflection::value_type_pair& ret)
 	{
 		return CScriptManager::sInstance->ConvertObject(v, ret);
 	}
 
-	inline PyObject* script_cast(const Reflection::ValueTypePair& v)
+	inline PyObject* script_cast(const reflection::value_type_pair& v)
 	{
 		return CScriptManager::sInstance->ConvertToObject(v);
 	}

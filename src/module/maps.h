@@ -14,7 +14,7 @@
 #include "common/typetraits.h"
 
 // Fwd for reflection export
-namespace Reflection { class Type; };
+namespace reflection { class user_type; };
 
 namespace  Module
 {
@@ -153,7 +153,7 @@ namespace  Module
 
 		typedef HResult (CREATOR_FUNC)(SF_RIID riid, void** ppv);
 
-		typedef Reflection::Type* (TYPE_OF_FUNC)();
+		typedef reflection::user_type* (TYPE_OF_FUNC)();
 
 		/// Object entry in module map
 		struct MODULE_MAP_ENTRY

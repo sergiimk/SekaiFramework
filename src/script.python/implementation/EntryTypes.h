@@ -28,25 +28,25 @@ namespace ScriptPy
 	/** @ingroup Py */
 	struct ExportEntry
 	{
-		int						_header;
+		int								_header;
 
 		/// Name of the exported type
-		char					Name[_EntNameBufLen];
+		char							Name[_EntNameBufLen];
 
 		/// Full name of the exported type
-		char					FullName[_EntNameBufLen];
+		//char							FullName[_EntNameBufLen];
 		
 		/// Type of the class
-		Reflection::UserType*	Type;
+		const reflection::user_type*	Type;
 
 		/// Corresponding class object in script
-		PyTypeObject			ClassObj;
+		PyTypeObject					ClassObj;
 
 		/// Module that exported this type
-		CScriptModule*			Module;
+		CScriptModule*					Module;
 
 		/// Entry of the base class
-		ExportEntry*			BaseType;
+		ExportEntry*					BaseType;
 
 
 		ExportEntry() 
@@ -74,11 +74,11 @@ namespace ScriptPy
 	struct InstanceObject
 	{
 		PyObject_HEAD
-		void*								instance;
-		InstanceType						inst_type;
-		Reflection::ConstructDescriptor*	ctor;
-		ExportEntry*						object_type;
-		PyObject*							inst_dictionary;
+		void*									instance;
+		InstanceType							inst_type;
+		const reflection::construct_attribute*	ctor;
+		ExportEntry*							object_type;
+		PyObject*								inst_dictionary;
 	};
 
 	//////////////////////////////////////////////////////////////////////////

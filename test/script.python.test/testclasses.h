@@ -16,15 +16,46 @@
 #include "module/intellectual.h"
 #include "module/module_reflection.h"
 #include "script.python/Scripting.h"
-#include <iostream>
-#include "vml/vml.h"
-#include "reflection/vml_reflect.h"
 
 //////////////////////////////////////////////////////////////////////////
 
 using namespace Module;
 using namespace Script;
-using namespace Reflection;
+using namespace reflection;
+
+//////////////////////////////////////////////////////////////////////////
+
+struct Vec3
+{
+	float x, y, z;
+	Vec3() : x(0), y(0), z(0) { }
+	Vec3(float v) : x(v), y(v), z(v) { }
+	Vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) { }
+	bool operator==(const Vec3& rhs) { return x == rhs.x && y == rhs.y && z == rhs.z; }
+	float getX() const { return x; } void setX(float v) { x = v; }
+	float getY() const { return y; } void setY(float v) { y = v; }
+	float getZ() const { return z; } void setZ(float v) { z = v; }
+};
+
+inline std::ostream& operator<<(std::ostream& os, const Vec3& v)
+{
+	return os << v.x << ' ' << v.y << ' ' << v.z;
+}
+
+inline std::istream& operator>>(std::istream& is, Vec3& v)
+{
+	return is;
+}
+
+reflect_class(Vec3, "Vector3")
+	.def_ctor()
+	.def_ctor(float)
+	.def_ctor(float, float, float)
+	.def_accessor("x", getX, setX)
+	.def_accessor("y", getY, setY)
+	.def_accessor("z", getZ, setZ)
+	.def_parsable()
+end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -34,10 +65,10 @@ enum TestEnum
 	eTE_VAL1,
 };
 
-reflect_enum(TestEnum)
-	map_enum(eTE_VAL0)
-	map_enum(eTE_VAL1)
-end_reflection_enum()
+reflect_enum(TestEnum, "TestEnum")
+	.def_enum("eTE_VAL0", eTE_VAL0)
+	.def_enum("eTE_VAL1", eTE_VAL1)
+end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -51,52 +82,33 @@ public:
 		str = (char*)"some string";
 	}
 
-	~TestClass()
-	{
-		++sDelCount;
-	}
+	~TestClass() { ++sDelCount; }
 
 	int data;
+	int getData() const { return data; }
+	void setData(int d) { data = d; }
+
 	bool bval;
 	int methodID;
 	static int sInstCount;
 	static int sDelCount;
 	char* str;
+	const char* getStr() const { return str; }
 
-	int GetMethodID() const
-	{
-		return methodID;
-	}
-
-	void Method1()
-	{
-		methodID = 1;
-	}
-
-	void Method2()
-	{
-		methodID = 2;
-	}
-
-	virtual double Method3(int a, double b)
-	{
-		methodID = 3;
-		double c = a * b;
-		return c;
-	}
-
+	int GetMethodID() const { return methodID; }
+	void Method1() { methodID = 1; }
+	void Method2() { methodID = 2; }
+	virtual double Method3(int a, double b) { methodID = 3; double c = a * b; return c; }
 };
 
-reflect_class(TestClass)
-	map_ctor()
-	map_field("data", data)
-	map_field("bval", bval)
-	map_field("str", str)
-	map_field("methodID", methodID)
-	map_method("GetMethodID", GetMethodID)
-	map_method("Method1", Method1)
-	map_method("Method2", Method2)
-	map_method("Method3", Method3)
+reflect_class(TestClass, "TestClass")
+	.def_ctor()
+	.def_method("GetMethodID", GetMethodID)
+	.def_method("Method1", Method1)
+	.def_method("Method2", Method2)
+	.def_method("Method3", Method3)
+	.def_accessor("data", getData, setData)
+	.def_accessor_ro("str", getStr)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
@@ -104,35 +116,28 @@ end_reflection()
 class TestPlayer
 {
 public:
-	VML::Vector3 mPosition;
+	Vec3 mPosition;
+	Vec3* mPositionPtr;
 
-	VML::Vector3* mPositionPtr;
+	const Vec3& getPosition() const { return mPosition; }
+	void setPosition(const Vec3& pos) { mPosition = pos; }
 
-
-	const VML::Vector3& getPosition() const { return mPosition; }
-
-	void setPosition(const VML::Vector3& pos) { mPosition = pos; }
-
-	VML::Vector3* getPositionPtr() const { return mPositionPtr; }
-
-	void setPositionPtr(VML::Vector3* pos) { mPositionPtr = pos; }
-
+	Vec3* getPositionPtr() const { return mPositionPtr; }
+	void setPositionPtr(Vec3* pos) { mPositionPtr = pos; }
 
 	TestPlayer() : mPosition(0), mPositionPtr(&mPosition) { }
 };
 
 //////////////////////////////////////////////////////////////////////////
 
-reflect_class(TestPlayer)
-	map_ctor_alloc(VML::AlignedAllocator)
-	map_field("mPosition", mPosition)
-	map_field("mPositionPtr", mPositionPtr)
-	map_accessor("Position", getPosition, setPosition)
-	map_accessor("PositionPtr", getPositionPtr, setPositionPtr)
-	map_method("setPosition", setPosition)
-	map_method("getPosition", getPosition)
-	map_method("setPositionPtr", setPositionPtr)
-	map_method("getPositionPtr", getPositionPtr)
+reflect_class(TestPlayer, "TestPlayer")
+	.def_ctor()
+	.def_accessor("Position", getPosition, setPosition)
+	.def_accessor("PositionPtr", getPositionPtr, setPositionPtr)
+	.def_method("setPosition", setPosition)
+	.def_method("getPosition", getPosition)
+	.def_method("setPositionPtr", setPositionPtr)
+	.def_method("getPositionPtr", getPositionPtr)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
@@ -151,15 +156,15 @@ struct TestInh_Derived : public TestInh_Base
 	void VirtFunc(int f) { flag = f - 1; }
 };
 
-reflect_class(TestInh_Base)
-	map_ctor()
-	map_method("getFlag", getFlag)
-	map_method("VirtFunc", VirtFunc)
+reflect_class(TestInh_Base, "TestInh_Base")
+	.def_ctor()
+	.def_method("getFlag", getFlag)
+	.def_method("VirtFunc", VirtFunc)
 end_reflection()
 
-reflect_class(TestInh_Derived)
-	map_ctor()
-	map_base(TestInh_Base)
+reflect_class(TestInh_Derived, "TestInh_Derived")
+	.def_ctor()
+	.def_base(TestInh_Base)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
@@ -204,24 +209,24 @@ public:
 };
 
 
-reflect_class(com_ptr<ITestInterface>)
-	map_ctor()
+reflect_class(com_ptr<ITestInterface>, "ITestInterfacePtr")
+	.def_ctor()
 end_reflection()
 
-reflect_class(ITestInterface)
-	map_base(Module::IUnknown)
-	map_method("Sum", Sum)
+reflect_class(ITestInterface, "ITestInterface")
+	.def_base(Module::IUnknown)
+	.def_method("Sum", Sum)
 end_reflection()
 
-reflect_class(TestInterfaceFactory)
-	map_ctor()
-	map_method("GetTestInterface", GetTestInterface)
-	map_method("CreateTestInterface", CreateTestInterface)
+reflect_class(TestInterfaceFactory, "TestInterfaceFactory")
+	.def_ctor()
+	.def_method("GetTestInterface", GetTestInterface)
+	.def_method("CreateTestInterface", CreateTestInterface)
 end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
 
-class TestDocClass
+/*class TestDocClass
 {
 public:
 	int Add(int a, int b) { return a+b; }
@@ -230,9 +235,9 @@ public:
 
 reflect_class( TestDocClass )
 	map_ctor()
-	map_method_doc("Add", Add, "Return summ of two integers")
+	map_method_doc("Add", Add, "Return sum of two integers")
 	map_field_doc("somedata", somedata, "Some data documentation")
-end_reflection()
+end_reflection()*/
 
 //////////////////////////////////////////////////////////////////////////
 
