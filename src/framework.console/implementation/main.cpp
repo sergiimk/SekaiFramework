@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	#endif
 
-	ModuleHandle fw("Framework.dll");
+	ModuleHandle fw(SHARED_LIB_NAME("framework"));
 
 	com_ptr<IFrameworkFactory> factory;
 	create_instance(factory, fw);

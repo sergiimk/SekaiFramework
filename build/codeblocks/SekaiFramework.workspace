@@ -30,7 +30,7 @@
 		<Project filename="framework.cbp">
 			<Depends filename="module.cbp" />
 		</Project>
-		<Project filename="framework.console.cbp">
+		<Project filename="framework.console.cbp" active="1">
 			<Depends filename="module.cbp" />
 			<Depends filename="reflection.cbp" />
 		</Project>

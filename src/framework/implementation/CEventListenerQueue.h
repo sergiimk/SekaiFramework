@@ -19,7 +19,9 @@ using namespace Module;
 
 namespace Framework
 {
-	class CEventQueueSnapshot;
+	//
+	// TODO: Separate a non-modifiable base class to pass to dispatchers
+	//
 
 	/// Event listener container
 	/** With requirement to deliver messages only to the objects who

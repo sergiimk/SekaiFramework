@@ -69,8 +69,8 @@ namespace Framework
 
 		if(it != m_queue->end())
 		{
-			listener->Release();
 			m_queue->erase(it);
+			listener->Release();
 		}
 	}
 

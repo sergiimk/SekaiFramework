@@ -7,7 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="debug">
-				<Option output="../../bin/x86_debug/framework" prefix_auto="1" extension_auto="1" />
+				<Option output="../../bin/x86_debug/framework_console" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/x86_debug/" />
 				<Option object_output="../../bin/x86_debug_temp/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -20,7 +21,8 @@
 				</Linker>
 			</Target>
 			<Target title="release">
-				<Option output="../../bin/x86_release/framework" prefix_auto="1" extension_auto="1" />
+				<Option output="../../bin/x86_release/framework_console" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/x86_debug/" />
 				<Option object_output="../../bin/x86_release_temp/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
