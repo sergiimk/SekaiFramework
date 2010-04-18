@@ -21,7 +21,7 @@
 
 #include <boost/thread.hpp>
 
-using namespace Module;
+using namespace module;
 using namespace Logging;
 
 namespace Framework

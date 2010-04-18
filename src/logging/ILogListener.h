@@ -17,7 +17,7 @@ namespace Logging
 {
 	/// Interface for objects that want to intercept the logging messages
 	/** @ingroup Logging */
-	sf_interface ILogListener : public Module::IUnknown
+	sf_interface ILogListener : public module::IUnknown
 	{
 		sf_uuid("b1d0733f-5539-4c8c-b53e-535dbaf69266")
 

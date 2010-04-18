@@ -31,12 +31,12 @@ namespace ScriptPy
 	/// Implementation of script manager for Python binding
 	/** @ingroup Py */
 	class NOVTABLE CScriptManager :
-		public Module::ComRootObject<>,
+		public module::ComRootObject<>,
 		public IScriptManager
 	{
 	public:
 
-		DECLARE_IMPLEMENTATION2(CScriptManager, Module::ComClassFactorySingleton)
+		DECLARE_IMPLEMENTATION2(CScriptManager, module::ComClassFactorySingleton)
 
 		BEGIN_INTERFACE_MAP()
 			INTERFACE_ENTRY(IScriptManager)
@@ -49,7 +49,7 @@ namespace ScriptPy
 
 		void Shutdown();
 
-		void ExportModule(const char* moduleName, const Module::ModuleHandle& module);
+		void ExportModule(const char* moduleName, const module::ModuleHandle& module);
 
 		void ExportType(const char* moduleName, reflection::user_type* type);
 

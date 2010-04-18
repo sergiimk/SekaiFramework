@@ -18,12 +18,12 @@ namespace Framework
 
 	/// Activator for the framework System Bundle
 	/** @ingroup Framework */
-	sf_interface IFrameworkFactory : public Module::IUnknown
+	sf_interface IFrameworkFactory : public module::IUnknown
 	{
 		sf_uuid("260ebe18-7b28-47db-b913-85e1ab9873dd")
 
 		/// Creates a framework instance
-		virtual Module::com_ptr<IFramework> NewFramework(int argc, char *argv[], const char* settingsFile) = 0;
+		virtual module::com_ptr<IFramework> NewFramework(int argc, char *argv[], const char* settingsFile) = 0;
 	};
 
 } // namespace

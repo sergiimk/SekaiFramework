@@ -18,7 +18,7 @@ namespace ScriptPy
 	/// Implementation of script object interface
 	/** @ingroup Py */
 	class NOVTABLE CScriptObject : 
-		public Module::ComRootObject<>,
+		public module::ComRootObject<>,
 		public IScriptObject
 	{
 	public:

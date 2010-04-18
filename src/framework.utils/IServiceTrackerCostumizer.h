@@ -23,17 +23,17 @@ namespace Framework
 		/** @param reference The reference to the service being added to the ServiceTracker
 		 *  @return The service object to be tracked for the specified referenced
 		 *  service or null if the specified referenced service should not be tracked */
-		virtual Module::IUnknown* AddingService(IServiceReference* reference) = 0;
+		virtual module::IUnknown* AddingService(IServiceReference* reference) = 0;
 
 		/// A service tracked by the ServiceTracker has been modified
 		/** @param reference The reference to the service that has been modified
 		 *  @param service The service object for the specified referenced service */
-		virtual void ModifiedService(IServiceReference* reference, Module::IUnknown* service) = 0;
+		virtual void ModifiedService(IServiceReference* reference, module::IUnknown* service) = 0;
 
 		/// A service tracked by the ServiceTracker has been removed
 		/** @param reference The reference to the service that has been removed
 		 *  @param service The service object for the specified referenced service */
-		virtual void RemovedService(IServiceReference* reference, Module::IUnknown* service) = 0;
+		virtual void RemovedService(IServiceReference* reference, module::IUnknown* service) = 0;
 	};
 
 } // namespace

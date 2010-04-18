@@ -14,7 +14,7 @@
 
 namespace Extensions
 {
-	using namespace Module;
+	using namespace module;
 	using namespace filesystem;
 
 	//////////////////////////////////////////////////////////////////////////
@@ -69,7 +69,7 @@ namespace Extensions
 	// Core plug-ins
 	//////////////////////////////////////////////////////////////////////////
 
-	Module::HResult CPluginManager::LoadCorePlugins()
+	module::HResult CPluginManager::LoadCorePlugins()
 	{
 		LogTrace("[Init] Loading core plug-ins");
 
@@ -149,7 +149,7 @@ namespace Extensions
 
 				doc.Accept(&visitors[i]);
 			}
-			catch(Module::Exception& ex)
+			catch(module::Exception& ex)
 			{
 				visitors[i].PluginName.clear();
 				LogErrorAlways("Plugin definition load failed: %s, in %s", ex.message(), files[i].c_str());
@@ -253,7 +253,7 @@ namespace Extensions
 
 	//////////////////////////////////////////////////////////////////////////
 
-	CExtensionPoint* CPluginManager::CreateExtensionPoint(CPluginShadow* provider, const std::string &name, const Module::GUID &iid)
+	CExtensionPoint* CPluginManager::CreateExtensionPoint(CPluginShadow* provider, const std::string &name, const module::guid &iid)
 	{
 		LogTrace("[Init] Creating extension point: %s", name.c_str());
 
@@ -271,7 +271,7 @@ namespace Extensions
 	//////////////////////////////////////////////////////////////////////////
 
 	CExtension* CPluginManager::CreateExtension(CPluginShadow* extender,
-		IExtensionPoint* exPoint, const Module::GUID& classID, std::map<std::string, std::string>& paramMap)
+		IExtensionPoint* exPoint, const module::guid& classID, std::map<std::string, std::string>& paramMap)
 	{
 		LogTrace("[Init] Creating extension, point: %s", exPoint->UniqueID().c_str());
 

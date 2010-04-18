@@ -17,7 +17,7 @@ namespace ScriptPy
 {
 
 	// {43982851-519b-413f-957e-57bc61a7f80b}
-	static const Module::GUID CLSID_CScriptManager =
+	static const module::guid CLSID_CScriptManager =
 	{ 0x43982851, 0x519b, 0x413f, { 0x95, 0x7e, 0x57, 0xbc, 0x61, 0xa7, 0xf8, 0x0b } };
 
 	BEGIN_MODULE_MAP()

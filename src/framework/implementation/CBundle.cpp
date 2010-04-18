@@ -229,7 +229,7 @@ namespace Framework
 
 	//////////////////////////////////////////////////////////////////////////
 
-	CServiceRegistration* CBundle::RegisterService(const GUID &riid, IUnknown *object)
+	CServiceRegistration* CBundle::RegisterService(const guid &riid, IUnknown *object)
 	{
 		THREAD_ANY();
 

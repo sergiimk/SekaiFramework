@@ -127,7 +127,7 @@ namespace Framework
 
 	//////////////////////////////////////////////////////////////////////////
 
-	com_ptr<IServiceRegistration> CBundleContext::RegisterService(const Module::GUID &riid, Module::IUnknown *object)
+	com_ptr<IServiceRegistration> CBundleContext::RegisterService(const module::guid &riid, module::IUnknown *object)
 	{
 		THREAD_ANY();
 

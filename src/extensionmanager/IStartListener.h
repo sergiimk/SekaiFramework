@@ -16,7 +16,7 @@ namespace Extensions
 {
 	/// Extenders will be started on core startup
 	/** @ingroup Extensions */
-	sf_interface IStartListener : public Module::IUnknown
+	sf_interface IStartListener : public module::IUnknown
 	{
 		sf_uuid("36d3d4bf-5b5f-4fb0-803d-3f7b89917979")
 

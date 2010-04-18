@@ -16,7 +16,7 @@
 #include <boost/thread.hpp>
 #include <vector>
 
-using namespace Module;
+using namespace module;
 
 namespace Framework
 {
@@ -24,7 +24,7 @@ namespace Framework
 	/// Implementation of bundle context
 	/** @ingroup Framework */
 	class NOVTABLE CBundleContext 
-		: public ComRootObject<Module::MultiThreadModel>
+		: public ComRootObject<module::MultiThreadModel>
 		, public IBundleContext
 	{
 		DECLARE_IMPLEMENTATION(CBundleContext)

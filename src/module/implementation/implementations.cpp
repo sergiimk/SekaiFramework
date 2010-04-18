@@ -9,7 +9,7 @@
 =========================================================*/
 #include "implementations.h"
 
-namespace Module
+namespace module
 {
 	namespace detail
 	{
@@ -73,7 +73,7 @@ namespace Module
 
 //////////////////////////////////////////////////////////////////////////
 
-bool implements_interface(Module::IUnknown* pUnk, const Module::GUID& riid)
+bool implements_interface(module::IUnknown* pUnk, const module::guid& riid)
 {
 	/// \todo Improve
 

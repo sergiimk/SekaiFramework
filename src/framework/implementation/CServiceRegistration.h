@@ -15,14 +15,14 @@
 #include "CServiceReference.h"
 #include <set>
 
-using namespace Module;
+using namespace module;
 
 namespace Framework
 {
 	/// Service registration object
 	/** @ingroup Framework */
 	class NOVTABLE CServiceRegistration : 
-		public Module::ComRootObject<Module::MultiThreadModel>,
+		public module::ComRootObject<module::MultiThreadModel>,
 		public IServiceRegistration
 	{
 	public:
@@ -39,7 +39,7 @@ namespace Framework
 
 		void Finalize();
 
-		const GUID& getID() const;
+		const guid& getID() const;
 
 		com_ptr<IBundle> getBundle() const;
 
@@ -54,7 +54,7 @@ namespace Framework
 	private:
 		typedef std::set<CBundle*> TServiceUsers;
 
-		GUID m_id;
+		guid m_id;
 		TServiceUsers m_users;
 		IUnknown* m_object;
 		CBundle* m_bundle;

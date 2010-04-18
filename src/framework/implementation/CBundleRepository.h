@@ -18,7 +18,7 @@
 #include <unordered_map>
 #include <boost/thread.hpp>
 
-using namespace Module;
+using namespace module;
 
 namespace Framework
 {

@@ -12,7 +12,7 @@
 
 #include "platform/platform.h"
 
-namespace Module
+namespace module
 {
 
 	//////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ namespace Module
 	{
 
 		/// This tricky class protects you from calling AddRef/Release on pointer wrapped by com_ptr
-		/** @ingroup Module */
+		/** @ingroup module */
 		template <class T>
 		class no_refcnt_ptr: public T
 		{
@@ -57,7 +57,7 @@ namespace Module
 
 
 	/// Base class for intellectual pointers
-	/** @ingroup Module */
+	/** @ingroup module */
 	template <class T>
 	class com_ptr_impl
 	{
@@ -145,7 +145,7 @@ namespace Module
 
 
 	/// Base class for intellectual Com pointers
-	/** @ingroup Module */
+	/** @ingroup module */
 	template <class T>
 	class com_ptr : public com_ptr_impl<T>
 	{
@@ -201,7 +201,7 @@ namespace Module
 
 
 	/// com_ptr specialization for IUnknown
-	/** @ingroup Module */
+	/** @ingroup module */
 	template<>
 	class com_ptr<IUnknown> : public com_ptr_impl<IUnknown>
 	{
@@ -256,9 +256,9 @@ namespace Module
 //////////////////////////////////////////////////////////////////////////
 
 /// Creation helper for com_ptr
-/** @ingroup Module */
+/** @ingroup module */
 template<class Impl, class Itf>
-Module::HResult create_instance(Module::com_ptr<Itf>& ptr)
+module::HResult create_instance(module::com_ptr<Itf>& ptr)
 {
 	return Impl::_ObjectClass::_CreateInstance(UUID_PPV(Itf, ptr.wrapped()));
 }

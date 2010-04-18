@@ -40,7 +40,7 @@ namespace Framework
 	*   Uninstalling and then reinstalling the bundle will create a new unique identity.
 	*
 	*   @ingroup Framework */
-	sf_interface IBundle : public Module::IUnknown
+	sf_interface IBundle : public module::IUnknown
 	{
 		sf_uuid("937db03e-fb35-4e7f-9a81-e6f43ade912b")
 
@@ -48,7 +48,7 @@ namespace Framework
 		virtual size_t getBundleId() = 0;
 
 		/// The returned BundleContext can be used by the caller to act on behalf of this bundle
-		virtual Module::com_ptr<IBundleContext> getBundleContext() = 0;
+		virtual module::com_ptr<IBundleContext> getBundleContext() = 0;
 
 		/// Returns this bundle's current state
 		virtual EBundleState getState() = 0;
@@ -64,10 +64,10 @@ namespace Framework
 		virtual java.util.Dictionary getHeaders() = 0;*/
 
 		/// Returns this bundle's ServiceReference list for all services it has registered
-		virtual void getRegisteredServices(IDynArray<Module::com_ptr<IServiceReference> >& services) = 0;
+		virtual void getRegisteredServices(IDynArray<module::com_ptr<IServiceReference> >& services) = 0;
 
 		/// Returns this bundle's ServiceReference list for all services it is using
-		virtual void getServicesInUse(IDynArray<Module::com_ptr<IServiceReference> >& services) = 0;
+		virtual void getServicesInUse(IDynArray<module::com_ptr<IServiceReference> >& services) = 0;
 
 		/*/// Find the specified resource in this bundle
 		virtual java.net.URL getResource(java.lang.String name) = 0;

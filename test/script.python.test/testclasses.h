@@ -19,7 +19,7 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-using namespace Module;
+using namespace module;
 using namespace Script;
 using namespace reflection;
 
@@ -169,14 +169,14 @@ end_reflection()
 
 //////////////////////////////////////////////////////////////////////////
 
-sf_interface ITestInterface : public Module::IUnknown
+sf_interface ITestInterface : public module::IUnknown
 {
 	sf_uuid("5315a473-f8e8-4724-bb13-336557779f85")
 	virtual int Sum(int a, int b) = 0;
 };
 
 class NOVTABLE CTestInterface : 
-	public Module::ComRootObject<>,
+	public module::ComRootObject<>,
 	public ITestInterface
 {
 public:
@@ -214,7 +214,7 @@ reflect_class(com_ptr<ITestInterface>, "ITestInterfacePtr")
 end_reflection()
 
 reflect_class(ITestInterface, "ITestInterface")
-	.def_base(Module::IUnknown)
+	.def_base(module::IUnknown)
 	.def_method("Sum", Sum)
 end_reflection()
 

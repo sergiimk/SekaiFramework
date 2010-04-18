@@ -62,14 +62,14 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CScriptModule::SetModuleHandle(const Module::ModuleHandle &module)
+	void CScriptModule::SetModuleHandle(const module::ModuleHandle &module)
 	{
 		mModuleHandle = module;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	const Module::ModuleHandle& CScriptModule::GetModuleHandle() const
+	const module::ModuleHandle& CScriptModule::GetModuleHandle() const
 	{
 		return mModuleHandle;
 	}

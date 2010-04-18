@@ -13,7 +13,7 @@
 #include "IFrameworkFactory.h"
 #include "module/implementations.h"
 
-using namespace Module;
+using namespace module;
 
 namespace Framework
 {
@@ -21,7 +21,7 @@ namespace Framework
 	/// System bundle activator implementation
 	/** @ingroup Framework */
 	class NOVTABLE CFrameworkFactory
-		: public ComRootObject<Module::MultiThreadModel>
+		: public ComRootObject<module::MultiThreadModel>
 		, public IFrameworkFactory
 	{
 		DECLARE_IMPLEMENTATION(CFrameworkFactory)

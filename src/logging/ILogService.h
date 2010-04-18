@@ -67,7 +67,7 @@ namespace Logging
 
 	/// Logging service interface
 	/** @ingroup Logging */
-	sf_interface ILogService : public Module::IUnknown
+	sf_interface ILogService : public module::IUnknown
 	{
 		sf_uuid("aa82aafb-be77-4b20-ab68-e03b294cf7b5")
 

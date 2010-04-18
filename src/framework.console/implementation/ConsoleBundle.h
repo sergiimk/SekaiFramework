@@ -17,13 +17,13 @@
 #include <iostream>
 #include <map>
 
-using namespace Module;
+using namespace module;
 using namespace Framework;
 
 class ConsoleCommand;
 
 class NOVTABLE CConsoleBundle : 
-	public Module::ComRootObject<>,
+	public module::ComRootObject<>,
 	public IBundleActivator
 {
 public:

@@ -28,19 +28,19 @@ namespace Extensions
 	{
 		std::string ClassName;
 		std::string ClassID;
-		Module::GUID	ClassGUID;
+		module::guid	ClassGUID;
 	};
 
 	struct ExtensionPointDef
 	{
 		std::string	PointID;
-		Module::GUID	InterfaceID;
+		module::guid	InterfaceID;
 	};
 
 	struct ExtensionDef
 	{
 		std::string	PointID;
-		Module::GUID	ClassID;
+		module::guid	ClassID;
 		std::map<std::string, std::string> PropertyMap;
 	};
 

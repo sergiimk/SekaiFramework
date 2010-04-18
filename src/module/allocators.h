@@ -1,5 +1,5 @@
 /*========================================================
-* Allocators.h
+* allocators.h
 * @author Sergey Mikhtonyuk
 * @date 20 May 2009
 *
@@ -12,14 +12,14 @@
 
 #include "platform/platform.h"
 
-namespace Module
+namespace module
 {
 	//////////////////////////////////////////////////////////////////////////
 
-	/// Default new allocator used by Module factories
-	/** @ingroup Module */
+	/// Default new allocator used by module factories
+	/** @ingroup module */
 	template<typename T>
-	class NewAllocator
+	class new_allocator
 	{
 	public:
 
@@ -37,17 +37,17 @@ namespace Module
 
 		template<typename U> struct rebind 
 		{
-			typedef NewAllocator<U> other;
+			typedef new_allocator<U> other;
 		};
 
 		//////////////////////////////////////////////////////////////////////////
 
-		NewAllocator() throw() {}
+		new_allocator() throw() {}
 
-		NewAllocator( const NewAllocator& ) throw() {}
+		new_allocator( const new_allocator& ) throw() {}
 
 		template<typename U> 
-		NewAllocator(const NewAllocator<U>&) throw() {}
+		new_allocator(const new_allocator<U>&) throw() {}
 
 		//////////////////////////////////////////////////////////////////////////
 
@@ -102,9 +102,9 @@ namespace Module
 	//////////////////////////////////////////////////////////////////////////
 
 	/// Void specialization (see ISO C++ Standard section 20.4.1)
-	/** @ingroup Module */
+	/** @ingroup module */
 	template<> 
-	class NewAllocator<void> 
+	class new_allocator<void> 
 	{
 	public:
 		typedef void*		pointer;
@@ -114,20 +114,20 @@ namespace Module
 		template<typename U>
 		struct rebind 
 		{
-			typedef NewAllocator<U> other;
+			typedef new_allocator<U> other;
 		};
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 
 	template<typename T, typename U>
-	inline bool operator==( const NewAllocator<T>&, const NewAllocator<U>& )
+	inline bool operator==( const new_allocator<T>&, const new_allocator<U>& )
 	{
 		return true;
 	}
 
 	template<typename T, typename U>
-	inline bool operator!=( const NewAllocator<T>&, const NewAllocator<U>& ) 
+	inline bool operator!=( const new_allocator<T>&, const new_allocator<U>& ) 
 	{
 		return false;
 	}

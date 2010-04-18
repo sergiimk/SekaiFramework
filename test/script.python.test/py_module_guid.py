@@ -1,6 +1,6 @@
-from Module import GUID
+from module import guid
 
-g1 = GUID();
-g2 = GUID();
+g1 = guid();
+g2 = guid();
 
 #assert(g1 == g2);

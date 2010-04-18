@@ -19,7 +19,7 @@ namespace Extensions
 	/// Implementation of IExtensionPoint interface
 	/** @ingroup Extensions */
 	class NOVTABLE CExtensionPoint : 
-		public Module::ComRootObject<>,
+		public module::ComRootObject<>,
 		public IExtensionPoint
 	{
 	public:
@@ -32,7 +32,7 @@ namespace Extensions
 		const std::string&	ID()						{ return mName; }
 		const std::string&	UniqueID()					{ return mFullName; }
 		IPluginShadow*		Provider()					{ return mProvider; }
-		const Module::GUID&	InterfaceID()				{ return mInterfaceID; }
+		const module::guid&	InterfaceID()				{ return mInterfaceID; }
 		size_t				getExtensionCount()			{ return mExtensions.size(); }
 		IExtension*			getExtension(size_t index)	{ return mExtensions[index]; }
 	
@@ -40,7 +40,7 @@ namespace Extensions
 		std::string					mName;
 		std::string					mFullName;
 		IPluginShadow*				mProvider;
-		Module::GUID					mInterfaceID;
+		module::guid					mInterfaceID;
 		std::vector<IExtension*>	mExtensions;
 	};
 

@@ -37,7 +37,7 @@ namespace Framework
 	struct SFrameworkEvent
 	{
 		/// Returns the bundle associated with the event
-		Module::com_ptr<IBundle> getBundle() const { return m_bundle; }
+		module::com_ptr<IBundle> getBundle() const { return m_bundle; }
 		
 		/// Returns the type of bundle state change
 		EFrameworkEventType getType() const { return m_type; }
@@ -53,7 +53,7 @@ namespace Framework
 		{ }
 
 	private:
-		Module::com_ptr<IBundle> m_bundle;
+		module::com_ptr<IBundle> m_bundle;
 		EFrameworkEventType m_type;
 	};
 
@@ -78,7 +78,7 @@ namespace Framework
 	struct SBundleEvent
 	{
 		/// Returns the bundle which had a lifecycle change
-		Module::com_ptr<IBundle> getBundle() const { return m_bundle; }
+		module::com_ptr<IBundle> getBundle() const { return m_bundle; }
 
 		/// Returns the type of lifecyle event
 		int getType() const { return m_type; }
@@ -91,7 +91,7 @@ namespace Framework
 		{ }
 
 	private:
-		Module::com_ptr<IBundle> m_bundle;
+		module::com_ptr<IBundle> m_bundle;
 		EBundleEventType m_type;
 	};
 
@@ -108,7 +108,7 @@ namespace Framework
 	struct SServiceEvent
 	{
 		/// Returns a reference to the service that had a change occur in its lifecycle
-		Module::com_ptr<IServiceReference> getServiceReference() const { return m_service; }
+		module::com_ptr<IServiceReference> getServiceReference() const { return m_service; }
 
 		/// Returns the type of lifecyle event
 		int getType() const { return m_type; }
@@ -121,7 +121,7 @@ namespace Framework
 		{ }
 
 	private:
-		Module::com_ptr<IServiceReference> m_service;
+		module::com_ptr<IServiceReference> m_service;
 		EServiceEventType m_type;
 	};
 

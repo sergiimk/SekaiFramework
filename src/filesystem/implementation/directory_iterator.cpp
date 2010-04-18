@@ -33,7 +33,7 @@ namespace filesystem
 			, steps(0)
 		{
 			if(!_p.is_directory())
-				throw Module::InvalidArgumentException("Path does not specify a directory");
+				throw module::InvalidArgumentException("Path does not specify a directory");
 
 			stack_string<> path(p.c_str());
 			*path += "\\*";

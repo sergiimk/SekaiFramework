@@ -27,7 +27,7 @@ namespace Extensions
 	  *
 	  * @ingroup Extensions */
 	class NOVTABLE CPluginShadow :
-		public Module::ComRootObject<>,
+		public module::ComRootObject<>,
 		public IPluginShadow
 	{
 	public:
@@ -43,12 +43,12 @@ namespace Extensions
 		const std::string& PluginName() { return mPluginName; }
 		const std::string& ModuleName() { return mModuleName; }
 
-		bool Exports(const Module::GUID &clsid);
+		bool Exports(const module::guid &clsid);
 		bool Provides(const std::string &expoint);
 		bool Extends(const std::string &expoint);
 
-		Module::HResult CreateInstance(SF_RIID clsid, SF_RIID riid, void** ppv);
-		Module::HResult CreateInstance(SF_RIID riid, void** ppv);
+		module::HResult CreateInstance(SF_RIID clsid, SF_RIID riid, void** ppv);
+		module::HResult CreateInstance(SF_RIID riid, void** ppv);
 
 		size_t getExtensionCount() { return mExtensions.size(); }
 		IExtension* getExtension(size_t index) { return mExtensions[index]; }
@@ -59,16 +59,16 @@ namespace Extensions
 
 	/* internal: */
 		void			FinalConstruct(const std::string &pluginName, int version);
-		Module::HResult	LoadModule();
+		module::HResult	LoadModule();
 		void			Shutdown();
 
 	/* internal: */
 		int						mVersion;
 		std::string				mPluginName;
 		std::string				mModuleName;
-		Module::ModuleHandle	mModule;
+		module::ModuleHandle	mModule;
 
-		typedef std::unordered_set<Module::GUID, Module::guid_hash> TExportTable;
+		typedef std::unordered_set<module::guid, module::guid_hash> TExportTable;
 
 		/// Provides quick look-up for exported classes
 		TExportTable					mExportTable;

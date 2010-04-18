@@ -25,17 +25,17 @@ namespace Framework
 	//////////////////////////////////////////////////////////////////////////
 
 	// {637b1ed1-12e5-4a4b-b69d-edf6ead5c478}
-	static const Module::GUID CLSID_FrameworkFactory =
+	static const module::guid CLSID_FrameworkFactory =
 	{ 0x637b1ed1, 0x12e5, 0x4a4b, { 0xb6, 0x9d, 0xed, 0xf6, 0xea, 0xd5, 0xc4, 0x78 } };
 
 
 	// {07a4b5f9-495c-45b1-bb91-e8fb11447c05}
-	static const Module::GUID CLSID_BundleActivator =
+	static const module::guid CLSID_BundleActivator =
 	{ 0x07a4b5f9, 0x495c, 0x45b1, { 0xbb, 0x91, 0xe8, 0xfb, 0x11, 0x44, 0x7c, 0x05 } };
 
 	//////////////////////////////////////////////////////////////////////////
 
-	sf_interface IFilter : public Module::IUnknown
+	sf_interface IFilter : public module::IUnknown
 	{
 		/// Compares this Filter object to another object
 		//boolean equals(java.lang.Object obj)

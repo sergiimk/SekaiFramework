@@ -18,7 +18,7 @@ namespace Framework
 
 	/// Customizes the starting and stopping of this bundle
 	/** @ingroup Framework */
-	sf_interface IBundleActivator : public Module::IUnknown
+	sf_interface IBundleActivator : public module::IUnknown
 	{
 		sf_uuid("0955b77d-f178-434d-adb0-9c2e55d93894")
 

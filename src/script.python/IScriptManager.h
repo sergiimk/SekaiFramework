@@ -15,7 +15,7 @@
 #include "reflection/reflection_fwd.h"
 
 // Fwd for whole-module export
-namespace Module { class ModuleHandle; }
+namespace module { class ModuleHandle; }
 
 namespace Script
 {
@@ -27,7 +27,7 @@ namespace Script
 	 *  - Manually control script execution
 	 *  - Shutdown()
 	 *  @ingroup Script */
-	sf_interface IScriptManager : public Module::IUnknown
+	sf_interface IScriptManager : public module::IUnknown
 	{
 		sf_uuid("01eefbeb-c80d-4434-b323-2d4dd2e95489")
 	
@@ -38,7 +38,7 @@ namespace Script
 		virtual void Shutdown() = 0;
 
 		/// Exports all entries of module that have associated reflection
-		virtual void ExportModule(const char* moduleName, const Module::ModuleHandle& module) = 0;
+		virtual void ExportModule(const char* moduleName, const module::ModuleHandle& module) = 0;
 
 		/// Exports user-defined type to script engine
 		virtual void ExportType(const char* moduleName, reflection::user_type* type) = 0;

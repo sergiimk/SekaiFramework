@@ -69,7 +69,7 @@ namespace filesystem
 		{
 			for(const char* pp = p; *pp; ++pp)
 				if(is_bad_path_symbol(*pp))
-					throw Module::InvalidArgumentException("Invalid symbols in the path");
+					throw module::InvalidArgumentException("Invalid symbols in the path");
 
 			size_t l = strlen(p);
 			while(l-- > 1 && is_sep(p[l]))
@@ -439,7 +439,7 @@ namespace filesystem
 
 	bool path::is_link() const
 	{
-		throw Module::NotImplementedException(__FUNCTION__);
+		throw module::NotImplementedException(__FUNCTION__);
 	}
 
 	//////////////////////////////////////////////////////////////////////////

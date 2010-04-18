@@ -21,23 +21,23 @@
  *  query for adapters afterwards. One factory constructs adapters only for one source interface
  *
  *  @ingroup Extensions */
-sf_interface IAdapterFactory : public Module::IUnknown
+sf_interface IAdapterFactory : public module::IUnknown
 {
     sf_uuid("babe39a9-529d-4bd5-853e-4a2974f3aa21")
 
     /// List of interfaces that can be adapted
     /** @return null-terminated list of GUIDs */
-    virtual Module::GUID** SourceInterfaceList() = 0;
+    virtual module::guid** SourceInterfaceList() = 0;
 
     /// List of adapter interfaces
     /** @return null-terminated list of GUIDs */
-    virtual Module::GUID** DestInterfaceList() = 0;
+    virtual module::guid** DestInterfaceList() = 0;
 
     /// Constructs the adapter for a specified object
     /** @param object Object to be adapted
      *  @param iid ID of adapter interface
      *  @param ppAdapter pointer to the resulting object */
-    virtual Module::HResult GetAdapter(Module::IUnknown* object, SF_RIID iid, void **ppAdapter) = 0;
+    virtual module::HResult GetAdapter(module::IUnknown* object, SF_RIID iid, void **ppAdapter) = 0;
 };
 
 #endif // _ADAPTERFACTORY_H__

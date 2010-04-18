@@ -1,5 +1,5 @@
 /*========================================================
-* Module.cpp
+* module.cpp
 * @author Sergey Mikhtonyuk
 * @date 02 May 2009
 *
@@ -10,7 +10,7 @@
 #include "module.h"
 #include "platform/shared.h"
 
-namespace Module
+namespace module
 {
 	//////////////////////////////////////////////////////////////////////////
 	// ModuleHandle
@@ -65,7 +65,7 @@ namespace Module
 
 	//////////////////////////////////////////////////////////////////////////
 
-	ModuleHandle& ModuleHandle::operator =(const Module::ModuleHandle &rhs)
+	ModuleHandle& ModuleHandle::operator =(const ModuleHandle &rhs)
 	{
 		Shutdown();
 		mGetModuleMap = rhs.mGetModuleMap;
@@ -158,7 +158,7 @@ namespace Module
 
 	//////////////////////////////////////////////////////////////////////////
 
-	reflection::user_type* ModuleHandle::GetType(const Module::GUID &clsid) const
+	reflection::user_type* ModuleHandle::GetType(const guid &clsid) const
 	{
 		if(!IsLoaded()) return 0;
 

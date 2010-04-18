@@ -16,7 +16,7 @@
 // Fwd for reflection export
 namespace reflection { class user_type; };
 
-namespace  Module
+namespace  module
 {
 	/////////////////////////////////////////////////////////////////////////
 	//  Interface map
@@ -72,24 +72,24 @@ namespace  Module
 
 
 	#define BEGIN_INTERFACE_MAP() public:																						\
-	Module::IUnknown* GetUnknown() throw() {return (Module::IUnknown*)((size_t)this+(size_t)_GetEntries()->OffChain); }			\
-	const static Module::detail::INTERFACE_MAP_ENTRY* _GetEntries() throw() {													\
-	static const Module::detail::INTERFACE_MAP_ENTRY _entries[] = {
+	module::IUnknown* GetUnknown() throw() {return (module::IUnknown*)((size_t)this+(size_t)_GetEntries()->OffChain); }			\
+	const static module::detail::INTERFACE_MAP_ENTRY* _GetEntries() throw() {													\
+	static const module::detail::INTERFACE_MAP_ENTRY _entries[] = {
 
 	/////////////////////////////////////////////////////////////////////////
 	
 	#define INTERFACE_ENTRY(intrfc)	\
-	{&uuid_of(intrfc), (void*)classoffset<intrfc, _ThisClass>(), Module::detail::SF_OFFSET_ENTRY},
+	{&uuid_of(intrfc), (void*)classoffset<intrfc, _ThisClass>(), module::detail::SF_OFFSET_ENTRY},
 
 	/////////////////////////////////////////////////////////////////////////
 
 	//#define INTERFACE_ENTRY_BRANCHED(intrfc, branch)
-	//{&uuid_of(intrfc), static_cast<void*>(static_cast<intrfc*>(static_cast<branch*>(reinterpret_cast<_ThisClass*>(8))))-8, Module::detail::SF_OFFSET_ENTRY},
+	//{&uuid_of(intrfc), static_cast<void*>(static_cast<intrfc*>(static_cast<branch*>(reinterpret_cast<_ThisClass*>(8))))-8, module::detail::SF_OFFSET_ENTRY},
 
 	/////////////////////////////////////////////////////////////////////////
 
 	#define INTERFACE_ENTRY_CHAIN(baseclass)\
-	{0, (void*)&Module::detail::_ComChainData<baseclass, _ThisClass>::data, Module::detail::_Chain},
+	{0, (void*)&module::detail::_ComChainData<baseclass, _ThisClass>::data, module::detail::_Chain},
 
 	/////////////////////////////////////////////////////////////////////////
 
@@ -97,8 +97,8 @@ namespace  Module
 	{0, 0, 0}}; return &_entries[0];}											\
 	unsigned long AddRef() { return 1; }										\
 	unsigned long Release() { return 1; }										\
-	Module::HResult QueryInterface(SF_RIID iid, void **ppObject)				\
-	{ return Module::detail::_QueryInterface(this, _GetEntries(), iid, ppObject); }
+	module::HResult QueryInterface(SF_RIID iid, void **ppObject)				\
+	{ return module::detail::_QueryInterface(this, _GetEntries(), iid, ppObject); }
 
 
 
@@ -107,30 +107,30 @@ namespace  Module
 	/////////////////////////////////////////////////////////////////////////
 
 	#define DECLARE_IMPLEMENTATION(className)																		\
-	DECLARE_IMPLEMENTATIONA(className, Module::NewAllocator)
+	DECLARE_IMPLEMENTATIONA(className, module::new_allocator)
 
 	/////////////////////////////////////////////////////////////////////////
 
 	#define DECLARE_IMPLEMENTATIONA(className, Allocator)															\
-	DECLARE_IMPLEMENTATION2A(className, Allocator, Module::ComClassFactory)
+	DECLARE_IMPLEMENTATION2A(className, Allocator, module::ComClassFactory)
 
 	/////////////////////////////////////////////////////////////////////////
 
 	#define DECLARE_IMPLEMENTATION2(className, factoryClass)														\
-	DECLARE_IMPLEMENTATION2A(className, Module::NewAllocator, factoryClass)
+	DECLARE_IMPLEMENTATION2A(className, module::new_allocator, factoryClass)
 
 	/////////////////////////////////////////////////////////////////////////
 
 	#define DECLARE_IMPLEMENTATION2A(className, Allocator, factoryClass)											\
 	public:																											\
 	typedef className _ThisClass;																					\
-	typedef Module::detail::ComObject<className, Allocator> _ObjectClass;											\
+	typedef module::detail::ComObject<className, Allocator> _ObjectClass;											\
 	typedef factoryClass< _ObjectClass > _FactoryClass;
 
 	/////////////////////////////////////////////////////////////////////////
 
 	#define DECLARE_IMPLEMENTATION_DERIVED(className, baseClassName)												\
-	DECLARE_IMPLEMENTATION_DERIVED2(className, baseClassName, Module::ComClassFactory)
+	DECLARE_IMPLEMENTATION_DERIVED2(className, baseClassName, module::ComClassFactory)
 
 	/////////////////////////////////////////////////////////////////////////
 
@@ -138,7 +138,7 @@ namespace  Module
 	public:																											\
 	typedef baseClassName _BaseClass;																				\
 	typedef className _ThisClass;																					\
-	typedef Module::detail::ComObject<className> _ObjectClass;														\
+	typedef module::detail::ComObject<className> _ObjectClass;														\
 	typedef factoryClass< _ObjectClass > _FactoryClass;
 
 	/////////////////////////////////////////////////////////////////////////
@@ -158,8 +158,8 @@ namespace  Module
 		/// Object entry in module map
 		struct MODULE_MAP_ENTRY
 		{
-			const GUID*			pClsid;
-			const GUID*			pInterfaceId;
+			const guid*			pClsid;
+			const guid*			pInterfaceId;
 			TYPE_OF_FUNC*		pTypeOf;
 			CREATOR_FUNC*		pCreateFactoryFn;
 			IClassFactory*		pClassFactory;
@@ -171,23 +171,23 @@ namespace  Module
 	/////////////////////////////////////////////////////////////////////////
 
 	#define DECLARE_MODULE_MAP()																					\
-	extern "C" SHARED_EXPORT Module::detail::MODULE_MAP_ENTRY* GetModuleMap();
+	extern "C" SHARED_EXPORT module::detail::MODULE_MAP_ENTRY* GetModuleMap();
 
 	//////////////////////////////////////////////////////////////////////////
 
 	#define BEGIN_MODULE_MAP()																						\
-	extern "C" SHARED_EXPORT Module::detail::MODULE_MAP_ENTRY* GetModuleMap()										\
-	{ static Module::detail::MODULE_MAP_ENTRY e[] = {
+	extern "C" SHARED_EXPORT module::detail::MODULE_MAP_ENTRY* GetModuleMap()										\
+	{ static module::detail::MODULE_MAP_ENTRY e[] = {
 
 	/////////////////////////////////////////////////////////////////////////
 
 	#define OBJECT_ENTRY(clssid, intrfID, clss)																		\
-	{ &clssid, &intrfID, 0, Module::detail::ComObject<clss::_FactoryClass>::_CreateInstance, 0 },
+	{ &clssid, &intrfID, 0, module::detail::ComObject<clss::_FactoryClass>::_CreateInstance, 0 },
 
 	/////////////////////////////////////////////////////////////////////////
 
 	#define OBJECT_ENTRY_REFLECTED(clssid, intrfID, clss, type_func)												\
-	{ &clssid, &intrfID, type_func, Module::detail::ComObject<clss::_FactoryClass>::_CreateInstance, 0 },
+	{ &clssid, &intrfID, type_func, module::detail::ComObject<clss::_FactoryClass>::_CreateInstance, 0 },
 
 	/////////////////////////////////////////////////////////////////////////
 
@@ -198,7 +198,7 @@ namespace  Module
 	extern "C" SHARED_EXPORT void ModuleInit() { }																	\
 	extern "C" SHARED_EXPORT void ModuleShutdown()																	\
 	{																												\
-		Module::detail::MODULE_MAP_ENTRY* e = GetModuleMap();														\
+		module::detail::MODULE_MAP_ENTRY* e = GetModuleMap();														\
 		while(e->pClsid)																							\
 		{																											\
 			if(e->pClassFactory)																					\

@@ -19,7 +19,7 @@ namespace Extensions
 	
 	/// Extension point interface serves a link between extension provider's shadow and extenders
 	/** @ingroup Extensions */
-	sf_interface IExtensionPoint : public Module::IUnknown
+	sf_interface IExtensionPoint : public module::IUnknown
 	{
 		sf_uuid("f46632cb-fc73-4d5f-a418-0c30b8150a61")
 
@@ -33,7 +33,7 @@ namespace Extensions
 		virtual IPluginShadow* Provider() = 0;
 
 		/// Interface all extenders must implement
-		virtual const Module::GUID& InterfaceID() = 0;
+		virtual const module::guid& InterfaceID() = 0;
 
 		/// Returns the number of extensions of this point
 		virtual size_t getExtensionCount() = 0;

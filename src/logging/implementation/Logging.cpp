@@ -20,7 +20,7 @@ namespace Logging
 	/// Activator that registers FileSystem service
 	/** @ingroup FileSystem  */
 	class NOVTABLE CLogActivator :
-		public Module::ComRootObject<>,
+		public module::ComRootObject<>,
 		public IBundleActivator
 	{
 	public:
@@ -33,7 +33,7 @@ namespace Logging
 
 		virtual void Start(IBundleContext* context)
 		{
-			Module::com_ptr<ILogService> log;
+			module::com_ptr<ILogService> log;
 			create_instance<CLogService, ILogService>(log);
 			context->RegisterService(uuid_of(ILogService), log);
 		}

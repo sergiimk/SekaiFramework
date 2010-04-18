@@ -17,14 +17,14 @@
 
 #include "Listeners.h"
 
-using namespace Module;
+using namespace module;
 
 namespace Framework
 {
 	/// Activator that registers FileSystem service
 	/** @ingroup Framework  */
 	class NOVTABLE CSystemBundleActivator : 
-		public Module::ComRootObject<Module::MultiThreadModel>,
+		public module::ComRootObject<module::MultiThreadModel>,
 		public IBundleActivator,
 		public IServiceListener
 	{

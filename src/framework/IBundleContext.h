@@ -22,21 +22,21 @@ namespace Framework
 	*  The context is used to grant access to other methods so that this bundle can interact with the Framework.
 	*  
 	*  @ingroup Framework */
-	sf_interface IBundleContext : public Module::IUnknown
+	sf_interface IBundleContext : public module::IUnknown
 	{
 		sf_uuid("21c69b4c-122a-4a77-bb21-cd7115ec1641")
 
 		/// Returns the Bundle object for this context bundle
-		virtual Module::com_ptr<IBundle> getBundle() = 0;
+		virtual module::com_ptr<IBundle> getBundle() = 0;
 
 		/// Returns the bundle with the specified identifier
-		virtual Module::com_ptr<IBundle> getBundle(size_t id) = 0;
+		virtual module::com_ptr<IBundle> getBundle(size_t id) = 0;
 
 		/// Returns a list of all installed bundles
-		virtual void getBundles(IDynArray<Module::com_ptr<IBundle> >& bundles) = 0;
+		virtual void getBundles(IDynArray<module::com_ptr<IBundle> >& bundles) = 0;
 
 		/// Installs the bundle from the specified location string
-		virtual Module::com_ptr<IBundle> InstallBundle(const char* location) = 0;
+		virtual module::com_ptr<IBundle> InstallBundle(const char* location) = 0;
 
 		/// Installs the bundle from the specified InputStream object
 		//virtual IBundle* InstallBundle(const char* location, java.io.InputStream in) = 0;
@@ -46,27 +46,27 @@ namespace Framework
 		/** @param riid service interface ID
 		 *  @param service service instance 
 		 *  @return service registration object */
-		virtual Module::com_ptr<IServiceRegistration> RegisterService(SF_RIID riid, Module::IUnknown* service /*, java.util.Dictionary properties*/) = 0;
+		virtual module::com_ptr<IServiceRegistration> RegisterService(SF_RIID riid, module::IUnknown* service /*, java.util.Dictionary properties*/) = 0;
 
 		/// Registers the specified service object with the specified properties under the specified class names into the Framework
-		//virtual IServiceRegistration* registerService(const char*[] clazzes, Module::IUnknown* service, java.util.Dictionary properties)  = 0;
+		//virtual IServiceRegistration* registerService(const char*[] clazzes, module::IUnknown* service, java.util.Dictionary properties)  = 0;
 
 		/// Returns a ServiceReference object for a service that implements, and was registered under, the specified class
 		/** @param riid service interface ID
 		 *  @return service reference object */
-		virtual Module::com_ptr<IServiceReference> getServiceReference(SF_RIID riid)  = 0;
+		virtual module::com_ptr<IServiceReference> getServiceReference(SF_RIID riid)  = 0;
 
 		/// Returns a list of ServiceReference objects
 		//virtual IServiceReference*[] getServiceReferences(const char* clazz, IFilter* filter)  = 0;
 
 		/// Returns the specified service object for a service
-		virtual Module::com_ptr<IUnknown> getService(IServiceReference* reference)  = 0;
+		virtual module::com_ptr<IUnknown> getService(IServiceReference* reference)  = 0;
 
 		/// Releases the service object referenced by the specified ServiceReference object
 		virtual bool ungetService(IServiceReference* reference)  = 0;
 		
 		/*/// Creates a Filter object
-		virtual Module::com_ptr<IFilter> createFilter(const char* filter)  = 0;
+		virtual module::com_ptr<IFilter> createFilter(const char* filter)  = 0;
 
 		/// Creates a File object for a file in the persistent storage area provided for the bundle by the Framework
 		virtual com_ptr<IFile> getDataFile(const char* filename)  = 0;

@@ -13,7 +13,7 @@
 #include "module/interfaces.h"
 #include "Events.h"
 
-using namespace Module;
+using namespace module;
 
 namespace Framework
 {

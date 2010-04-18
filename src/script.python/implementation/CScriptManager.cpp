@@ -106,11 +106,11 @@ namespace ScriptPy
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CScriptManager::ExportModule(const char* moduleName, const Module::ModuleHandle& module)
+	void CScriptManager::ExportModule(const char* moduleName, const module::ModuleHandle& module)
 	{
 		CScriptModule* scriptModule = FindOrCreateModule(moduleName);
-		Module::ModuleHandle::iterator end = module.MapEnd();
-		for(Module::ModuleHandle::iterator it = module.MapBegin();
+		module::ModuleHandle::iterator end = module.MapEnd();
+		for(module::ModuleHandle::iterator it = module.MapBegin();
 			it != end;
 			++it)
 		{
@@ -161,7 +161,7 @@ namespace ScriptPy
 		if(!pyScript)
 		{
 			PyErr_Print();
-			throw Module::RuntimeException("Module loading failed");
+			throw module::RuntimeException("Module loading failed");
 		}
 
 		PyModule_AddObject(mMainModule, file, pyScript);

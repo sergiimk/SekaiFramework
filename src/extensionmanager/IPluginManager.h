@@ -21,7 +21,7 @@ namespace Extensions
 	  * for loading and supporting all plug-ins in the system 
 	  *  
 	  * @ingroup  Core */
-	sf_interface IPluginManager : public Module::IUnknown
+	sf_interface IPluginManager : public module::IUnknown
 	{
 		sf_uuid("6ad90a75-daeb-49d8-9167-0c5a8f5c5a41")
 	

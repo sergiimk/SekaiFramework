@@ -42,7 +42,7 @@ namespace Extensions
 	void CCore::Initialize(const char* paramsFile)
 	{
 		if(gEnv->PluginManager)
-			throw Module::RuntimeException("Multiple Core initialization");
+			throw module::RuntimeException("Multiple Core initialization");
 
 		mLogModule.Init("Logging.dll");
 		create_instance(&gEnv->Logger, Logging::CLSID_CLogService, mLogModule);
@@ -76,7 +76,7 @@ namespace Extensions
 		{
 			StartExecution_actual(argc, argv);
 		}
-		catch(Module::Exception& cex)
+		catch(module::Exception& cex)
 		{
 			LogErrorAlways("%s: %s", cex.className(), cex.message());
 		}
@@ -103,7 +103,7 @@ namespace Extensions
 			IExtension *pEx = pStartListeners->getExtension(i);
 			LogTrace("[Startup] Notifying start listener: %s", pEx->Extender()->PluginName().c_str());
 
-			Module::com_ptr<IStartListener> l;
+			module::com_ptr<IStartListener> l;
 			pEx->Extender()->CreateInstance(pEx->ImplClassID(), UUID_PPV(IStartListener, l.wrapped()));
 
 			if(l)

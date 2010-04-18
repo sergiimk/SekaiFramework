@@ -46,15 +46,15 @@ namespace Extensions
 
 	//////////////////////////////////////////////////////////////////////////
 
-	Module::HResult CPluginShadow::CreateInstance(const Module::GUID &clsid, const Module::GUID &riid, void **ppv)
+	module::HResult CPluginShadow::CreateInstance(const module::guid &clsid, const module::guid &riid, void **ppv)
 	{
 		if(!mModule.IsLoaded())
 		{
-			Module::HResult hr = LoadModule();
+			module::HResult hr = LoadModule();
 			if(SF_FAILED(hr)) return hr;
 		}
 
-		Module::HResult hr = create_instance(ppv, riid, clsid, mModule);
+		module::HResult hr = create_instance(ppv, riid, clsid, mModule);
 		if(SF_FAILED(hr))
 		{
 			LogWarningAlways("CreateInstance request failed, target: %s", mPluginName.c_str());
@@ -64,15 +64,15 @@ namespace Extensions
 
 	//////////////////////////////////////////////////////////////////////////
 
-	Module::HResult CPluginShadow::CreateInstance(const Module::GUID &riid, void **ppv)
+	module::HResult CPluginShadow::CreateInstance(const module::guid &riid, void **ppv)
 	{
 		if(!mModule.IsLoaded())
 		{
-			Module::HResult hr = LoadModule();
+			module::HResult hr = LoadModule();
 			if(SF_FAILED(hr)) return hr;
 		}
 
-		Module::HResult hr = create_instance(ppv, riid, mModule);
+		module::HResult hr = create_instance(ppv, riid, mModule);
 		if(SF_FAILED(hr))
 		{
 			LogWarningAlways("CreateInstance request failed, target: %s", mPluginName.c_str());
@@ -82,11 +82,11 @@ namespace Extensions
 
 	//////////////////////////////////////////////////////////////////////////
 
-	Module::HResult CPluginShadow::LoadModule()
+	module::HResult CPluginShadow::LoadModule()
 	{
 		LogTrace("Loading plugin module: %s", mModuleName.c_str());
 
-		Module::HResult hr = mModule.Init(mModuleName.c_str());
+		module::HResult hr = mModule.Init(mModuleName.c_str());
 		if(SF_FAILED(hr)) return hr;
 		return static_cast<CPluginManager*>(gEnv->PluginManager)->OnPluginLoad(this);
 	}
@@ -101,7 +101,7 @@ namespace Extensions
 
 	//////////////////////////////////////////////////////////////////////////
 
-	bool CPluginShadow::Exports(const Module::GUID &clsid)
+	bool CPluginShadow::Exports(const module::guid &clsid)
 	{
 		return mExportTable.find(clsid) != mExportTable.end();
 	}

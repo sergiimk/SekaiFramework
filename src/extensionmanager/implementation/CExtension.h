@@ -20,7 +20,7 @@ namespace Extensions
 	/// Implementation of IExtension interface
 	/** @ingroup Extensions */
 	class NOVTABLE CExtension : 
-		public Module::ComRootObject<>,
+		public module::ComRootObject<>,
 		public IExtension
 	{
 		typedef std::map<std::string, std::string> TParameterMap;
@@ -34,7 +34,7 @@ namespace Extensions
 
 		IPluginShadow*		Extender()			{ return pExtender; }
 		IExtensionPoint*	ExtensionPoint()	{ return pExtensionPoint; }
-		const Module::GUID&	ImplClassID()		{ return mImplClassID; }
+		const module::guid&	ImplClassID()		{ return mImplClassID; }
 		const char*			getParameter(const char* name)		
 		{
 			TParameterMap::const_iterator it = mParameterMap.find(name);
@@ -44,7 +44,7 @@ namespace Extensions
 	/* internal: */
 		IPluginShadow*		pExtender;
 		IExtensionPoint*	pExtensionPoint;
-		Module::GUID			mImplClassID;
+		module::guid			mImplClassID;
 		TParameterMap		mParameterMap;
 	};
 

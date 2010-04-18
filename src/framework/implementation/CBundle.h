@@ -22,7 +22,7 @@
 #include <unordered_map>
 #include <boost/thread.hpp>
 
-using namespace Module;
+using namespace module;
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -32,7 +32,7 @@ namespace Framework
 	/// Bundle implementation
 	/** @ingroup Framework */
 	class NOVTABLE CBundle :
-		public Module::ComRootObject<Module::MultiThreadModel>,
+		public module::ComRootObject<module::MultiThreadModel>,
 		public IBundle
 	{
 	public:

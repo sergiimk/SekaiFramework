@@ -54,17 +54,17 @@ namespace Framework
 		void Close();
 
 		/// Default implementation of the AddingService method
-		Module::IUnknown* AddingService(IServiceReference* reference);
+		module::IUnknown* AddingService(IServiceReference* reference);
 
 		/// Default implementation of the ModifiedService method
-		void ModifiedService(IServiceReference* reference, Module::IUnknown* service);
+		void ModifiedService(IServiceReference* reference, module::IUnknown* service);
 
 		/// Default implementation of the RemovedService method
-		void RemovedService(IServiceReference* reference, Module::IUnknown* service);
+		void RemovedService(IServiceReference* reference, module::IUnknown* service);
 
 		/** Wait for at least one service to be tracked by this ServiceTracker.
 		 *  This method will also return when this ServiceTracker is closed. */
-		Module::IUnknown* WaitForService(long timeout);
+		module::IUnknown* WaitForService(long timeout);
 
 		/// Return an collection of ServiceReferences for all services being tracked
 		//ServiceReference[] getServiceReferences();
@@ -77,13 +77,13 @@ namespace Framework
 		/// Returns the service object for the specified ServiceReference
 		/** @param reference The reference to the desired service
 		 *  @return A service object or null if the service is not being tracked */
-		Module::IUnknown* getService(IServiceReference* reference);
+		module::IUnknown* getService(IServiceReference* reference);
 
 		/// Return an collection of service objects for all services being tracked by this ServiceTracker
 		//Object[] getServices();
 
 		/// Returns a service object for one of the services being tracked by this ServiceTracker
-		Module::IUnknown* getService();
+		module::IUnknown* getService();
 
 		/// Remove a service from this ServiceTracker
 		void Remove(IServiceReference* reference);

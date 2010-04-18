@@ -22,7 +22,7 @@ namespace Framework
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CServiceRegistration::FinalConstruct(const GUID &riid, IUnknown *pObject, CBundle* bundle)
+	void CServiceRegistration::FinalConstruct(const guid &riid, IUnknown *pObject, CBundle* bundle)
 	{
 		m_id = riid;
 
@@ -37,7 +37,7 @@ namespace Framework
 
 	//////////////////////////////////////////////////////////////////////////
 
-	const GUID& CServiceRegistration::getID() const
+	const guid& CServiceRegistration::getID() const
 	{
 		return m_id;
 	}

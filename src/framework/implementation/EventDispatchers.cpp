@@ -22,7 +22,7 @@ namespace Framework
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CFrameworkEventDispatcher::Dispatch(Module::IUnknown *listener) const
+	void CFrameworkEventDispatcher::Dispatch(module::IUnknown *listener) const
 	{
 		static_cast<IFrameworkListener*>(listener)->FrameworkEvent(Event);
 	}
@@ -37,7 +37,7 @@ namespace Framework
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CBundleEventDispatcher::Dispatch(Module::IUnknown *listener) const
+	void CBundleEventDispatcher::Dispatch(module::IUnknown *listener) const
 	{
 		static_cast<IBundleListener*>(listener)->BundleChanged(Event);
 	}
@@ -52,7 +52,7 @@ namespace Framework
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void CServiceEventDispatcher::Dispatch(Module::IUnknown *listener) const
+	void CServiceEventDispatcher::Dispatch(module::IUnknown *listener) const
 	{
 		static_cast<IServiceListener*>(listener)->ServiceChanged(Event);
 	}

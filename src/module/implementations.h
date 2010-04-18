@@ -15,7 +15,7 @@
 #include "threadingmodel.h"
 #include "allocators.h"
 
-namespace Module
+namespace module
 {
 
 	//////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,7 @@ namespace Module
 
 	/// Inherit this class for IUnknown method implementation
 	/** Template parameter defines threading model for operations
-	 *  @ingroup Module */
+	 *  @ingroup module */
 	template<class ThreadingModel = SingleThreadModel>
 	class ComRootObject
 	{
@@ -46,7 +46,7 @@ namespace Module
 		virtual ~ComRootObject() { }
 
 		/// This declaration protects user from calling uuid_of on implementation class
-		static const Module::GUID& _get_uuid();
+		static const guid& _get_uuid();
 
 	protected:	
 		/// Implementation of IUnknown::AddRef method
@@ -72,7 +72,7 @@ namespace Module
 
 	/// ComClassFactory class
 	/** Implements IClassFactory methods
-	 *  @ingroup Module */
+	 *  @ingroup module */
 	template <class T>
 	class NOVTABLE ComClassFactory : 
 		public ComRootObject<>, 
@@ -102,7 +102,7 @@ namespace Module
 	 *  caching the pointer received after first query
 	 *  and returns it for the following queries 
 	 * 
-	 *  @ingroup Module */
+	 *  @ingroup module */
 	template <class T>
 	class NOVTABLE ComClassFactorySingleton : 
 		public ComRootObject<>, 
@@ -153,9 +153,9 @@ namespace Module
 		/// ComObject class
 		/** Inherits your class and binds IUnknown methods to implementation in ComRootObject
 		 *
-		 *  @ingroup Module
+		 *  @ingroup module
 		 *  @see ComRootObject */
-		template<typename Base, template<typename> class Alloc = NewAllocator>
+		template<typename Base, template<typename> class Alloc = new_allocator>
 		class ComObject : public Base
 		{
 		public:
@@ -232,9 +232,9 @@ namespace Module
 
 
 /// Creates implementation class instance (refCount == 1)
-/** @ingroup Module */
+/** @ingroup module */
 template<class Impl>
-Module::HResult create_instance_impl(Impl** pp)
+module::HResult create_instance_impl(Impl** pp)
 {
 	if(!pp) return SF_E_POINTER;
 	*pp = 0;
@@ -251,9 +251,9 @@ Module::HResult create_instance_impl(Impl** pp)
 
 
 /// Creates implementation and checks for specified interface (refCount == 1)
-/** @ingroup Module */
+/** @ingroup module */
 template<class Impl, class Itf>
-Module::HResult create_instance(Itf** pp)
+module::HResult create_instance(Itf** pp)
 {
 	// NOTE: if you get an ambiguity error here
 	// then you have tried to call create_instance to
@@ -262,9 +262,9 @@ Module::HResult create_instance(Itf** pp)
 }
 
 /// Creates implementation and checks for specified interface (refCount == 1)
-/** @ingroup Module */
+/** @ingroup module */
 template<class Impl>
-Module::HResult create_instance(void** pp, SF_RIID iid)
+module::HResult create_instance(void** pp, SF_RIID iid)
 {
 	return Impl::_ObjectClass::_CreateInstance(iid, pp);
 }

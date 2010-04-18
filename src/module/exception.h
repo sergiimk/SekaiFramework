@@ -12,7 +12,7 @@
 
 #include <exception>
 
-namespace Module
+namespace module
 {
 
 	/// Base exception class

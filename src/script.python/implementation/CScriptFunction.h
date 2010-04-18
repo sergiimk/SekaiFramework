@@ -20,7 +20,7 @@ namespace ScriptPy
 	/// Implementation of IScriptFunction for Python
 	/** @ingroup Py */
 	class NOVTABLE CScriptFunction : 
-		public Module::ComRootObject<>,
+		public module::ComRootObject<>,
 		public Script::IScriptFunction
 	{
 	public:

@@ -18,7 +18,7 @@
 #include <unordered_map>
 #include <boost/thread.hpp>
 
-using namespace Module;
+using namespace module;
 
 namespace Framework
 {
@@ -32,7 +32,7 @@ namespace Framework
 
 		void Init(CSystemBundle* systemBundle);
 
-		CServiceRegistration* RegisterService(SF_RIID riid, Module::IUnknown *service, CBundle* bundle);
+		CServiceRegistration* RegisterService(SF_RIID riid, module::IUnknown *service, CBundle* bundle);
 		void UnregisterService(CServiceRegistration* service);
 		com_ptr<IServiceReference> getServiceReference(SF_RIID riid);
 
@@ -41,7 +41,7 @@ namespace Framework
 		void RemoveListener(IServiceListener* listener);
 
 	private:
-		typedef std::unordered_multimap<GUID, CServiceRegistration*, Module::guid_hash> TServiceByID;
+		typedef std::unordered_multimap<guid, CServiceRegistration*, module::guid_hash> TServiceByID;
 
 		TServiceByID m_servicesByID;
 		CEventListenerQueue m_listeners;

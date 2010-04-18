@@ -165,8 +165,8 @@ namespace Extensions
 			}
 
 			if(definition->ClassID.size() == 0 ||
-				!definition->ClassGUID.FromString(definition->ClassID.c_str()))
-				ThrowHelper("Invalid GUID format, parsing failed");
+				!definition->ClassGUID.parse(definition->ClassID.c_str()))
+				ThrowHelper("Invalid guid format, parsing failed");
 
 			pReq = pReq->NextSiblingElement();
 		}
@@ -196,8 +196,8 @@ namespace Extensions
 		}
 
 		if(definition->PointID.size() == 0 ||
-			!definition->InterfaceID.FromString(siid.c_str()))
-			ThrowHelper("Invalid GUID format, parsing failed");
+			!definition->InterfaceID.parse(siid.c_str()))
+			ThrowHelper("Invalid guid format, parsing failed");
 
 		return false;
 	}
@@ -233,7 +233,7 @@ namespace Extensions
 		if(definition->PointID[0] == ':' || definition->PointID[definition->PointID.size() - 1] == ':')
 			ThrowHelper(_invalid_format);
 
-		// Translate classid to class GUID
+		// Translate classid to class guid
 		if(classid.size() != 0)
 		{
 			TExports::const_iterator it = std::find_if(Exports.begin(), Exports.end(),
@@ -241,12 +241,12 @@ namespace Extensions
 
 			if(it != Exports.end())
 				definition->ClassID = (*it)->ClassGUID;
-			else if(!definition->ClassID.FromString(classid.c_str()))
+			else if(!definition->ClassID.parse(classid.c_str()))
 				ThrowHelper(_invalid_format);
 		}
 		else
 		{
-			definition->ClassID.SetZero();
+			definition->ClassID.reset();
 		}
 
 		// Fill the property map
@@ -277,7 +277,7 @@ namespace Extensions
 
 	void CPluginDefVisitor::ThrowHelper(const char* message)
 	{
-		throw Module::RuntimeException(message);
+		throw module::RuntimeException(message);
 	}
 
 	CPluginDefVisitor::~CPluginDefVisitor()

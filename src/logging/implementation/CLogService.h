@@ -27,7 +27,7 @@ namespace Logging
 	/// Logging service implementation
 	/** @ingroup Logging */
 	class NOVTABLE CLogService : 
-		public Module::ComRootObject<Module::MultiThreadModel>,
+		public module::ComRootObject<module::MultiThreadModel>,
 		public ILogService
 	{
 	public:

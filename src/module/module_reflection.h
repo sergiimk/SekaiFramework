@@ -1,5 +1,5 @@
 /*========================================================
-* Module_reflection.h
+* module_reflection.h
 * @author Sergey Mikhtonyuk
 * @date 08 November 2009
 *
@@ -14,31 +14,31 @@
 #include "reflection/reflection.h"
 
 //////////////////////////////////////////////////////////////////////////
-// GUID
+// guid
 //////////////////////////////////////////////////////////////////////////
 
 namespace detail
 {
 	inline void* _create_guid()
 	{
-		Module::GUID* g = new Module::GUID();
-		g->SetZero();
+		module::guid* g = new module::guid();
+		g->reset();
 		return g;
 	}
 
 	inline void _delete_guid(void* inst)
 	{
-		delete (Module::GUID*)inst;
+		delete (module::guid*)inst;
 	}
 } // namespace
 
-reflect_struct(Module::GUID, "GUID")
+reflect_struct(module::guid, "guid")
 	.def_ctor_custom(&::detail::_create_guid, &::detail::_delete_guid)
 	.def_parsable()
 end_reflection()
 
 
-reflect_class(Module::IUnknown, "IUnknown")
+reflect_class(module::IUnknown, "IUnknown")
 	.def_method("AddRef", AddRef)
 	.def_method("Release", Release)
 end_reflection()

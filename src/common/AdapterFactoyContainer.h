@@ -33,7 +33,7 @@ public:
         pFactory->AddRef();
         mFactories.push_back(pFactory);
 
-        Module::GUID** ppGuid = pFactory->DestInterfaceList();
+        module::guid** ppGuid = pFactory->DestInterfaceList();
         while(*ppGuid)
         {
             /// \todo use multimap
@@ -47,7 +47,7 @@ public:
     }
 
     /// Creates adapter from first suitable factory
-    Module::HResult CreateAdapter(Module::IUnknown* object, SF_RIID uid, void **ppAdapter)
+    module::HResult CreateAdapter(module::IUnknown* object, SF_RIID uid, void **ppAdapter)
     {
         TAdapterFactoryMap::const_iterator it =
                 mAdatperFactoryMap.find(uid);
@@ -59,7 +59,7 @@ public:
     }
 
 protected:
-    typedef std::hash_map<Module::GUID, IAdapterFactory*, Module::guid_hash> TAdapterFactoryMap;
+    typedef std::hash_map<module::guid, IAdapterFactory*, module::guid_hash> TAdapterFactoryMap;
 
     TAdapterFactoryMap				mAdatperFactoryMap;
 

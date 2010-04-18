@@ -22,11 +22,11 @@ namespace Extensions
 	  * 
 	  * @ingroup Extensions */
 	class NOVTABLE CommonPlugin : 
-		public Module::ComRootObject<>,
+		public module::ComRootObject<>,
 		public IPlugin
 	{
 	public:
-		DECLARE_IMPLEMENTATION2(CommonPlugin, Module::ComClassFactorySingleton)
+		DECLARE_IMPLEMENTATION2(CommonPlugin, module::ComClassFactorySingleton)
 
 		BEGIN_INTERFACE_MAP()
 			INTERFACE_ENTRY(IPlugin)
@@ -53,7 +53,7 @@ namespace Extensions
 
 	/// Class ID of common plug-in, it is not important, because plug-in lookup is done by interface.
 	/// {ba518e45-a5c9-4222-8617-71c794c633da}
-	static const Module::GUID CLSID_CommonPlugin = 
+	static const module::guid CLSID_CommonPlugin = 
 	{ 0xba518e45, 0xa5c9, 0x4222, { 0x86, 0x17, 0x71, 0xc7, 0x94, 0xc6, 0x33, 0xda } };
 
 	//////////////////////////////////////////////////////////////////////////

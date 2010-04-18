@@ -17,7 +17,7 @@ namespace Script
 {
 	/// Represent abstract script table (a set of key-value pairs)
 	/** @ingroup Script */
-	sf_interface IScriptTable : public Module::IUnknown
+	sf_interface IScriptTable : public module::IUnknown
 	{
 		sf_uuid("26e96cb7-d5f9-4364-86ec-c415157ceac9")
 

@@ -108,7 +108,7 @@ template<> struct type_desc<clas> {												\
 	&type_destroy_inst<Class>))
 
 #define def_ctor(...)															\
-	def_ctor_alloc(Module::NewAllocator, ## __VA_ARGS__)
+	def_ctor_alloc(module::new_allocator, ## __VA_ARGS__)
 
 
 #define def_method(name, func)													\

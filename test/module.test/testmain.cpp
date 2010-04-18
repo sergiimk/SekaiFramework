@@ -13,7 +13,7 @@
 #include <sstream>
 #include <map>
 
-using namespace Module;
+using namespace module;
 
 SF_IMPLEMENT_EXCEPTION(TestException, Exception)
 
@@ -24,9 +24,9 @@ BOOST_AUTO_TEST_SUITE( SMTest );
 
 BOOST_AUTO_TEST_CASE( TestGUIDBinding )
 {
-	const GUID& g = uuid_of(ITest);
-	GUID g2;
-	g2.FromString("835ca580-8bc7-40a7-913e-49bbb4987085");
+	const guid& g = uuid_of(ITest);
+	guid g2;
+	g2.parse("835ca580-8bc7-40a7-913e-49bbb4987085");
 
 	BOOST_CHECK(g == g2);
 }
@@ -34,20 +34,20 @@ BOOST_AUTO_TEST_CASE( TestGUIDBinding )
 BOOST_AUTO_TEST_CASE( TestGUIDFromString )
 {
 	// {a1efa033-613e-4110-90ce-992b81cf751f}
-	GUID g = { 0xa1efa033, 0x613e, 0x4110, { 0x90, 0xce, 0x99, 0x2b, 0x81, 0xcf, 0x75, 0x1f } };
+	guid g = { 0xa1efa033, 0x613e, 0x4110, { 0x90, 0xce, 0x99, 0x2b, 0x81, 0xcf, 0x75, 0x1f } };
 
-	GUID g2;
-	bool res = g2.FromString("{a1efa033-613e-4110-90ce-992b81cf751f}");
+	guid g2;
+	bool res = g2.parse("{a1efa033-613e-4110-90ce-992b81cf751f}");
 	BOOST_CHECK(res);
 	BOOST_CHECK(g == g2);
 
-	GUID g3;
-	res = g3.FromString("a1efa033-613e-4110-90ce-992b81cf751f");
+	guid g3;
+	res = g3.parse("a1efa033-613e-4110-90ce-992b81cf751f");
 	BOOST_CHECK(res);
 	BOOST_CHECK(g == g3);
 
 	std::istringstream ss("{a1efa033-613e-4110-90ce-992b81cf751f}");
-	GUID g4;
+	guid g4;
 	BOOST_CHECK(!(!(ss >> g4)));
 	BOOST_CHECK(g == g3);
 }
@@ -55,11 +55,11 @@ BOOST_AUTO_TEST_CASE( TestGUIDFromString )
 BOOST_AUTO_TEST_CASE( TestGUIDToString )
 {
 	// {a1efa033-613e-4110-90ce-992b81cf751f}
-	GUID g = { 0xa1efa033, 0x613e, 0x4110, { 0x90, 0xce, 0x99, 0x2b, 0x81, 0xcf, 0x75, 0x1f } };
+	guid g = { 0xa1efa033, 0x613e, 0x4110, { 0x90, 0xce, 0x99, 0x2b, 0x81, 0xcf, 0x75, 0x1f } };
 	const char* gs = "A1EFA033-613E-4110-90CE-992B81CF751F";
 
 	char buf[37];
-	g.ToString(buf);
+	g.to_string(buf);
 
 	BOOST_CHECK(strcmp(buf, gs) == 0);
 
@@ -137,10 +137,10 @@ BOOST_AUTO_TEST_CASE( TestComPtr )
 
 BOOST_AUTO_TEST_CASE( TestGUIDCompare )
 {
-	GUID g1;
-	g1.FromString("00000001-0000-0000-0000-000000000000");
-	GUID g2;
-	g2.FromString("00000000-1000-0000-0000-000000000000");
+	guid g1;
+	g1.parse("00000001-0000-0000-0000-000000000000");
+	guid g2;
+	g2.parse("00000000-1000-0000-0000-000000000000");
 
 	bool b1 = g1 < g2;
 	bool b2 = g2 < g1;

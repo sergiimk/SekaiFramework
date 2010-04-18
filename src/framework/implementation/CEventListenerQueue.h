@@ -15,7 +15,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/thread.hpp>
 
-using namespace Module;
+using namespace module;
 
 namespace Framework
 {

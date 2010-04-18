@@ -19,7 +19,7 @@ namespace Extensions
 	/// ICore interface
 	/** Facade interface to all subsystems
 	 *  @ingroup Extensions */
-	sf_interface ICore : public Module::IUnknown
+	sf_interface ICore : public module::IUnknown
 	{
 		sf_uuid("58CC46C4-647C-42d6-9D41-73A981B3A5A2")
 

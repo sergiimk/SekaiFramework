@@ -237,7 +237,7 @@ struct ModuleLibraryFixture : public ScriptFixture
 {
 	ModuleLibraryFixture()
 	{
-		mgr->ExportType("Module", type_of<Module::GUID>());
+		mgr->ExportType("module", type_of<module::guid>());
 	}
 };
 

@@ -13,23 +13,23 @@
 #include "platform/platform.h"
 
 //////////////////////////////////////////////////////////////////////////
-// GUID hashing and comparing
+// guid hashing and comparing
 //////////////////////////////////////////////////////////////////////////
 
 #if defined(_SF_GUID_H__)
 
-namespace Module
+namespace module
 {
-    /// GUID hash functor
+    /// guid hash functor
     /** @ingroup Common */
     struct guid_hash
     {
-        size_t operator() (const GUID& guid) const
+        size_t operator() (const guid& g) const
         {
             unsigned long val;
-            val = guid.Data1 ^ guid.Data2 ^ guid.Data3;
+            val = g.data1 ^ g.data2 ^ g.data3;
             for(int i = 0; i < 8; i += sizeof(unsigned long))
-                val ^= (unsigned long)guid.Data4[i];
+                val ^= (unsigned long)g.data4[i];
             return size_t(val);
         }
     };
@@ -51,7 +51,7 @@ namespace stl
 
 	//////////////////////////////////////////////////////////////////////////
 
-	template<class T = Module::IUnknown>
+	template<class T = module::IUnknown>
 	struct fn_release
 	{
 		void operator()(T *itf) const { itf->Release(); }

@@ -31,7 +31,7 @@ namespace Extensions
 		/** Implements the managing system of plug-ins
 	      * @ingroup Extensions */
 		class NOVTABLE CPluginManager :
-			public Module::ComRootObject<>,
+			public module::ComRootObject<>,
 			public IPluginManager
 		{
 		public:
@@ -53,7 +53,7 @@ namespace Extensions
 
 		public:
 			/// Executed on start to initialize core plug-ins
-			Module::HResult	LoadCorePlugins();
+			module::HResult	LoadCorePlugins();
 
 			/// Loads all dynamic plug-ins
 			void			LoadPlugins();
@@ -75,21 +75,21 @@ namespace Extensions
 			CPluginShadow*	CreatePluginShadow(const std::string& name, int version);
 
 			/// Creates extension
-			CExtension*		CreateExtension(CPluginShadow *extender, IExtensionPoint* exPoint, const Module::GUID& classID, std::map<std::string, std::string>& paramMap);
+			CExtension*		CreateExtension(CPluginShadow *extender, IExtensionPoint* exPoint, const module::guid& classID, std::map<std::string, std::string>& paramMap);
 
 			/// Creates extension point
-			CExtensionPoint* CreateExtensionPoint(CPluginShadow *provider, const std::string& name, const Module::GUID& iid);
+			CExtensionPoint* CreateExtensionPoint(CPluginShadow *provider, const std::string& name, const module::guid& iid);
 
 			/// Breaks full extension point path
 			void			ParseExtesionPoint(const std::string& str, std::string& plugin, std::string& point);
 
 			/// Initialization of loaded plugin
-			Module::HResult	OnPluginLoad(CPluginShadow *pShadow);
+			module::HResult	OnPluginLoad(CPluginShadow *pShadow);
 
 		protected:
 			typedef std::vector<CPluginShadow*> TCreationStack;
 			typedef std::unordered_map<std::string, CPluginShadow*, str_hash> TShadowMap;
-			typedef std::unordered_multimap<std::string, std::pair<CPluginShadow*, Module::GUID>, str_hash> TExtendersMap;
+			typedef std::unordered_multimap<std::string, std::pair<CPluginShadow*, module::guid>, str_hash> TExtendersMap;
 
 			CoreParams*		mCoreParams;	///< Settings that will be used for core initialization
 			TShadowMap		mShadows;		///< Shadows

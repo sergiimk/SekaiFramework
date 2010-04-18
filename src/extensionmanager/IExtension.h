@@ -19,7 +19,7 @@ namespace Extensions
 {
 	/// Extension binds extension point with implementation class of extender and contains extension parameters
 	/** @ingroup Extensions */
-	sf_interface IExtension : public Module::IUnknown
+	sf_interface IExtension : public module::IUnknown
 	{
 		sf_uuid("a4fe0296-4f81-4643-ab29-37a9039d85ac")
 
@@ -29,8 +29,8 @@ namespace Extensions
 		/// Gets the point this extension extends
 		virtual IExtensionPoint* ExtensionPoint() = 0;
 
-		/// Gets the implementation class GUID, check IsZero before using it
-		virtual const Module::GUID& ImplClassID() = 0;
+		/// Gets the implementation class guid, check IsZero before using it
+		virtual const module::guid& ImplClassID() = 0;
 
 		/// Returns parameter of extension by it's name
 		/** Parameter map is widely used to increase the 'lazyness' of plugin creation 

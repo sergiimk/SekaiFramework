@@ -13,7 +13,7 @@
 #include "module/interfaces.h"
 #include "reflection/reflection.h"
 
-sf_interface IFancyInterface : public Module::IUnknown
+sf_interface IFancyInterface : public module::IUnknown
 {
 	sf_uuid("79189e96-9353-4177-9d7d-1530bf94eb59")
 

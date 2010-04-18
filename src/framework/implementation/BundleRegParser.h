@@ -13,7 +13,7 @@
 #include "filesystem/FileSystem.h"
 #include "tinyxml/tinyxml.h"
 
-using namespace Module;
+using namespace module;
 using namespace filesystem;
 
 namespace Framework

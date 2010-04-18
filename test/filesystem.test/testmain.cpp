@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE( TestConstructPath )
 	path p("test_path");
 	path p2;
 	std::swap(p, p2);
-	BOOST_CHECK_THROW(path p3("te|<>\"?*st"), Module::InvalidArgumentException);
+	BOOST_CHECK_THROW(path p3("te|<>\"?*st"), module::InvalidArgumentException);
 }
 
 BOOST_AUTO_TEST_CASE( TestCmp )

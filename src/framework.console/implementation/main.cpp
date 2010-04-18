@@ -15,7 +15,7 @@
 #   include <crtdbg.h>
 #endif
 
-using namespace Module;
+using namespace module;
 using namespace Framework;
 
 int main(int argc, char* argv[])

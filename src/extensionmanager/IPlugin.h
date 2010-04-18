@@ -32,7 +32,7 @@ namespace Extensions
 	  * this means that plug-in lookup will happen by interface, not by class ID.
 	  * 
 	  * @ingroup Extensions */
-	sf_interface IPlugin : public Module::IUnknown
+	sf_interface IPlugin : public module::IUnknown
 	{
 		sf_uuid("6c6c333c-861f-4948-90e1-9588613e3495")
 

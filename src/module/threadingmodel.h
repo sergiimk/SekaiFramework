@@ -12,10 +12,10 @@
 
 #include "threading/threading.h"
 
-namespace Module
+namespace module
 {
 	//! Single-threading model for ComRootObject
-	/** @ingroup Module */
+	/** @ingroup module */
 	struct SingleThreadModel
 	{
 		static void Increment(long& l) { ++l; }
@@ -23,7 +23,7 @@ namespace Module
 	};
 
 	//! Multi-threading model for ComRootObject
-	/** @ingroup Module */
+	/** @ingroup module */
 	struct MultiThreadModel
 	{
 		static void Increment(long& l) { Utils::AtomicIncrement(&l); }

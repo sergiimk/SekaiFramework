@@ -19,7 +19,7 @@ namespace ScriptPy
 	/// Implementation of abstract table interface
 	/** @ingroup Py */
 	class NOVTABLE CScriptTable : 
-		public Module::ComRootObject<>,
+		public module::ComRootObject<>,
 		public IScriptTable
 	{
 	public:

@@ -1,5 +1,5 @@
 /*========================================================
-* Module.h
+* module.h
 * @author Sergey Mikhtonyuk
 * @date 02 May 2009
 *
@@ -13,13 +13,13 @@
 #include "implementations.h"
 #include "intellectual.h"
 
-namespace Module
+namespace module
 {
 	//////////////////////////////////////////////////////////////////////////
 
 	/// Module managing class
 	/** Used to easily load the module and gain access to module map
-	*  @ingroup Module */
+	*  @ingroup module */
 	class ModuleHandle
 	{
 		typedef detail::MODULE_MAP_ENTRY* (*GET_MAP_FUNC)();
@@ -38,7 +38,7 @@ namespace Module
 			bool operator !=(const iterator& rhs) const { return !(*this == rhs); }
 			iterator& operator++() { ASSERT_STRICT(m_pEntry); ++m_pEntry; checkEnd(); return *this; }
 			iterator operator++(int) { iterator ret(*this); ++*this; return ret; }
-			const GUID* ClassID() const { return m_pEntry->pClsid; }
+			const guid* ClassID() const { return m_pEntry->pClsid; }
 			reflection::user_type* ReflectedType() const { return (m_pEntry->pTypeOf) ? m_pEntry->pTypeOf() : 0; }
 
 			iterator() : m_pEntry(0) { }
@@ -123,49 +123,49 @@ namespace Module
 
 
 /// Creates implementation from specified module (refCount == 1)
-/** @ingroup Module */
+/** @ingroup module */
 template<class Itf>
-Module::HResult create_instance(Itf** outObj, SF_RIID clsid, const Module::ModuleHandle& module)
+module::HResult create_instance(Itf** outObj, SF_RIID clsid, const module::ModuleHandle& m)
 {
-	return module.CreateInstance(clsid, UUID_PPV(Itf, outObj));
+	return m.CreateInstance(clsid, UUID_PPV(Itf, outObj));
 }
 
-/// Creation helper for com_ptr
-/** @ingroup Module */
+/// creation helper for com_ptr
+/** @ingroup module */
 template<class Itf>
-Module::HResult create_instance(Module::com_ptr<Itf>& ptr, SF_RIID clsid, const Module::ModuleHandle& module)
+module::HResult create_instance(module::com_ptr<Itf>& ptr, SF_RIID clsid, const module::ModuleHandle& m)
 {
-	return module.CreateInstance(clsid, UUID_PPV(Itf, ptr.wrapped()));
+	return m.CreateInstance(clsid, UUID_PPV(Itf, ptr.wrapped()));
 }
 
-/// Creates implementation from specified module (refCount == 1)
-/** @ingroup Module */
-inline Module::HResult create_instance(void** outObj, SF_RIID iid, SF_RIID clsid, const Module::ModuleHandle& module)
+/// creates implementation from specified module (refCount == 1)
+/** @ingroup module */
+inline module::HResult create_instance(void** outObj, SF_RIID iid, SF_RIID clsid, const module::ModuleHandle& m)
 {
-	return module.CreateInstance(clsid, iid, outObj);
+	return m.CreateInstance(clsid, iid, outObj);
 }
 
-/// Creates first found implementation of specified interface (refCount == 1)
-/** @ingroup Module */
+/// creates first found implementation of specified interface (refCount == 1)
+/** @ingroup module */
 template<class Itf>
-Module::HResult create_instance(Itf** outObj, const Module::ModuleHandle& module)
+module::HResult create_instance(Itf** outObj, const module::ModuleHandle& m)
 {
-	return module.CreateInstance(UUID_PPV(Itf, outObj));
+	return m.CreateInstance(UUID_PPV(Itf, outObj));
 }
 
-/// Creation helper for com_ptr
-/** @ingroup Module */
+/// creation helper for com_ptr
+/** @ingroup module */
 template<class Itf>
-Module::HResult create_instance(Module::com_ptr<Itf>& ptr, const Module::ModuleHandle& module)
+module::HResult create_instance(module::com_ptr<Itf>& ptr, const module::ModuleHandle& m)
 {
-	return module.CreateInstance(UUID_PPV(Itf, ptr.wrapped()));
+	return m.CreateInstance(UUID_PPV(Itf, ptr.wrapped()));
 }
 
-/// Creates first found implementation of specified interface (refCount == 1)
-/** @ingroup Module */
-inline Module::HResult create_instance(void** outObj, SF_RIID iid, const Module::ModuleHandle& module)
+/// creates first found implementation of specified interface (refCount == 1)
+/** @ingroup module */
+inline module::HResult create_instance(void** outObj, SF_RIID iid, const module::ModuleHandle& m)
 {
-	return module.CreateInstance(iid, outObj);
+	return m.CreateInstance(iid, outObj);
 }
 
 //////////////////////////////////////////////////////////////////////////

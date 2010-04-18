@@ -1,5 +1,5 @@
 /*========================================================
-* GUID.h
+* guid.h
 * @author Sergey Mikhtonyuk
 * @date 23 July 2009
 *
@@ -14,65 +14,65 @@
 #include <iosfwd>
 
 
-namespace Module
+namespace module
 {
 
 	//////////////////////////////////////////////////////////////////////////
 
 
-	/// GUID structure
+	/// guid structure
 	/** Used to uniquely identify interface between modules
-	 *  @ingroup Module */
-	struct GUID
+	 *  @ingroup module */
+	struct guid
 	{
 		//@{
 		/** Data fields */
-		unsigned long  Data1;
-		unsigned short Data2;
-		unsigned short Data3;
-		unsigned char  Data4[ 8 ];
+		unsigned long  data1;
+		unsigned short data2;
+		unsigned short data3;
+		unsigned char  data4[ 8 ];
 		//@}
 
 		/// Comparison operator
-		bool operator == (const Module::GUID& rhs) const
+		bool operator == (const guid& rhs) const
 		{
-			return Data1 == rhs.Data1
-				&& Data2 == rhs.Data2
-				&& Data3 == rhs.Data3
-				&& memcmp(Data4, rhs.Data4, sizeof(char)*8) == 0;
+			return data1 == rhs.data1
+				&& data2 == rhs.data2
+				&& data3 == rhs.data3
+				&& memcmp(data4, rhs.data4, sizeof(char)*8) == 0;
 		}
 
 		/// Comparison operator
-		bool operator != (const Module::GUID& rhs) const
+		bool operator != (const guid& rhs) const
 		{
 			return !(this->operator ==(rhs));
 		}
 
 		/// Comparison operator
-		bool operator < (const Module::GUID& rhs) const
+		bool operator < (const guid& rhs) const
 		{
-			// If GUID first components are not equal -> return their comparison result
+			// If guid first components are not equal -> return their comparison result
 			// Otherwise, proceed to the next component pair
-			// Continue for all components of GUID
-			if( Data1 != rhs.Data1 )
+			// Continue for all components of guid
+			if( data1 != rhs.data1 )
 			{
-				return Data1 < rhs.Data1;
+				return data1 < rhs.data1;
 			}
 
-			if ( Data2 != rhs.Data2 )
+			if ( data2 != rhs.data2 )
 			{
-				return Data2 < rhs.Data2;
+				return data2 < rhs.data2;
 			}
 
-			if ( Data3 != rhs.Data3 )
+			if ( data3 != rhs.data3 )
 			{
-				return Data3 < rhs.Data3;
+				return data3 < rhs.data3;
 			}
 
 			for(int i = 0; i < 8; ++i)
 			{
-				if ( Data4[i] != rhs.Data4[i] )
-					return Data4[i] < rhs.Data4[i];
+				if ( data4[i] != rhs.data4[i] )
+					return data4[i] < rhs.data4[i];
 			}
 
 			// Guids are equal
@@ -80,49 +80,51 @@ namespace Module
 		}
 
 		/// Sets data to zero
-		void SetZero()
+		void reset()
 		{
-			memset(this, 0, sizeof(Module::GUID));
+			memset(this, 0, sizeof(guid));
 		}
 
-		/// Checks is GUID is zero
-		bool IsZero() const
+		/// Checks is guid is zero
+		bool is_reset() const
 		{
-			GUID zero;
-			zero.SetZero();
+			guid zero;
+			zero.reset();
 			return *this == zero;
 		}
 
-		/// Parses the GUID string
-		bool FromString(const char* s);
+		operator bool() const { return !is_reset(); }
+
+		/// Parses the guid string
+		bool parse(const char* s);
 
 		/// Buffer must be 37 bytes long
-		void ToString(char* buf) const;
+		void to_string(char* buf) const;
 
-		/// Constructs GUID from string
+		/// Constructs guid from string
 		/** @return zero guid if failed */
-		static GUID GUIDFromString(const char* s)
+		static guid guid_from_string(const char* s)
 		{
-			GUID g;
-			g.SetZero();
-			g.FromString(s);
+			guid g;
+			g.reset();
+			g.parse(s);
 			return g;
 		}
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 
-	std::ostream& operator<<(std::ostream& os, const GUID& guid);
+	std::ostream& operator<<(std::ostream& os, const guid& g);
 
-	std::istream& operator>>(std::istream& is, GUID& guid);
+	std::istream& operator>>(std::istream& is, guid& g);
 
 	//////////////////////////////////////////////////////////////////////////
 
 
 	//@{
 	/** Type masks */
-	#define SF_IID  Module::GUID
-	#define SF_RIID const Module::GUID&
+	#define SF_IID  module::guid
+	#define SF_RIID const module::guid&
 	//@}
 
 
@@ -140,4 +142,4 @@ namespace Module
 
 } // namespace
 
-#endif // _Module_GUID_H__
+#endif // _module_GUID_H__

@@ -14,7 +14,7 @@
 #include "module/implementations.h"
 
 class NOVTABLE CFancyAdder : 
-	public Module::ComRootObject<>,
+	public module::ComRootObject<>,
 	public IFancyInterface
 {
 public:
@@ -33,7 +33,7 @@ public:
 };
 
 // {e051c779-64dc-4da3-99bb-01a7b7dcf603} 
-static const Module::GUID CLSID_FancyAdder = { 0xe051c779, 0x64dc, 0x4da3, { 0x99, 0xbb, 0x01, 0xa7, 0xb7, 0xdc, 0xf6, 0x03 } };
+static const module::guid CLSID_FancyAdder = { 0xe051c779, 0x64dc, 0x4da3, { 0x99, 0xbb, 0x01, 0xa7, 0xb7, 0xdc, 0xf6, 0x03 } };
 
 reflect_class(CFancyAdder, "CFancyAdder")
 	.def_base(IFancyInterface)

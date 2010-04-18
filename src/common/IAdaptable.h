@@ -24,12 +24,12 @@
   * can be ignored.
   *
   * @ingroup Extensions */
-sf_interface IAdaptable : public Module::IUnknown
+sf_interface IAdaptable : public module::IUnknown
 {
     sf_uuid("f7c5f5ea-33ed-48e8-8823-5904da2cf6fa")
 
     /// Returns the adapter of the object if it exist
-    virtual Module::HResult GetAdapter(SF_RIID iid, Module::IUnknown** ppv) = 0;
+    virtual module::HResult GetAdapter(SF_RIID iid, module::IUnknown** ppv) = 0;
 };
 
 #endif // _IADAPTABLE_H__

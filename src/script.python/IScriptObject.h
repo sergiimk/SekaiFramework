@@ -17,7 +17,7 @@ namespace Script
 {
 	/// Interface for manipulation on script objects
 	/** @ingroup Script */
-	sf_interface IScriptObject : public Module::IUnknown
+	sf_interface IScriptObject : public module::IUnknown
 	{
 		sf_uuid("7d18bfd5-dc29-4894-b684-f1990484af61")
 

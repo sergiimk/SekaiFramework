@@ -14,14 +14,14 @@
 #include "module/implementations.h"
 #include "Impl_fwd.h"
 
-using namespace Module;
+using namespace module;
 
 namespace Framework
 {
 	/// Implementation of service reference object
 	/** @ingroup Framework */
 	class NOVTABLE CServiceReference : 
-		public Module::ComRootObject<Module::MultiThreadModel>,
+		public module::ComRootObject<module::MultiThreadModel>,
 		public IServiceReference
 	{
 	public:

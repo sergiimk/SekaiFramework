@@ -54,10 +54,10 @@ namespace ScriptPy
 		ExportEntry* FindExportedType(const char* typeName) const;
 
 		/// Associates a module handle with script
-		void SetModuleHandle(const Module::ModuleHandle& module);
+		void SetModuleHandle(const module::ModuleHandle& module);
 
 		/// Returns associated module handle (check IsLoaded before using)
-		const Module::ModuleHandle& GetModuleHandle() const;
+		const module::ModuleHandle& GetModuleHandle() const;
 
 	private:
 
@@ -82,7 +82,7 @@ namespace ScriptPy
 		typedef std::unordered_map<const reflection::user_type*, ExportEntry*, hash_typeptr> THintMap;
 		typedef std::unordered_map<const char*, ExportEntry*, cstr_hash, cstrcmp_eq> TExportMap;
 
-		Module::ModuleHandle		mModuleHandle;
+		module::ModuleHandle		mModuleHandle;
 		std::deque<PyMethodDef>		mMethodDefStorage;
 		std::vector<PyGetSetDef*>	mAttributeStorage;
 		TExportMap					mEntries;

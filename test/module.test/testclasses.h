@@ -12,21 +12,21 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-sf_interface ITest : public Module::IUnknown
+sf_interface ITest : public module::IUnknown
 {
 	sf_uuid("835ca580-8bc7-40a7-913e-49bbb4987085")
 
 	virtual void Test() = 0;
 };
 
-sf_interface ITest2 : public Module::IUnknown
+sf_interface ITest2 : public module::IUnknown
 {
 	sf_uuid("123ca580-8bc7-40a7-913e-49bbb4987085")
 
 	virtual void Test() = 0;
 };
 
-sf_interface ITest3 : public Module::IUnknown
+sf_interface ITest3 : public module::IUnknown
 {
 	sf_uuid("633f7d87-44a7-45b8-b3ed-3453fe7687cb")
 
@@ -36,7 +36,7 @@ sf_interface ITest3 : public Module::IUnknown
 //////////////////////////////////////////////////////////////////////////
 
 class NOVTABLE CTest : 
-	public Module::ComRootObject<>,
+	public module::ComRootObject<>,
 	public ITest,
 	public ITest2
 {
@@ -76,6 +76,6 @@ public:
 
 //////////////////////////////////////////////////////////////////////////
 
-SF_DECLARE_EXCEPTION(TestException, Module::Exception)
+SF_DECLARE_EXCEPTION(TestException, module::Exception)
 
 //////////////////////////////////////////////////////////////////////////

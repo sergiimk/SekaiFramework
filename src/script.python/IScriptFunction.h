@@ -20,7 +20,7 @@ namespace Script
 
 	/// Object bound to function defined in script
 	/** @ingroup Script */
-	sf_interface IScriptFunction : public Module::IUnknown
+	sf_interface IScriptFunction : public module::IUnknown
 	{
 		sf_uuid("3b86f95d-fb47-4a4c-bf72-a6b84cd96fd8")
 	

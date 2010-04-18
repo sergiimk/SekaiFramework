@@ -21,12 +21,12 @@ namespace Extensions
 	/** Implements facade class to all subsystems
 	 *  @ingroup Extensions */
 	class NOVTABLE CCore : 
-		public Module::ComRootObject<>,
+		public module::ComRootObject<>,
 		public ICore
 	{
 	public:
 
-		DECLARE_IMPLEMENTATION2(CCore, Module::ComClassFactorySingleton)
+		DECLARE_IMPLEMENTATION2(CCore, module::ComClassFactorySingleton)
 
 		BEGIN_INTERFACE_MAP()
 			INTERFACE_ENTRY(ICore)
@@ -50,7 +50,7 @@ namespace Extensions
 		void	StartExecution_actual(int argc, char *argv[]);
 
 	private:
-		Module::ModuleHandle mLogModule;
+		module::ModuleHandle mLogModule;
 		GlobalEnvironment	mEnvironment;			///< Base global environment structure
 		GlobalEnvironment*	pCurrentEnvironment;	///< Current environment pointer
 	};

@@ -1,5 +1,5 @@
 /*========================================================
-* GUID.cpp
+* guid.cpp
 * @author Sergey Mikhtonyuk
 * @date 22 April 2009
 *
@@ -11,11 +11,11 @@
 #include <stdio.h>
 #include <iostream>
 
-namespace Module
+namespace module
 {
 	//////////////////////////////////////////////////////////////////////////
 
-	bool GUID::FromString(const char* s)
+	bool guid::parse(const char* s)
 	{
 		if (!s)
 			return false;
@@ -33,39 +33,39 @@ namespace Module
 		int _data[8];
 
 		if(sscanf(&s[start], "%08lX-%04hX-%04hX-%02X%02X-%02X%02X%02X%02X%02X%02X",
-				&Data1, &Data2, &Data3,
+				&data1, &data2, &data3,
 				&_data[0], &_data[1], &_data[2], &_data[3],
 				&_data[4], &_data[5], &_data[6], &_data[7]) != 11)
 			return false;
 
 		for(int i = 0; i != 8; ++i)
-			Data4[i] = (unsigned char)_data[i];
+			data4[i] = (unsigned char)_data[i];
 		return true;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void GUID::ToString(char* buf) const
+	void guid::to_string(char* buf) const
 	{
 		sprintf( buf, "%08lX-%04hX-%04hX-%02X%02X-%02X%02X%02X%02X%02X%02X",
-			Data1, Data2, Data3,
-			Data4[0], Data4[1], Data4[2], Data4[3],
-			Data4[4], Data4[5], Data4[6], Data4[7] );
+			data1, data2, data3,
+			data4[0], data4[1], data4[2], data4[3],
+			data4[4], data4[5], data4[6], data4[7] );
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	std::ostream& operator<<(std::ostream& os, const GUID& guid)
+	std::ostream& operator<<(std::ostream& os, const guid& g)
 	{
 		char buff[37];
-		guid.ToString(buff);
+		g.to_string(buff);
 		os << buff;
 		return os;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	std::istream& operator>>(std::istream& is, GUID& guid)
+	std::istream& operator>>(std::istream& is, guid& g)
 	{
 		char buff[39];
 		is.get(buff, 37, '\n');
@@ -73,7 +73,7 @@ namespace Module
 			is.get(&buff[36], 3, '\n');
 
 		if(!is) return is;
-		if(!guid.FromString(buff))
+		if(!g.parse(buff))
 			is.setstate(std::ios_base::failbit);
 
 		return is;
