@@ -186,11 +186,9 @@
     <ClInclude Include="..\..\src\reflection\types\pointer_type.h" />
     <ClInclude Include="..\..\src\reflection\types\reference_type.h" />
     <ClInclude Include="..\..\src\reflection\types\type.h" />
-    <ClInclude Include="..\..\src\reflection\types\type_iters.h" />
     <ClInclude Include="..\..\src\reflection\types\typeof.h" />
     <ClInclude Include="..\..\src\reflection\types\typetag.h" />
     <ClInclude Include="..\..\src\reflection\types\user_type.h" />
-    <ClInclude Include="..\..\src\reflection\types\user_type_iters.h" />
     <ClInclude Include="..\..\src\reflection\implementation\types\type_impl.h" />
     <ClInclude Include="..\..\src\reflection\implementation\custom\attribute_impl.h" />
     <ClInclude Include="..\..\src\reflection\implementation\custom\member_impl.h" />
@@ -239,6 +237,8 @@
     <None Include="..\..\src\reflection\generated\function_typeof.inc" />
     <None Include="..\..\src\reflection\generated\invoke_generic.inc" />
     <None Include="..\..\src\reflection\generated\method_typeof.inc" />
+    <None Include="..\..\src\reflection\types\type_iters.inc" />
+    <None Include="..\..\src\reflection\types\user_type_iters.inc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

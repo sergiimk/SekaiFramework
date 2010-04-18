@@ -24,7 +24,7 @@ namespace reflection
 	{
 	public:
 
-		#include "type_iters.h"
+		#include "type_iters.inc"
 
 		type(ETypeTag tag, EArchType arch, size_t size);
 

@@ -14,8 +14,8 @@
 #include "Services.h"
 #include "CEventListenerQueue.h"
 #include "Impl_fwd.h"
-#include "platform/hash_map.h"
 #include "common/stlutils.h"
+#include <unordered_map>
 #include <boost/thread.hpp>
 
 using namespace Module;
@@ -41,7 +41,7 @@ namespace Framework
 		void RemoveListener(IServiceListener* listener);
 
 	private:
-		typedef std::hash_multimap<GUID, CServiceRegistration*, Module::guid_hash> TServiceByID;
+		typedef std::unordered_multimap<GUID, CServiceRegistration*, Module::guid_hash> TServiceByID;
 
 		TServiceByID m_servicesByID;
 		CEventListenerQueue m_listeners;

@@ -30,6 +30,7 @@ public:
 	{
 		m_type = rhs.m_type;
 		m_pos = rhs.m_pos;
+		return *this;
 	}
 
 	const attribute& operator*() const

@@ -16,10 +16,10 @@
 #include "Impl_fwd.h"
 #include "ServiceUsage.h"
 #include "Events.h"
-#include "platform/hash_map.h"
 #include "common/stlutils.h"
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include <boost/thread.hpp>
 
 using namespace Module;
@@ -81,7 +81,7 @@ namespace Framework
 
 	protected:
 		typedef std::vector<CServiceRegistration*> TServiceContainer;
-		typedef std::hash_map<CServiceRegistration*, ServiceUsage, stl::hash_ptr> TServicesInUseContainer;
+		typedef std::unordered_map<CServiceRegistration*, ServiceUsage, stl::hash_ptr> TServicesInUseContainer;
 
 		size_t					m_id;
 		EBundleState			m_state;

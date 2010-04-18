@@ -18,8 +18,8 @@
 #include "reflection/types/Type.h"
 #include "common/stringutils.h"
 #include <vector>
+#include <unordered_map>
 #include <Python.h>
-#include "platform/hash_map.h"
 #include "EntryTypes.h"
 
 using namespace Script;
@@ -135,7 +135,7 @@ namespace ScriptPy
 
 		CScriptModule* FindOrCreateModule(const char* moduleName);
 
-		typedef std::hash_map<const char*, CScriptModule*, cstr_hash, cstrcmp_eq> TModuleMap;
+		typedef std::unordered_map<const char*, CScriptModule*, cstr_hash, cstrcmp_eq> TModuleMap;
 		TModuleMap					mModules;
 		std::vector<CScriptModule*>	mUnloaded;
 		PyObject*					mMainModule;

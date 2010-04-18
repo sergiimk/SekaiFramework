@@ -34,6 +34,7 @@ public:
 		m_type = rhs.m_type;
 		m_pos = rhs.m_pos;
 		m_offset = rhs.m_offset;
+		return *this;
 	}
 
 	const user_type& get_type() const { return *m_type; }

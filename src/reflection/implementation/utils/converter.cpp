@@ -11,6 +11,7 @@
 #include "types/user_type.h"
 #include "custom/parsing_attribute.h"
 #include "custom/enumeration_member.h"
+#include <algorithm>
 
 namespace reflection
 {

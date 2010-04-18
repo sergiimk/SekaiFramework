@@ -20,7 +20,7 @@ namespace reflection
 	{
 	public:
 
-		#include "user_type_iters.h"
+		#include "user_type_iters.inc"
 
 		user_type(ETypeTag tag, const char* name, size_t size);
 

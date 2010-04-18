@@ -15,7 +15,7 @@
 #include "Impl_fwd.h"
 #include "CEventListenerQueue.h"
 #include "common/stringutils.h"
-#include "platform/hash_map.h"
+#include <unordered_map>
 #include <boost/thread.hpp>
 
 using namespace Module;
@@ -53,8 +53,8 @@ namespace Framework
 		void RemoveListener(IBundleListener* listener);
 
 	private:
-		typedef std::hash_map<size_t, CBundle*> TBundleById;
-		typedef std::hash_map<const char*, CBundle*, cstr_hash, cstrcmp_eq> TBundleByLocation;
+		typedef std::unordered_map<size_t, CBundle*> TBundleById;
+		typedef std::unordered_map<const char*, CBundle*, cstr_hash, cstrcmp_eq> TBundleByLocation;
 
 		TBundleById m_bundlesById;
 		TBundleByLocation m_bundlesByLocation;

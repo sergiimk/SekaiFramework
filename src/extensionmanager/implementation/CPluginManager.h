@@ -17,8 +17,8 @@
 #include "module/intellectual.h"
 #include "filesystem/filesystem.h"
 #include "CPluginDefVisitor.h"
-#include "platform/hash_map.h"
 #include <vector>
+#include <unordered_map>
 #include "common/stringutils.h"
 
 namespace Extensions
@@ -88,8 +88,8 @@ namespace Extensions
 
 		protected:
 			typedef std::vector<CPluginShadow*> TCreationStack;
-			typedef std::hash_map<std::string, CPluginShadow*, str_hash> TShadowMap;
-			typedef std::hash_multimap<std::string, std::pair<CPluginShadow*, Module::GUID>, str_hash> TExtendersMap;
+			typedef std::unordered_map<std::string, CPluginShadow*, str_hash> TShadowMap;
+			typedef std::unordered_multimap<std::string, std::pair<CPluginShadow*, Module::GUID>, str_hash> TExtendersMap;
 
 			CoreParams*		mCoreParams;	///< Settings that will be used for core initialization
 			TShadowMap		mShadows;		///< Shadows

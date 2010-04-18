@@ -12,10 +12,10 @@
 
 #include "IPluginShadow.h"
 #include "module/implementations.h"
-#include "platform/hash_set.h"
 #include "common/stlutils.h"
 #include <string>
 #include <vector>
+#include <unordered_set>
 #include "module/module.h"
 
 
@@ -68,7 +68,7 @@ namespace Extensions
 		std::string				mModuleName;
 		Module::ModuleHandle	mModule;
 
-		typedef std::hash_set<Module::GUID, Module::guid_hash> TExportTable;
+		typedef std::unordered_set<Module::GUID, Module::guid_hash> TExportTable;
 
 		/// Provides quick look-up for exported classes
 		TExportTable					mExportTable;

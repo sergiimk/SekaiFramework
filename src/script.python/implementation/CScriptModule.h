@@ -11,8 +11,8 @@
 #define _CSCRIPTMODULE_H__
 
 #include <deque>
+#include <unordered_map>
 #include <Python.h>
-#include "platform/hash_map.h"
 #include "reflection/reflection_fwd.h"
 #include "common/stringutils.h"
 #include "EntryTypes.h"
@@ -79,8 +79,8 @@ namespace ScriptPy
 	private:
 		static void FillAttributeDesc(PyGetSetDef& def, const reflection::accessor_member* acc);
 
-		typedef std::hash_map<const reflection::user_type*, ExportEntry*, hash_typeptr> THintMap;
-		typedef std::hash_map<const char*, ExportEntry*, cstr_hash, cstrcmp_eq> TExportMap;
+		typedef std::unordered_map<const reflection::user_type*, ExportEntry*, hash_typeptr> THintMap;
+		typedef std::unordered_map<const char*, ExportEntry*, cstr_hash, cstrcmp_eq> TExportMap;
 
 		Module::ModuleHandle		mModuleHandle;
 		std::deque<PyMethodDef>		mMethodDefStorage;
