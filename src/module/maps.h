@@ -83,8 +83,8 @@ namespace  module
 
 	/////////////////////////////////////////////////////////////////////////
 
-	//#define INTERFACE_ENTRY_BRANCHED(intrfc, branch)
-	//{&uuid_of(intrfc), static_cast<void*>(static_cast<intrfc*>(static_cast<branch*>(reinterpret_cast<_ThisClass*>(8))))-8, module::detail::SF_OFFSET_ENTRY},
+	#define INTERFACE_ENTRY_BRANCHED(intrfc, branch) \
+	{&uuid_of(intrfc), static_cast<void*>(static_cast<intrfc*>(static_cast<branch*>(reinterpret_cast<_ThisClass*>(8))))-8, module::detail::SF_OFFSET_ENTRY},
 
 	/////////////////////////////////////////////////////////////////////////
 

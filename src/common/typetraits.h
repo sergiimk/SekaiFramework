@@ -76,7 +76,7 @@ template<class T> struct t_strip<const T*>
 
 /// Returns the offset between classes
 template<class base, class derived>
-inline size_t classoffset() { return (size_t)(static_cast<base*>((derived*)8)) - 8; }
+inline size_t classoffset() { return (size_t)(static_cast<base*>(reinterpret_cast<derived*>(8))) - 8; }
 
 /// Adjusts the pointer by specified offset
 inline void* adjustptr(void* pThis, size_t offset) { return (char*)pThis + offset; }
