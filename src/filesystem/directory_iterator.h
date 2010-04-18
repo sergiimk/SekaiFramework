@@ -28,6 +28,9 @@ namespace filesystem
 
 		directory_iterator& operator=(const directory_iterator& rhs);
 
+		/// Swap two iterators
+		void swap(directory_iterator& other);
+
 		/// Returns true if iterator is valid, false when reached the end
 		operator bool() const;
 
@@ -46,5 +49,17 @@ namespace filesystem
 	};
 	
 } // namespace
+
+//////////////////////////////////////////////////////////////////////////
+
+namespace std
+{
+	inline void swap(filesystem::directory_iterator& i1, filesystem::directory_iterator& i2)
+	{
+		i1.swap(i2);
+	}
+} // namespace
+
+//////////////////////////////////////////////////////////////////////////
 
 #endif //_DIRECTORY_ITERATOR_H__

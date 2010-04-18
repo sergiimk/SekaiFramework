@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="implementation">
+      <UniqueIdentifier>{ce51f8a1-3fc2-41d1-aceb-028722b50c67}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\filesystem\implementation\directory_iterator.cpp">
+      <Filter>implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\filesystem\implementation\filesystem.cpp">
+      <Filter>implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\filesystem\implementation\path.cpp">
+      <Filter>implementation</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\filesystem\directory_iterator.h" />
+    <ClInclude Include="..\..\src\filesystem\filesystem.h" />
+    <ClInclude Include="..\..\src\filesystem\filesystem_fwd.h" />
+    <ClInclude Include="..\..\src\filesystem\path.h" />
+  </ItemGroup>
+</Project>

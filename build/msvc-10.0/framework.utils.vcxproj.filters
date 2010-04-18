@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ServiceTracker">
+      <UniqueIdentifier>{d7a4c80e-7d20-4e62-8d84-11ecde233d28}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\framework.utils\IServiceTrackerCostumizer.h">
+      <Filter>ServiceTracker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework.utils\ServiceTracker.h">
+      <Filter>ServiceTracker</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\framework.utils\ServiceTracker.cpp">
+      <Filter>ServiceTracker</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

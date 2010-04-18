@@ -61,6 +61,9 @@ namespace filesystem
 		/// Destructor
 		~path();
 
+		/// Swaps two paths
+		void swap(path& other);
+
 
 		/// Checks if path is empty
 		bool empty() const;
@@ -226,5 +229,17 @@ namespace filesystem
 	//////////////////////////////////////////////////////////////////////////
 	
 } // namespace
+
+//////////////////////////////////////////////////////////////////////////
+
+namespace std
+{
+	inline void swap(filesystem::path& p1, filesystem::path& p2)
+	{
+		p1.swap(p2);
+	}
+} // namespace
+
+//////////////////////////////////////////////////////////////////////////
 
 #endif //_SF_PATH_H__

@@ -178,6 +178,13 @@ namespace filesystem
 
 	//////////////////////////////////////////////////////////////////////////
 
+	void path::swap(path& other)
+	{
+		std::swap(m_impl, other.m_impl);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	path& path::operator=(const filesystem::path &rhs)
 	{
 		if(this == &rhs)
@@ -315,7 +322,7 @@ namespace filesystem
 
 	void path::relative(const path& dir)
 	{
-		if(!is_absolute() || !dir.is_absolute() || size() <= dir.size())
+		if(!is_absolute() || !dir.is_absolute())
 			return;
 
 		path tmp;

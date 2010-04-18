@@ -18,7 +18,7 @@ namespace Module
 		HResult _Chain(void *pThis, void* pChain, SF_RIID riid, void **ppv)
 		{
 			_CHAINDATA* pcd = static_cast<_CHAINDATA*>(pChain);
-			void* p = (void*)((size_t)pThis + pcd->dwOffset);
+			void* p = adjustptr(pThis, pcd->dwOffset);
 			return _QueryInterface(p, pcd->pFunc(), riid, ppv);
 		}
 
@@ -31,8 +31,8 @@ namespace Module
 			{
 				// first entry must be an offset
 				assert( pEntries->locator == SF_OFFSET_ENTRY );
-				*ppvObject = (char*)pThis + reinterpret_cast<unsigned long>(pEntries->OffChain);
-				static_cast<IUnknown*>(*ppvObject)->AddRef() ;
+				*ppvObject = adjustptr(pThis, reinterpret_cast<size_t>(pEntries->OffChain));
+				static_cast<IUnknown*>(*ppvObject)->AddRef();
 				return SF_S_OK;
 			}
 			else
@@ -45,7 +45,7 @@ namespace Module
 					{
 						if (pEntries->locator == SF_OFFSET_ENTRY)
 						{
-							*ppvObject = (char*)pThis + reinterpret_cast<unsigned long>(pEntries->OffChain);
+							*ppvObject = adjustptr(pThis, reinterpret_cast<size_t>(pEntries->OffChain));
 							static_cast<IUnknown*>(*ppvObject)->AddRef();
 							hr = SF_S_OK;
 							break;

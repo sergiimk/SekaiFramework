@@ -198,6 +198,13 @@ namespace filesystem
 
 	//////////////////////////////////////////////////////////////////////////
 
+	void directory_iterator::swap(directory_iterator& other)
+	{
+		std::swap(m_impl, other.m_impl);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	directory_iterator& directory_iterator::operator=(const directory_iterator& rhs)
 	{
 		if(this == &rhs)

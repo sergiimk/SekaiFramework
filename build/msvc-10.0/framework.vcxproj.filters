@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="interfaces">
+      <UniqueIdentifier>{a46b473c-d14e-4421-98bd-c467540df2bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation">
+      <UniqueIdentifier>{2be89575-d335-4e9a-b2ef-55e85145a833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation\events">
+      <UniqueIdentifier>{8eba14f2-07b9-4ac2-ab6f-28030f6483cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation\framework">
+      <UniqueIdentifier>{04d0f5fa-6e2e-463c-859b-ba6830e0b4bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation\bundle">
+      <UniqueIdentifier>{605f5e4f-5f5a-4b76-a6b0-398d7481e097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation\services">
+      <UniqueIdentifier>{f9a24167-4f40-407f-9a7a-ff2c6e117d1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation\persistance">
+      <UniqueIdentifier>{bcf412a8-7f3c-4594-b538-f64257a8ec08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="reflection">
+      <UniqueIdentifier>{48a3e048-f24f-4c81-a7fa-ca4dcd354856}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\framework\Events.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\IBundle.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\IBundleActivator.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\IBundleContext.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\IFramework.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\IFrameworkFactory.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Listeners.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Services.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\Impl_fwd.h">
+      <Filter>implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\CEventListenerQueue.h">
+      <Filter>implementation\events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\CEventServer.h">
+      <Filter>implementation\events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\EventDispatchers.h">
+      <Filter>implementation\events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\CBundleRepository.h">
+      <Filter>implementation\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\CFrameworkFactory.h">
+      <Filter>implementation\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\CSystemBundle.h">
+      <Filter>implementation\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\CSystemBundleActivator.h">
+      <Filter>implementation\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\CBundle.h">
+      <Filter>implementation\bundle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\CBundleContext.h">
+      <Filter>implementation\bundle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\CServiceReference.h">
+      <Filter>implementation\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\CServiceRegistration.h">
+      <Filter>implementation\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\CServiceRegistry.h">
+      <Filter>implementation\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\ServiceUsage.h">
+      <Filter>implementation\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Implementation\BundleRegParser.h">
+      <Filter>implementation\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="reflection.h">
+      <Filter>reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework\Framework.h" />
+    <ClInclude Include="..\..\src\framework\Framework_fwd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\framework\Implementation\Framework.cpp">
+      <Filter>implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\CEventListenerQueue.cpp">
+      <Filter>implementation\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\CEventServer.cpp">
+      <Filter>implementation\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\EventDispatchers.cpp">
+      <Filter>implementation\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\CBundleRepository.cpp">
+      <Filter>implementation\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\CFrameworkFactory.cpp">
+      <Filter>implementation\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\CSystemBundle.cpp">
+      <Filter>implementation\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\CSystemBundleActivator.cpp">
+      <Filter>implementation\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\CBundle.cpp">
+      <Filter>implementation\bundle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\CBundleContext.cpp">
+      <Filter>implementation\bundle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\CServiceReference.cpp">
+      <Filter>implementation\services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\CServiceRegistration.cpp">
+      <Filter>implementation\services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\CServiceRegistry.cpp">
+      <Filter>implementation\services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\ServiceUsage.cpp">
+      <Filter>implementation\services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework\Implementation\BundleRegParser.cpp">
+      <Filter>implementation\persistance</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\src\framework\BundleRegistry.xml" />
+  </ItemGroup>
+</Project>

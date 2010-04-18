@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="tests">
+      <UniqueIdentifier>{26ae33c7-7478-469c-ae74-32c195d1a4f0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\test\filesystem.test\Tests\test_arch.zip">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="..\..\test\filesystem.test\Tests\TestINI.ini">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="..\..\test\filesystem.test\Tests\TestXML.xml">
+      <Filter>tests</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\test\filesystem.test\testmain.cpp" />
+  </ItemGroup>
+</Project>

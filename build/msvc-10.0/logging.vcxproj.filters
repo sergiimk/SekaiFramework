@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="interfaces">
+      <UniqueIdentifier>{1651a22f-10f1-4c6e-8651-6731134647b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation">
+      <UniqueIdentifier>{8658406f-648c-449b-b588-8bf16382a9cd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\logging\ILogListener.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\logging\ILogService.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\logging\Implementation\CLogService.h">
+      <Filter>implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\logging\logging.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\logging\Implementation\CLogService.cpp">
+      <Filter>implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\logging\implementation\logging.cpp">
+      <Filter>implementation</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

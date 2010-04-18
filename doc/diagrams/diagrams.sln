@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "module", "module\module.modelproj", "{A417F90E-D81F-41D8-96FB-4E0C1D832A6C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A417F90E-D81F-41D8-96FB-4E0C1D832A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A417F90E-D81F-41D8-96FB-4E0C1D832A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A417F90E-D81F-41D8-96FB-4E0C1D832A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A417F90E-D81F-41D8-96FB-4E0C1D832A6C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

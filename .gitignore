@@ -12,6 +12,17 @@ build/msvc-9.0/*.ncb
 build/msvc-9.0/*.suo
 build/msvc-9.0/*.user
 
+build/msvc-10.0/ipch
+build/msvc-10.0/*.suo
+build/msvc-10.0/*.user
+build/msvc-10.0/*.sdf
+
+# Ignore temp diagram files
+doc/diagrams/*.suo
+doc/diagrams/*/bin
+doc/diagrams/*/obj
+
+
 # Ignore codeblocks tmp files
 build/codeblocks/*.depend
 build/codeblocks/*.layout

@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="types">
+      <UniqueIdentifier>{47ab1a8c-7752-4491-b507-888145a0d427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation">
+      <UniqueIdentifier>{6a43be16-c973-4f18-bcb6-eb3b7db97206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation\types">
+      <UniqueIdentifier>{07d728cf-2a72-4513-9ca9-27e661d5a9d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation\custom">
+      <UniqueIdentifier>{513b2417-fbf6-46e0-82ce-f75d49226f4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation\utils">
+      <UniqueIdentifier>{842d63ed-8d7f-4386-8ede-f9931adadbee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="generated">
+      <UniqueIdentifier>{0add78c0-97a1-4229-a53d-05f2d2b9ad51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="delegate">
+      <UniqueIdentifier>{75162a51-7ffe-42cd-9e8d-2a63cf0a3604}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\reflection\types\array_type.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\types\builtin_type.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\types\function_type.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\types\pointer_type.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\types\reference_type.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\types\type.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\types\type_iters.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\types\typeof.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\types\typetag.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\types\user_type.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\types\user_type_iters.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\implementation\types\type_impl.h">
+      <Filter>implementation\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\implementation\custom\attribute_impl.h">
+      <Filter>implementation\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\implementation\custom\member_impl.h">
+      <Filter>implementation\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\custom\accessor_member.h">
+      <Filter>implementation\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\custom\attribute.h">
+      <Filter>implementation\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\custom\basetype_attribute.h">
+      <Filter>implementation\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\custom\construction_attribute.h">
+      <Filter>implementation\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\custom\custom.h">
+      <Filter>implementation\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\custom\enumeration_member.h">
+      <Filter>implementation\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\custom\member.h">
+      <Filter>implementation\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\custom\method_member.h">
+      <Filter>implementation\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\custom\parsing_attribute.h">
+      <Filter>implementation\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\delegate\Delegate.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\delegate\Delegate_closure.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\delegate\Delegate_deleg.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\delegate\Delegate_funcdata.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\delegate\Delegate_funcstyle.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\delegate\Delegate_makedeleg.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\delegate\Delegate_utils.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\delegate\DelegateBase.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\utils\activator.h">
+      <Filter>implementation\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\utils\converter.h">
+      <Filter>implementation\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\reflection\reflection.h" />
+    <ClInclude Include="..\..\src\reflection\reflection_fwd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\reflection\implementation\types\array_type.cpp">
+      <Filter>implementation\types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\types\builtin_type.cpp">
+      <Filter>implementation\types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\types\function_type.cpp">
+      <Filter>implementation\types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\types\pointer_type.cpp">
+      <Filter>implementation\types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\types\reference_type.cpp">
+      <Filter>implementation\types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\types\type_impl.cpp">
+      <Filter>implementation\types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\types\user_type.cpp">
+      <Filter>implementation\types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\custom\accessor_impl.cpp">
+      <Filter>implementation\custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\custom\attribute_impl.cpp">
+      <Filter>implementation\custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\custom\basetype_impl.cpp">
+      <Filter>implementation\custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\custom\construction_impl.cpp">
+      <Filter>implementation\custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\custom\enumeration_impl.cpp">
+      <Filter>implementation\custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\custom\member_impl.cpp">
+      <Filter>implementation\custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\custom\method_impl.cpp">
+      <Filter>implementation\custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\utils\activator.cpp">
+      <Filter>implementation\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\reflection\implementation\utils\converter.cpp">
+      <Filter>implementation\utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\reflection\generated\construction.inc">
+      <Filter>generated</Filter>
+    </None>
+    <None Include="..\..\src\reflection\generated\function_typeof.inc">
+      <Filter>generated</Filter>
+    </None>
+    <None Include="..\..\src\reflection\generated\invoke_generic.inc">
+      <Filter>generated</Filter>
+    </None>
+    <None Include="..\..\src\reflection\generated\method_typeof.inc">
+      <Filter>generated</Filter>
+    </None>
+  </ItemGroup>
+</Project>

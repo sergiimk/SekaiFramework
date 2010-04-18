@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="scripts">
+      <UniqueIdentifier>{286b5a21-1958-4bfd-86bf-d0f08f108e98}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\test\script.python.test\py_arguments.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_classaccess.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_construction.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_customization.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_doctest.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_enumtest.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_funcaccess.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_inheritance.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_interface.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_members.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_methods.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_module_creation.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_module_guid.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_plain.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_ptrargs.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_simple.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_tableaccess.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_utargs.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_varexport.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\test\script.python.test\py_vector.py">
+      <Filter>scripts</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\test\script.python.test\testclasses.cpp" />
+    <ClCompile Include="..\..\test\script.python.test\testmain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\test\script.python.test\testclasses.h" />
+  </ItemGroup>
+</Project>

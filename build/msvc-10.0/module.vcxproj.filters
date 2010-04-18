@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="base_types">
+      <UniqueIdentifier>{8c92768b-6d15-40ac-af86-2189923e0652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interfaces">
+      <UniqueIdentifier>{17b07d24-5ee0-41e4-a1cc-ab22af8e4f70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="service">
+      <UniqueIdentifier>{27ef927b-adf7-4972-93ce-ee5e3164c30b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\module\allocators.h">
+      <Filter>base_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\module\exception.h">
+      <Filter>base_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\module\guid.h">
+      <Filter>base_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\module\threadingmodel.h">
+      <Filter>base_types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\module\implementations.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\module\interfaces.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\module\maps.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\module\intellectual.h">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\module\module.h">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\module\module_reflection.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\module\implementation\exception.cpp">
+      <Filter>base_types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\module\implementation\guid.cpp">
+      <Filter>base_types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\module\implementation\implementations.cpp">
+      <Filter>interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\module\implementation\module.cpp">
+      <Filter>service</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

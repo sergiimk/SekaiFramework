@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="interfaces">
+      <UniqueIdentifier>{745e5bdf-b50f-4fa9-b0ec-c1c76370386f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interfaces\Shadows">
+      <UniqueIdentifier>{b56592ab-940a-45fe-8750-0a63fa5f795f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interfaces\Facade">
+      <UniqueIdentifier>{de16c160-f799-41df-8225-a186410e09d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interfaces\Common">
+      <UniqueIdentifier>{0ca95d0c-82d1-4af0-a11c-9c636d09c023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation">
+      <UniqueIdentifier>{06891a17-0579-4741-a45f-3c7e56d4e875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation\PluginManager">
+      <UniqueIdentifier>{004e7397-1ec7-42ee-b5f7-11346e2b519e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation\Core">
+      <UniqueIdentifier>{e1be33e1-6ea7-464e-beb6-f2e41ff97489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="implementation\Shadows">
+      <UniqueIdentifier>{2a880f9a-a80e-4fb3-9c6b-7c5470d86677}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\extensionmanager\IPlugin.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\IStartListener.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\IExtension.h">
+      <Filter>interfaces\Shadows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\IExtensionPoint.h">
+      <Filter>interfaces\Shadows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\IPluginShadow.h">
+      <Filter>interfaces\Shadows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\ICore.h">
+      <Filter>interfaces\Facade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\IPluginManager.h">
+      <Filter>interfaces\Facade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\CommonPlugin.h">
+      <Filter>interfaces\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\GlobalEnvironment.h">
+      <Filter>interfaces\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\Implementation\CPluginDefVisitor.h">
+      <Filter>implementation\PluginManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\Implementation\CPluginManager.h">
+      <Filter>implementation\PluginManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\Implementation\CCore.h">
+      <Filter>implementation\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\Implementation\CoreParams.h">
+      <Filter>implementation\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\Implementation\CExtension.h">
+      <Filter>implementation\Shadows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\Implementation\CExtensionPoint.h">
+      <Filter>implementation\Shadows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\Implementation\CPluginShadow.h">
+      <Filter>implementation\Shadows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\extensionmanager\Core_fwd.h" />
+    <ClInclude Include="..\..\src\extensionmanager\SekaiCore.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\extensionmanager\Implementation\CPluginDefVisitor.cpp">
+      <Filter>implementation\PluginManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\extensionmanager\Implementation\CPluginManager.cpp">
+      <Filter>implementation\PluginManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\extensionmanager\Implementation\CCore.cpp">
+      <Filter>implementation\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\extensionmanager\Implementation\CoreParams.cpp">
+      <Filter>implementation\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\extensionmanager\Implementation\CPluginShadow.cpp">
+      <Filter>implementation\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\extensionmanager\implementation\SekaiCore.cpp" />
+  </ItemGroup>
+</Project>

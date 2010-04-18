@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{ead1074d-86a6-43b5-af98-245fd66edbea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation">
+      <UniqueIdentifier>{e4d7daa8-b012-4090-91ce-a7ce7cdee73c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\ScriptManager">
+      <UniqueIdentifier>{000a49d5-c5d2-478e-9f83-0e2dee99a704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\ScriptModule">
+      <UniqueIdentifier>{dd331579-a8cf-44e4-b73b-8adb88e7317b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\ScriptFunction">
+      <UniqueIdentifier>{d228916d-06a6-40a5-beb9-6f34d8111247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\ScriptTable">
+      <UniqueIdentifier>{3a3ceb02-25bc-4677-ac43-bd801d987ac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\ScriptObject">
+      <UniqueIdentifier>{fb3ab576-ac2d-49c6-9dc8-a1e496e8af9a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\script.python\IScriptFunction.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\script.python\IScriptManager.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\script.python\IScriptObject.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\script.python\IScriptTable.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\script.python\SScriptAny.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\script.python\Implementation\EntryTypes.h">
+      <Filter>Implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\script.python\Implementation\CScriptManager.h">
+      <Filter>Implementation\ScriptManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\script.python\Implementation\CScriptModule.h">
+      <Filter>Implementation\ScriptModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\script.python\Implementation\CScriptFunction.h">
+      <Filter>Implementation\ScriptFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\script.python\Implementation\CScriptTable.h">
+      <Filter>Implementation\ScriptTable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\script.python\Implementation\CScriptObject.h">
+      <Filter>Implementation\ScriptObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\script.python\scripting.h" />
+    <ClInclude Include="..\..\src\script.python\scripting_fwd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\script.python\Implementation\CScriptManager.cpp">
+      <Filter>Implementation\ScriptManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\script.python\Implementation\CScriptManager_callbacks.cpp">
+      <Filter>Implementation\ScriptManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\script.python\Implementation\CScriptManager_conversions.cpp">
+      <Filter>Implementation\ScriptManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\script.python\Implementation\CScriptModule.cpp">
+      <Filter>Implementation\ScriptModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\script.python\Implementation\CScriptFunction.cpp">
+      <Filter>Implementation\ScriptFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\script.python\Implementation\CScriptTable.cpp">
+      <Filter>Implementation\ScriptTable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\script.python\Implementation\CScriptObject.cpp">
+      <Filter>Implementation\ScriptObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\script.python\implementation\script_python.cpp" />
+  </ItemGroup>
+</Project>

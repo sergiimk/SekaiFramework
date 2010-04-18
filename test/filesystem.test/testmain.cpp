@@ -20,7 +20,9 @@ BOOST_AUTO_TEST_SUITE( PathTestSuite );
 BOOST_AUTO_TEST_CASE( TestConstructPath )
 {
 	path p("test_path");
-	BOOST_CHECK_THROW(path p2("te|<>\"?*st"), Module::InvalidArgumentException);
+	path p2;
+	std::swap(p, p2);
+	BOOST_CHECK_THROW(path p3("te|<>\"?*st"), Module::InvalidArgumentException);
 }
 
 BOOST_AUTO_TEST_CASE( TestCmp )
