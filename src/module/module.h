@@ -22,13 +22,13 @@ namespace module
 	*  @ingroup module */
 	class ModuleHandle
 	{
+	public:
 		typedef detail::MODULE_MAP_ENTRY* (*GET_MAP_FUNC)();
 		typedef void (*INIT_FUNC)();
 		typedef void (*SHUTDOWN_FUNC)();
 
-	public:
-
 		//////////////////////////////////////////////////////////////////////////
+
 		class iterator
 		{
 			friend class ModuleHandle;
@@ -49,6 +49,7 @@ namespace module
 			void checkEnd() { if(!m_pEntry->pClsid) m_pEntry = 0; }
 			detail::MODULE_MAP_ENTRY* m_pEntry;
 		};
+
 		//////////////////////////////////////////////////////////////////////////
 
 		/// Creates uninitialized module object
@@ -57,13 +58,13 @@ namespace module
 		/// Creates and initializes module object
 		ModuleHandle(const char* moduleName);
 
-		/// Creates a 'weak' module handle that don't control library lifetime
+		/// Can be used to create a handle to current module
 		ModuleHandle(GET_MAP_FUNC mapFunc);
 
-		/// Copy Ctor, only creates 'weak' handles
+		/// Increases the reference count of module
 		ModuleHandle(const ModuleHandle& other);
 
-		/// Assignment operation only degrades to 'weak' handles
+		/// Increases the reference count of module
 		ModuleHandle& operator=(const ModuleHandle& rhs);
 
 		/// Unloads the package
@@ -72,20 +73,14 @@ namespace module
 		/// Used to bind module object to some dll and extract module map accessor
 		HResult Init(const char* moduleName);
 
-		/// Initializes the 'weak' module handle
-		void Init(GET_MAP_FUNC mapFunc);
-
-		/// Calls module shutdown routine
+		/// Calls module shutdown routine, legal when only one handle left
 		void Shutdown();
 
-		/// Unloads the binary
-		void Unload();
+		/// Releases the module reference, if refcount reached zero the binary will be unloaded
+		void Release();
 
 		/// Checks if module is loaded and module map extracted
 		bool IsLoaded() const;
-
-		/// Returns a 'weak' module handle
-		ModuleHandle GetWeakHandle() const;
 
 		/// Returns iterator to the first element of map
 		iterator MapBegin() const;
@@ -110,10 +105,8 @@ namespace module
 
 	private:
 
-		void*			mModule;			///< Module handle
-		INIT_FUNC		mInitFunc;			///< Init function
-		SHUTDOWN_FUNC	mShutdownFunc;		///< Init function
-		GET_MAP_FUNC	mGetModuleMap;		///< Map access
+		struct ModuleHandleImpl;
+		ModuleHandleImpl* m_impl;
 	};
 
 } // namespace

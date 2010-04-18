@@ -39,6 +39,7 @@ namespace Extensions
 
 	void CPluginShadow::FinalConstruct(const std::string &pluginName, int version)
 	{
+		/// \todo refactor to common assembly prefix\suffix
 		mVersion = version;
 		mPluginName = pluginName;
 		mModuleName = pluginName + ".dll";

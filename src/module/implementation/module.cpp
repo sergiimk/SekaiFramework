@@ -13,24 +13,49 @@
 namespace module
 {
 	//////////////////////////////////////////////////////////////////////////
+	// ModuleHandleImpl
+	//////////////////////////////////////////////////////////////////////////
+
+	struct ModuleHandle::ModuleHandleImpl
+	{
+		ModuleHandleImpl()
+			: m_module(0)
+			, m_initFunc(0)
+			, m_shutdownFunc(0)
+			, m_getModuleMap(0)
+			, m_refCount(0)
+		{ }
+
+		ModuleHandleImpl(ModuleHandle::GET_MAP_FUNC getFunc)
+			: m_module(0)
+			, m_initFunc(0)
+			, m_shutdownFunc(0)
+			, m_getModuleMap(getFunc)
+			, m_refCount(0)
+		{
+		}
+
+		void*						m_module;
+		ModuleHandle::INIT_FUNC		m_initFunc;
+		ModuleHandle::SHUTDOWN_FUNC	m_shutdownFunc;
+		ModuleHandle::GET_MAP_FUNC	m_getModuleMap;
+		size_t						m_refCount;
+	};
+
+
+	//////////////////////////////////////////////////////////////////////////
 	// ModuleHandle
 	//////////////////////////////////////////////////////////////////////////
 
 	ModuleHandle::ModuleHandle()
-		: mModule(0)
-		, mInitFunc(0)
-		, mShutdownFunc(0)
-		, mGetModuleMap(0)
+		: m_impl(0)
 	{
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	ModuleHandle::ModuleHandle(const char* moduleName)
-		: mModule(0)
-		, mInitFunc(0)
-		, mShutdownFunc(0)
-		, mGetModuleMap(0)
+		: m_impl(0)
 	{
 		Init(moduleName);
 	}
@@ -38,37 +63,40 @@ namespace module
 	//////////////////////////////////////////////////////////////////////////
 
 	ModuleHandle::ModuleHandle(GET_MAP_FUNC mapFunc)
-		: mModule(0)
-		, mInitFunc(0)
-		, mShutdownFunc(0)
-		, mGetModuleMap(mapFunc)
+		: m_impl(new ModuleHandleImpl(mapFunc))
 	{
+		++m_impl->m_refCount;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	ModuleHandle::ModuleHandle(const ModuleHandle& other)
-		: mModule(0)
-		, mInitFunc(0)
-		, mShutdownFunc(0)
-		, mGetModuleMap(other.mGetModuleMap)
+		: m_impl(other.m_impl)
 	{
+		if(m_impl)
+			++m_impl->m_refCount;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	ModuleHandle::~ModuleHandle()
 	{
-		Shutdown();
-		Unload();
+		Release();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	ModuleHandle& ModuleHandle::operator =(const ModuleHandle &rhs)
 	{
-		Shutdown();
-		mGetModuleMap = rhs.mGetModuleMap;
+		if(this == &rhs)
+			return *this;
+
+		Release();
+		if(rhs.m_impl)
+		{
+			m_impl = rhs.m_impl;
+			++m_impl->m_refCount;
+		}
 		return *this;
 	}
 
@@ -76,21 +104,14 @@ namespace module
 
 	bool ModuleHandle::IsLoaded() const
 	{
-		return mGetModuleMap != 0;
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-	ModuleHandle ModuleHandle::GetWeakHandle() const
-	{
-		return ModuleHandle(mGetModuleMap);
+		return m_impl != 0;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	ModuleHandle::iterator ModuleHandle::MapBegin() const
 	{
-		return iterator(mGetModuleMap());
+		return iterator(m_impl->m_getModuleMap());
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -104,12 +125,14 @@ namespace module
 
 	HResult ModuleHandle::CreateInstance(SF_RIID clsid, SF_RIID riid, void** outObj) const
 	{
-		if(!IsLoaded()) return SF_E_FAIL;
+		if(!IsLoaded()) 
+			return SF_E_FAIL;
 
 		HResult hr = SF_E_POINTER;
-		if(outObj == 0) return hr;
+		if(outObj == 0) 
+			return hr;
 
-		detail::MODULE_MAP_ENTRY* ent = mGetModuleMap();
+		detail::MODULE_MAP_ENTRY* ent = m_impl->m_getModuleMap();
 		while(ent->pClsid)
 		{
 			if(clsid == *ent->pClsid)
@@ -132,12 +155,14 @@ namespace module
 
 	HResult ModuleHandle::CreateInstance(SF_RIID riid, void** outObj) const
 	{
-		if(!IsLoaded()) return SF_E_FAIL;
+		if(!IsLoaded()) 
+			return SF_E_FAIL;
 
 		HResult hr = SF_E_POINTER;
-		if(outObj == 0) return hr;
+		if(outObj == 0) 
+			return hr;
 
-		detail::MODULE_MAP_ENTRY* ent = mGetModuleMap();
+		detail::MODULE_MAP_ENTRY* ent = m_impl->m_getModuleMap();
 		while(ent->pClsid)
 		{
 			if(ent->pInterfaceId && riid == *ent->pInterfaceId)
@@ -160,9 +185,10 @@ namespace module
 
 	reflection::user_type* ModuleHandle::GetType(const guid &clsid) const
 	{
-		if(!IsLoaded()) return 0;
+		if(!IsLoaded()) 
+			return 0;
 
-		detail::MODULE_MAP_ENTRY* ent = mGetModuleMap();
+		detail::MODULE_MAP_ENTRY* ent = m_impl->m_getModuleMap();
 		while(ent->pClsid)
 		{
 			if(clsid == *ent->pClsid && ent->pTypeOf)
@@ -178,22 +204,32 @@ namespace module
 
 	HResult ModuleHandle::Init(const char* moduleName)
 	{
-		/// \todo Support unicode paths
-		mModule = Sekai_LoadLibrary(moduleName);
-		if(!mModule) return SF_E_FAIL;
+		Release();
 
-		mGetModuleMap = (GET_MAP_FUNC)Sekai_GetProcAddress(mModule, "GetModuleMap");
-		if(!mGetModuleMap)
+		/// \todo Support unicode paths
+		void* mod = Sekai_LoadLibrary(moduleName);
+		if(!mod)
+			return SF_E_FAIL;
+
+		GET_MAP_FUNC gmf = (GET_MAP_FUNC)Sekai_GetProcAddress(mod, "GetModuleMap");
+		if(!gmf)
 		{
-			Unload();
+			Sekai_FreeLibrary(mod);
 			return SF_E_FAIL;
 		}
 
-		mInitFunc = (INIT_FUNC)Sekai_GetProcAddress(mModule, "ModuleInit");
-		mShutdownFunc = (SHUTDOWN_FUNC)Sekai_GetProcAddress(mModule, "ModuleShutdown");
+		INIT_FUNC inf = static_cast<INIT_FUNC>(Sekai_GetProcAddress(mod, "ModuleInit"));
+		SHUTDOWN_FUNC snf = static_cast<SHUTDOWN_FUNC>(Sekai_GetProcAddress(mod, "ModuleShutdown"));
 
-		if(mInitFunc)
-			mInitFunc();
+		if(inf)
+			inf();
+
+		m_impl = new ModuleHandleImpl();
+		m_impl->m_module = mod;
+		m_impl->m_getModuleMap = gmf;
+		m_impl->m_initFunc = inf;
+		m_impl->m_shutdownFunc = snf;
+		++m_impl->m_refCount;
 
 		return SF_S_OK;
 	}
@@ -202,23 +238,36 @@ namespace module
 
 	void ModuleHandle::Shutdown()
 	{
-		mInitFunc = 0;
-		if(mShutdownFunc)
+		if(!m_impl)
+			return;
+
+		// Shutting down module is legal when only one handle left
+		ASSERT_SOFT(m_impl->m_refCount <= 1);
+
+		m_impl->m_initFunc = 0;
+		if(m_impl->m_shutdownFunc)
 		{
-			mShutdownFunc();
-			mShutdownFunc = 0;
+			m_impl->m_shutdownFunc();
+			m_impl->m_shutdownFunc = 0;
 		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void ModuleHandle::Unload()
+	void ModuleHandle::Release()
 	{
-		if(mModule)
+		if(!m_impl)
+			return;
+
+		if(!(--m_impl->m_refCount))
 		{
-			Sekai_FreeLibrary(mModule);
-			mModule = 0;
+			Shutdown();
+			if(m_impl->m_module)
+				Sekai_FreeLibrary(m_impl->m_module);
+			delete m_impl;
 		}
+
+		m_impl = 0;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
