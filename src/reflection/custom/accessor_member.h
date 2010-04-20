@@ -11,9 +11,7 @@
 #define _ACCESSOR_MEMBER_H__
 
 #include "member.h"
-#include "delegate/DelegateBase.h"
 #include "delegate/Delegate.h"
-#include "common/static_assert.h"
 #include "common/typetraits.h"
 
 namespace reflection

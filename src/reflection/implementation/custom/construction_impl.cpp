@@ -52,7 +52,7 @@ namespace reflection
 	void* construct_attribute::create_instance(void** args) const
 	{
 		void* ret = 0;
-		m_impl->m_ctorType->invoke((DelegateBase*)m_impl->m_delegBuf, args, &ret);
+		m_impl->m_ctorType->invoke((void*)m_impl->m_delegBuf, args, &ret);
 		return ret;
 	}
 

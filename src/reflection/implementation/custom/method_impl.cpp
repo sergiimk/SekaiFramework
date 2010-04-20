@@ -40,7 +40,7 @@ namespace reflection
 
 		void invoke(void** args, void* result) const
 		{
-			m_type->invoke((DelegateBase*)m_delegBuf, args, result);
+			m_type->invoke((void*)m_delegBuf, args, result);
 		}
 
 	private:

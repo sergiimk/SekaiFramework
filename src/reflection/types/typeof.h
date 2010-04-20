@@ -29,25 +29,12 @@ namespace reflection
 	{
 		//////////////////////////////////////////////////////////////////////////
 
-		// Deduces most specialized Type class for specific T
-		template<class T>
-		struct meta_type
-		{
-			typedef typename if_then_else<t_strip<T>::is_ptr, pointer_type,
-				typename if_then_else<t_strip<T>::is_ref, reference_type,
-				typename if_then_else<is_user_type<T>::value, user_type, builtin_type<T>
-				>::value
-				>::value
-			>::value value;
-		};
-
-		//////////////////////////////////////////////////////////////////////////
-
 		template<class T>
 		struct _type_of_builtin_ {
-			static type* get() {
+			typedef builtin_type<T>* ret_t;
+			static ret_t get() {
 				static builtin_type<T> type;
-				return &type; 
+				return &type;
 			}
 		};
 
@@ -55,7 +42,8 @@ namespace reflection
 
 		template<class T>
 		struct _type_of_pointer_ {
-			static type* get() {
+			typedef pointer_type* ret_t;
+			static ret_t get() {
 				static pointer_type type(_type_of_<T>::get());
 				return &type; 
 			}
@@ -65,7 +53,8 @@ namespace reflection
 
 		template<class T>
 		struct _type_of_reference_ {
-			static type* get() {
+			typedef reference_type* ret_t;
+			static ret_t get() {
 				static reference_type type(_type_of_<T>::get());
 				return &type;
 			}
@@ -75,7 +64,8 @@ namespace reflection
 
 		template<class T>
 		struct _type_of_user_ {
-			static type* get() {
+			typedef user_type* ret_t;
+			static ret_t get() {
 				static type_desc<T> desc;
 				return desc.get_type(); 
 			}
@@ -86,15 +76,20 @@ namespace reflection
 		template<class T>
 		struct _type_of_ 
 		{
-			static type* get()
+			typedef typename t_strip<T>::nomod pure;
+
+			typedef typename if_then_else<t_strip<T>::is_ptr, _type_of_pointer_<typename t_strip<pure>::noptr>,
+					typename if_then_else<t_strip<T>::is_ref, _type_of_reference_<typename t_strip<pure>::noref>,
+					typename if_then_else<is_user_type<T>::value, _type_of_user_<pure>, _type_of_builtin_<pure>
+					>::value
+					>::value
+				>::value type_function;
+
+			typedef typename type_function::ret_t return_type;
+
+			static return_type get()
 			{
-				typedef typename if_then_else<t_strip<T>::is_ptr, _type_of_pointer_<t_strip<T>::noptr>,
-					typename if_then_else<t_strip<T>::is_ref, _type_of_reference_<t_strip<T>::noref>,
-					typename if_then_else<is_user_type<T>::value, _type_of_user_<T>, _type_of_builtin_<T>
-					>::value
-					>::value
-				>::value tof;
-				return tof::get();
+				return type_function::get();
 			}
 		};
 
@@ -105,17 +100,17 @@ namespace reflection
 	//////////////////////////////////////////////////////////////////////////
 
 	template<class T>
-	typename detail::meta_type<T>::value* type_of()
+	typename detail::_type_of_<T>::return_type type_of()
 	{
-		return static_cast<detail::meta_type<T>::value*>(detail::_type_of_<t_strip<T>::nomod>::get());
+		return detail::_type_of_<T>::get();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	template<class T>
-	typename detail::meta_type<T>::value* type_of(const T&)
+	typename detail::_type_of_<T>::return_type type_of(const T&)
 	{
-		return type_of<T>();
+		return detail::_type_of_<T>::get();
 	}
 
 	//////////////////////////////////////////////////////////////////////////

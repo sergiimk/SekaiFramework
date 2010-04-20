@@ -45,7 +45,7 @@ namespace reflection
 		void get_value(void* inst, void* buffer) const
 		{
 			void* args[] = { &inst };
-			m_typeGet->invoke((DelegateBase*)m_delegGetBuf, args, buffer);
+			m_typeGet->invoke((void*)m_delegGetBuf, args, buffer);
 		}
 
 		void set_value(void* inst, void* buffer) const
@@ -53,7 +53,7 @@ namespace reflection
 			if(m_typeSet)
 			{
 				void* args[] = { &inst, buffer };
-				m_typeSet->invoke((DelegateBase*)m_delegSetBuf, args, 0);
+				m_typeSet->invoke((void*)m_delegSetBuf, args, 0);
 			}
 		}
 

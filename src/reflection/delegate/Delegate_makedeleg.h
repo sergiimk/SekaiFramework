@@ -17,6 +17,7 @@
 #define FASTDLGT_RETTYPE RetType
 #endif
 
+
 //N=0
 template <class X, class Y, class RetType>
 Delegate0<FASTDLGT_RETTYPE> MakeDelegate(Y* x, RetType (X::*func)() DELEG_CONST) { 

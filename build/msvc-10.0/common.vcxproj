@@ -156,7 +156,6 @@
     <ClInclude Include="..\..\src\common\noncopyable.h" />
     <ClInclude Include="..\..\src\common\stack_container.h" />
     <ClInclude Include="..\..\src\common\stack_string.h" />
-    <ClInclude Include="..\..\src\common\static_assert.h" />
     <ClInclude Include="..\..\src\common\stlutils.h" />
     <ClInclude Include="..\..\src\common\stringutils.h" />
     <ClInclude Include="..\..\src\common\typetraits.h" />

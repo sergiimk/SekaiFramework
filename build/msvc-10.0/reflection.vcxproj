@@ -180,6 +180,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\reflection\custom\accessor_member.h" />
+    <ClInclude Include="..\..\src\reflection\custom\attribute.h" />
+    <ClInclude Include="..\..\src\reflection\custom\basetype_attribute.h" />
+    <ClInclude Include="..\..\src\reflection\custom\construction_attribute.h" />
+    <ClInclude Include="..\..\src\reflection\custom\custom.h" />
+    <ClInclude Include="..\..\src\reflection\custom\enumeration_member.h" />
+    <ClInclude Include="..\..\src\reflection\custom\member.h" />
+    <ClInclude Include="..\..\src\reflection\custom\method_member.h" />
+    <ClInclude Include="..\..\src\reflection\custom\parsing_attribute.h" />
+    <ClInclude Include="..\..\src\reflection\implementation\custom\attribute_impl.h" />
+    <ClInclude Include="..\..\src\reflection\implementation\custom\member_impl.h" />
     <ClInclude Include="..\..\src\reflection\types\array_type.h" />
     <ClInclude Include="..\..\src\reflection\types\builtin_type.h" />
     <ClInclude Include="..\..\src\reflection\types\function_type.h" />
@@ -190,17 +201,6 @@
     <ClInclude Include="..\..\src\reflection\types\typetag.h" />
     <ClInclude Include="..\..\src\reflection\types\user_type.h" />
     <ClInclude Include="..\..\src\reflection\implementation\types\type_impl.h" />
-    <ClInclude Include="..\..\src\reflection\implementation\custom\attribute_impl.h" />
-    <ClInclude Include="..\..\src\reflection\implementation\custom\member_impl.h" />
-    <ClInclude Include="..\..\src\reflection\custom\accessor_member.h" />
-    <ClInclude Include="..\..\src\reflection\custom\attribute.h" />
-    <ClInclude Include="..\..\src\reflection\custom\basetype_attribute.h" />
-    <ClInclude Include="..\..\src\reflection\custom\construction_attribute.h" />
-    <ClInclude Include="..\..\src\reflection\custom\custom.h" />
-    <ClInclude Include="..\..\src\reflection\custom\enumeration_member.h" />
-    <ClInclude Include="..\..\src\reflection\custom\member.h" />
-    <ClInclude Include="..\..\src\reflection\custom\method_member.h" />
-    <ClInclude Include="..\..\src\reflection\custom\parsing_attribute.h" />
     <ClInclude Include="..\..\src\reflection\delegate\Delegate.h" />
     <ClInclude Include="..\..\src\reflection\delegate\Delegate_closure.h" />
     <ClInclude Include="..\..\src\reflection\delegate\Delegate_deleg.h" />
@@ -208,20 +208,12 @@
     <ClInclude Include="..\..\src\reflection\delegate\Delegate_funcstyle.h" />
     <ClInclude Include="..\..\src\reflection\delegate\Delegate_makedeleg.h" />
     <ClInclude Include="..\..\src\reflection\delegate\Delegate_utils.h" />
-    <ClInclude Include="..\..\src\reflection\delegate\DelegateBase.h" />
     <ClInclude Include="..\..\src\reflection\utils\activator.h" />
     <ClInclude Include="..\..\src\reflection\utils\converter.h" />
     <ClInclude Include="..\..\src\reflection\reflection.h" />
     <ClInclude Include="..\..\src\reflection\reflection_fwd.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\reflection\implementation\types\array_type.cpp" />
-    <ClCompile Include="..\..\src\reflection\implementation\types\builtin_type.cpp" />
-    <ClCompile Include="..\..\src\reflection\implementation\types\function_type.cpp" />
-    <ClCompile Include="..\..\src\reflection\implementation\types\pointer_type.cpp" />
-    <ClCompile Include="..\..\src\reflection\implementation\types\reference_type.cpp" />
-    <ClCompile Include="..\..\src\reflection\implementation\types\type_impl.cpp" />
-    <ClCompile Include="..\..\src\reflection\implementation\types\user_type.cpp" />
     <ClCompile Include="..\..\src\reflection\implementation\custom\accessor_impl.cpp" />
     <ClCompile Include="..\..\src\reflection\implementation\custom\attribute_impl.cpp" />
     <ClCompile Include="..\..\src\reflection\implementation\custom\basetype_impl.cpp" />
@@ -229,6 +221,13 @@
     <ClCompile Include="..\..\src\reflection\implementation\custom\enumeration_impl.cpp" />
     <ClCompile Include="..\..\src\reflection\implementation\custom\member_impl.cpp" />
     <ClCompile Include="..\..\src\reflection\implementation\custom\method_impl.cpp" />
+    <ClCompile Include="..\..\src\reflection\implementation\types\array_type.cpp" />
+    <ClCompile Include="..\..\src\reflection\implementation\types\builtin_type.cpp" />
+    <ClCompile Include="..\..\src\reflection\implementation\types\function_type.cpp" />
+    <ClCompile Include="..\..\src\reflection\implementation\types\pointer_type.cpp" />
+    <ClCompile Include="..\..\src\reflection\implementation\types\reference_type.cpp" />
+    <ClCompile Include="..\..\src\reflection\implementation\types\type_impl.cpp" />
+    <ClCompile Include="..\..\src\reflection\implementation\types\user_type.cpp" />
     <ClCompile Include="..\..\src\reflection\implementation\utils\activator.cpp" />
     <ClCompile Include="..\..\src\reflection\implementation\utils\converter.cpp" />
   </ItemGroup>

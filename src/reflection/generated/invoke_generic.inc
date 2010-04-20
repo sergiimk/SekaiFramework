@@ -13,91 +13,91 @@
 //////////////////////////////////////////////////////////////////////////
 
 template<class FT, class RT>
-void invoke_generic(DelegateBase* deleg, void** args, void* res)
+void invoke_generic(void* deleg, void** args, void* res)
 { MAKE_DELEG(); UNPCK_RET() = MAKE_CALL(); }
 
 template<class FT, class RT>
-void invoke_generic_ref(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_ref(void* deleg, void** args, void* res)
 { MAKE_DELEG(); UNPCK_RET_REF() = &MAKE_CALL(); }
 
 template<class FT>
-void invoke_generic_noret(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_noret(void* deleg, void** args, void* res)
 { MAKE_DELEG(); MAKE_CALL(); }
 
 //////////////////////////////////////////////////////////////////////////
 
 template<class FT, class A1, class RT>
-void invoke_generic(DelegateBase* deleg, void** args, void* res)
+void invoke_generic(void* deleg, void** args, void* res)
 { MAKE_DELEG(); UNPCK_RET() = MAKE_CALL(UNPCK_ARG(A1, 0)); }
 
 template<class FT, class A1, class RT>
-void invoke_generic_ref(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_ref(void* deleg, void** args, void* res)
 { MAKE_DELEG(); UNPCK_RET_REF() = &MAKE_CALL(UNPCK_ARG(A1, 0)); }
 
 template<class FT, class A1>
-void invoke_generic_noret(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_noret(void* deleg, void** args, void* res)
 { MAKE_DELEG(); MAKE_CALL(UNPCK_ARG(A1, 0)); }
 
 //////////////////////////////////////////////////////////////////////////
 
 template<class FT, class A1, class A2, class RT>
-void invoke_generic(DelegateBase* deleg, void** args, void* res)
+void invoke_generic(void* deleg, void** args, void* res)
 { MAKE_DELEG(); UNPCK_RET() = MAKE_CALL(UNPCK_ARG(A1, 0), UNPCK_ARG(A2, 1)); }
 
 template<class FT, class A1, class A2, class RT>
-void invoke_generic_ref(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_ref(void* deleg, void** args, void* res)
 { MAKE_DELEG(); UNPCK_RET_REF() = &MAKE_CALL(UNPCK_ARG(A1, 0), UNPCK_ARG(A2, 1)); }
 
 template<class FT, class A1, class A2>
-void invoke_generic_noret(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_noret(void* deleg, void** args, void* res)
 { MAKE_DELEG(); MAKE_CALL(UNPCK_ARG(A1, 0), UNPCK_ARG(A2, 1)); }
 
 //////////////////////////////////////////////////////////////////////////
 
 template<class FT, class A1, class A2, class A3, class RT>
-void invoke_generic(DelegateBase* deleg, void** args, void* res)
+void invoke_generic(void* deleg, void** args, void* res)
 { MAKE_DELEG(); UNPCK_RET() = MAKE_CALL(UNPCK_ARG(A1, 0), UNPCK_ARG(A2, 1), UNPCK_ARG(A3, 2)); }
 
 template<class FT, class A1, class A2, class A3, class RT>
-void invoke_generic_ref(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_ref(void* deleg, void** args, void* res)
 { MAKE_DELEG(); UNPCK_RET_REF() = &MAKE_CALL(UNPCK_ARG(A1, 0), UNPCK_ARG(A2, 1), UNPCK_ARG(A3, 2)); }
 
 template<class FT, class A1, class A2, class A3>
-void invoke_generic_noret(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_noret(void* deleg, void** args, void* res)
 { MAKE_DELEG(); MAKE_CALL(UNPCK_ARG(A1, 0), UNPCK_ARG(A2, 1), UNPCK_ARG(A3, 2)); }
 
 //////////////////////////////////////////////////////////////////////////
 
 template<class FT, class A1, class A2, class A3, class A4, class RT>
-void invoke_generic(DelegateBase* deleg, void** args, void* res)
+void invoke_generic(void* deleg, void** args, void* res)
 { MAKE_DELEG(); UNPCK_RET() = MAKE_CALL(UNPCK_ARG(A1, 0), UNPCK_ARG(A2, 1), UNPCK_ARG(A3, 2), UNPCK_ARG(A4, 3)); }
 
 template<class FT, class A1, class A2, class A3, class A4, class RT>
-void invoke_generic_ref(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_ref(void* deleg, void** args, void* res)
 { MAKE_DELEG(); UNPCK_RET_REF() = &MAKE_CALL(UNPCK_ARG(A1, 0), UNPCK_ARG(A2, 1), UNPCK_ARG(A3, 2), UNPCK_ARG(A4, 3)); }
 
 template<class FT, class A1, class A2, class A3, class A4>
-void invoke_generic_noret(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_noret(void* deleg, void** args, void* res)
 { MAKE_DELEG(); MAKE_CALL(UNPCK_ARG(A1, 0), UNPCK_ARG(A2, 1), UNPCK_ARG(A3, 2), UNPCK_ARG(A4, 3)); }
 
 //////////////////////////////////////////////////////////////////////////
 
 template<class FT, class RT>
-void invoke_generic_m(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	UNPCK_RET() = MAKE_CALL();
 }
 
 template<class FT, class RT>
-void invoke_generic_m_ref(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m_ref(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	UNPCK_RET_REF() = &MAKE_CALL();
 }
 
 template<class FT>
-void invoke_generic_m_noret(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m_noret(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	MAKE_CALL();
@@ -106,21 +106,21 @@ void invoke_generic_m_noret(DelegateBase* deleg, void** args, void* res)
 //////////////////////////////////////////////////////////////////////////
 
 template<class FT, class A1, class RT>
-void invoke_generic_m(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	UNPCK_RET() = MAKE_CALL(UNPCK_ARG(A1, 1));
 }
 
 template<class FT, class A1, class RT>
-void invoke_generic_m_ref(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m_ref(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	UNPCK_RET_REF() = &MAKE_CALL(UNPCK_ARG(A1, 1));
 }
 
 template<class FT, class A1>
-void invoke_generic_m_noret(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m_noret(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	MAKE_CALL(UNPCK_ARG(A1, 1));
@@ -129,21 +129,21 @@ void invoke_generic_m_noret(DelegateBase* deleg, void** args, void* res)
 //////////////////////////////////////////////////////////////////////////
 
 template<class FT, class A1, class A2, class RT>
-void invoke_generic_m(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	UNPCK_RET() = MAKE_CALL(UNPCK_ARG(A1, 1), UNPCK_ARG(A2, 2));
 }
 
 template<class FT, class A1, class A2, class RT>
-void invoke_generic_m_ref(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m_ref(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	UNPCK_RET_REF() = &MAKE_CALL(UNPCK_ARG(A1, 1), UNPCK_ARG(A2, 2));
 }
 
 template<class FT, class A1, class A2>
-void invoke_generic_m_noret(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m_noret(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	MAKE_CALL(UNPCK_ARG(A1, 1), UNPCK_ARG(A2, 2));
@@ -152,21 +152,21 @@ void invoke_generic_m_noret(DelegateBase* deleg, void** args, void* res)
 //////////////////////////////////////////////////////////////////////////
 
 template<class FT, class A1, class A2, class A3, class RT>
-void invoke_generic_m(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	UNPCK_RET() = MAKE_CALL(UNPCK_ARG(A1, 1), UNPCK_ARG(A2, 2), UNPCK_ARG(A3, 3));
 }
 
 template<class FT, class A1, class A2, class A3, class RT>
-void invoke_generic_m_ref(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m_ref(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	UNPCK_RET_REF() = &MAKE_CALL(UNPCK_ARG(A1, 1), UNPCK_ARG(A2, 2), UNPCK_ARG(A3, 3));
 }
 
 template<class FT, class A1, class A2, class A3>
-void invoke_generic_m_noret(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m_noret(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	MAKE_CALL(UNPCK_ARG(A1, 1), UNPCK_ARG(A2, 2), UNPCK_ARG(A3, 3));
@@ -175,21 +175,21 @@ void invoke_generic_m_noret(DelegateBase* deleg, void** args, void* res)
 //////////////////////////////////////////////////////////////////////////
 
 template<class FT, class A1, class A2, class A3, class A4, class RT>
-void invoke_generic_m(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	UNPCK_RET() = MAKE_CALL(UNPCK_ARG(A1, 1), UNPCK_ARG(A2, 2), UNPCK_ARG(A3, 3), UNPCK_ARG(A4, 4));
 }
 
 template<class FT, class A1, class A2, class A3, class A4, class RT>
-void invoke_generic_m_ref(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m_ref(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	UNPCK_RET_REF() = &MAKE_CALL(UNPCK_ARG(A1, 1), UNPCK_ARG(A2, 2), UNPCK_ARG(A3, 3), UNPCK_ARG(A4, 4));
 }
 
 template<class FT, class A1, class A2, class A3, class A4>
-void invoke_generic_m_noret(DelegateBase* deleg, void** args, void* res)
+void invoke_generic_m_noret(void* deleg, void** args, void* res)
 {
 	MAKE_DELEGM();
 	MAKE_CALL(UNPCK_ARG(A1, 1), UNPCK_ARG(A2, 2), UNPCK_ARG(A3, 3), UNPCK_ARG(A4, 4));

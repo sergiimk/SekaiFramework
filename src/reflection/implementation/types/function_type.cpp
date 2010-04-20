@@ -18,7 +18,7 @@ namespace reflection
 	class function_type::function_type_impl : public type::type_impl
 	{
 	public:
-		function_type_impl(generic_invoker inv, bool isMethod, type* rt, type** arguments, int argc)
+		function_type_impl(deleg_generic_invoke inv, bool isMethod, type* rt, type** arguments, int argc)
 			: type_impl(isMethod ? T_METHOD : T_FUNCTION, ARCH_FUNCTION, 0)
 			, m_invoker(inv)
 			, m_retType(rt)
@@ -76,23 +76,23 @@ namespace reflection
 			return (type**)m_argTypes;
 		}
 
-		void invoke(DelegateBase* deleg, void** args, void* result) const
+		void invoke(void* deleg, void** args, void* result) const
 		{
 			m_invoker(deleg, args, result);
 		}
 
 	private:
-		generic_invoker	m_invoker;
-		type*			m_retType;
-		type*			m_argTypes[DELEG_MAX_INVOKE_PARAMS];
-		size_t			m_argc;
+		deleg_generic_invoke	m_invoker;
+		type*					m_retType;
+		type*					m_argTypes[DELEG_MAX_INVOKE_PARAMS];
+		size_t					m_argc;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 	// function_type
 	//////////////////////////////////////////////////////////////////////////
 
-	function_type::function_type(generic_invoker inv, bool isMethod, type* rt, type** arguments, int argc)
+	function_type::function_type(deleg_generic_invoke inv, bool isMethod, type* rt, type** arguments, int argc)
 		: type(new function_type_impl(inv, isMethod, rt, arguments, argc))
 	{
 		m_impl = static_cast<function_type_impl*>(type::m_impl);
@@ -121,7 +121,7 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void function_type::invoke(DelegateBase *deleg, void **args, void *result) const
+	void function_type::invoke(void *deleg, void **args, void *result) const
 	{
 		m_impl->invoke(deleg, args, result);
 	}

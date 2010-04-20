@@ -12,7 +12,6 @@
 
 #include "attribute.h"
 #include "member.h"
-#include "common/static_assert.h"
 
 namespace reflection
 {
