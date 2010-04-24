@@ -11,6 +11,7 @@
 
 #include "common/containers.h"
 #include "common/stack_string.h"
+#include "common/cow_wrappers.h"
 
 #define BOOST_TEST_MODULE CommonTest
 #include <boost/test/unit_test.hpp>
@@ -54,6 +55,27 @@ BOOST_AUTO_TEST_CASE( ArrayTest )
 		stack->reserve(1024);
 
 		BOOST_CHECK(!stack.isOnStack());
+	}
+
+	BOOST_AUTO_TEST_CASE( COWWrappersTest )
+	{
+		typedef cow_wrapper< std::vector<int> > wrapper;
+
+		wrapper c1;
+		c1->push_back(10);
+
+		// Prevents COW to kick in to early
+		wrapper const& cc1(c1);
+
+		auto c2 = c1.get_snapshot();
+		BOOST_CHECK_EQUAL(*cc1, *c2);
+		BOOST_CHECK_EQUAL(cc1->size(), 1);
+		BOOST_CHECK_EQUAL(c2->size(), 1);
+
+		c1->push_back(20);
+		BOOST_CHECK_NE(*cc1, *c2);
+		BOOST_CHECK_EQUAL(c1->size(), 2);
+		BOOST_CHECK_EQUAL(c2->size(), 1);
 	}
 
 	BOOST_AUTO_TEST_SUITE_END();

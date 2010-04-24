@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\common\AdapterFactoyContainer.h" />
     <ClInclude Include="..\..\src\common\containers.h" />
+    <ClInclude Include="..\..\src\common\cow_wrappers.h" />
     <ClInclude Include="..\..\src\common\IAdaptable.h" />
     <ClInclude Include="..\..\src\common\IAdapterFactory.h" />
     <ClInclude Include="..\..\src\common\ifthenelse.h" />
