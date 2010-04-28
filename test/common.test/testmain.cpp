@@ -68,12 +68,12 @@ BOOST_AUTO_TEST_CASE( ArrayTest )
 		wrapper const& cc1(c1);
 
 		auto c2 = c1.get_snapshot();
-		BOOST_CHECK_EQUAL(*cc1, *c2);
+		BOOST_CHECK_EQUAL(&*cc1, &*c2);
 		BOOST_CHECK_EQUAL(cc1->size(), 1);
 		BOOST_CHECK_EQUAL(c2->size(), 1);
 
 		c1->push_back(20);
-		BOOST_CHECK_NE(*cc1, *c2);
+		BOOST_CHECK_NE(&*cc1, &*c2);
 		BOOST_CHECK_EQUAL(c1->size(), 2);
 		BOOST_CHECK_EQUAL(c2->size(), 1);
 	}

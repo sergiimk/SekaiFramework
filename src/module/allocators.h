@@ -11,6 +11,7 @@
 #define _SF_ALLOCATORS_H__
 
 #include "platform/platform.h"
+#include <new>
 
 namespace module
 {
