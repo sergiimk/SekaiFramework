@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classmodule_1_1_com_root_object.html" title="{module::ComRootObject\&lt;\&gt;\n||+ ~ComRootObject()\l+ _get_uuid()\l# _AddRef()\l# _Release()\l}" alt="" coords="5,251,184,381"/>
+<area shape="rect" id="node4" href="$struct_framework_1_1_i_bundle_activator.html" title="Customizes the starting and stopping of this bundle." alt="" coords="208,267,395,365"/>
+<area shape="rect" id="node6" href="$structmodule_1_1_i_unknown.html" title="IUnknown interface." alt="" coords="440,6,568,119"/>
+<area shape="rect" id="node8" href="$struct_framework_1_1_i_bundle.html" title="A Bundle object is the access point to define the life cycle of an installed bundle..." alt="" coords="419,211,589,421"/>
+<area shape="rect" id="node11" href="$struct_framework_1_1_i_bundle_context.html" title="{Framework::IBundleContext\n|+ uuid\l|+ getBundle()\l+ getBundle()\l+ getBundles()\l+ InstallBundle()\l+ RegisterService()\l+ getServiceReference()\l+ getService()\l+ ungetService()\l+ AddBundleListener()\l+ RemoveBundleListener()\l+ AddFrameworkListener()\l+ RemoveFrameworkListener()\l+ AddServiceListener()\l+ RemoveServiceListener()\l}" alt="" coords="613,171,811,461"/>
+</map>

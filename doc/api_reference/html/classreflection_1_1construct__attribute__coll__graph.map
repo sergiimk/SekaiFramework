@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classreflection_1_1attribute.html" title="Attribute base class." alt="" coords="33,1201,161,1394"/>
+<area shape="rect" id="node4" href="$classreflection_1_1attribute_1_1attribute__impl.html" title="{reflection::attribute::attribute_impl\n|&#45; m_type\l|+ attribute_impl()\l+ ~attribute_impl()\l+ get_type()\l}" alt="" coords="5,998,219,1111"/>
+<area shape="rect" id="node6" href="$structreflection_1_1construct__attribute_1_1construct__impl.html" title="{reflection::construct_attribute::construct_impl\n|+ m_delegBuf\l+ m_ctorType\l+ m_dtor\l|+ construct_impl()\l}" alt="" coords="185,1241,468,1354"/>
+<area shape="rect" id="node9" href="$classreflection_1_1function__type.html" title="Function type class." alt="" coords="248,974,405,1135"/>
+<area shape="rect" id="node11" href="$classreflection_1_1type.html" title="Type information class." alt="" coords="276,313,409,618"/>
+<area shape="rect" id="node15" href="$classreflection_1_1function__type_1_1function__type__impl.html" title="{reflection::function_type::function_type_impl\n|&#45; m_invoker\l&#45; m_retType\l&#45; m_argTypes\l&#45; m_argc\l|+ function_type_impl()\l+ print_name()\l+ return_type()\l+ argument_count()\l+ argument_types()\l+ invoke()\l}" alt="" coords="309,699,584,909"/>
+<area shape="rect" id="node13" href="$classreflection_1_1type_1_1type__impl.html" title="Implementation of Type." alt="" coords="320,6,491,247"/>
+</map>

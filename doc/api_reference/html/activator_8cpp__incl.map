@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$activator_8h.html" title="utils/activator.h" alt="" coords="1424,83,1531,111"/>
+<area shape="rect" id="node13" href="$function__type_8h.html" title="types/function_type.h" alt="" coords="960,83,1104,111"/>
+<area shape="rect" id="node41" href="$construction__attribute_8h.html" title="custom/construction_attribute.h" alt="" coords="1556,83,1759,111"/>
+<area shape="rect" id="node5" href="$reflection__fwd_8h.html" title="reflection_fwd.h" alt="" coords="1552,238,1661,266"/>
+<area shape="rect" id="node7" href="$platform_8h.html" title="platform/platform.h" alt="" coords="1543,315,1671,343"/>
+<area shape="rect" id="node15" href="$type_8h.html" title="types/type.h" alt="" coords="283,161,376,189"/>
+<area shape="rect" id="node25" href="$_delegate_8h.html" title="delegate/Delegate.h" alt="" coords="964,161,1100,189"/>
+<area shape="rect" id="node23" href="$type__iters_8inc.html" title="type_iters.inc" alt="" coords="384,238,483,266"/>
+<area shape="rect" id="node29" href="$_delegate__utils_8h.html" title="Delegate_utils.h" alt="" coords="1096,238,1211,266"/>
+<area shape="rect" id="node31" href="$_delegate__funcdata_8h.html" title="Delegate_funcdata.h" alt="" coords="1235,238,1373,266"/>
+<area shape="rect" id="node33" href="$_delegate__closure_8h.html" title="Delegate_closure.h" alt="" coords="1397,238,1528,266"/>
+<area shape="rect" id="node35" href="$_delegate__deleg_8h.html" title="Delegate_deleg.h" alt="" coords="507,238,627,266"/>
+<area shape="rect" id="node37" href="$_delegate__funcstyle_8h.html" title="Delegate_funcstyle.h" alt="" coords="651,238,792,266"/>
+<area shape="rect" id="node39" href="$_delegate__makedeleg_8h.html" title="Delegate_makedeleg.h" alt="" coords="816,238,968,266"/>
+<area shape="rect" id="node43" href="$attribute_8h.html" title="attribute.h" alt="" coords="1515,161,1595,189"/>
+<area shape="rect" id="node46" href="$member_8h.html" title="member.h" alt="" coords="1619,161,1699,189"/>
+<area shape="rect" id="node49" href="$construction_8inc.html" title="generated/construction.inc" alt="" coords="1723,161,1896,189"/>
+</map>

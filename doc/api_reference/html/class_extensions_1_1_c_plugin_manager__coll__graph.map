@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classmodule_1_1_com_root_object.html" title="{module::ComRootObject\&lt;\&gt;\n||+ ~ComRootObject()\l+ _get_uuid()\l# _AddRef()\l# _Release()\l}" alt="" coords="5,171,184,301"/>
+<area shape="rect" id="node4" href="$struct_extensions_1_1_i_plugin_manager.html" title="IPluginManager interface." alt="" coords="208,187,392,285"/>
+<area shape="rect" id="node6" href="$structmodule_1_1_i_unknown.html" title="IUnknown interface." alt="" coords="236,6,364,119"/>
+<area shape="rect" id="node8" href="$class_extensions_1_1_core_params.html" title="Holds core parameters." alt="" coords="416,187,581,285"/>
+</map>

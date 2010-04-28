@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_i_bundle_8h.html" title="IBundle.h" alt="" coords="92,315,167,343"/>
+<area shape="rect" id="node32" href="$_i_bundle_activator_8h.html" title="IBundleActivator.h" alt="" coords="489,315,615,343"/>
+<area shape="rect" id="node36" href="$_i_bundle_context_8h.html" title="IBundleContext.h" alt="" coords="241,315,361,343"/>
+<area shape="rect" id="node42" href="$_services_8h.html" title="Services.h" alt="" coords="385,315,465,343"/>
+<area shape="rect" id="node47" href="$_listeners_8h.html" title="Listeners.h" alt="" coords="639,315,724,343"/>
+<area shape="rect" id="node51" href="$_events_8h.html" title="Events.h" alt="" coords="168,238,240,266"/>
+<area shape="rect" id="node56" href="$_i_framework_factory_8h.html" title="IFrameworkFactory.h" alt="" coords="69,83,213,111"/>
+<area shape="rect" id="node5" href="$interfaces_8h.html" title="module/interfaces.h" alt="" coords="485,393,619,421"/>
+<area shape="rect" id="node19" href="$intellectual_8h.html" title="module/intellectual.h" alt="" coords="176,393,315,421"/>
+<area shape="rect" id="node22" href="$containers_8h.html" title="common/containers.h" alt="" coords="5,393,152,421"/>
+<area shape="rect" id="node29" href="$_framework__fwd_8h.html" title="Framework_fwd.h" alt="" coords="339,393,461,421"/>
+<area shape="rect" id="node7" href="$guid_8h.html" title="guid.h" alt="" coords="524,470,580,498"/>
+<area shape="rect" id="node13" href="$platform_8h.html" title="platform/platform.h" alt="" coords="216,470,344,498"/>
+<area shape="rect" id="node58" href="$_i_framework_8h.html" title="IFramework.h" alt="" coords="92,161,191,189"/>
+</map>

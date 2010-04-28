@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classreflection_1_1member.html" title="Base type of user&#45;defined class members." alt="" coords="5,1345,133,1586"/>
+<area shape="rect" id="node4" href="$classreflection_1_1member_1_1member__impl.html" title="Implementation of base member." alt="" coords="39,1086,252,1279"/>
+<area shape="rect" id="node15" href="$structreflection_1_1enumeration__member_1_1enumeration__impl.html" title="{reflection::enumeration_member::enumeration_impl\n|+ m_value\l|+ enumeration_impl()\l}" alt="" coords="157,1425,472,1506"/>
+<area shape="rect" id="node6" href="$classreflection_1_1user__type.html" title="User&#45;defined type class." alt="" coords="72,683,219,1021"/>
+<area shape="rect" id="node8" href="$classreflection_1_1type.html" title="Type information class." alt="" coords="16,313,149,618"/>
+<area shape="rect" id="node10" href="$classreflection_1_1type_1_1type__impl.html" title="Implementation of Type." alt="" coords="119,6,289,247"/>
+<area shape="rect" id="node12" href="$classreflection_1_1user__type_1_1user__type__impl.html" title="{reflection::user_type::user_type_impl\n|&#45; m_members\l&#45; m_attributes\l|+ user_type_impl()\l+ ~user_type_impl()\l+ add_member()\l+ add_attribute()\l+ member_count()\l+ get_member()\l+ find_member()\l+ attribute_count()\l+ get_attribute()\l}" alt="" coords="173,353,408,578"/>
+</map>

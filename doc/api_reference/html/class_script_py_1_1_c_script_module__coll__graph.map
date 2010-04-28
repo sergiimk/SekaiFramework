@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classmodule_1_1_module_handle.html" title="Module managing class." alt="" coords="63,1011,215,1317"/>
+<area shape="rect" id="node4" href="$structmodule_1_1_module_handle_1_1_module_handle_impl.html" title="{module::ModuleHandle::ModuleHandleImpl\n|+ m_module\l+ m_initFunc\l+ m_shutdownFunc\l+ m_getModuleMap\l+ m_refCount\l|+ ModuleHandleImpl()\l+ ModuleHandleImpl()\l}" alt="" coords="5,785,272,946"/>
+<area shape="rect" id="node6" href="$structmodule_1_1detail_1_1_m_o_d_u_l_e___m_a_p___e_n_t_r_y.html" title="Object entry in module map." alt="" coords="13,574,264,719"/>
+<area shape="rect" id="node8" href="$structmodule_1_1guid.html" title="guid structure" alt="" coords="5,171,141,493"/>
+<area shape="rect" id="node10" href="$structmodule_1_1_i_class_factory.html" title="IClassFactory interface." alt="" coords="165,291,317,373"/>
+<area shape="rect" id="node12" href="$structmodule_1_1_i_unknown.html" title="IUnknown interface." alt="" coords="177,6,305,119"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$class_console_command.html" title="ConsoleCommand" alt="" coords="5,131,133,159"/>
+<area shape="rect" id="node3" href="$class_cmd_help.html" title="CmdHelp" alt="" coords="193,5,268,33"/>
+<area shape="rect" id="node5" href="$class_cmd_install.html" title="CmdInstall" alt="" coords="189,55,272,83"/>
+<area shape="rect" id="node7" href="$class_cmd_start.html" title="CmdStart" alt="" coords="193,106,268,134"/>
+<area shape="rect" id="node9" href="$class_cmd_status.html" title="CmdStatus" alt="" coords="188,157,273,185"/>
+<area shape="rect" id="node11" href="$class_cmd_stop.html" title="CmdStop" alt="" coords="193,207,268,235"/>
+<area shape="rect" id="node13" href="$class_cmd_uninstall.html" title="CmdUninstall" alt="" coords="181,258,280,286"/>
+</map>

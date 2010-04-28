@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$method__member_8h.html" title="custom/method_member.h" alt="" coords="369,83,545,111"/>
+<area shape="rect" id="node33" href="$member__impl_8h.html" title="member_impl.h" alt="" coords="236,83,345,111"/>
+<area shape="rect" id="node38" href="$function__type_8h.html" title="types/function_type.h" alt="" coords="569,83,713,111"/>
+<area shape="rect" id="node5" href="$member_8h.html" title="member.h" alt="" coords="268,161,348,189"/>
+<area shape="rect" id="node15" href="$_delegate_8h.html" title="delegate/Delegate.h" alt="" coords="563,161,699,189"/>
+<area shape="rect" id="node31" href="$typetraits_8h.html" title="common/typetraits.h" alt="" coords="388,161,527,189"/>
+<area shape="rect" id="node7" href="$reflection__fwd_8h.html" title="reflection_fwd.h" alt="" coords="27,238,136,266"/>
+<area shape="rect" id="node9" href="$platform_8h.html" title="platform/platform.h" alt="" coords="17,315,145,343"/>
+<area shape="rect" id="node19" href="$_delegate__utils_8h.html" title="Delegate_utils.h" alt="" coords="264,238,379,266"/>
+<area shape="rect" id="node21" href="$_delegate__funcdata_8h.html" title="Delegate_funcdata.h" alt="" coords="403,238,541,266"/>
+<area shape="rect" id="node23" href="$_delegate__closure_8h.html" title="Delegate_closure.h" alt="" coords="565,238,696,266"/>
+<area shape="rect" id="node25" href="$_delegate__deleg_8h.html" title="Delegate_deleg.h" alt="" coords="720,238,840,266"/>
+<area shape="rect" id="node27" href="$_delegate__funcstyle_8h.html" title="Delegate_funcstyle.h" alt="" coords="864,238,1005,266"/>
+<area shape="rect" id="node29" href="$_delegate__makedeleg_8h.html" title="Delegate_makedeleg.h" alt="" coords="1029,238,1181,266"/>
+<area shape="rect" id="node40" href="$type_8h.html" title="types/type.h" alt="" coords="1367,161,1460,189"/>
+<area shape="rect" id="node48" href="$type__iters_8inc.html" title="type_iters.inc" alt="" coords="1584,238,1683,266"/>
+</map>

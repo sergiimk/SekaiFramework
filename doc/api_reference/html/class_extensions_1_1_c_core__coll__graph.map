@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classmodule_1_1_com_root_object.html" title="{module::ComRootObject\&lt;\&gt;\n||+ ~ComRootObject()\l+ _get_uuid()\l# _AddRef()\l# _Release()\l}" alt="" coords="5,1115,184,1245"/>
+<area shape="rect" id="node4" href="$struct_extensions_1_1_i_core.html" title="ICore interface." alt="" coords="84,267,244,397"/>
+<area shape="rect" id="node8" href="$struct_extensions_1_1_global_environment.html" title="This struct is used for convenient access to subsystems." alt="" coords="259,590,461,703"/>
+<area shape="rect" id="node6" href="$structmodule_1_1_i_unknown.html" title="IUnknown interface." alt="" coords="388,6,516,119"/>
+<area shape="rect" id="node10" href="$struct_extensions_1_1_i_plugin_manager.html" title="IPluginManager interface." alt="" coords="268,283,452,381"/>
+<area shape="rect" id="node13" href="$struct_logging_1_1_i_log_service.html" title="Logging service interface." alt="" coords="476,259,615,405"/>
+<area shape="rect" id="node25" href="$structmodule_1_1_i_class_factory.html" title="IClassFactory interface." alt="" coords="639,291,791,373"/>
+<area shape="rect" id="node17" href="$classmodule_1_1_module_handle.html" title="Module managing class." alt="" coords="383,1027,535,1333"/>
+<area shape="rect" id="node19" href="$structmodule_1_1_module_handle_1_1_module_handle_impl.html" title="{module::ModuleHandle::ModuleHandleImpl\n|+ m_module\l+ m_initFunc\l+ m_shutdownFunc\l+ m_getModuleMap\l+ m_refCount\l|+ ModuleHandleImpl()\l+ ModuleHandleImpl()\l}" alt="" coords="411,785,677,946"/>
+<area shape="rect" id="node21" href="$structmodule_1_1detail_1_1_m_o_d_u_l_e___m_a_p___e_n_t_r_y.html" title="Object entry in module map." alt="" coords="589,574,840,719"/>
+<area shape="rect" id="node23" href="$structmodule_1_1guid.html" title="guid structure" alt="" coords="815,171,951,493"/>
+</map>

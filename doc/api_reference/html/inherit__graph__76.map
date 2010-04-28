@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$class_i_map.html" title="IMap\&lt; Key, Val \&gt;" alt="" coords="7,5,129,33"/>
+<area shape="rect" id="node3" href="$class_map_impl_wrapper.html" title="MapImplWrapper\&lt; Key, Val, C \&gt;" alt="" coords="179,5,389,33"/>
+<area shape="rect" id="node5" href="$class_map_impl_owned.html" title="MapImplOwned\&lt; Key, Val, C \&gt;" alt="" coords="439,5,639,33"/>
+</map>

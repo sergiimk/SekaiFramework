@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_i_core_8h.html" title="ICore.h" alt="" coords="264,83,325,111"/>
+<area shape="rect" id="node21" href="$_global_environment_8h.html" title="GlobalEnvironment.h" alt="" coords="101,83,240,111"/>
+<area shape="rect" id="node24" href="$module_8h.html" title="module/module.h" alt="" coords="491,83,611,111"/>
+<area shape="rect" id="node5" href="$_core__fwd_8h.html" title="Core_fwd.h" alt="" coords="139,161,224,189"/>
+<area shape="rect" id="node7" href="$interfaces_8h.html" title="module/interfaces.h" alt="" coords="171,315,304,343"/>
+<area shape="rect" id="node9" href="$guid_8h.html" title="guid.h" alt="" coords="209,393,265,421"/>
+<area shape="rect" id="node15" href="$platform_8h.html" title="platform/platform.h" alt="" coords="551,393,679,421"/>
+<area shape="rect" id="node26" href="$implementations_8h.html" title="implementations.h" alt="" coords="487,161,615,189"/>
+<area shape="rect" id="node43" href="$intellectual_8h.html" title="intellectual.h" alt="" coords="689,161,783,189"/>
+<area shape="rect" id="node28" href="$maps_8h.html" title="maps.h" alt="" coords="365,238,429,266"/>
+<area shape="rect" id="node33" href="$threadingmodel_8h.html" title="threadingmodel.h" alt="" coords="491,238,611,266"/>
+<area shape="rect" id="node38" href="$allocators_8h.html" title="allocators.h" alt="" coords="635,238,723,266"/>
+<area shape="rect" id="node31" href="$typetraits_8h.html" title="common/typetraits.h" alt="" coords="328,315,467,343"/>
+<area shape="rect" id="node35" href="$threading_8h.html" title="threading/threading.h" alt="" coords="491,315,632,343"/>
+</map>

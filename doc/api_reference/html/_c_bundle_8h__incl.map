@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_i_bundle_8h.html" title="IBundle.h" alt="" coords="744,238,819,266"/>
+<area shape="rect" id="node32" href="$_i_bundle_activator_8h.html" title="IBundleActivator.h" alt="" coords="997,238,1123,266"/>
+<area shape="rect" id="node36" href="$module_8h.html" title="module/module.h" alt="" coords="647,83,767,111"/>
+<area shape="rect" id="node56" href="$_impl__fwd_8h.html" title="Impl_fwd.h" alt="" coords="1167,161,1249,189"/>
+<area shape="rect" id="node63" href="$_service_usage_8h.html" title="ServiceUsage.h" alt="" coords="1152,83,1264,111"/>
+<area shape="rect" id="node67" href="$_events_8h.html" title="Events.h" alt="" coords="869,161,941,189"/>
+<area shape="rect" id="node76" href="$stlutils_8h.html" title="common/stlutils.h" alt="" coords="313,161,436,189"/>
+<area shape="rect" id="node5" href="$interfaces_8h.html" title="module/interfaces.h" alt="" coords="1019,315,1152,343"/>
+<area shape="rect" id="node19" href="$intellectual_8h.html" title="module/intellectual.h" alt="" coords="709,315,848,343"/>
+<area shape="rect" id="node22" href="$containers_8h.html" title="common/containers.h" alt="" coords="109,315,256,343"/>
+<area shape="rect" id="node29" href="$_framework__fwd_8h.html" title="Framework_fwd.h" alt="" coords="872,315,995,343"/>
+<area shape="rect" id="node7" href="$guid_8h.html" title="guid.h" alt="" coords="1057,393,1113,421"/>
+<area shape="rect" id="node13" href="$platform_8h.html" title="platform/platform.h" alt="" coords="551,393,679,421"/>
+<area shape="rect" id="node38" href="$implementations_8h.html" title="implementations.h" alt="" coords="489,161,617,189"/>
+<area shape="rect" id="node40" href="$maps_8h.html" title="maps.h" alt="" coords="587,238,651,266"/>
+<area shape="rect" id="node45" href="$threadingmodel_8h.html" title="threadingmodel.h" alt="" coords="443,238,563,266"/>
+<area shape="rect" id="node50" href="$allocators_8h.html" title="allocators.h" alt="" coords="331,238,419,266"/>
+<area shape="rect" id="node43" href="$typetraits_8h.html" title="common/typetraits.h" alt="" coords="547,315,685,343"/>
+<area shape="rect" id="node47" href="$threading_8h.html" title="threading/threading.h" alt="" coords="381,315,523,343"/>
+<area shape="rect" id="node70" href="$_services_8h.html" title="Services.h" alt="" coords="893,238,973,266"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$struct_framework_1_1_i_event_dispatcher.html" title="Event dispatcher interface." alt="" coords="5,1118,195,1215"/>
+<area shape="rect" id="node4" href="$struct_framework_1_1_s_bundle_event.html" title="Arguments of the bundle event." alt="" coords="219,1094,392,1239"/>
+<area shape="rect" id="node6" href="$classmodule_1_1com__ptr.html" title="{module::com_ptr\&lt; IBundle \&gt;\n||+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ operator=()\l+ operator=()\l+ Equal()\l}" alt="" coords="213,835,397,1029"/>
+<area shape="rect" id="node8" href="$classmodule_1_1com__ptr__impl.html" title="{module::com_ptr_impl\&lt; IBundle \&gt;\n|# p\l|+ com_ptr_impl()\l+ com_ptr_impl()\l+ com_ptr_impl()\l+ ~com_ptr_impl()\l+ operator IBundle *()\l+ operator*()\l+ wrapped()\l+ operator&#45;\&gt;()\l+ operator!()\l+ operator\&lt;()\l+ operator==()\l+ operator!=()\l+ operator=()\l+ operator=()\l+ Release()\l+ Attach()\l+ Detach()\l}" alt="" coords="197,446,413,783"/>
+<area shape="rect" id="node10" href="$struct_framework_1_1_i_bundle.html" title="A Bundle object is the access point to define the life cycle of an installed bundle..." alt="" coords="220,171,391,381"/>
+<area shape="rect" id="node12" href="$structmodule_1_1_i_unknown.html" title="IUnknown interface." alt="" coords="241,6,369,119"/>
+</map>

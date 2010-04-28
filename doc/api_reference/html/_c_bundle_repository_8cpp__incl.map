@@ -1,0 +1,35 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_c_bundle_repository_8h.html" title="CBundleRepository.h" alt="" coords="537,238,681,266"/>
+<area shape="rect" id="node63" href="$_c_system_bundle_8h.html" title="CSystemBundle.h" alt="" coords="716,83,841,111"/>
+<area shape="rect" id="node126" href="$_c_event_server_8h.html" title="CEventServer.h" alt="" coords="328,238,437,266"/>
+<area shape="rect" id="node151" href="$_listeners_8h.html" title="Listeners.h" alt="" coords="2137,315,2223,343"/>
+<area shape="rect" id="node5" href="$_i_bundle_8h.html" title="IBundle.h" alt="" coords="1481,315,1556,343"/>
+<area shape="rect" id="node24" href="$containers_8h.html" title="common/containers.h" alt="" coords="1176,393,1323,421"/>
+<area shape="rect" id="node35" href="$_impl__fwd_8h.html" title="Impl_fwd.h" alt="" coords="831,315,913,343"/>
+<area shape="rect" id="node42" href="$_c_event_listener_queue_8h.html" title="CEventListenerQueue.h" alt="" coords="415,315,572,343"/>
+<area shape="rect" id="node49" href="$stringutils_8h.html" title="common/stringutils.h" alt="" coords="68,315,209,343"/>
+<area shape="rect" id="node7" href="$interfaces_8h.html" title="module/interfaces.h" alt="" coords="1708,470,1841,498"/>
+<area shape="rect" id="node21" href="$intellectual_8h.html" title="module/intellectual.h" alt="" coords="1595,393,1733,421"/>
+<area shape="rect" id="node31" href="$_framework__fwd_8h.html" title="Framework_fwd.h" alt="" coords="1397,393,1520,421"/>
+<area shape="rect" id="node9" href="$guid_8h.html" title="guid.h" alt="" coords="1747,547,1803,575"/>
+<area shape="rect" id="node15" href="$platform_8h.html" title="platform/platform.h" alt="" coords="1395,547,1523,575"/>
+<area shape="rect" id="node65" href="$_i_framework_8h.html" title="IFramework.h" alt="" coords="1444,161,1543,189"/>
+<area shape="rect" id="node77" href="$_i_bundle_context_8h.html" title="IBundleContext.h" alt="" coords="1337,315,1457,343"/>
+<area shape="rect" id="node83" href="$_c_bundle_8h.html" title="CBundle.h" alt="" coords="1197,161,1277,189"/>
+<area shape="rect" id="node117" href="$_c_service_registry_8h.html" title="CServiceRegistry.h" alt="" coords="756,238,887,266"/>
+<area shape="rect" id="node134" href="$logging_8h.html" title="logging/logging.h" alt="" coords="2345,161,2463,189"/>
+<area shape="rect" id="node68" href="$_events_8h.html" title="Events.h" alt="" coords="1531,238,1603,266"/>
+<area shape="rect" id="node71" href="$_services_8h.html" title="Services.h" alt="" coords="1580,315,1660,343"/>
+<area shape="rect" id="node86" href="$_i_bundle_activator_8h.html" title="IBundleActivator.h" alt="" coords="1785,315,1911,343"/>
+<area shape="rect" id="node90" href="$module_8h.html" title="module/module.h" alt="" coords="1888,238,2008,266"/>
+<area shape="rect" id="node104" href="$_service_usage_8h.html" title="ServiceUsage.h" alt="" coords="1063,238,1175,266"/>
+<area shape="rect" id="node109" href="$stlutils_8h.html" title="common/stlutils.h" alt="" coords="1140,315,1263,343"/>
+<area shape="rect" id="node92" href="$implementations_8h.html" title="implementations.h" alt="" coords="1985,315,2113,343"/>
+<area shape="rect" id="node94" href="$maps_8h.html" title="maps.h" alt="" coords="2104,393,2168,421"/>
+<area shape="rect" id="node97" href="$threadingmodel_8h.html" title="threadingmodel.h" alt="" coords="1960,393,2080,421"/>
+<area shape="rect" id="node99" href="$allocators_8h.html" title="allocators.h" alt="" coords="1871,470,1959,498"/>
+<area shape="rect" id="node136" href="$_i_log_service_8h.html" title="ILogService.h" alt="" coords="2355,238,2453,266"/>
+<area shape="rect" id="node139" href="$_i_log_listener_8h.html" title="ILogListener.h" alt="" coords="2663,315,2764,343"/>
+<area shape="rect" id="node143" href="$_global_environment_8h.html" title="extensionmanager/GlobalEnvironment.h" alt="" coords="2388,315,2639,343"/>
+<area shape="rect" id="node145" href="$_core__fwd_8h.html" title="Core_fwd.h" alt="" coords="2471,393,2556,421"/>
+</map>

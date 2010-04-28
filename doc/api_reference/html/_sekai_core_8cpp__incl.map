@@ -1,0 +1,27 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_c_core_8h.html" title="CCore.h" alt="" coords="527,83,593,111"/>
+<area shape="rect" id="node48" href="$_sekai_core_8h.html" title="SekaiCore.h" alt="" coords="833,83,924,111"/>
+<area shape="rect" id="node5" href="$_i_core_8h.html" title="ICore.h" alt="" coords="429,161,491,189"/>
+<area shape="rect" id="node23" href="$_global_environment_8h.html" title="GlobalEnvironment.h" alt="" coords="599,315,737,343"/>
+<area shape="rect" id="node26" href="$module_8h.html" title="module/module.h" alt="" coords="164,161,284,189"/>
+<area shape="rect" id="node7" href="$_core__fwd_8h.html" title="Core_fwd.h" alt="" coords="1053,393,1139,421"/>
+<area shape="rect" id="node9" href="$interfaces_8h.html" title="module/interfaces.h" alt="" coords="812,393,945,421"/>
+<area shape="rect" id="node11" href="$guid_8h.html" title="guid.h" alt="" coords="851,470,907,498"/>
+<area shape="rect" id="node17" href="$platform_8h.html" title="platform/platform.h" alt="" coords="176,470,304,498"/>
+<area shape="rect" id="node28" href="$implementations_8h.html" title="implementations.h" alt="" coords="160,238,288,266"/>
+<area shape="rect" id="node45" href="$intellectual_8h.html" title="intellectual.h" alt="" coords="5,238,99,266"/>
+<area shape="rect" id="node30" href="$maps_8h.html" title="maps.h" alt="" coords="308,315,372,343"/>
+<area shape="rect" id="node35" href="$threadingmodel_8h.html" title="threadingmodel.h" alt="" coords="164,315,284,343"/>
+<area shape="rect" id="node40" href="$allocators_8h.html" title="allocators.h" alt="" coords="52,315,140,343"/>
+<area shape="rect" id="node33" href="$typetraits_8h.html" title="common/typetraits.h" alt="" coords="335,393,473,421"/>
+<area shape="rect" id="node37" href="$threading_8h.html" title="threading/threading.h" alt="" coords="169,393,311,421"/>
+<area shape="rect" id="node51" href="$_i_plugin_8h.html" title="IPlugin.h" alt="" coords="699,238,771,266"/>
+<area shape="rect" id="node55" href="$_i_plugin_manager_8h.html" title="IPluginManager.h" alt="" coords="1144,238,1264,266"/>
+<area shape="rect" id="node57" href="$_i_plugin_shadow_8h.html" title="IPluginShadow.h" alt="" coords="1145,315,1263,343"/>
+<area shape="rect" id="node67" href="$_i_extension_8h.html" title="IExtension.h" alt="" coords="1028,315,1121,343"/>
+<area shape="rect" id="node74" href="$_i_start_listener_8h.html" title="IStartListener.h" alt="" coords="515,161,624,189"/>
+<area shape="rect" id="node77" href="$_i_extension_point_8h.html" title="IExtensionPoint.h" alt="" coords="1337,315,1460,343"/>
+<area shape="rect" id="node82" href="$logging_8h.html" title="logging/logging.h" alt="" coords="820,161,937,189"/>
+<area shape="rect" id="node84" href="$_i_log_service_8h.html" title="ILogService.h" alt="" coords="796,238,895,266"/>
+<area shape="rect" id="node87" href="$_i_log_listener_8h.html" title="ILogListener.h" alt="" coords="903,315,1004,343"/>
+</map>

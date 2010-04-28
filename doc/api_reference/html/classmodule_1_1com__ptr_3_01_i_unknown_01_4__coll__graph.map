@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classmodule_1_1com__ptr__impl.html" title="{module::com_ptr_impl\&lt; IUnknown \&gt;\n|# p\l|+ com_ptr_impl()\l+ com_ptr_impl()\l+ com_ptr_impl()\l+ ~com_ptr_impl()\l+ operator IUnknown *()\l+ operator*()\l+ wrapped()\l+ operator&#45;\&gt;()\l+ operator!()\l+ operator\&lt;()\l+ operator==()\l+ operator!=()\l+ operator=()\l+ operator=()\l+ Release()\l+ Attach()\l+ Detach()\l}" alt="" coords="5,185,235,522"/>
+<area shape="rect" id="node4" href="$structmodule_1_1_i_unknown.html" title="IUnknown interface." alt="" coords="56,6,184,119"/>
+</map>

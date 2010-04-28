@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$structstack__allocator_1_1_source.html" title="{stack_allocator\&lt; T, stack_capacity \&gt;::Source\n|+ m_stackBuffer\l+ m_isStackBufferUsed\l|+ Source()\l+ stack_buffer()\l+ stack_buffer()\l}" alt="" coords="5,6,291,135"/>
+<area shape="rect" id="node6" href="$classstack__allocator.html" title="{stack_allocator\&lt; ContainedType, stack_capacity \&gt;\n|&#45; m_source\l|+ stack_allocator()\l+ stack_allocator()\l+ stack_allocator()\l+ stack_allocator()\l+ allocate()\l+ deallocate()\l+ isOnStack()\l}" alt="" coords="260,201,575,378"/>
+<area shape="rect" id="node8" href="$classstd_1_1allocator.html" title="{std::allocator\&lt;ContainedType \&gt;\n||}" alt="" coords="316,30,519,111"/>
+</map>

@@ -1,0 +1,28 @@
+<map id="G" name="G">
+<area shape="rect" id="node10" href="$class_framework_1_1_c_service_reference.html" title="Implementation of service reference object." alt="" coords="236,3702,439,3863"/>
+<area shape="rect" id="node2" href="$classmodule_1_1_com_root_object.html" title="{module::ComRootObject\&lt; module::MultiThreadModel \&gt;\n||+ ~ComRootObject()\l+ _get_uuid()\l# _AddRef()\l# _Release()\l}" alt="" coords="363,1763,701,1893"/>
+<area shape="rect" id="node18" href="$class_framework_1_1_c_bundle.html" title="Bundle implementation." alt="" coords="771,2145,941,2802"/>
+<area shape="rect" id="node66" href="$class_framework_1_1_c_bundle_context.html" title="Implementation of bundle context." alt="" coords="757,3558,949,4007"/>
+<area shape="rect" id="node4" href="$struct_framework_1_1_i_service_registration.html" title="A registered service." alt="" coords="120,1067,328,1165"/>
+<area shape="rect" id="node6" href="$structmodule_1_1_i_unknown.html" title="IUnknown interface." alt="" coords="407,6,535,119"/>
+<area shape="rect" id="node13" href="$struct_framework_1_1_i_service_reference.html" title="{Framework::IServiceReference\n|+ uuid\l|+ getBundle()\l}" alt="" coords="5,1553,200,1634"/>
+<area shape="rect" id="node21" href="$struct_framework_1_1_i_bundle.html" title="A Bundle object is the access point to define the life cycle of an installed bundle..." alt="" coords="1043,833,1213,1042"/>
+<area shape="rect" id="node53" href="$struct_framework_1_1_i_bundle_activator.html" title="Customizes the starting and stopping of this bundle." alt="" coords="860,614,1047,711"/>
+<area shape="rect" id="node63" href="$structmodule_1_1_i_class_factory.html" title="IClassFactory interface." alt="" coords="681,291,833,373"/>
+<area shape="rect" id="node69" href="$struct_framework_1_1_i_bundle_context.html" title="{Framework::IBundleContext\n|+ uuid\l|+ getBundle()\l+ getBundle()\l+ getBundles()\l+ InstallBundle()\l+ RegisterService()\l+ getServiceReference()\l+ getService()\l+ ungetService()\l+ AddBundleListener()\l+ RemoveBundleListener()\l+ AddFrameworkListener()\l+ RemoveFrameworkListener()\l+ AddServiceListener()\l+ RemoveServiceListener()\l}" alt="" coords="372,518,569,807"/>
+<area shape="rect" id="node8" href="$structmodule_1_1guid.html" title="guid structure" alt="" coords="521,171,657,493"/>
+<area shape="rect" id="node60" href="$structmodule_1_1detail_1_1_m_o_d_u_l_e___m_a_p___e_n_t_r_y.html" title="Object entry in module map." alt="" coords="632,865,883,1010"/>
+<area shape="rect" id="node24" href="$class_framework_1_1_c_system_bundle.html" title="System bundle implementation." alt="" coords="1217,2867,1404,3493"/>
+<area shape="rect" id="node27" href="$struct_framework_1_1_i_framework.html" title="Framework interface." alt="" coords="1547,2022,1707,2119"/>
+<area shape="rect" id="node46" href="$classmodule_1_1com__ptr__impl.html" title="{module::com_ptr_impl\&lt; IBundle \&gt;\n|# p\l|+ com_ptr_impl()\l+ com_ptr_impl()\l+ com_ptr_impl()\l+ ~com_ptr_impl()\l+ operator IBundle *()\l+ operator*()\l+ wrapped()\l+ operator&#45;\&gt;()\l+ operator!()\l+ operator\&lt;()\l+ operator==()\l+ operator!=()\l+ operator=()\l+ operator=()\l+ Release()\l+ Attach()\l+ Detach()\l}" alt="" coords="1111,1190,1327,1527"/>
+<area shape="rect" id="node30" href="$class_framework_1_1_c_bundle_repository.html" title="Bundle registry." alt="" coords="1240,3606,1443,3959"/>
+<area shape="rect" id="node49" href="$class_framework_1_1_c_service_registry.html" title="Manages service lifetimes." alt="" coords="1527,3654,1719,3911"/>
+<area shape="rect" id="node33" href="$class_framework_1_1_c_event_listener_queue.html" title="Event listener container." alt="" coords="1664,2369,1883,2578"/>
+<area shape="rect" id="node35" href="$classmodule_1_1com__ptr.html" title="{module::com_ptr\&lt; ILogService \&gt;\n||+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ operator=()\l+ operator=()\l+ Equal()\l}" alt="" coords="1381,2377,1589,2570"/>
+<area shape="rect" id="node37" href="$classmodule_1_1com__ptr__impl.html" title="{module::com_ptr_impl\&lt; ILogService \&gt;\n|# p\l|+ com_ptr_impl()\l+ com_ptr_impl()\l+ com_ptr_impl()\l+ ~com_ptr_impl()\l+ operator ILogService *()\l+ operator*()\l+ wrapped()\l+ operator&#45;\&gt;()\l+ operator!()\l+ operator\&lt;()\l+ operator==()\l+ operator!=()\l+ operator=()\l+ operator=()\l+ Release()\l+ Attach()\l+ Detach()\l}" alt="" coords="1349,1659,1589,1997"/>
+<area shape="rect" id="node40" href="$class_framework_1_1_c_event_server.html" title="Implements event delivery system." alt="" coords="965,2337,1136,2610"/>
+<area shape="rect" id="node42" href="$struct_framework_1_1_s_framework_event.html" title="Arguments of the framework event." alt="" coords="1160,2401,1357,2546"/>
+<area shape="rect" id="node44" href="$classmodule_1_1com__ptr.html" title="{module::com_ptr\&lt; IBundle \&gt;\n||+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ operator=()\l+ operator=()\l+ Equal()\l}" alt="" coords="1140,1731,1324,1925"/>
+<area shape="rect" id="node56" href="$classmodule_1_1_module_handle.html" title="Module managing class." alt="" coords="776,1675,928,1981"/>
+<area shape="rect" id="node58" href="$structmodule_1_1_module_handle_1_1_module_handle_impl.html" title="{module::ModuleHandle::ModuleHandleImpl\n|+ m_module\l+ m_initFunc\l+ m_shutdownFunc\l+ m_getModuleMap\l+ m_refCount\l|+ ModuleHandleImpl()\l+ ModuleHandleImpl()\l}" alt="" coords="637,1278,904,1439"/>
+</map>

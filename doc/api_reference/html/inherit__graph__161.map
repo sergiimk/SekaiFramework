@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classreflection_1_1type.html" title="Type information class." alt="" coords="5,157,112,185"/>
+<area shape="rect" id="node3" href="$classreflection_1_1array__type.html" title="Array type class." alt="" coords="187,5,328,33"/>
+<area shape="rect" id="node5" href="$classreflection_1_1builtin__type.html" title="Built&#45;in type class." alt="" coords="168,55,347,83"/>
+<area shape="rect" id="node7" href="$classreflection_1_1builtin__type_3_01void_01_4.html" title="Built&#45;in specialization for void type." alt="" coords="161,106,353,134"/>
+<area shape="rect" id="node9" href="$classreflection_1_1function__type.html" title="Function type class." alt="" coords="179,157,336,185"/>
+<area shape="rect" id="node11" href="$classreflection_1_1pointer__type.html" title="Pointer type class." alt="" coords="181,207,333,235"/>
+<area shape="rect" id="node13" href="$classreflection_1_1reference__type.html" title="Reference type class." alt="" coords="175,258,340,286"/>
+<area shape="rect" id="node15" href="$classreflection_1_1user__type.html" title="User&#45;defined type class." alt="" coords="188,309,327,337"/>
+</map>

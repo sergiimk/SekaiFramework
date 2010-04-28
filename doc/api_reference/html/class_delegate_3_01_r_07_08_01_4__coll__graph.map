@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$class_delegate0.html" title="{Delegate0\&lt; R \&gt;\n||+ Delegate0()\l+ Delegate0()\l+ Delegate0()\l+ Delegate0()\l+ Delegate0()\l+ operator=()\l+ operator=()\l+ bind()\l+ bind()\l+ bind()\l+ operator()()\l&#45; InvokeStaticFunction()\l}" alt="" coords="72,361,229,618"/>
+<area shape="rect" id="node4" href="$classdetail_1_1_delegate_n.html" title="{detail::DelegateN\&lt; detail::deleg_traits0\&lt; R \&gt; \&gt;\n|# m_Closure\l|+ operator unspecified_bool_type()\l+ operator==()\l+ operator!=()\l+ operator!()\l+ empty()\l+ clear()\l+ GetFunctionData()\l+ SetFunctionData()\l# DelegateN()\l# DelegateN()\l# operator=()\l# operator==()\l# operator!=()\l# operator\&lt;()\l# operator\&gt;()\l}" alt="" coords="5,6,296,311"/>
+</map>

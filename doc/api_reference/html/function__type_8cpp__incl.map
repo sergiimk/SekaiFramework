@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$function__type_8h.html" title="types/function_type.h" alt="" coords="1100,83,1244,111"/>
+<area shape="rect" id="node31" href="$type__impl_8h.html" title="type_impl.h" alt="" coords="1268,83,1356,111"/>
+<area shape="rect" id="node36" href="$stack__string_8h.html" title="common/stack_string.h" alt="" coords="1380,83,1537,111"/>
+<area shape="rect" id="node5" href="$type_8h.html" title="types/type.h" alt="" coords="1212,161,1305,189"/>
+<area shape="rect" id="node15" href="$_delegate_8h.html" title="delegate/Delegate.h" alt="" coords="531,161,667,189"/>
+<area shape="rect" id="node13" href="$type__iters_8inc.html" title="type_iters.inc" alt="" coords="1429,238,1528,266"/>
+<area shape="rect" id="node19" href="$_delegate__utils_8h.html" title="Delegate_utils.h" alt="" coords="5,238,120,266"/>
+<area shape="rect" id="node21" href="$_delegate__funcdata_8h.html" title="Delegate_funcdata.h" alt="" coords="144,238,283,266"/>
+<area shape="rect" id="node23" href="$_delegate__closure_8h.html" title="Delegate_closure.h" alt="" coords="307,238,437,266"/>
+<area shape="rect" id="node25" href="$_delegate__deleg_8h.html" title="Delegate_deleg.h" alt="" coords="461,238,581,266"/>
+<area shape="rect" id="node27" href="$_delegate__funcstyle_8h.html" title="Delegate_funcstyle.h" alt="" coords="605,238,747,266"/>
+<area shape="rect" id="node29" href="$_delegate__makedeleg_8h.html" title="Delegate_makedeleg.h" alt="" coords="771,238,923,266"/>
+<area shape="rect" id="node39" href="$stack__container_8h.html" title="stack_container.h" alt="" coords="1535,161,1657,189"/>
+<area shape="rect" id="node43" href="$noncopyable_8h.html" title="noncopyable.h" alt="" coords="1407,161,1511,189"/>
+</map>

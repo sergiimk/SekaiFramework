@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classreflection_1_1type.html" title="Type information class." alt="" coords="33,313,167,618"/>
+<area shape="rect" id="node6" href="$classreflection_1_1function__type_1_1function__type__impl.html" title="{reflection::function_type::function_type_impl\n|&#45; m_invoker\l&#45; m_retType\l&#45; m_argTypes\l&#45; m_argc\l|+ function_type_impl()\l+ print_name()\l+ return_type()\l+ argument_count()\l+ argument_types()\l+ invoke()\l}" alt="" coords="67,699,341,909"/>
+<area shape="rect" id="node4" href="$classreflection_1_1type_1_1type__impl.html" title="Implementation of Type." alt="" coords="77,6,248,247"/>
+</map>

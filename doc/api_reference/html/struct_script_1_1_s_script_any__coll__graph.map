@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$struct_script_1_1_i_script_table.html" title="Represent abstract script table (a set of key&#45;value pairs)." alt="" coords="5,171,136,301"/>
+<area shape="rect" id="node4" href="$structmodule_1_1_i_unknown.html" title="IUnknown interface." alt="" coords="165,6,293,119"/>
+<area shape="rect" id="node6" href="$struct_script_1_1_i_script_object.html" title="Interface for manipulation on script objects." alt="" coords="160,187,299,285"/>
+<area shape="rect" id="node9" href="$struct_script_1_1_i_script_function.html" title="Object bound to function defined in script." alt="" coords="323,195,472,277"/>
+</map>

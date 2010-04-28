@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$construction__attribute_8h.html" title="custom/construction_attribute.h" alt="" coords="229,83,432,111"/>
+<area shape="rect" id="node20" href="$attribute__impl_8h.html" title="attribute_impl.h" alt="" coords="96,83,205,111"/>
+<area shape="rect" id="node23" href="$function__type_8h.html" title="types/function_type.h" alt="" coords="491,83,635,111"/>
+<area shape="rect" id="node5" href="$attribute_8h.html" title="attribute.h" alt="" coords="111,161,191,189"/>
+<area shape="rect" id="node15" href="$member_8h.html" title="member.h" alt="" coords="215,161,295,189"/>
+<area shape="rect" id="node18" href="$construction_8inc.html" title="generated/construction.inc" alt="" coords="319,161,492,189"/>
+<area shape="rect" id="node7" href="$reflection__fwd_8h.html" title="reflection_fwd.h" alt="" coords="101,238,211,266"/>
+<area shape="rect" id="node9" href="$platform_8h.html" title="platform/platform.h" alt="" coords="92,315,220,343"/>
+<area shape="rect" id="node25" href="$type_8h.html" title="types/type.h" alt="" coords="516,161,609,189"/>
+<area shape="rect" id="node35" href="$_delegate_8h.html" title="delegate/Delegate.h" alt="" coords="1063,161,1199,189"/>
+<area shape="rect" id="node33" href="$type__iters_8inc.html" title="type_iters.inc" alt="" coords="617,238,716,266"/>
+<area shape="rect" id="node39" href="$_delegate__utils_8h.html" title="Delegate_utils.h" alt="" coords="844,238,959,266"/>
+<area shape="rect" id="node41" href="$_delegate__funcdata_8h.html" title="Delegate_funcdata.h" alt="" coords="983,238,1121,266"/>
+<area shape="rect" id="node43" href="$_delegate__closure_8h.html" title="Delegate_closure.h" alt="" coords="1145,238,1276,266"/>
+<area shape="rect" id="node45" href="$_delegate__deleg_8h.html" title="Delegate_deleg.h" alt="" coords="1300,238,1420,266"/>
+<area shape="rect" id="node47" href="$_delegate__funcstyle_8h.html" title="Delegate_funcstyle.h" alt="" coords="1444,238,1585,266"/>
+<area shape="rect" id="node49" href="$_delegate__makedeleg_8h.html" title="Delegate_makedeleg.h" alt="" coords="1609,238,1761,266"/>
+</map>

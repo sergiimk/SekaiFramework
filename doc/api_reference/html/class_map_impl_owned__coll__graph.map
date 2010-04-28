@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$class_map_impl_wrapper.html" title="{MapImplWrapper\&lt; Key, Val, C \&gt;\n|&#45; m_container\l|+ MapImplWrapper()\l+ size()\l+ operator[]()\l+ operator[]()\l}" alt="" coords="5,169,216,298"/>
+<area shape="rect" id="node4" href="$class_i_map.html" title="{IMap\&lt; Key, Val \&gt;\n||+ size()\l+ operator[]()\l+ operator[]()\l}" alt="" coords="49,6,172,119"/>
+</map>

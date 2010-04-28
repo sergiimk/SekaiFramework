@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classmodule_1_1_com_root_object.html" title="{module::ComRootObject\&lt;\&gt;\n||+ ~ComRootObject()\l+ _get_uuid()\l# _AddRef()\l# _Release()\l}" alt="" coords="5,267,184,397"/>
+<area shape="rect" id="node4" href="$struct_extensions_1_1_i_extension.html" title="Extension binds extension point with implementation class of extender and contains..." alt="" coords="208,267,363,397"/>
+<area shape="rect" id="node6" href="$structmodule_1_1_i_unknown.html" title="IUnknown interface." alt="" coords="413,6,541,119"/>
+<area shape="rect" id="node10" href="$struct_extensions_1_1_i_plugin_shadow.html" title="IPluginShadow interface." alt="" coords="387,203,568,461"/>
+<area shape="rect" id="node13" href="$struct_extensions_1_1_i_extension_point.html" title="Extension point interface serves a link between extension provider&#39;s shadow and..." alt="" coords="592,251,776,413"/>
+<area shape="rect" id="node8" href="$structmodule_1_1guid.html" title="guid structure" alt="" coords="800,171,936,493"/>
+</map>

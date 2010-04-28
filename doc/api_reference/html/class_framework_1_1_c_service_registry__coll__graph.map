@@ -1,0 +1,24 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$class_framework_1_1_c_system_bundle.html" title="System bundle implementation." alt="" coords="1113,2433,1300,3058"/>
+<area shape="rect" id="node4" href="$class_framework_1_1_c_bundle.html" title="Bundle implementation." alt="" coords="515,3123,685,3781"/>
+<area shape="rect" id="node27" href="$class_framework_1_1_c_bundle_context.html" title="Implementation of bundle context." alt="" coords="412,3846,604,4295"/>
+<area shape="rect" id="node38" href="$class_framework_1_1_c_bundle_repository.html" title="Bundle registry." alt="" coords="1237,3275,1440,3629"/>
+<area shape="rect" id="node6" href="$classmodule_1_1_com_root_object.html" title="{module::ComRootObject\&lt; module::MultiThreadModel \&gt;\n||+ ~ComRootObject()\l+ _get_uuid()\l# _AddRef()\l# _Release()\l}" alt="" coords="224,2681,563,2810"/>
+<area shape="rect" id="node8" href="$struct_framework_1_1_i_bundle.html" title="A Bundle object is the access point to define the life cycle of an installed bundle..." alt="" coords="612,227,783,437"/>
+<area shape="rect" id="node35" href="$struct_framework_1_1_i_framework.html" title="Framework interface." alt="" coords="1176,1195,1336,1293"/>
+<area shape="rect" id="node54" href="$classmodule_1_1com__ptr__impl.html" title="{module::com_ptr_impl\&lt; IBundle \&gt;\n|# p\l|+ com_ptr_impl()\l+ com_ptr_impl()\l+ com_ptr_impl()\l+ ~com_ptr_impl()\l+ operator IBundle *()\l+ operator*()\l+ wrapped()\l+ operator&#45;\&gt;()\l+ operator!()\l+ operator\&lt;()\l+ operator==()\l+ operator!=()\l+ operator=()\l+ operator=()\l+ Release()\l+ Attach()\l+ Detach()\l}" alt="" coords="707,833,923,1170"/>
+<area shape="rect" id="node10" href="$structmodule_1_1_i_unknown.html" title="IUnknown interface." alt="" coords="388,6,516,119"/>
+<area shape="rect" id="node13" href="$struct_framework_1_1_i_bundle_activator.html" title="Customizes the starting and stopping of this bundle." alt="" coords="439,1681,625,1778"/>
+<area shape="rect" id="node24" href="$structmodule_1_1_i_class_factory.html" title="IClassFactory interface." alt="" coords="180,291,332,373"/>
+<area shape="rect" id="node30" href="$struct_framework_1_1_i_bundle_context.html" title="{Framework::IBundleContext\n|+ uuid\l|+ getBundle()\l+ getBundle()\l+ getBundles()\l+ InstallBundle()\l+ RegisterService()\l+ getServiceReference()\l+ getService()\l+ ungetService()\l+ AddBundleListener()\l+ RemoveBundleListener()\l+ AddFrameworkListener()\l+ RemoveFrameworkListener()\l+ AddServiceListener()\l+ RemoveServiceListener()\l}" alt="" coords="5,518,203,807"/>
+<area shape="rect" id="node16" href="$classmodule_1_1_module_handle.html" title="Module managing class." alt="" coords="119,2102,271,2407"/>
+<area shape="rect" id="node18" href="$structmodule_1_1_module_handle_1_1_module_handle_impl.html" title="{module::ModuleHandle::ModuleHandleImpl\n|+ m_module\l+ m_initFunc\l+ m_shutdownFunc\l+ m_getModuleMap\l+ m_refCount\l|+ ModuleHandleImpl()\l+ ModuleHandleImpl()\l}" alt="" coords="117,1406,384,1567"/>
+<area shape="rect" id="node20" href="$structmodule_1_1detail_1_1_m_o_d_u_l_e___m_a_p___e_n_t_r_y.html" title="Object entry in module map." alt="" coords="131,929,381,1074"/>
+<area shape="rect" id="node22" href="$structmodule_1_1guid.html" title="guid structure" alt="" coords="356,171,492,493"/>
+<area shape="rect" id="node41" href="$class_framework_1_1_c_event_listener_queue.html" title="Event listener container." alt="" coords="1487,1382,1705,1591"/>
+<area shape="rect" id="node43" href="$classmodule_1_1com__ptr.html" title="{module::com_ptr\&lt; ILogService \&gt;\n||+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ operator=()\l+ operator=()\l+ Equal()\l}" alt="" coords="1103,1843,1311,2037"/>
+<area shape="rect" id="node45" href="$classmodule_1_1com__ptr__impl.html" title="{module::com_ptr_impl\&lt; ILogService \&gt;\n|# p\l|+ com_ptr_impl()\l+ com_ptr_impl()\l+ com_ptr_impl()\l+ ~com_ptr_impl()\l+ operator ILogService *()\l+ operator*()\l+ wrapped()\l+ operator&#45;\&gt;()\l+ operator!()\l+ operator\&lt;()\l+ operator==()\l+ operator!=()\l+ operator=()\l+ operator=()\l+ Release()\l+ Attach()\l+ Detach()\l}" alt="" coords="1071,1318,1311,1655"/>
+<area shape="rect" id="node48" href="$class_framework_1_1_c_event_server.html" title="Implements event delivery system." alt="" coords="687,1803,857,2077"/>
+<area shape="rect" id="node50" href="$struct_framework_1_1_s_framework_event.html" title="Arguments of the framework event." alt="" coords="881,1867,1079,2013"/>
+<area shape="rect" id="node52" href="$classmodule_1_1com__ptr.html" title="{module::com_ptr\&lt; IBundle \&gt;\n||+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ com_ptr()\l+ operator=()\l+ operator=()\l+ Equal()\l}" alt="" coords="783,1390,967,1583"/>
+</map>

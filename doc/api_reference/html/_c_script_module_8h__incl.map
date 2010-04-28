@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node9" href="$reflection__fwd_8h.html" title="reflection/reflection_fwd.h" alt="" coords="176,238,341,266"/>
+<area shape="rect" id="node17" href="$stringutils_8h.html" title="common/stringutils.h" alt="" coords="384,83,525,111"/>
+<area shape="rect" id="node28" href="$_entry_types_8h.html" title="EntryTypes.h" alt="" coords="549,83,648,111"/>
+<area shape="rect" id="node30" href="$module_8h.html" title="module/module.h" alt="" coords="735,83,855,111"/>
+<area shape="rect" id="node11" href="$platform_8h.html" title="platform/platform.h" alt="" coords="533,393,661,421"/>
+<area shape="rect" id="node32" href="$implementations_8h.html" title="implementations.h" alt="" coords="832,161,960,189"/>
+<area shape="rect" id="node57" href="$intellectual_8h.html" title="intellectual.h" alt="" coords="525,238,619,266"/>
+<area shape="rect" id="node34" href="$maps_8h.html" title="maps.h" alt="" coords="929,238,993,266"/>
+<area shape="rect" id="node47" href="$threadingmodel_8h.html" title="threadingmodel.h" alt="" coords="771,238,891,266"/>
+<area shape="rect" id="node52" href="$allocators_8h.html" title="allocators.h" alt="" coords="643,238,731,266"/>
+<area shape="rect" id="node36" href="$interfaces_8h.html" title="interfaces.h" alt="" coords="1055,315,1143,343"/>
+<area shape="rect" id="node45" href="$typetraits_8h.html" title="common/typetraits.h" alt="" coords="892,315,1031,343"/>
+<area shape="rect" id="node38" href="$guid_8h.html" title="guid.h" alt="" coords="1071,393,1127,421"/>
+<area shape="rect" id="node49" href="$threading_8h.html" title="threading/threading.h" alt="" coords="727,315,868,343"/>
+</map>

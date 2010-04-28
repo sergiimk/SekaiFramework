@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classreflection_1_1user__type.html" title="User&#45;defined type class." alt="" coords="61,683,208,1021"/>
+<area shape="rect" id="node4" href="$classreflection_1_1type.html" title="Type information class." alt="" coords="5,313,139,618"/>
+<area shape="rect" id="node6" href="$classreflection_1_1type_1_1type__impl.html" title="Implementation of Type." alt="" coords="108,6,279,247"/>
+<area shape="rect" id="node8" href="$classreflection_1_1user__type_1_1user__type__impl.html" title="{reflection::user_type::user_type_impl\n|&#45; m_members\l&#45; m_attributes\l|+ user_type_impl()\l+ ~user_type_impl()\l+ add_member()\l+ add_attribute()\l+ member_count()\l+ get_member()\l+ find_member()\l+ attribute_count()\l+ get_attribute()\l}" alt="" coords="163,353,397,578"/>
+</map>
