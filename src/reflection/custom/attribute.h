@@ -36,15 +36,13 @@ namespace reflection
 
 		attribute(EAttributeType type);
 
+		// Non-virtual because release is called
 		~attribute();
 
 		/// Returns type of the attribute
 		EAttributeType get_type() const;
 
-		/// Clones the attribute
-		virtual attribute* clone() const = 0;
-
-		/// Releases the cloned attribute
+		/// Destroys the attribute
 		virtual void release() = 0;
 
 	private:

@@ -157,8 +157,8 @@ BOOST_AUTO_TEST_CASE( invoke_function )
 	function_type* t = type_of(&F1);
 	int ret, a = 2, b = 3;
 	void* args[] = { &a, &b };
-	Delegate<int (int, int)> deleg = MakeDelegate(&F1);
-	t->invoke(&deleg, args, &ret);
+	auto deleg = delegates::make_delegate_dynamic(&F1);
+	deleg.invoke(args, &ret);
 	BOOST_CHECK_EQUAL(ret, 5);
 }
 

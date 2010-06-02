@@ -7,9 +7,11 @@
 * Terms of use, copying, distribution, and modification
 * are covered in accompanying LICENSE file
 =========================================================*/
-#include "custom/accessor_member.h"
 #include "member_impl.h"
+#include "custom/accessor_member.h"
 #include "types/function_type.h"
+
+using namespace delegates;
 
 namespace reflection
 {
@@ -21,39 +23,41 @@ namespace reflection
 	public:
 		accessor_impl(
 			const char* name, 
-			void* delegGet, function_type* typeGet, 
-			void* delegSet, function_type* typeSet)
+			delegate_dynamic_base* delegGet, function_type* typeGet, 
+			delegate_dynamic_base* delegSet, function_type* typeSet)
 			: member_impl(MEMBER_ACCESSOR, name)
+			, m_delegGet(delegGet)
+			, m_delegSet(delegSet)
 			, m_typeGet(typeGet)
 			, m_typeSet(typeSet)
-		{
-			memcpy(m_delegGetBuf, delegGet, sizeof(m_delegGetBuf));
-			if(m_typeSet)
-				memcpy(m_delegSetBuf, delegSet, sizeof(m_delegSetBuf));
-		}
+		{ }
 
-		accessor_impl(const accessor_impl& other)
-			: member_impl(MEMBER_ACCESSOR, other.get_name())
-			, m_typeGet(other.m_typeGet)
-			, m_typeSet(other.m_typeSet)
+		~accessor_impl()
 		{
-			memcpy(m_delegGetBuf, other.m_delegGetBuf, sizeof(m_delegGetBuf));
-			if(m_typeSet)
-				memcpy(m_delegSetBuf, other.m_delegSetBuf, sizeof(m_delegSetBuf));
+			delete m_delegGet;
+			delete m_delegSet;
 		}
 
 		void get_value(void* inst, void* buffer) const
 		{
-			void* args[] = { &inst };
-			m_typeGet->invoke((void*)m_delegGetBuf, args, buffer);
+			// Setup this pointer of delegate
+			delegates::detail::function_data fd = m_delegGet->getFunctionData();
+			fd.setThisPtr(reinterpret_cast<delegates::detail::GenericClass*>(inst));
+			m_delegGet->setFunctionData(fd);
+
+			m_delegGet->invoke(0, buffer);
 		}
 
 		void set_value(void* inst, void* buffer) const
 		{
 			if(m_typeSet)
 			{
-				void* args[] = { &inst, buffer };
-				m_typeSet->invoke((void*)m_delegSetBuf, args, 0);
+				// Setup this pointer of delegate
+				delegates::detail::function_data fd = m_delegSet->getFunctionData();
+				fd.setThisPtr(reinterpret_cast<delegates::detail::GenericClass*>(inst));
+				m_delegSet->setFunctionData(fd);
+
+				m_delegSet->invoke(&buffer, 0);
 			}
 		}
 
@@ -68,8 +72,8 @@ namespace reflection
 		}
 
 	private:
-		char m_delegGetBuf[member::_deleg_buf_size];
-		char m_delegSetBuf[member::_deleg_buf_size];
+		delegate_dynamic_base* m_delegGet;
+		delegate_dynamic_base* m_delegSet;
 		function_type* m_typeGet;
 		function_type* m_typeSet;
 	};
@@ -80,56 +84,39 @@ namespace reflection
 
 	accessor_member::accessor_member(
 		const char* name, 
-		void* delegGet, 
+		delegate_dynamic_base* delegGet, 
 		function_type* typeGet, 
-		void* delegSet /* = 0 */, 
+		delegate_dynamic_base* delegSet /* = 0 */, 
 		function_type* typeSet /* = 0 */)
 		: member(new accessor_impl(name, delegGet, typeGet, delegSet, typeSet))
-	{
-		m_impl = static_cast<accessor_impl*>(member::m_impl);
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-	accessor_member::accessor_member(accessor_impl* impl)
-		: member(impl)
-	{
-		m_impl = impl;
-	}
+	{ }
 
 	//////////////////////////////////////////////////////////////////////////
 
 	void accessor_member::get_value(void* inst, void* buffer) const
 	{
-		m_impl->get_value(inst, buffer);
+		static_cast<accessor_impl*>(m_impl)->get_value(inst, buffer);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	void accessor_member::set_value(void* inst, void* buffer) const
 	{
-		m_impl->set_value(inst, buffer);
+		static_cast<accessor_impl*>(m_impl)->set_value(inst, buffer);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	bool accessor_member::is_read_only() const
 	{
-		return m_impl->is_read_only();
+		return static_cast<accessor_impl*>(m_impl)->is_read_only();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	type* accessor_member::value_type() const
 	{
-		return m_impl->value_type();
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-	accessor_member* accessor_member::clone() const
-	{
-		return new accessor_member(new accessor_impl(*m_impl));
+		return static_cast<accessor_impl*>(m_impl)->value_type();
 	}
 
 	//////////////////////////////////////////////////////////////////////////

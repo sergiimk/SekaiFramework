@@ -293,6 +293,20 @@ namespace filesystem
 
 	//////////////////////////////////////////////////////////////////////////
 
+	void path::drop_extension()
+	{
+		stack_string<10> sep(separators());
+		*sep += '.';
+		size_t i = m_impl->str.find_last_of(sep->c_str());
+
+		if(i == std::string::npos || m_impl->str[i] != '.')
+			return;
+
+		m_impl->str.resize(i);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	void path::absolute()
 	{
 		char buf[512];

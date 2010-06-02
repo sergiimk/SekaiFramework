@@ -47,20 +47,20 @@ namespace module
 
 	//@{
 	/** Helper interface definition macros */
-#	ifdef COMPILER_MSC
-#		define NOVTABLE _declspec(novtable)
-#	else
-#		define NOVTABLE
-#	endif
+	#ifdef COMPILER_MSC
+		#define NOVTABLE _declspec(novtable)
+	#else
+		#define NOVTABLE
+	#endif
 
-#	define sf_interface struct NOVTABLE
+	#define sf_interface struct NOVTABLE
 
-#	define sf_uuid(str)																\
+	#define sf_uuid(str)															\
 		static const module::guid& _get_uuid() {									\
 			static const module::guid g = module::guid::guid_from_string(str);		\
 			return g; }
 
-#	define uuid_of(intrfc) intrfc::_get_uuid()
+	#define uuid_of(intrfc) intrfc::_get_uuid()
 	//@}
 
 	//////////////////////////////////////////////////////////////////////////

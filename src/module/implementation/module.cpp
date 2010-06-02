@@ -35,6 +35,27 @@ namespace module
 		{
 		}
 
+		~ModuleHandleImpl()
+		{
+			ASSERT_STRICT(!m_refCount);
+			Shutdown();
+			if(m_module)
+				Sekai_FreeLibrary(m_module);
+		}
+
+		void Shutdown()
+		{
+			// Shutting down module is legal when only one handle left
+			ASSERT_SOFT(m_refCount <= 1);
+
+			m_initFunc = 0;
+			if(m_shutdownFunc)
+			{
+				m_shutdownFunc();
+				m_shutdownFunc = 0;
+			}
+		}
+
 		void*						m_module;
 		ModuleHandle::INIT_FUNC		m_initFunc;
 		ModuleHandle::SHUTDOWN_FUNC	m_shutdownFunc;
@@ -238,36 +259,21 @@ namespace module
 
 	void ModuleHandle::Shutdown()
 	{
-		if(!m_impl)
-			return;
-
-		// Shutting down module is legal when only one handle left
-		ASSERT_SOFT(m_impl->m_refCount <= 1);
-
-		m_impl->m_initFunc = 0;
-		if(m_impl->m_shutdownFunc)
-		{
-			m_impl->m_shutdownFunc();
-			m_impl->m_shutdownFunc = 0;
-		}
+		if(m_impl)
+			m_impl->Shutdown();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	void ModuleHandle::Release()
 	{
-		if(!m_impl)
-			return;
-
-		if(!(--m_impl->m_refCount))
+		if(m_impl)
 		{
-			Shutdown();
-			if(m_impl->m_module)
-				Sekai_FreeLibrary(m_impl->m_module);
-			delete m_impl;
-		}
+			if(!(--m_impl->m_refCount))
+				delete m_impl;
 
-		m_impl = 0;
+			m_impl = 0;
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////

@@ -184,7 +184,6 @@
     <ClInclude Include="..\..\src\reflection\custom\attribute.h" />
     <ClInclude Include="..\..\src\reflection\custom\basetype_attribute.h" />
     <ClInclude Include="..\..\src\reflection\custom\construction_attribute.h" />
-    <ClInclude Include="..\..\src\reflection\custom\custom.h" />
     <ClInclude Include="..\..\src\reflection\custom\enumeration_member.h" />
     <ClInclude Include="..\..\src\reflection\custom\member.h" />
     <ClInclude Include="..\..\src\reflection\custom\method_member.h" />
@@ -201,13 +200,6 @@
     <ClInclude Include="..\..\src\reflection\types\typetag.h" />
     <ClInclude Include="..\..\src\reflection\types\user_type.h" />
     <ClInclude Include="..\..\src\reflection\implementation\types\type_impl.h" />
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate.h" />
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_closure.h" />
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_deleg.h" />
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_funcdata.h" />
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_funcstyle.h" />
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_makedeleg.h" />
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_utils.h" />
     <ClInclude Include="..\..\src\reflection\utils\activator.h" />
     <ClInclude Include="..\..\src\reflection\utils\converter.h" />
     <ClInclude Include="..\..\src\reflection\reflection.h" />
@@ -234,7 +226,6 @@
   <ItemGroup>
     <None Include="..\..\src\reflection\generated\construction.inc" />
     <None Include="..\..\src\reflection\generated\function_typeof.inc" />
-    <None Include="..\..\src\reflection\generated\invoke_generic.inc" />
     <None Include="..\..\src\reflection\generated\method_typeof.inc" />
     <None Include="..\..\src\reflection\types\type_iters.inc" />
     <None Include="..\..\src\reflection\types\user_type_iters.inc" />

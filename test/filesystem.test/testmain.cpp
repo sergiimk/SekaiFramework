@@ -88,7 +88,10 @@ BOOST_AUTO_TEST_CASE( TestExt )
 	path p1("asdf/fdsa.ext");
 	BOOST_CHECK( strcmp(".ext", p1.extension()) == 0 );
 
-	path p2("asdf/fdsaext");
+	p1.drop_extension();
+	BOOST_CHECK( strcmp("asdf/fdsa", p1.c_str()) == 0 );
+
+	path p2("asdf.ext/fdsa");
 	BOOST_CHECK( strcmp("", p2.extension()) == 0 );
 }
 

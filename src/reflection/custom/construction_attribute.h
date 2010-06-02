@@ -12,6 +12,7 @@
 
 #include "attribute.h"
 #include "member.h"
+#include "dynamic_delegates/delegate_dynamic.h"
 
 namespace reflection
 {
@@ -30,15 +31,12 @@ namespace reflection
 		typedef void(*TDtor)(void*);
 
 		template<class Deleg>
-		static construct_attribute create(function_type* ctorType, const Deleg& ctorDeleg, TDtor d)
+		static construct_attribute* create(function_type* ctorType, const Deleg& ctorDeleg, TDtor d)
 		{
-			static_assert(sizeof(Deleg) <= member::_deleg_buf_size, "Delegate buffer too small");
-			return construct_attribute(ctorType, (void*)&ctorDeleg, d);
+			return new construct_attribute(ctorType, new Deleg(ctorDeleg), d);
 		}
 
-		construct_attribute(function_type* ctorType, void* ctorDeleg, TDtor d);
-
-		virtual construct_attribute* clone() const;
+		construct_attribute(function_type* ctorType, delegates::delegate_dynamic_base* ctorDeleg, TDtor d);
 
 		virtual void release();
 
@@ -53,9 +51,6 @@ namespace reflection
 
 	private:
 		struct construct_impl;
-		construct_impl* m_impl;
-
-		construct_attribute(construct_impl* impl);
 	};
 
 	//////////////////////////////////////////////////////////////////////////

@@ -11,7 +11,6 @@
 #define _FUNCTIONTYPE_H__
 
 #include "types/type.h"
-#include "delegate/Delegate.h"
 
 namespace reflection
 {
@@ -21,7 +20,7 @@ namespace reflection
 	{
 	public:
 
-		function_type(deleg_generic_invoke inv, bool isMethod, type* rt, type** arguments, int argc);
+		function_type(bool isMethod, type* rt, type** arguments, int argc);
 
 		/// Returns the result type
 		type* return_type() const;
@@ -31,9 +30,6 @@ namespace reflection
 
 		/// Returns the types of arguments
 		type** argument_types() const;
-
-		/// Make a function call (in case of methods first argument is class instance)
-		void invoke(void* deleg, void** args, void* result) const;
 
 		virtual bool equal(const type* other) const;
 

@@ -19,6 +19,12 @@ namespace reflection
 	class REFLECTION_API base_type : public attribute
 	{
 	public:
+
+		static base_type* create(user_type* base, size_t this_offset)
+		{
+			return new base_type(base, this_offset);
+		}
+
 		base_type(user_type* base, size_t this_offset);
 
 		/// Returns base type
@@ -27,15 +33,10 @@ namespace reflection
 		/// Returns offset of 'this' pointer from base class
 		size_t get_offset() const;
 
-		virtual base_type* clone() const;
-
 		virtual void release();
 
 	private:
 		struct base_type_impl;
-		base_type_impl* m_impl;
-
-		base_type(base_type_impl* impl);
 	};
 	
 } // namespace

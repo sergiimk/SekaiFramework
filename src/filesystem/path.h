@@ -104,6 +104,9 @@ namespace filesystem
 		/// Returns path extension
 		const char* extension() const;
 
+		/// Drops the extension if present
+		void drop_extension();
+
 		/// Converts path to an absolute
 		void absolute();
 

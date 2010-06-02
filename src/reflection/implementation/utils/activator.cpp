@@ -35,8 +35,8 @@ namespace reflection
 
 	void* activator::create_instance(const type& t, value_type_pair argv[], size_t argc)
 	{
-		const type* argv_t[DELEG_MAX_INVOKE_PARAMS];
-		void* argv_i[DELEG_MAX_INVOKE_PARAMS];
+		const type* argv_t[delegates::MAX_INVOKE_ARGS];
+		void* argv_i[delegates::MAX_INVOKE_ARGS];
 
 		for(size_t i = 0; i != argc; ++i)
 		{

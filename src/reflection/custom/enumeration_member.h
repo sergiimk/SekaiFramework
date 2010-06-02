@@ -22,19 +22,19 @@ namespace reflection
 	{
 	public:
 
+		static enumeration_member* create(const char* name, unsigned int value)
+		{
+			return new enumeration_member(name, value);
+		}
+
 		enumeration_member(const char* name, unsigned int value);
 
 		unsigned int get_value() const;
-
-		virtual enumeration_member* clone() const;
 
 		virtual void release();
 
 	private:
 		struct enumeration_impl;
-		enumeration_impl* m_impl;
-
-		enumeration_member(enumeration_impl* impl);
 	};
 
 	//////////////////////////////////////////////////////////////////////////

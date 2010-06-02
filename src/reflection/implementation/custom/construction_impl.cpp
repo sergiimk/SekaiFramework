@@ -7,9 +7,10 @@
 * Terms of use, copying, distribution, and modification
 * are covered in accompanying LICENSE file
 =========================================================*/
-#include "custom/construction_attribute.h"
 #include "attribute_impl.h"
-#include "types/function_type.h"
+#include "custom/construction_attribute.h"
+
+using namespace delegates;
 
 namespace reflection
 {
@@ -18,63 +19,60 @@ namespace reflection
 
 	struct construct_attribute::construct_impl : public attribute::attribute_impl
 	{
-		construct_impl(function_type* ctorType, void* ctorDeleg, TDtor d)
+		construct_impl(function_type* ctorType, delegate_dynamic_base* ctorDeleg, TDtor d)
 			: attribute_impl(ATTR_CONSTRUCTION)
+			, m_deleg(ctorDeleg)
 			, m_ctorType(ctorType)
 			, m_dtor(d)
+		{ }
+
+		~construct_impl()
 		{
-			memcpy(m_delegBuf, ctorDeleg, sizeof(m_delegBuf));
+			delete m_deleg;
 		}
 
-		char m_delegBuf[member::_deleg_buf_size];
+		void* create_instance(void** args) const
+		{
+			void* ret = 0;
+			m_deleg->invoke(args, &ret);
+			return ret;
+		}
+
+		void destroy_instance(void* v) const
+		{
+			m_dtor(v);
+		}
+
+		delegate_dynamic_base* m_deleg;
 		function_type* m_ctorType;
 		TDtor m_dtor;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
 
-	construct_attribute::construct_attribute(function_type *ctorType, void *ctorDeleg, TDtor d)
+	construct_attribute::construct_attribute(function_type *ctorType, delegate_dynamic_base *ctorDeleg, TDtor d)
 		: attribute(new construct_impl(ctorType, ctorDeleg, d))
-	{
-		m_impl = static_cast<construct_impl*>(attribute::m_impl);
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-	construct_attribute::construct_attribute(construct_impl *impl)
-		: attribute(impl)
-		, m_impl(impl)
-	{
-	}
+	{ }
 
 	//////////////////////////////////////////////////////////////////////////
 
 	void* construct_attribute::create_instance(void** args) const
 	{
-		void* ret = 0;
-		m_impl->m_ctorType->invoke((void*)m_impl->m_delegBuf, args, &ret);
-		return ret;
+		return static_cast<construct_impl*>(m_impl)->create_instance(args);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	void construct_attribute::destroy_instance(void* v) const
 	{
-		m_impl->m_dtor(v);
+		static_cast<construct_impl*>(m_impl)->destroy_instance(v);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 	const function_type& construct_attribute::ctor_type() const
 	{
-		return *m_impl->m_ctorType;
-	}	
-
-	//////////////////////////////////////////////////////////////////////////
-
-	construct_attribute* construct_attribute::clone() const
-	{
-		return new construct_attribute(new construct_impl(*m_impl));
+		return *static_cast<construct_impl*>(m_impl)->m_ctorType;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

@@ -12,45 +12,12 @@ template<%targs%, class RT>
 inline function_type* type_of(RT (*)(%args%)) 
 { 
 	typedef RT (FT)(%args%); 
-	generic_invoker inv = &invoke_generic<FT, %sargs%, RT>; 
 	Type* rt = type_of<RT>();
 	Type* args[%nargs%];%fill_args%
-	static function_type ft(inv, false, rt, args, %nargs%);
+	static function_type ft(false, rt, args, %nargs%);
 	return &ft;
 }
 
-template<%targs%, class RT>
-inline function_type* type_of(const RT& (*)(%args%)) 
-{ 
-	typedef const RT& (FT)(%args%); 
-	generic_invoker inv = &invoke_generic<FT, %sargs%, RT>; 
-	Type* rt = type_of<RT>();
-	Type* args[%nargs%];%fill_args%
-	static function_type ft(inv, false, rt, args, %nargs%);
-	return &ft;
-}
-
-template<%targs%, class RT>
-inline function_type* type_of(RT& (*)(%args%)) 
-{ 
-	typedef RT& (FT)(%args%); 
-	generic_invoker inv = &invoke_generic_ref<FT, %sargs%, RT>;
-	Type* rt = type_of<RT*>();
-	Type* args[%nargs%];%fill_args%
-	static function_type ft(inv, false, rt, args, %nargs%);
-	return &ft;
-}
-
-template<%targs%>
-inline function_type* type_of(void (*)(%args%)) 
-{ 
-	typedef void (FT)(%args%); 
-	generic_invoker inv = &invoke_generic_noret<FT, %sargs%>;
-	Type* rt = type_of<void>();
-	Type* args[%nargs%];%fill_args%
-	static function_type ft(inv, false, rt, args, %nargs%);
-	return &ft;
-}
 '''
 
 method_creators = '''
@@ -60,47 +27,10 @@ template<class C, %targs%, class RT>
 inline function_type* type_of(RT (C::*)(%args%) CONST_METH) 
 { 
 	typedef RT (FT)(%args%); 
-	generic_invoker inv = &invoke_generic_m<FT, %sargs%, RT>;
 	type* rt = type_of<RT>();
 	type* args[%nargs%];
 	args[0] = type_of<C*>();%fill_args%
-	static function_type ft(inv, true, rt, args, %nargs%); 
-	return &ft;
-}
-
-template<class C, %targs%, class RT>
-inline function_type* type_of(const RT& (C::*)(%args%) CONST_METH) 
-{ 
-	typedef const RT& (FT)(%args%); 
-	generic_invoker inv = &invoke_generic_m<FT, %sargs%, RT>;
-	type* rt = type_of<RT>();
-	type* args[%nargs%];
-	args[0] = type_of<C*>();%fill_args%
-	static function_type ft(inv, true, rt, args, %nargs%); 
-	return &ft;
-}
-
-template<class C, %targs%, class RT>
-inline function_type* type_of(RT& (C::*)(%args%) CONST_METH) 
-{ 
-	typedef RT& (FT)(%args%); 
-	generic_invoker inv = &invoke_generic_m_ref<FT, %sargs%, RT>;
-	type* rt = type_of<RT*>();
-	type* args[%nargs%];
-	args[0] = type_of<C*>();%fill_args%
-	static function_type ft(inv, true, rt, args, %nargs%); 
-	return &ft;
-}
-
-template<class C, %targs%>
-inline function_type* type_of(void (C::*)(%args%) CONST_METH) 
-{ 
-	typedef void (FT)(%args%); 
-	generic_invoker inv = &invoke_generic_m_noret<FT, %sargs%>;
-	type* rt = type_of<void>();
-	type* args[%nargs%];
-	args[0] = type_of<C*>();%fill_args%
-	static function_type ft(inv, true, rt, args, %nargs%); 
+	static function_type ft(true, rt, args, %nargs%); 
 	return &ft;
 }
 

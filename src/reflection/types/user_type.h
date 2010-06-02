@@ -27,20 +27,20 @@ namespace reflection
 		virtual bool equal(const type* other) const;
 
 		/// Adds type member
-		void add_member(const member& mem);
+		void add_member(member* mem);
 
 		/// Adds attribute to the type itself
-		void add_attribute(const attribute& attr);
+		void add_attribute(attribute* attr);
 
 		/// Declare member
-		user_type& def(const member& mem) 
+		user_type& def(member* mem) 
 		{ 
 			add_member(mem); 
 			return *this; 
 		}
 
 		/// Declare class attribute
-		user_type& def(const attribute& a) 
+		user_type& def(attribute* a) 
 		{ 
 			add_attribute(a); 
 			return *this; 
@@ -65,6 +65,8 @@ namespace reflection
 		class user_type_impl;
 		user_type_impl* m_impl;
 	};
+
+	//////////////////////////////////////////////////////////////////////////
 
 } // namespace
 
@@ -92,19 +94,19 @@ template<> struct type_desc<clas> {												\
 #define def_ctor_custom(_create, _destroy)										\
 	def(construct_attribute::create(											\
 	type_of(_create),															\
-	MakeDelegate(_create),														\
+	delegates::make_delegate_dynamic(_create),									\
 	_destroy))
 
 #define def_ctor_alloc(alloc, ...)												\
 	def(construct_attribute::create(											\
 	type_of(&type_ctor<Class, alloc, ## __VA_ARGS__>),							\
-	MakeDelegate(&type_ctor<Class, alloc, ## __VA_ARGS__>),						\
+	delegates::make_delegate_dynamic(&type_ctor<Class, alloc, ## __VA_ARGS__>),	\
 	&type_destructor<Class, alloc>))
 
 #define def_create_inst(...)													\
 	def(construct_attribute::create(											\
 	type_of(&type_create_inst<Class, ## __VA_ARGS__>),							\
-	MakeDelegate(&type_create_inst<Class, ## __VA_ARGS__>),						\
+	delegates::make_delegate_dynamic(&type_create_inst<Class, ## __VA_ARGS__>),	\
 	&type_destroy_inst<Class>))
 
 #define def_ctor(...)															\
@@ -112,22 +114,26 @@ template<> struct type_desc<clas> {												\
 
 
 #define def_method(name, func)													\
-	def(method_member::create(name, MakeDelegate(static_cast<Class*>(0), &Class::func), type_of(&Class::func)))
+	def(method_member::create(name,												\
+	delegates::make_delegate_dynamic(static_cast<Class*>(0), &Class::func),		\
+	type_of(&Class::func)))
 
 #define def_accessor(name, fget, fset)											\
 	def(accessor_member::create(name,											\
-	MakeDelegate(static_cast<Class*>(0), &Class::fget), type_of(&Class::fget),	\
-	MakeDelegate(static_cast<Class*>(0), &Class::fset), type_of(&Class::fset)))
+	delegates::make_delegate_dynamic(static_cast<Class*>(0), &Class::fget),		\
+	type_of(&Class::fget),														\
+	delegates::make_delegate_dynamic(static_cast<Class*>(0), &Class::fset),		\
+	type_of(&Class::fset)))
 
 #define def_accessor_ro(name, fget)												\
 	def(accessor_member::create(name,											\
-	MakeDelegate(static_cast<Class*>(0), &Class::fget), type_of(&Class::fget)))
+	delegates::make_delegate_dynamic(static_cast<Class*>(0), &Class::fget), type_of(&Class::fget)))
 
-#define def_enum(name, value) def(enumeration_member(name, value))
+#define def_enum(name, value) def(enumeration_member::create(name, value))
 
-#define def_base(base) def(base_type(type_of<base>(), classoffset<base, Class>()))
+#define def_base(base) def(base_type::create(type_of<base>(), classoffset<base, Class>()))
 
-#define def_parsable() def(parsing_attribute_t<Class>())
+#define def_parsable() def(parsing_attribute_t<Class>::create())
 
 //////////////////////////////////////////////////////////////////////////
 

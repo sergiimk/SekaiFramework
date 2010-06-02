@@ -11,7 +11,7 @@
 #define _ACCESSOR_MEMBER_H__
 
 #include "member.h"
-#include "delegate/Delegate.h"
+#include "dynamic_delegates/delegate_dynamic.h"
 #include "common/typetraits.h"
 
 namespace reflection
@@ -25,32 +25,31 @@ namespace reflection
 	public:
 
 		template<class Deleg1, class Deleg2>
-		static accessor_member create(
+		static accessor_member* create(
 			const char* name, 
 			const Deleg1& delegGet, 
 			function_type* typeGet,
 			const Deleg2& delegSet, 
 			function_type* typeSet)
 		{
-			static_assert(sizeof(Deleg1) <= _deleg_buf_size, "Delegate buffer too small");
-			static_assert(sizeof(Deleg2) <= _deleg_buf_size, "Delegate buffer too small");
-			return accessor_member(name, (void*)&delegGet, typeGet, (void*)&delegSet, typeSet);
+			return new accessor_member(name, 
+				new Deleg1(delegGet), typeGet, 
+				new Deleg2(delegSet), typeSet);
 		}
 
 		template<class Deleg>
-		static accessor_member create(
+		static accessor_member* create(
 			const char* name, 
 			const Deleg& delegGet, 
 			function_type* typeGet)
 		{
-			static_assert(sizeof(Deleg) <= _deleg_buf_size, "Delegate buffer too small");
-			return accessor_member(name, (void*)&delegGet, typeGet);
+			return new accessor_member(name, new Deleg(delegGet), typeGet);
 		}
 
 		accessor_member(const char* name, 
-			void* delegGet, 
+			delegates::delegate_dynamic_base* delegGet, 
 			function_type* typeGet,
-			void* delegSet = 0,  
+			delegates::delegate_dynamic_base* delegSet = 0,  
 			function_type* typeSet = 0);
 
 		void get_value(void* inst, void* buffer) const;
@@ -61,15 +60,10 @@ namespace reflection
 
 		type* value_type() const;
 
-		virtual accessor_member* clone() const;
-
 		virtual void release();
 
 	private:
 		class accessor_impl;
-		accessor_impl* m_impl;
-
-		accessor_member(accessor_impl* impl);
 	};
 
 	//////////////////////////////////////////////////////////////////////////

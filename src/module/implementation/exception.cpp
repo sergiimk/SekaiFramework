@@ -140,7 +140,8 @@ namespace module
 	SF_IMPLEMENT_EXCEPTION(ExistsException, RuntimeException)
 	SF_IMPLEMENT_EXCEPTION(TimeoutException, RuntimeException)
 	SF_IMPLEMENT_EXCEPTION(NoPermissionException, RuntimeException)
-	SF_IMPLEMENT_EXCEPTION(IOException, RuntimeException)	
+	SF_IMPLEMENT_EXCEPTION(IOException, RuntimeException)
+	SF_IMPLEMENT_EXCEPTION(FormatException, RuntimeException)
 
 	//////////////////////////////////////////////////////////////////////////
 	

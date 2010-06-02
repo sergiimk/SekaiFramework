@@ -11,7 +11,7 @@
 #define _METHOD_MEMBER_H__
 
 #include "member.h"
-#include "delegate/Delegate.h"
+#include "dynamic_delegates/delegate_dynamic.h"
 #include "common/typetraits.h"
 
 namespace reflection
@@ -25,28 +25,22 @@ namespace reflection
 	public:
 
 		template<class Deleg>
-		static method_member create(const char* name, const Deleg& deleg, function_type* type)
+		static method_member* create(const char* name, const Deleg& deleg, function_type* type)
 		{
-			static_assert(sizeof(Deleg) <= _deleg_buf_size, "Delegate buffer too small");
-			return method_member(name, (void*)&deleg, type);
+			return new method_member(name, new Deleg(deleg), type);
 		}
 
-		method_member(const char* name, void* deleg, function_type* type);
+		method_member(const char* name, delegates::delegate_dynamic_base* deleg, function_type* type);
 
 		/// Returns type of the method
 		function_type* get_function_type() const;
 
 		void invoke(void** args, void* result) const;
 
-		virtual method_member* clone() const;
-
 		virtual void release();
 
 	private:
 		class method_impl;
-		method_impl* m_impl;
-
-		method_member(method_impl* impl);
 	};
 
 	//////////////////////////////////////////////////////////////////////////

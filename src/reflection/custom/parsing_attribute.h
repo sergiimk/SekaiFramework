@@ -24,6 +24,7 @@ namespace reflection
 	class REFLECTION_API parsing_attribute : public attribute
 	{
 	public:
+
 		parsing_attribute() : attribute(ATTR_PARSING) { }
 
 		/// Converts value to string using the iostream operators
@@ -39,6 +40,12 @@ namespace reflection
 	class parsing_attribute_t : public parsing_attribute
 	{
 	public:
+
+		static parsing_attribute_t<T>* create()
+		{
+			return new parsing_attribute_t<T>();
+		}
+
 		/// Converts value to string using the iostream operators
 		bool to_string(void* value, char* buf, size_t size) const
 		{
@@ -54,11 +61,6 @@ namespace reflection
 		{
 			std::istringstream ss(str);
 			return !(!( ss >> *(T*)value));
-		}
-
-		virtual parsing_attribute_t<T>* clone() const
-		{
-			return new parsing_attribute_t<T>();
 		}
 
 		virtual void release()

@@ -1,12 +1,12 @@
 Current Status
 --------------
 
-Module - functional
+Module - fully functional
 
 
 FileSystem - functional 
 todo:
- - only PImpl version, service wrapper to be added
+ - port to Linux
  - integrate archives support
 
 
@@ -15,13 +15,13 @@ todo:
  - refactor, extension/services aware
 
 
-Reflection - functional
+Reflection - fully functional
+
+
+Script.Python - refactoring
 todo:
- - solve class fields / virtual inheritance problem
- - refactor type interface
-
-
-Script.Python - functional
+ - redesign
+ - migrate to new reflection
 
 
 ExtensionManager - functional

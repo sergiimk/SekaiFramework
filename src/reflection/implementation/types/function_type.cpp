@@ -10,6 +10,7 @@
 #include "types/function_type.h"
 #include "type_impl.h"
 #include "common/stack_string.h"
+#include "dynamic_delegates/delegate.h"
 
 namespace reflection
 {
@@ -18,9 +19,8 @@ namespace reflection
 	class function_type::function_type_impl : public type::type_impl
 	{
 	public:
-		function_type_impl(deleg_generic_invoke inv, bool isMethod, type* rt, type** arguments, int argc)
+		function_type_impl(bool isMethod, type* rt, type** arguments, int argc)
 			: type_impl(isMethod ? T_METHOD : T_FUNCTION, ARCH_FUNCTION, 0)
-			, m_invoker(inv)
 			, m_retType(rt)
 			, m_argc(argc)
 		{
@@ -76,15 +76,9 @@ namespace reflection
 			return (type**)m_argTypes;
 		}
 
-		void invoke(void* deleg, void** args, void* result) const
-		{
-			m_invoker(deleg, args, result);
-		}
-
 	private:
-		deleg_generic_invoke	m_invoker;
 		type*					m_retType;
-		type*					m_argTypes[DELEG_MAX_INVOKE_PARAMS];
+		type*					m_argTypes[delegates::MAX_INVOKE_ARGS];
 		size_t					m_argc;
 	};
 
@@ -92,8 +86,8 @@ namespace reflection
 	// function_type
 	//////////////////////////////////////////////////////////////////////////
 
-	function_type::function_type(deleg_generic_invoke inv, bool isMethod, type* rt, type** arguments, int argc)
-		: type(new function_type_impl(inv, isMethod, rt, arguments, argc))
+	function_type::function_type(bool isMethod, type* rt, type** arguments, int argc)
+		: type(new function_type_impl(isMethod, rt, arguments, argc))
 	{
 		m_impl = static_cast<function_type_impl*>(type::m_impl);
 	}
@@ -117,13 +111,6 @@ namespace reflection
 	type** function_type::argument_types() const
 	{
 		return m_impl->argument_types();
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-	void function_type::invoke(void *deleg, void **args, void *result) const
-	{
-		m_impl->invoke(deleg, args, result);
 	}
 
 	//////////////////////////////////////////////////////////////////////////

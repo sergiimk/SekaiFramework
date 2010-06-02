@@ -79,6 +79,9 @@ namespace module
 		/// Copy ctor
 		com_ptr_impl(const com_ptr_impl<T>& other) : p(other.p) { if (p != 0) p->AddRef(); }
 
+		/// Move ctor
+		com_ptr_impl(com_ptr_impl&& other) : p(other.p) { other.p = 0; }
+
 		/// Destructor
 		~com_ptr_impl() { if (p) p->Release(); }
 
@@ -117,10 +120,22 @@ namespace module
 		}
 
 		/// Assigning intellectual pointer 
-		T* operator = (const com_ptr_impl<T>& lp)
+		com_ptr_impl<T>& operator = (const com_ptr_impl<T>& rhs)
 		{
-			if(*this != lp)
-				return static_cast<T*>(detail::_ComPtrAssign((IUnknown**)&p, lp));
+			if(*this != &rhs)
+				return static_cast<T*>(detail::_ComPtrAssign((IUnknown**)&p, rhs));
+			return *this;
+		}
+
+		/// Move assignment
+		com_ptr_impl<T>& operator = (com_ptr_impl<T>&& rhs)
+		{
+			if(*this != &rhs)
+			{
+				Release();
+				p = rhs.p;
+				rhs.p = 0;
+			}
 			return *this;
 		}
 
@@ -157,12 +172,13 @@ namespace module
 		com_ptr() { }
 		com_ptr(T* lp) : com_ptr_impl<T>(lp) { }
 		com_ptr(const com_ptr<T>& other) : com_ptr_impl<T>(other) { }
+		com_ptr(com_ptr<T>&& other) : com_ptr_impl<T>(std::move(other)) { }
 
 		/// Cast ctor
 		com_ptr(IUnknown* pUnk)
 		{
 			if (pUnk)
-				pUnk->QueryInterface(uuid_of(T), (void **)&this->p);
+				pUnk->QueryInterface(uuid_of(T), (void **)&p);
 		}
 
 		/// Cast ctor
@@ -170,23 +186,36 @@ namespace module
 		com_ptr(const com_ptr<Q>& other)
 		{
 			if (other)
-				other->QueryInterface(uuid_of(T), (void **)&this->p);
+				other->QueryInterface(uuid_of(T), (void **)&p);
 		}
 
 		/// Assigning pointer with type casting
 		T* operator = (IUnknown* lp)
 		{
 			if(*this != lp)
-				return static_cast<T*>(detail::_ComQIPtrAssign((IUnknown**)&this->p, lp, uuid_of(T)));
+				return static_cast<T*>(detail::_ComQIPtrAssign((IUnknown**)&p, lp, uuid_of(T)));
 			return *this;
 		}
 
 		/// Assigning intellectual pointer with interface querying
 		template <typename Q>
-		T* operator = (const com_ptr<Q>& lp)
+		com_ptr<T>& operator = (const com_ptr<Q>& rhs)
 		{
-			if(!Equal(lp))
-				return static_cast<T*>(detail::_ComQIPtrAssign((IUnknown**)&this->p, lp, uuid_of(T)));
+			if(!Equal(rhs))
+				return static_cast<T*>(detail::_ComQIPtrAssign((IUnknown**)&p, rhs, uuid_of(T)));
+			return *this;
+		}
+
+		template <typename Q>
+		com_ptr<T>& operator = (com_ptr<Q>&& rhs)
+		{
+			Release();
+			Q* ptr = rhs;
+			if(ptr)
+			{
+				ptr->QueryInterface(UUID_PPV(T, &p));
+				rhs.Release();
+			}
 			return *this;
 		}
 

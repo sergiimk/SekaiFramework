@@ -51,7 +51,7 @@ BOOST_FIXTURE_TEST_CASE( PlainPyTest, ScriptFixture )
 {
 	mgr->RunScript("py_plain");
 }
-
+/*
 BOOST_FIXTURE_TEST_CASE( ObjectCreateDestroyTest, ScriptFixture )
 {
 	mgr->ExportType("Sekai", type_of<TestClass>());
@@ -212,6 +212,7 @@ BOOST_FIXTURE_TEST_CASE( DocTest, ScriptFixture )
 	mgr->RunScript("py_doctest");
 }
 */
+/*
 struct ScriptModuleFixture : public ScriptFixture
 {
 	ScriptModuleFixture()
@@ -245,5 +246,5 @@ BOOST_FIXTURE_TEST_CASE(Guid, ModuleLibraryFixture)
 {
 	mgr->RunScript("py_module_guid");
 }
-
+*/
 BOOST_AUTO_TEST_SUITE_END();

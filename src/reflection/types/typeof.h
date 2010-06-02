@@ -18,15 +18,21 @@
 #include "types/function_type.h"
 #include "types/user_type.h"
 #include "types/array_type.h"
-#include "custom/custom.h"
 #include "common/ifthenelse.h"
 #include "common/typetraits.h"
-#include "delegate/Delegate.h"
 
 namespace reflection
 {
 	namespace detail
 	{
+		//////////////////////////////////////////////////////////////////////////
+
+		template<class T>
+		struct type_desc
+		{			
+			user_type* get_type() { return 0; }
+		};
+
 		//////////////////////////////////////////////////////////////////////////
 
 		template<class T>
@@ -125,7 +131,6 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	#include "generated/invoke_generic.inc"
 	#include "generated/function_typeof.inc"
 
 	//////////////////////////////////////////////////////////////////////////

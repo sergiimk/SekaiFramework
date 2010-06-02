@@ -16,9 +16,6 @@
     <Filter Include="generated">
       <UniqueIdentifier>{0add78c0-97a1-4229-a53d-05f2d2b9ad51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="delegate">
-      <UniqueIdentifier>{75162a51-7ffe-42cd-9e8d-2a63cf0a3604}</UniqueIdentifier>
-    </Filter>
     <Filter Include="custom">
       <UniqueIdentifier>{27c38000-2317-42f9-a8e0-a98099396cdc}</UniqueIdentifier>
     </Filter>
@@ -57,27 +54,6 @@
     <ClInclude Include="..\..\src\reflection\implementation\types\type_impl.h">
       <Filter>implementation\types</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate.h">
-      <Filter>delegate</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_closure.h">
-      <Filter>delegate</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_deleg.h">
-      <Filter>delegate</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_funcdata.h">
-      <Filter>delegate</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_funcstyle.h">
-      <Filter>delegate</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_makedeleg.h">
-      <Filter>delegate</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\reflection\delegate\Delegate_utils.h">
-      <Filter>delegate</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\reflection\utils\activator.h">
       <Filter>implementation\utils</Filter>
     </ClInclude>
@@ -96,9 +72,6 @@
       <Filter>custom</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\reflection\custom\construction_attribute.h">
-      <Filter>custom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\reflection\custom\custom.h">
       <Filter>custom</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\reflection\custom\enumeration_member.h">
@@ -175,9 +148,6 @@
       <Filter>generated</Filter>
     </None>
     <None Include="..\..\src\reflection\generated\function_typeof.inc">
-      <Filter>generated</Filter>
-    </None>
-    <None Include="..\..\src\reflection\generated\invoke_generic.inc">
       <Filter>generated</Filter>
     </None>
     <None Include="..\..\src\reflection\generated\method_typeof.inc">

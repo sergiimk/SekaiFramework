@@ -22,15 +22,15 @@ namespace ScriptPy
 
 	struct SInvokeArgs
 	{
-		void* values[DELEG_MAX_INVOKE_PARAMS];
-		type* types[DELEG_MAX_INVOKE_PARAMS];
-		char builtin_buf[DELEG_MAX_INVOKE_PARAMS * sizeof(long long)];
+		void* values[delegates::MAX_INVOKE_ARGS];
+		type* types[delegates::MAX_INVOKE_ARGS];
+		char builtin_buf[delegates::MAX_INVOKE_ARGS * sizeof(long long)];
 
 		void clear()
 		{
-			memset(values, 0, sizeof(void*) * DELEG_MAX_INVOKE_PARAMS);
-			memset(types, 0, sizeof(void*) * DELEG_MAX_INVOKE_PARAMS);
-			memset(builtin_buf, 0, DELEG_MAX_INVOKE_PARAMS * sizeof(long long));
+			memset(values, 0, sizeof(void*) * delegates::MAX_INVOKE_ARGS);
+			memset(types, 0, sizeof(void*) * delegates::MAX_INVOKE_ARGS);
+			memset(builtin_buf, 0, delegates::MAX_INVOKE_ARGS * sizeof(long long));
 		}
 	};
 

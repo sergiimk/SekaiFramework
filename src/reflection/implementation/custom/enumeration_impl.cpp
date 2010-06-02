@@ -28,29 +28,13 @@ namespace reflection
 
 	enumeration_member::enumeration_member(const char* name, unsigned int value)
 		: member(new enumeration_impl(name, value))
-	{
-		m_impl = static_cast<enumeration_impl*>(member::m_impl);
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-	enumeration_member::enumeration_member(enumeration_impl* impl)
-		: member(impl)
-		, m_impl(impl)
 	{ }
 
 	//////////////////////////////////////////////////////////////////////////
 
 	unsigned int enumeration_member::get_value() const
 	{
-		return m_impl->m_value;
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-	enumeration_member* enumeration_member::clone() const
-	{
-		return new enumeration_member(new enumeration_impl(*m_impl));
+		return static_cast<enumeration_impl*>(m_impl)->m_value;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

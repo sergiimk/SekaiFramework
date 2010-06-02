@@ -33,6 +33,7 @@ namespace reflection
 	{
 	public:
 
+		// Non-virtual because release() is used to delete it
 		~member();
 
 		/// Returns type of this member
@@ -47,13 +48,8 @@ namespace reflection
 		/// Called by user_type when binding the member
 		void set_owner(const user_type* own);
 
-		/// Clones the member
-		virtual member* clone() const = 0;
-
-		/// Releases the cloned member
+		/// Destroys the member
 		virtual void release() = 0;
-
-		static const int _deleg_buf_size = 10;
 
 	private:
 		member(const member& other);

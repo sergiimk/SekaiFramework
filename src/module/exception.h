@@ -138,6 +138,7 @@ namespace module
 	SF_DECLARE_EXCEPTION(TimeoutException, RuntimeException)
 	SF_DECLARE_EXCEPTION(NoPermissionException, RuntimeException)
 	SF_DECLARE_EXCEPTION(IOException, RuntimeException)	
+	SF_DECLARE_EXCEPTION(FormatException, RuntimeException)	
 
 	//////////////////////////////////////////////////////////////////////////
 

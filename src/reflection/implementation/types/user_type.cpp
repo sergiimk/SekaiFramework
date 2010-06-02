@@ -102,18 +102,17 @@ namespace reflection
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void user_type::add_member(const member& mem)
+	void user_type::add_member(member* mem)
 	{
-		member* nm = mem.clone();
-		nm->set_owner(this);
-		m_impl->add_member(nm);
+		mem->set_owner(this);
+		m_impl->add_member(mem);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	void user_type::add_attribute(const attribute& attr)
+	void user_type::add_attribute(attribute* attr)
 	{
-		m_impl->add_attribute(attr.clone());
+		m_impl->add_attribute(attr);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
