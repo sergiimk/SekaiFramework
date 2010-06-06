@@ -26,7 +26,7 @@ namespace  module
 	{
 
 		/// Interface locator function type
-		typedef HResult (*INTERFACE_LOCATOR_FUNC)(void *pThis, void* pChain, SF_RIID riid, void **ppv);
+		typedef ModuleError (*INTERFACE_LOCATOR_FUNC)(void *pThis, void* pChain, guid const& riid, void **ppv);
 
 		/// Indicate entry is just offset 
 		static const INTERFACE_LOCATOR_FUNC SF_OFFSET_ENTRY = (INTERFACE_LOCATOR_FUNC)1;
@@ -39,7 +39,7 @@ namespace  module
 		/// Interface entry in interface map
 		struct INTERFACE_MAP_ENTRY
 		{
-			const SF_IID*			piid;		///< pointer to interface ID
+			const guid*				piid;		///< pointer to interface ID
 			void*					OffChain;	///< offset of class from IUnknown or chain pointer
 			INTERFACE_LOCATOR_FUNC	locator;	///< 0 - table end; 1 - offset entry; else - real locator
 		};
@@ -97,7 +97,7 @@ namespace  module
 	{0, 0, 0}}; return &_entries[0];}											\
 	unsigned long AddRef() { return 1; }										\
 	unsigned long Release() { return 1; }										\
-	module::HResult QueryInterface(SF_RIID iid, void **ppObject)				\
+	module::ModuleError QueryInterface(module::guid const& iid, void **ppObject)\
 	{ return module::detail::_QueryInterface(this, _GetEntries(), iid, ppObject); }
 
 
@@ -151,7 +151,7 @@ namespace  module
 	namespace detail
 	{
 
-		typedef HResult (CREATOR_FUNC)(SF_RIID riid, void** ppv);
+		typedef ModuleError (CREATOR_FUNC)(guid const& riid, void** ppv);
 
 		typedef reflection::user_type* (TYPE_OF_FUNC)();
 
@@ -195,7 +195,7 @@ namespace  module
 	{ 0, 0, 0, 0 } };																								\
 	return e; }																										\
 																													\
-	extern "C" SHARED_EXPORT void ModuleInit() { }																	\
+	extern "C" SHARED_EXPORT module::ModuleError ModuleInit() { return module::ModuleError::OK; }					\
 	extern "C" SHARED_EXPORT void ModuleShutdown()																	\
 	{																												\
 		module::detail::MODULE_MAP_ENTRY* e = GetModuleMap();														\

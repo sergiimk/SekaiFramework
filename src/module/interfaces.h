@@ -14,34 +14,30 @@
 #define _INTERFACES_H__
 
 #include "guid.h"
-#include "platform/platform.h"
 
 namespace module
 {
 	//////////////////////////////////////////////////////////////////////////
 
-	//@{
-	/** Predefined HResult types */
-	typedef long HResult;
+	/// \todo refactor to 'enum class' when will be available
+#ifdef COMPILER_MSC
+#	pragma warning(disable : 4482)
+#endif
 
-	#define SF_S_OK								((module::HResult)0L)
-	#define SF_S_FALSE							((module::HResult)1L)
-
-	#define SF_E_NOTIMPL						((module::HResult)0x80004001L)
-	#define SF_E_OUTOFMEMORY					((module::HResult)0x8007000EL)
-	#define SF_E_INVALIDARG						((module::HResult)0x80070057L)
-	#define SF_E_NOINTERFACE					((module::HResult)0x80004002L)
-	#define SF_E_POINTER						((module::HResult)0x80004003L)
-	#define SF_E_HANDLE							((module::HResult)0x80070006L)
-	#define SF_E_ABORT							((module::HResult)0x80004004L)
-	#define SF_E_FAIL							((module::HResult)0x80004005L)
-	#define SF_E_ACCESSDENIED					((module::HResult)0x80070005L)
-
-	#define SF_CLASS_E_NOAGGREGATION			((module::HResult)0x80040110L)
-
-	#define SF_SUCCEEDED(hr) (((module::HResult)(hr)) >= 0)
-	#define SF_FAILED(hr) (((module::HResult)(hr)) < 0)
-	//@}
+	/// Error codes
+	/** @ingroup module */
+	enum ModuleError
+	{
+		OK = 0,
+		FAILED,
+		OUT_OF_MEMORY,
+		INVALID_ARGUMENT,
+		NO_INTERFACE,
+		INVALID_POINTER,
+		ABORTED,
+		ACCESS_DENIED,
+		NOT_IMPLEMENTED,
+	};
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -78,7 +74,7 @@ namespace module
 		 *
 		 *  @param riid UUID of interface to cast to
 		 *  @param ppObject pointer to returned interface pointer */
-		virtual HResult QueryInterface(SF_RIID riid, void **ppObject) = 0;
+		virtual ModuleError QueryInterface(guid const& riid, void **ppObject) = 0;
 
 		/// Increases reference counter
 		virtual unsigned long AddRef() = 0;
@@ -101,7 +97,7 @@ namespace module
 		/// Creates instance and casts it to 'riid' interface
 		/** @param riid			Unique identifier of class
 		 *  @param ppvObject	Where to put class pointer */
-		virtual HResult CreateInstance(SF_RIID riid, void **ppvObject) = 0;
+		virtual ModuleError CreateInstance(guid const& riid, void **ppvObject) = 0;
 	};
 
 } // namespace
@@ -111,7 +107,7 @@ namespace module
 /// Performs the type casting
 /** @ingroup module */
 template<class I>
-module::HResult interface_cast(module::IUnknown* pUnk, I** pp)
+module::ModuleError interface_cast(module::IUnknown* pUnk, I** pp)
 {
 	return pUnk->QueryInterface(UUID_PPV(I, pp));
 }
@@ -119,7 +115,7 @@ module::HResult interface_cast(module::IUnknown* pUnk, I** pp)
 //////////////////////////////////////////////////////////////////////////
 
 /// Checks that type implements specified interface
-bool implements_interface(module::IUnknown* pUnk, const module::guid& riid);
+MODULE_API bool implements_interface(module::IUnknown* pUnk, const module::guid& riid);
 
 //////////////////////////////////////////////////////////////////////////
 

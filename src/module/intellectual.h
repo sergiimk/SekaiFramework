@@ -40,7 +40,7 @@ namespace module
 			return lp;
 		}
 
-		static inline IUnknown* _ComQIPtrAssign(IUnknown** pp, IUnknown* lp, SF_RIID riid)
+		static inline IUnknown* _ComQIPtrAssign(IUnknown** pp, IUnknown* lp, const guid& riid)
 		{
 			IUnknown* pTemp = *pp;
 			*pp = 0;
@@ -287,7 +287,7 @@ namespace module
 /// Creation helper for com_ptr
 /** @ingroup module */
 template<class Impl, class Itf>
-module::HResult create_instance(module::com_ptr<Itf>& ptr)
+module::ModuleError create_instance(module::com_ptr<Itf>& ptr)
 {
 	return Impl::_ObjectClass::_CreateInstance(UUID_PPV(Itf, ptr.wrapped()));
 }

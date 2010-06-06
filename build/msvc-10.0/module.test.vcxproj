@@ -204,7 +204,6 @@
   <ItemGroup>
     <ProjectReference Include="module.vcxproj">
       <Project>{f4dea521-189f-4696-83f1-86253fbf23b1}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

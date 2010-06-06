@@ -35,7 +35,7 @@ namespace Framework
 
 		CServiceRegistration();
 
-		void FinalConstruct(SF_RIID riid, IUnknown* pObject, CBundle* bundle);
+		void FinalConstruct(guid const& riid, IUnknown* pObject, CBundle* bundle);
 
 		void Finalize();
 

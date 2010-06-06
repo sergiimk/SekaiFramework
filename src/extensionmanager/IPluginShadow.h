@@ -40,9 +40,9 @@ namespace Extensions
 		virtual bool Extends(const std::string& extpoint) = 0;
 
 		/// Queries the creation of object (loads module automatically)
-		virtual module::HResult CreateInstance(SF_RIID clsid, SF_RIID riid, void** ppv) = 0;
+		virtual module::ModuleError CreateInstance(module::guid const& clsid, module::guid const& riid, void** ppv) = 0;
 		/// Queries the creation of first found interface implementation (loads module automatically)
-		virtual module::HResult CreateInstance(SF_RIID riid, void** ppv) = 0;
+		virtual module::ModuleError CreateInstance(module::guid const& riid, void** ppv) = 0;
 
 		/// Returns the number of extension provided by this plug-in
 		virtual size_t getExtensionCount() = 0;

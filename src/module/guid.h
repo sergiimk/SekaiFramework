@@ -10,6 +10,7 @@
 #ifndef _SF_GUID_H__
 #define _SF_GUID_H__
 
+#include "module_fwd.h"
 #include <memory.h>
 #include <iosfwd>
 
@@ -23,7 +24,7 @@ namespace module
 	/// guid structure
 	/** Used to uniquely identify interface between modules
 	 *  @ingroup module */
-	struct guid
+	struct MODULE_API guid
 	{
 		//@{
 		/** Data fields */
@@ -114,19 +115,9 @@ namespace module
 
 	//////////////////////////////////////////////////////////////////////////
 
-	std::ostream& operator<<(std::ostream& os, const guid& g);
+	MODULE_API std::ostream& operator<<(std::ostream& os, const guid& g);
 
-	std::istream& operator>>(std::istream& is, guid& g);
-
-	//////////////////////////////////////////////////////////////////////////
-
-
-	//@{
-	/** Type masks */
-	#define SF_IID  module::guid
-	#define SF_RIID const module::guid&
-	//@}
-
+	MODULE_API std::istream& operator>>(std::istream& is, guid& g);
 
 	//////////////////////////////////////////////////////////////////////////
 

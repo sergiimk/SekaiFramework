@@ -46,7 +46,7 @@ namespace Framework
 		/** @param riid service interface ID
 		 *  @param service service instance 
 		 *  @return service registration object */
-		virtual module::com_ptr<IServiceRegistration> RegisterService(SF_RIID riid, module::IUnknown* service /*, java.util.Dictionary properties*/) = 0;
+		virtual module::com_ptr<IServiceRegistration> RegisterService(module::guid const& riid, module::IUnknown* service /*, java.util.Dictionary properties*/) = 0;
 
 		/// Registers the specified service object with the specified properties under the specified class names into the Framework
 		//virtual IServiceRegistration* registerService(const char*[] clazzes, module::IUnknown* service, java.util.Dictionary properties)  = 0;
@@ -54,7 +54,7 @@ namespace Framework
 		/// Returns a ServiceReference object for a service that implements, and was registered under, the specified class
 		/** @param riid service interface ID
 		 *  @return service reference object */
-		virtual module::com_ptr<IServiceReference> getServiceReference(SF_RIID riid)  = 0;
+		virtual module::com_ptr<IServiceReference> getServiceReference(module::guid const& riid)  = 0;
 
 		/// Returns a list of ServiceReference objects
 		//virtual IServiceReference*[] getServiceReferences(const char* clazz, IFilter* filter)  = 0;

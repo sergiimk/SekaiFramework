@@ -53,7 +53,7 @@ namespace Extensions
 
 		public:
 			/// Executed on start to initialize core plug-ins
-			module::HResult	LoadCorePlugins();
+			bool			LoadCorePlugins();
 
 			/// Loads all dynamic plug-ins
 			void			LoadPlugins();
@@ -84,7 +84,7 @@ namespace Extensions
 			void			ParseExtesionPoint(const std::string& str, std::string& plugin, std::string& point);
 
 			/// Initialization of loaded plugin
-			module::HResult	OnPluginLoad(CPluginShadow *pShadow);
+			module::ModuleError	OnPluginLoad(CPluginShadow *pShadow);
 
 		protected:
 			typedef std::vector<CPluginShadow*> TCreationStack;

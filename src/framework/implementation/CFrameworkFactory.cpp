@@ -19,7 +19,7 @@ namespace Framework
 	{
 		CSystemBundle* sys_bundle;
 
-		if(SF_FAILED(create_instance_impl(&sys_bundle)))
+		if(ModuleError::OK != create_instance_impl(&sys_bundle))
 			return com_ptr<IFramework>();
 
 		sys_bundle->FinalConstruct(argc, argv, settingsFile);

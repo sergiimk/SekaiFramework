@@ -39,7 +39,7 @@ namespace Framework
 		/** @param context The BundleContext against which the tracking is done
 		 *  @param riid The interface Id of the services to be tracked
 		 *  @param customizer The customizer object to call when services are added */
-		ServiceTracker(IBundleContext* context, SF_RIID riid, IServiceTrackerCustomizer* customizer);
+		ServiceTracker(IBundleContext* context, module::guid const& riid, IServiceTrackerCustomizer* customizer);
 
 		/// Create a ServiceTracker on the specified Filter object
 		/** @param context The BundleContext against which the tracking is done

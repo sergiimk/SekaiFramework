@@ -26,12 +26,12 @@ namespace module
 
 		/// Implementation of IUnknown::QueryInterface method
 		/** This method uses interface table, which you define by BEGIN_INTERFACE_MAP macro */
-		HResult _QueryInterface(void* pThis, const INTERFACE_MAP_ENTRY* pEntries, SF_RIID riid, void** ppvObject);
+		MODULE_API ModuleError _QueryInterface(void* pThis, const INTERFACE_MAP_ENTRY* pEntries, guid const& riid, void** ppvObject);
 
 		/// Used for chaining QueryInterface
 		/** This method used when you have an hierarchy of implementations
 		 *  and passing QueryInterface to the top of the tree */
-		HResult _Chain(void *pThis, void* pChain, SF_RIID riid, void **ppv);
+		MODULE_API ModuleError _Chain(void *pThis, void* pChain, guid const& riid, void **ppv);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -87,7 +87,7 @@ namespace module
 		END_INTERFACE_MAP()
 
 		/// Redirects creation to T::CreateInstance()
-		HResult CreateInstance(SF_RIID riid, void** ppvObj)
+		ModuleError CreateInstance(guid const& riid, void** ppvObj)
 		{
 			return T::_CreateInstance(riid, ppvObj);
 		}
@@ -129,13 +129,13 @@ namespace module
 		}
 
 		/// Creates object for first call and then return cached pointer after casting it
-		HResult CreateInstance(SF_RIID riid, void** ppvObj)
+		ModuleError CreateInstance(guid const& riid, void** ppvObj)
 		{
 			if(!pCached)
 			{
-				HResult hr = T::_CreateInstance(uuid_of(IUnknown), (void**)&pCached);
-				if(SF_FAILED(hr))
-					return hr;
+				ModuleError err = T::_CreateInstance(uuid_of(IUnknown), (void**)&pCached);
+				if(err)
+					return err;
 			}
 			return pCached->QueryInterface(riid, ppvObj);
 		}
@@ -197,12 +197,12 @@ namespace module
 			}
 
 			/// Creates and checks for required interface
-			static HResult _CreateInstance(SF_RIID riid, void** ppv)
+			static ModuleError _CreateInstance(guid const& riid, void** ppv)
 			{
-				if (ppv == 0) return SF_E_POINTER;
+				if (ppv == 0) return ModuleError::INVALID_POINTER;
 				*ppv = 0;
 
-				HResult hRes = SF_E_OUTOFMEMORY;
+				ModuleError err = ModuleError::OUT_OF_MEMORY;
 				_thisType* p = 0;
 
 				p = _CreateInstance();
@@ -210,10 +210,10 @@ namespace module
 				if (p != 0)
 				{
 					p->AddRef();
-					hRes = p->QueryInterface(riid, ppv);
+					err = p->QueryInterface(riid, ppv);
 					p->Release();
 				}
-				return hRes;
+				return err;
 			}
 
 
@@ -234,17 +234,17 @@ namespace module
 /// Creates implementation class instance (refCount == 1)
 /** @ingroup module */
 template<class Impl>
-module::HResult create_instance_impl(Impl** pp)
+module::ModuleError create_instance_impl(Impl** pp)
 {
-	if(!pp) return SF_E_POINTER;
+	if(!pp) return module::ModuleError::INVALID_POINTER;
 	*pp = 0;
 
 	typename Impl::_ObjectClass * pImpl = Impl::_ObjectClass::_CreateInstance();
-	if(!pImpl) return SF_E_FAIL;
+	if(!pImpl) return module::ModuleError::FAILED;
 
 	pImpl->AddRef();
 	*pp = pImpl;
-	return SF_S_OK;
+	return module::ModuleError::OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -253,7 +253,7 @@ module::HResult create_instance_impl(Impl** pp)
 /// Creates implementation and checks for specified interface (refCount == 1)
 /** @ingroup module */
 template<class Impl, class Itf>
-module::HResult create_instance(Itf** pp)
+module::ModuleError create_instance(Itf** pp)
 {
 	// NOTE: if you get an ambiguity error here
 	// then you have tried to call create_instance to
@@ -264,7 +264,7 @@ module::HResult create_instance(Itf** pp)
 /// Creates implementation and checks for specified interface (refCount == 1)
 /** @ingroup module */
 template<class Impl>
-module::HResult create_instance(void** pp, SF_RIID iid)
+module::ModuleError create_instance(void** pp, module::guid const& iid)
 {
 	return Impl::_ObjectClass::_CreateInstance(iid, pp);
 }

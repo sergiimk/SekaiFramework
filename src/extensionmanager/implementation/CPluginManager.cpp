@@ -69,7 +69,7 @@ namespace Extensions
 	// Core plug-ins
 	//////////////////////////////////////////////////////////////////////////
 
-	module::HResult CPluginManager::LoadCorePlugins()
+	bool CPluginManager::LoadCorePlugins()
 	{
 		LogTrace("[Init] Loading core plug-ins");
 
@@ -79,7 +79,7 @@ namespace Extensions
 		CreateExtensionPoint(pShadow, "startlisteners", uuid_of(IStartListener));
 
 		// Initializing file system
-		return SF_S_OK;
+		return true;
 	}
 
 
@@ -293,7 +293,7 @@ namespace Extensions
 	// Runtime
 	//////////////////////////////////////////////////////////////////////////
 
-	HResult CPluginManager::OnPluginLoad(CPluginShadow *pShadow)
+	ModuleError CPluginManager::OnPluginLoad(CPluginShadow *pShadow)
 	{
 		// Initializes plugin and puts it to creation stack
 		LogTrace("Loading plugin binary: %s", pShadow->ModuleName().c_str());
@@ -303,7 +303,7 @@ namespace Extensions
 		pShadow->CreateInstance(UUID_PPV(IPlugin, plugin.wrapped()));
 		if(plugin)
 			plugin->Initialize(gEnv->Core->Environment(), pShadow);
-		return SF_S_OK;
+		return ModuleError::OK;
 	}
 
 

@@ -40,6 +40,7 @@
       <Filter>service</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\module\module_reflection.h" />
+    <ClInclude Include="..\..\src\module\module_fwd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\module\implementation\exception.cpp">

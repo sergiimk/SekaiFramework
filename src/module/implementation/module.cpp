@@ -144,14 +144,14 @@ namespace module
 
 	//////////////////////////////////////////////////////////////////////////
 
-	HResult ModuleHandle::CreateInstance(SF_RIID clsid, SF_RIID riid, void** outObj) const
+	ModuleError ModuleHandle::CreateInstance(guid const& clsid, guid const& riid, void** outObj) const
 	{
 		if(!IsLoaded()) 
-			return SF_E_FAIL;
+			return ModuleError::FAILED;
 
-		HResult hr = SF_E_POINTER;
+		ModuleError err = ModuleError::INVALID_POINTER;
 		if(outObj == 0) 
-			return hr;
+			return err;
 
 		detail::MODULE_MAP_ENTRY* ent = m_impl->m_getModuleMap();
 		while(ent->pClsid)
@@ -160,28 +160,28 @@ namespace module
 			{
 				if(!ent->pClassFactory)
 				{
-					hr = ent->pCreateFactoryFn(UUID_PPV(IClassFactory, &ent->pClassFactory));
-					if(SF_FAILED(hr))
-						return hr;
+					err = ent->pCreateFactoryFn(UUID_PPV(IClassFactory, &ent->pClassFactory));
+					if(err)
+						return err;
 				}
-				hr = ent->pClassFactory->CreateInstance(riid, outObj);
-				return hr;
+				err = ent->pClassFactory->CreateInstance(riid, outObj);
+				return err;
 			}
 			++ent;
 		}
-		return SF_E_FAIL;
+		return ModuleError::FAILED;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	HResult ModuleHandle::CreateInstance(SF_RIID riid, void** outObj) const
+	ModuleError ModuleHandle::CreateInstance(guid const& riid, void** outObj) const
 	{
 		if(!IsLoaded()) 
-			return SF_E_FAIL;
+			return ModuleError::FAILED;
 
-		HResult hr = SF_E_POINTER;
+		ModuleError err = ModuleError::INVALID_POINTER;
 		if(outObj == 0) 
-			return hr;
+			return err;
 
 		detail::MODULE_MAP_ENTRY* ent = m_impl->m_getModuleMap();
 		while(ent->pClsid)
@@ -190,16 +190,16 @@ namespace module
 			{
 				if(!ent->pClassFactory)
 				{
-					hr = ent->pCreateFactoryFn(UUID_PPV(IClassFactory, &ent->pClassFactory));
-					if(SF_FAILED(hr))
-						return hr;
+					err = ent->pCreateFactoryFn(UUID_PPV(IClassFactory, &ent->pClassFactory));
+					if(err)
+						return err;
 				}
-				hr = ent->pClassFactory->CreateInstance(riid, outObj);
-				return hr;
+				err = ent->pClassFactory->CreateInstance(riid, outObj);
+				return err;
 			}
 			++ent;
 		}
-		return SF_E_FAIL;
+		return ModuleError::FAILED;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -223,27 +223,34 @@ namespace module
 
 	//////////////////////////////////////////////////////////////////////////
 
-	HResult ModuleHandle::Init(const char* moduleName)
+	ModuleError ModuleHandle::Init(const char* moduleName)
 	{
 		Release();
 
 		/// \todo Support unicode paths
 		void* mod = Sekai_LoadLibrary(moduleName);
 		if(!mod)
-			return SF_E_FAIL;
+			return ModuleError::FAILED;
 
 		GET_MAP_FUNC gmf = (GET_MAP_FUNC)Sekai_GetProcAddress(mod, "GetModuleMap");
 		if(!gmf)
 		{
 			Sekai_FreeLibrary(mod);
-			return SF_E_FAIL;
+			return ModuleError::FAILED;
 		}
 
 		INIT_FUNC inf = static_cast<INIT_FUNC>(Sekai_GetProcAddress(mod, "ModuleInit"));
 		SHUTDOWN_FUNC snf = static_cast<SHUTDOWN_FUNC>(Sekai_GetProcAddress(mod, "ModuleShutdown"));
 
 		if(inf)
-			inf();
+		{
+			ModuleError err = inf();
+			if(err)
+			{
+				Sekai_FreeLibrary(mod);
+				return err;
+			}
+		}
 
 		m_impl = new ModuleHandleImpl();
 		m_impl->m_module = mod;
@@ -252,7 +259,7 @@ namespace module
 		m_impl->m_shutdownFunc = snf;
 		++m_impl->m_refCount;
 
-		return SF_S_OK;
+		return ModuleError::OK;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

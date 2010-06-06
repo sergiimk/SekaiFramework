@@ -32,9 +32,9 @@ namespace Framework
 
 		void Init(CSystemBundle* systemBundle);
 
-		CServiceRegistration* RegisterService(SF_RIID riid, module::IUnknown *service, CBundle* bundle);
+		CServiceRegistration* RegisterService(guid const& riid, module::IUnknown *service, CBundle* bundle);
 		void UnregisterService(CServiceRegistration* service);
-		com_ptr<IServiceReference> getServiceReference(SF_RIID riid);
+		com_ptr<IServiceReference> getServiceReference(guid const& riid);
 
 		const CEventListenerQueue& getListeners() const;
 		void AddListener(IServiceListener* listener);

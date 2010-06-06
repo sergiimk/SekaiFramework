@@ -10,6 +10,7 @@
 #ifndef _FWK_EXCEPTIONS_H__
 #define _FWK_EXCEPTIONS_H__
 
+#include "module_fwd.h"
 #include <exception>
 
 namespace module
@@ -17,7 +18,7 @@ namespace module
 
 	/// Base exception class
 	/** @ingroup Common */
-	class Exception: public std::exception
+	class MODULE_API Exception: public std::exception
 	{
 	public:
 
@@ -93,8 +94,8 @@ namespace module
 	//////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
 
-#define SF_DECLARE_EXCEPTION(Name, Base)									\
-	class Name: public Base													\
+#define SF_DECLARE_EXCEPTION_L(Name, Base, Linkage)							\
+	class Linkage Name: public Base											\
 	{																		\
 	public:																	\
 		Name(const char* msg, int code = 0);								\
@@ -108,6 +109,12 @@ namespace module
 		void release();														\
 		void rethrow() const;												\
 	};
+
+#define SF_DECLARE_EXCEPTION(Name, Base)									\
+	SF_DECLARE_EXCEPTION_L(Name, Base, )
+
+#define SF_DECLARE_EXCEPTION_MODULE(Name, Base)								\
+	SF_DECLARE_EXCEPTION_L(Name, Base, MODULE_API)
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -125,20 +132,20 @@ namespace module
 
 	//////////////////////////////////////////////////////////////////////////
 
-	SF_DECLARE_EXCEPTION(LogicException, Exception)
-	SF_DECLARE_EXCEPTION(InvalidArgumentException, LogicException)
-	SF_DECLARE_EXCEPTION(NotImplementedException, LogicException)
-	SF_DECLARE_EXCEPTION(RangeException, LogicException)
+	SF_DECLARE_EXCEPTION_MODULE(LogicException, Exception)
+	SF_DECLARE_EXCEPTION_MODULE(InvalidArgumentException, LogicException)
+	SF_DECLARE_EXCEPTION_MODULE(NotImplementedException, LogicException)
+	SF_DECLARE_EXCEPTION_MODULE(RangeException, LogicException)
 
 	//////////////////////////////////////////////////////////////////////////
 
-	SF_DECLARE_EXCEPTION(RuntimeException, Exception)
-	SF_DECLARE_EXCEPTION(NotFoundException, RuntimeException)
-	SF_DECLARE_EXCEPTION(ExistsException, RuntimeException)
-	SF_DECLARE_EXCEPTION(TimeoutException, RuntimeException)
-	SF_DECLARE_EXCEPTION(NoPermissionException, RuntimeException)
-	SF_DECLARE_EXCEPTION(IOException, RuntimeException)	
-	SF_DECLARE_EXCEPTION(FormatException, RuntimeException)	
+	SF_DECLARE_EXCEPTION_MODULE(RuntimeException, Exception)
+	SF_DECLARE_EXCEPTION_MODULE(NotFoundException, RuntimeException)
+	SF_DECLARE_EXCEPTION_MODULE(ExistsException, RuntimeException)
+	SF_DECLARE_EXCEPTION_MODULE(TimeoutException, RuntimeException)
+	SF_DECLARE_EXCEPTION_MODULE(NoPermissionException, RuntimeException)
+	SF_DECLARE_EXCEPTION_MODULE(IOException, RuntimeException)	
+	SF_DECLARE_EXCEPTION_MODULE(FormatException, RuntimeException)	
 
 	//////////////////////////////////////////////////////////////////////////
 

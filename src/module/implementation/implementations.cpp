@@ -15,7 +15,7 @@ namespace module
 	{
 		//////////////////////////////////////////////////////////////////////////
 
-		HResult _Chain(void *pThis, void* pChain, SF_RIID riid, void **ppv)
+		ModuleError _Chain(void *pThis, void* pChain, guid const& riid, void **ppv)
 		{
 			_CHAINDATA* pcd = static_cast<_CHAINDATA*>(pChain);
 			void* p = adjustptr(pThis, pcd->dwOffset);
@@ -24,7 +24,7 @@ namespace module
 
 		//////////////////////////////////////////////////////////////////////////
 
-		HResult _QueryInterface(void* pThis, const INTERFACE_MAP_ENTRY* pEntries, SF_RIID riid, void** ppvObject)
+		ModuleError _QueryInterface(void* pThis, const INTERFACE_MAP_ENTRY* pEntries, guid const& riid, void** ppvObject)
 		{
 			// To avoid ambiguity always cast first entry to IUnknown
 			if (riid == uuid_of(IUnknown))
@@ -33,11 +33,11 @@ namespace module
 				assert( pEntries->locator == SF_OFFSET_ENTRY );
 				*ppvObject = adjustptr(pThis, reinterpret_cast<size_t>(pEntries->OffChain));
 				static_cast<IUnknown*>(*ppvObject)->AddRef();
-				return SF_S_OK;
+				return ModuleError::OK;
 			}
 			else
 			{
-				HResult hr = SF_E_NOINTERFACE;
+				ModuleError err = ModuleError::NO_INTERFACE;
 				// until end
 				while (pEntries->locator)
 				{
@@ -47,21 +47,21 @@ namespace module
 						{
 							*ppvObject = adjustptr(pThis, reinterpret_cast<size_t>(pEntries->OffChain));
 							static_cast<IUnknown*>(*ppvObject)->AddRef();
-							hr = SF_S_OK;
+							err = ModuleError::OK;
 							break;
 						}
 						else
 						{
-							hr = pEntries->locator(pThis, pEntries->OffChain, riid, ppvObject);
-							if (hr == SF_S_OK)
+							err = pEntries->locator(pThis, pEntries->OffChain, riid, ppvObject);
+							if (!err)
 								break;
 						}
 					}
 					++pEntries;
 				}
-				if (hr != SF_S_OK)
+				if (err)
 					*ppvObject = 0;
-				return hr;
+				return err;
 			}
 		}
 
@@ -80,7 +80,7 @@ bool implements_interface(module::IUnknown* pUnk, const module::guid& riid)
 	if(pUnk)
 	{
 		void* dummy;
-		if(SF_SUCCEEDED(pUnk->QueryInterface(riid, &dummy)))
+		if(module::ModuleError::OK == pUnk->QueryInterface(riid, &dummy))
 		{
 			// Compensate reference
 			pUnk->Release();

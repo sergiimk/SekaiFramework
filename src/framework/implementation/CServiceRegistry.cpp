@@ -37,7 +37,7 @@ namespace Framework
 
 	//////////////////////////////////////////////////////////////////////////
 
-	CServiceRegistration* CServiceRegistry::RegisterService(SF_RIID riid, IUnknown *service, CBundle* bundle)
+	CServiceRegistration* CServiceRegistry::RegisterService(guid const& riid, IUnknown *service, CBundle* bundle)
 	{
 		THREAD_ANY();
 
@@ -77,7 +77,7 @@ namespace Framework
 
 	//////////////////////////////////////////////////////////////////////////
 
-	com_ptr<IServiceReference> CServiceRegistry::getServiceReference(SF_RIID riid)
+	com_ptr<IServiceReference> CServiceRegistry::getServiceReference(guid const& riid)
 	{
 		THREAD_ANY();
 		read_lock l(m_lock);

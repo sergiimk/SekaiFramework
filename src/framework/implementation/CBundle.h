@@ -61,7 +61,7 @@ namespace Framework
 		virtual void Stop();
 		virtual void Uninstall();
 
-		CServiceRegistration* RegisterService(SF_RIID riid, IUnknown* object);
+		CServiceRegistration* RegisterService(guid const& riid, IUnknown* object);
 		void UnregisterService(CServiceRegistration* service);
 		com_ptr<IUnknown> getService(CServiceReference* reference);
 		bool ungetService(CServiceReference* reference);

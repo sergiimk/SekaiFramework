@@ -47,48 +47,49 @@ namespace Extensions
 
 	//////////////////////////////////////////////////////////////////////////
 
-	module::HResult CPluginShadow::CreateInstance(const module::guid &clsid, const module::guid &riid, void **ppv)
+	module::ModuleError CPluginShadow::CreateInstance(const module::guid &clsid, const module::guid &riid, void **ppv)
 	{
+		module::ModuleError err;
+
 		if(!mModule.IsLoaded())
 		{
-			module::HResult hr = LoadModule();
-			if(SF_FAILED(hr)) return hr;
+			if(err = LoadModule()) 
+				return err;
 		}
 
-		module::HResult hr = create_instance(ppv, riid, clsid, mModule);
-		if(SF_FAILED(hr))
+		if(err = create_instance(ppv, riid, clsid, mModule))
 		{
 			LogWarningAlways("CreateInstance request failed, target: %s", mPluginName.c_str());
 		}
-		return hr;
+		return err;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	module::HResult CPluginShadow::CreateInstance(const module::guid &riid, void **ppv)
+	module::ModuleError CPluginShadow::CreateInstance(const module::guid &riid, void **ppv)
 	{
+		module::ModuleError err;
 		if(!mModule.IsLoaded())
 		{
-			module::HResult hr = LoadModule();
-			if(SF_FAILED(hr)) return hr;
+			if(err = LoadModule()) 
+				return err;
 		}
 
-		module::HResult hr = create_instance(ppv, riid, mModule);
-		if(SF_FAILED(hr))
+		if(err = create_instance(ppv, riid, mModule))
 		{
 			LogWarningAlways("CreateInstance request failed, target: %s", mPluginName.c_str());
 		}
-		return hr;
+		return err;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	module::HResult CPluginShadow::LoadModule()
+	module::ModuleError CPluginShadow::LoadModule()
 	{
 		LogTrace("Loading plugin module: %s", mModuleName.c_str());
 
-		module::HResult hr = mModule.Init(mModuleName.c_str());
-		if(SF_FAILED(hr)) return hr;
+		module::ModuleError err = mModule.Init(mModuleName.c_str());
+		if(err) return err;
 		return static_cast<CPluginManager*>(gEnv->PluginManager)->OnPluginLoad(this);
 	}
 

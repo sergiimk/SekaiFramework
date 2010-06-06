@@ -43,8 +43,8 @@ namespace Framework
 		virtual com_ptr<IBundle> getBundle(size_t id);
 		virtual void getBundles(IDynArray<com_ptr<IBundle> >& bundles);
 		virtual com_ptr<IBundle> InstallBundle(const char* location);
-		virtual com_ptr<IServiceRegistration> RegisterService(SF_RIID riid, IUnknown* object);
-		virtual com_ptr<IServiceReference> getServiceReference(SF_RIID riid);
+		virtual com_ptr<IServiceRegistration> RegisterService(guid const& riid, IUnknown* object);
+		virtual com_ptr<IServiceReference> getServiceReference(guid const& riid);
 		virtual com_ptr<IUnknown> getService(IServiceReference* reference);
 		virtual bool ungetService(IServiceReference* reference);
 

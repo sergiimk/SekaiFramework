@@ -142,7 +142,7 @@ namespace Framework
 
 	//////////////////////////////////////////////////////////////////////////
 
-	com_ptr<IServiceReference> CBundleContext::getServiceReference(SF_RIID riid)
+	com_ptr<IServiceReference> CBundleContext::getServiceReference(guid const& riid)
 	{
 		THREAD_ANY();
 
