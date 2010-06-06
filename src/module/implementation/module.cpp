@@ -35,6 +35,37 @@ namespace module
 		{
 		}
 
+		std::error_code Init(const char* moduleName)
+		{
+			/// \todo Support unicode paths
+			m_module = Sekai_LoadLibrary(moduleName);
+			if(!m_module)
+				return std::make_error_code(std::errc::not_connected);
+
+			m_getModuleMap = (GET_MAP_FUNC)Sekai_GetProcAddress(m_module, "GetModuleMap");
+			if(!m_getModuleMap)
+			{
+				Sekai_FreeLibrary(m_module);
+				return std::make_error_code(std::errc::not_connected);
+			}
+
+			m_initFunc = static_cast<INIT_FUNC>(Sekai_GetProcAddress(m_module, "ModuleInit"));
+			m_shutdownFunc = static_cast<SHUTDOWN_FUNC>(Sekai_GetProcAddress(m_module, "ModuleShutdown"));
+
+			if(m_initFunc)
+			{
+				std::error_code err;
+				m_initFunc(&err);
+				if(err)
+				{
+					Sekai_FreeLibrary(m_module);
+					return err;
+				}
+			}
+
+			return std::error_code();
+		}
+
 		~ModuleHandleImpl()
 		{
 			ASSERT_STRICT(!m_refCount);
@@ -144,14 +175,15 @@ namespace module
 
 	//////////////////////////////////////////////////////////////////////////
 
-	ModuleError ModuleHandle::CreateInstance(guid const& clsid, guid const& riid, void** outObj) const
+	std::error_code ModuleHandle::CreateInstance(guid const& clsid, guid const& riid, void** outObj) const
 	{
 		if(!IsLoaded()) 
-			return ModuleError::FAILED;
+			return std::make_error_code(std::errc::not_connected);
 
-		ModuleError err = ModuleError::INVALID_POINTER;
 		if(outObj == 0) 
-			return err;
+			return module_error::invalid_pointer;
+
+		std::error_code err = std::make_error_code(std::errc::address_not_available);
 
 		detail::MODULE_MAP_ENTRY* ent = m_impl->m_getModuleMap();
 		while(ent->pClsid)
@@ -169,19 +201,20 @@ namespace module
 			}
 			++ent;
 		}
-		return ModuleError::FAILED;
+		return err;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	ModuleError ModuleHandle::CreateInstance(guid const& riid, void** outObj) const
+	std::error_code ModuleHandle::CreateInstance(guid const& riid, void** outObj) const
 	{
 		if(!IsLoaded()) 
-			return ModuleError::FAILED;
+			return std::make_error_code(std::errc::not_connected);
 
-		ModuleError err = ModuleError::INVALID_POINTER;
 		if(outObj == 0) 
-			return err;
+			return module_error::invalid_pointer;
+
+		std::error_code err = std::make_error_code(std::errc::address_not_available);
 
 		detail::MODULE_MAP_ENTRY* ent = m_impl->m_getModuleMap();
 		while(ent->pClsid)
@@ -199,7 +232,7 @@ namespace module
 			}
 			++ent;
 		}
-		return ModuleError::FAILED;
+		return err;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -223,43 +256,21 @@ namespace module
 
 	//////////////////////////////////////////////////////////////////////////
 
-	ModuleError ModuleHandle::Init(const char* moduleName)
+	std::error_code ModuleHandle::Init(const char* moduleName)
 	{
 		Release();
 
-		/// \todo Support unicode paths
-		void* mod = Sekai_LoadLibrary(moduleName);
-		if(!mod)
-			return ModuleError::FAILED;
-
-		GET_MAP_FUNC gmf = (GET_MAP_FUNC)Sekai_GetProcAddress(mod, "GetModuleMap");
-		if(!gmf)
+		
+		ModuleHandleImpl* impl = new ModuleHandleImpl();
+		std::error_code err = impl->Init(moduleName);
+		
+		if(!err)
 		{
-			Sekai_FreeLibrary(mod);
-			return ModuleError::FAILED;
+			m_impl = impl;
+			++m_impl->m_refCount;
 		}
 
-		INIT_FUNC inf = static_cast<INIT_FUNC>(Sekai_GetProcAddress(mod, "ModuleInit"));
-		SHUTDOWN_FUNC snf = static_cast<SHUTDOWN_FUNC>(Sekai_GetProcAddress(mod, "ModuleShutdown"));
-
-		if(inf)
-		{
-			ModuleError err = inf();
-			if(err)
-			{
-				Sekai_FreeLibrary(mod);
-				return err;
-			}
-		}
-
-		m_impl = new ModuleHandleImpl();
-		m_impl->m_module = mod;
-		m_impl->m_getModuleMap = gmf;
-		m_impl->m_initFunc = inf;
-		m_impl->m_shutdownFunc = snf;
-		++m_impl->m_refCount;
-
-		return ModuleError::OK;
+		return std::error_code();
 	}
 
 	//////////////////////////////////////////////////////////////////////////

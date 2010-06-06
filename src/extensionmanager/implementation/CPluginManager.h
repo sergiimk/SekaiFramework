@@ -84,7 +84,7 @@ namespace Extensions
 			void			ParseExtesionPoint(const std::string& str, std::string& plugin, std::string& point);
 
 			/// Initialization of loaded plugin
-			module::ModuleError	OnPluginLoad(CPluginShadow *pShadow);
+			std::error_code	OnPluginLoad(CPluginShadow *pShadow);
 
 		protected:
 			typedef std::vector<CPluginShadow*> TCreationStack;

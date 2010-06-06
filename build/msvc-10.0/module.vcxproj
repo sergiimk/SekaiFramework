@@ -185,6 +185,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\module\allocators.h" />
+    <ClInclude Include="..\..\src\module\errors.h" />
     <ClInclude Include="..\..\src\module\exception.h" />
     <ClInclude Include="..\..\src\module\guid.h" />
     <ClInclude Include="..\..\src\module\module_fwd.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="..\..\src\module\module_reflection.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\module\implementation\errors.cpp" />
     <ClCompile Include="..\..\src\module\implementation\exception.cpp" />
     <ClCompile Include="..\..\src\module\implementation\guid.cpp" />
     <ClCompile Include="..\..\src\module\implementation\implementations.cpp" />

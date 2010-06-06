@@ -26,12 +26,12 @@ namespace module
 
 		/// Implementation of IUnknown::QueryInterface method
 		/** This method uses interface table, which you define by BEGIN_INTERFACE_MAP macro */
-		MODULE_API ModuleError _QueryInterface(void* pThis, const INTERFACE_MAP_ENTRY* pEntries, guid const& riid, void** ppvObject);
+		MODULE_API std::error_code _QueryInterface(void* pThis, const INTERFACE_MAP_ENTRY* pEntries, guid const& riid, void** ppvObject);
 
 		/// Used for chaining QueryInterface
 		/** This method used when you have an hierarchy of implementations
 		 *  and passing QueryInterface to the top of the tree */
-		MODULE_API ModuleError _Chain(void *pThis, void* pChain, guid const& riid, void **ppv);
+		MODULE_API std::error_code _Chain(void *pThis, void* pChain, guid const& riid, void **ppv);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -87,7 +87,7 @@ namespace module
 		END_INTERFACE_MAP()
 
 		/// Redirects creation to T::CreateInstance()
-		ModuleError CreateInstance(guid const& riid, void** ppvObj)
+		std::error_code CreateInstance(guid const& riid, void** ppvObj)
 		{
 			return T::_CreateInstance(riid, ppvObj);
 		}
@@ -129,11 +129,11 @@ namespace module
 		}
 
 		/// Creates object for first call and then return cached pointer after casting it
-		ModuleError CreateInstance(guid const& riid, void** ppvObj)
+		std::error_code CreateInstance(guid const& riid, void** ppvObj)
 		{
 			if(!pCached)
 			{
-				ModuleError err = T::_CreateInstance(uuid_of(IUnknown), (void**)&pCached);
+				std::error_code err = T::_CreateInstance(uuid_of(IUnknown), (void**)&pCached);
 				if(err)
 					return err;
 			}
@@ -197,14 +197,15 @@ namespace module
 			}
 
 			/// Creates and checks for required interface
-			static ModuleError _CreateInstance(guid const& riid, void** ppv)
+			static std::error_code _CreateInstance(guid const& riid, void** ppv)
 			{
-				if (ppv == 0) return ModuleError::INVALID_POINTER;
+				if (ppv == 0) 
+					return module_error::invalid_pointer;
+
 				*ppv = 0;
-
-				ModuleError err = ModuleError::OUT_OF_MEMORY;
+				std::error_code err = std::make_error_code(std::errc::not_enough_memory);
+				
 				_thisType* p = 0;
-
 				p = _CreateInstance();
 
 				if (p != 0)
@@ -234,26 +235,25 @@ namespace module
 /// Creates implementation class instance (refCount == 1)
 /** @ingroup module */
 template<class Impl>
-module::ModuleError create_instance_impl(Impl** pp)
+std::error_code create_instance_impl(Impl** pp)
 {
-	if(!pp) return module::ModuleError::INVALID_POINTER;
 	*pp = 0;
-
 	typename Impl::_ObjectClass * pImpl = Impl::_ObjectClass::_CreateInstance();
-	if(!pImpl) return module::ModuleError::FAILED;
+	
+	if(!pImpl)
+		return std::make_error_code(std::errc::not_enough_memory);
 
 	pImpl->AddRef();
 	*pp = pImpl;
-	return module::ModuleError::OK;
+	return std::error_code();
 }
 
 //////////////////////////////////////////////////////////////////////////
 
-
 /// Creates implementation and checks for specified interface (refCount == 1)
 /** @ingroup module */
 template<class Impl, class Itf>
-module::ModuleError create_instance(Itf** pp)
+std::error_code create_instance(Itf** pp)
 {
 	// NOTE: if you get an ambiguity error here
 	// then you have tried to call create_instance to
@@ -264,7 +264,7 @@ module::ModuleError create_instance(Itf** pp)
 /// Creates implementation and checks for specified interface (refCount == 1)
 /** @ingroup module */
 template<class Impl>
-module::ModuleError create_instance(void** pp, module::guid const& iid)
+std::error_code create_instance(void** pp, module::guid const& iid)
 {
 	return Impl::_ObjectClass::_CreateInstance(iid, pp);
 }

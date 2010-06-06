@@ -47,9 +47,9 @@ namespace Extensions
 
 	//////////////////////////////////////////////////////////////////////////
 
-	module::ModuleError CPluginShadow::CreateInstance(const module::guid &clsid, const module::guid &riid, void **ppv)
+	std::error_code CPluginShadow::CreateInstance(const module::guid &clsid, const module::guid &riid, void **ppv)
 	{
-		module::ModuleError err;
+		std::error_code err;
 
 		if(!mModule.IsLoaded())
 		{
@@ -66,9 +66,9 @@ namespace Extensions
 
 	//////////////////////////////////////////////////////////////////////////
 
-	module::ModuleError CPluginShadow::CreateInstance(const module::guid &riid, void **ppv)
+	std::error_code CPluginShadow::CreateInstance(const module::guid &riid, void **ppv)
 	{
-		module::ModuleError err;
+		std::error_code err;
 		if(!mModule.IsLoaded())
 		{
 			if(err = LoadModule()) 
@@ -84,11 +84,11 @@ namespace Extensions
 
 	//////////////////////////////////////////////////////////////////////////
 
-	module::ModuleError CPluginShadow::LoadModule()
+	std::error_code CPluginShadow::LoadModule()
 	{
 		LogTrace("Loading plugin module: %s", mModuleName.c_str());
 
-		module::ModuleError err = mModule.Init(mModuleName.c_str());
+		std::error_code err = mModule.Init(mModuleName.c_str());
 		if(err) return err;
 		return static_cast<CPluginManager*>(gEnv->PluginManager)->OnPluginLoad(this);
 	}

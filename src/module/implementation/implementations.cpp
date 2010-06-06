@@ -15,7 +15,7 @@ namespace module
 	{
 		//////////////////////////////////////////////////////////////////////////
 
-		ModuleError _Chain(void *pThis, void* pChain, guid const& riid, void **ppv)
+		std::error_code _Chain(void *pThis, void* pChain, guid const& riid, void **ppv)
 		{
 			_CHAINDATA* pcd = static_cast<_CHAINDATA*>(pChain);
 			void* p = adjustptr(pThis, pcd->dwOffset);
@@ -24,8 +24,11 @@ namespace module
 
 		//////////////////////////////////////////////////////////////////////////
 
-		ModuleError _QueryInterface(void* pThis, const INTERFACE_MAP_ENTRY* pEntries, guid const& riid, void** ppvObject)
+		std::error_code _QueryInterface(void* pThis, const INTERFACE_MAP_ENTRY* pEntries, guid const& riid, void** ppvObject)
 		{
+			if(!ppvObject)
+				return module_error::invalid_pointer;
+
 			// To avoid ambiguity always cast first entry to IUnknown
 			if (riid == uuid_of(IUnknown))
 			{
@@ -33,11 +36,11 @@ namespace module
 				assert( pEntries->locator == SF_OFFSET_ENTRY );
 				*ppvObject = adjustptr(pThis, reinterpret_cast<size_t>(pEntries->OffChain));
 				static_cast<IUnknown*>(*ppvObject)->AddRef();
-				return ModuleError::OK;
+				return std::error_code();
 			}
 			else
 			{
-				ModuleError err = ModuleError::NO_INTERFACE;
+				std::error_code err = module_error::no_interface;
 				// until end
 				while (pEntries->locator)
 				{
@@ -47,7 +50,7 @@ namespace module
 						{
 							*ppvObject = adjustptr(pThis, reinterpret_cast<size_t>(pEntries->OffChain));
 							static_cast<IUnknown*>(*ppvObject)->AddRef();
-							err = ModuleError::OK;
+							err = std::error_code();
 							break;
 						}
 						else
@@ -80,7 +83,7 @@ bool implements_interface(module::IUnknown* pUnk, const module::guid& riid)
 	if(pUnk)
 	{
 		void* dummy;
-		if(module::ModuleError::OK == pUnk->QueryInterface(riid, &dummy))
+		if(!pUnk->QueryInterface(riid, &dummy))
 		{
 			// Compensate reference
 			pUnk->Release();

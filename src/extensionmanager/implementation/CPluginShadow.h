@@ -47,8 +47,8 @@ namespace Extensions
 		bool Provides(const std::string &expoint);
 		bool Extends(const std::string &expoint);
 
-		module::ModuleError CreateInstance(module::guid const& clsid, module::guid const& riid, void** ppv);
-		module::ModuleError CreateInstance(module::guid const& riid, void** ppv);
+		std::error_code CreateInstance(module::guid const& clsid, module::guid const& riid, void** ppv);
+		std::error_code CreateInstance(module::guid const& riid, void** ppv);
 
 		size_t getExtensionCount() { return mExtensions.size(); }
 		IExtension* getExtension(size_t index) { return mExtensions[index]; }
@@ -59,7 +59,7 @@ namespace Extensions
 
 	/* internal: */
 		void				FinalConstruct(const std::string &pluginName, int version);
-		module::ModuleError	LoadModule();
+		std::error_code		LoadModule();
 		void				Shutdown();
 
 	/* internal: */

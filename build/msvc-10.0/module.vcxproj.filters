@@ -41,6 +41,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\module\module_reflection.h" />
     <ClInclude Include="..\..\src\module\module_fwd.h" />
+    <ClInclude Include="..\..\src\module\errors.h">
+      <Filter>base_types</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\module\implementation\exception.cpp">
@@ -54,6 +57,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\module\implementation\module.cpp">
       <Filter>service</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\module\implementation\errors.cpp">
+      <Filter>base_types</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

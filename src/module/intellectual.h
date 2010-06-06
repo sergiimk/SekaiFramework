@@ -287,7 +287,7 @@ namespace module
 /// Creation helper for com_ptr
 /** @ingroup module */
 template<class Impl, class Itf>
-module::ModuleError create_instance(module::com_ptr<Itf>& ptr)
+std::error_code create_instance(module::com_ptr<Itf>& ptr)
 {
 	return Impl::_ObjectClass::_CreateInstance(UUID_PPV(Itf, ptr.wrapped()));
 }

@@ -14,30 +14,10 @@
 #define _INTERFACES_H__
 
 #include "guid.h"
+#include "errors.h"
 
 namespace module
 {
-	//////////////////////////////////////////////////////////////////////////
-
-	/// \todo refactor to 'enum class' when will be available
-#ifdef COMPILER_MSC
-#	pragma warning(disable : 4482)
-#endif
-
-	/// Error codes
-	/** @ingroup module */
-	enum ModuleError
-	{
-		OK = 0,
-		FAILED,
-		OUT_OF_MEMORY,
-		INVALID_ARGUMENT,
-		NO_INTERFACE,
-		INVALID_POINTER,
-		ABORTED,
-		ACCESS_DENIED,
-		NOT_IMPLEMENTED,
-	};
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -74,7 +54,7 @@ namespace module
 		 *
 		 *  @param riid UUID of interface to cast to
 		 *  @param ppObject pointer to returned interface pointer */
-		virtual ModuleError QueryInterface(guid const& riid, void **ppObject) = 0;
+		virtual std::error_code QueryInterface(guid const& riid, void **ppObject) = 0;
 
 		/// Increases reference counter
 		virtual unsigned long AddRef() = 0;
@@ -97,7 +77,7 @@ namespace module
 		/// Creates instance and casts it to 'riid' interface
 		/** @param riid			Unique identifier of class
 		 *  @param ppvObject	Where to put class pointer */
-		virtual ModuleError CreateInstance(guid const& riid, void **ppvObject) = 0;
+		virtual std::error_code CreateInstance(guid const& riid, void **ppvObject) = 0;
 	};
 
 } // namespace
@@ -107,7 +87,7 @@ namespace module
 /// Performs the type casting
 /** @ingroup module */
 template<class I>
-module::ModuleError interface_cast(module::IUnknown* pUnk, I** pp)
+std::error_code interface_cast(module::IUnknown* pUnk, I** pp)
 {
 	return pUnk->QueryInterface(UUID_PPV(I, pp));
 }

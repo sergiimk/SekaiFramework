@@ -24,7 +24,7 @@ namespace module
 	{
 	public:
 		typedef detail::MODULE_MAP_ENTRY* (*GET_MAP_FUNC)();
-		typedef ModuleError (*INIT_FUNC)();
+		typedef void (*INIT_FUNC)(std::error_code* ec);
 		typedef void (*SHUTDOWN_FUNC)();
 
 		//////////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ namespace module
 		virtual ~ModuleHandle();
 
 		/// Used to bind module object to some dll and extract module map accessor
-		ModuleError Init(const char* moduleName);
+		std::error_code Init(const char* moduleName);
 
 		/// Calls module shutdown routine, legal when only one handle left
 		void Shutdown();
@@ -92,12 +92,12 @@ namespace module
 		/** @param clsid CLS_ID of the class to create
 		*  @param riid Interface ID of interface to cast to
 		*  @param outObj location where to put the interface pointer */
-		ModuleError CreateInstance(guid const& clsid, guid const& riid, void** outObj) const;
+		std::error_code CreateInstance(guid const& clsid, guid const& riid, void** outObj) const;
 
 		/// Creates first found implementation of specified interface
 		/**@param riid Interface ID of desired interface
 		* @param outObj location where to put the interface pointer */
-		ModuleError CreateInstance(guid const& riid, void** outObj) const;
+		std::error_code CreateInstance(guid const& riid, void** outObj) const;
 
 		/// Searches the module map for reflection for the specified class
 		/** @param clsid ID of the implementation class */
@@ -118,7 +118,7 @@ namespace module
 /// Creates implementation from specified module (refCount == 1)
 /** @ingroup module */
 template<class Itf>
-module::ModuleError create_instance(Itf** outObj, module::guid const& clsid, const module::ModuleHandle& m)
+std::error_code create_instance(Itf** outObj, module::guid const& clsid, const module::ModuleHandle& m)
 {
 	return m.CreateInstance(clsid, UUID_PPV(Itf, outObj));
 }
@@ -126,14 +126,14 @@ module::ModuleError create_instance(Itf** outObj, module::guid const& clsid, con
 /// creation helper for com_ptr
 /** @ingroup module */
 template<class Itf>
-module::ModuleError create_instance(module::com_ptr<Itf>& ptr, module::guid const& clsid, const module::ModuleHandle& m)
+std::error_code create_instance(module::com_ptr<Itf>& ptr, module::guid const& clsid, const module::ModuleHandle& m)
 {
 	return m.CreateInstance(clsid, UUID_PPV(Itf, ptr.wrapped()));
 }
 
 /// creates implementation from specified module (refCount == 1)
 /** @ingroup module */
-inline module::ModuleError create_instance(void** outObj, module::guid const& iid, module::guid const& clsid, const module::ModuleHandle& m)
+inline std::error_code create_instance(void** outObj, module::guid const& iid, module::guid const& clsid, const module::ModuleHandle& m)
 {
 	return m.CreateInstance(clsid, iid, outObj);
 }
@@ -141,7 +141,7 @@ inline module::ModuleError create_instance(void** outObj, module::guid const& ii
 /// creates first found implementation of specified interface (refCount == 1)
 /** @ingroup module */
 template<class Itf>
-module::ModuleError create_instance(Itf** outObj, const module::ModuleHandle& m)
+std::error_code create_instance(Itf** outObj, const module::ModuleHandle& m)
 {
 	return m.CreateInstance(UUID_PPV(Itf, outObj));
 }
@@ -149,14 +149,14 @@ module::ModuleError create_instance(Itf** outObj, const module::ModuleHandle& m)
 /// creation helper for com_ptr
 /** @ingroup module */
 template<class Itf>
-module::ModuleError create_instance(module::com_ptr<Itf>& ptr, const module::ModuleHandle& m)
+std::error_code create_instance(module::com_ptr<Itf>& ptr, const module::ModuleHandle& m)
 {
 	return m.CreateInstance(UUID_PPV(Itf, ptr.wrapped()));
 }
 
 /// creates first found implementation of specified interface (refCount == 1)
 /** @ingroup module */
-inline module::ModuleError create_instance(void** outObj, module::guid const& iid, const module::ModuleHandle& m)
+inline std::error_code create_instance(void** outObj, module::guid const& iid, const module::ModuleHandle& m)
 {
 	return m.CreateInstance(iid, outObj);
 }

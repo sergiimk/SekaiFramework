@@ -293,7 +293,7 @@ namespace Extensions
 	// Runtime
 	//////////////////////////////////////////////////////////////////////////
 
-	ModuleError CPluginManager::OnPluginLoad(CPluginShadow *pShadow)
+	std::error_code CPluginManager::OnPluginLoad(CPluginShadow *pShadow)
 	{
 		// Initializes plugin and puts it to creation stack
 		LogTrace("Loading plugin binary: %s", pShadow->ModuleName().c_str());
@@ -303,7 +303,7 @@ namespace Extensions
 		pShadow->CreateInstance(UUID_PPV(IPlugin, plugin.wrapped()));
 		if(plugin)
 			plugin->Initialize(gEnv->Core->Environment(), pShadow);
-		return ModuleError::OK;
+		return std::error_code();
 	}
 
 

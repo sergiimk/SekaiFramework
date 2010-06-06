@@ -364,7 +364,7 @@ namespace Framework
 
 	void CBundle::PreStart()
 	{
-		if(ModuleError::OK != m_module.Init(m_location.c_str()))
+		if(m_module.Init(m_location.c_str()))
 			return;
 
 		create_instance(&m_activator, m_module);
